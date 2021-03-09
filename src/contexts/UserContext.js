@@ -8,7 +8,7 @@ export const UserContext = createContext()
 export default function UserContextProvider(props) {
 
   // A reactive state to store users
-  const [users, setUsers] = useState([])
+  const [user, setUsers] = useState([])
 
   // Get user by id
   const fetchUser = async () => {
@@ -46,7 +46,7 @@ export default function UserContextProvider(props) {
 
   // The values we want the children components to reach and be able to use
   const values = {
-    users,
+    user,
     addUser,
     removeUserById
   }
