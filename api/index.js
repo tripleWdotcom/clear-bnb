@@ -7,7 +7,7 @@ const app = express()
 app.use(express.json())
 
 //temp link for testing puroposes
-const dbCloudUrl ='mongodb+srv://user:123@cluster0.uzm12.mongodb.net/test101?retryWrites=true&w=majority' 
+const dbCloudUrl ='mongodb+srv://Rebecca:hej123@cluster0.sk4ko.mongodb.net/clearbnbTest?retryWrites=true&w=majority'
 
 
 mongoose.connect(dbCloudUrl, {
