@@ -9,7 +9,7 @@ module.exports = (app, models) => {
   })
 
   // Get houses by filters 
-  app.get('/rest/:model/:something', async (req, res) => {
+  app.get('/rest/:model/filters/:something', async (req, res) => {
     console.log(req.params.something)
     let filter = JSON.parse(req.params.something)
     console.log(JSON.parse(req.params.something))
