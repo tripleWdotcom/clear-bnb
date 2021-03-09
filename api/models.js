@@ -12,11 +12,11 @@ const House = mongoose.model('House', {
   bedrooms: Number,
   price: Number,
   bathroom: Number,
-  featureIds: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Feature'
-  }],
-  //featureIds:[Number], // optional and use index number from model Feature
+ // featureIds: [{
+  //  type: mongoose.Schema.Types.ObjectId,
+   // ref: 'Feature'
+  //}],
+  featureIds:[Number], // optional and use index number from model Feature
   availableStart:Number,
   availableEnd:Number,
   userId: {
