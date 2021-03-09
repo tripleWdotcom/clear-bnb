@@ -8,11 +8,11 @@ export const UserContext = createContext()
 export default function UserContextProvider(props) {
 
   // A reactive state to store users
-  const [user, setUsers] = useState([])
+  const [users, setUsers] = useState([])
 
   // Get user by id
-  const fetchUser = async () => {
-    let res = await fetch('/rest/users/:id')
+  const fetchUsers = async () => {
+    let res = await fetch('/rest/users')
     res = await res.json()
     setUsers(res)
   }
@@ -46,14 +46,14 @@ export default function UserContextProvider(props) {
 
   // The values we want the children components to reach and be able to use
   const values = {
-    user,
+    users,
     addUser,
     removeUserById
   }
 
   // Calls one time, as mounted in Vue
   useEffect(() => {
-    fetchUser()
+    fetchUsers()
   }, [])
 
   return (
