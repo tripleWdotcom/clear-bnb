@@ -36,8 +36,35 @@
   padding: 20px;
 }
 
-@media (max-width: 767px) { 
+
+@media (max-width: 750px) { 
     .navbar{
+        display: none;
+    }
+}
+
+/* footer */
+.footer {
+   display: flex;
+   align-items: center; 
+    
+}
+.footer .links {
+  margin: auto;
+}
+
+.footer a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+  cursor: pointer;
+}
+.footer a:hover {
+  color: crimson;
+}
+
+@media (min-width: 750px) { 
+    .footer{
         display: none;
     }
 }
