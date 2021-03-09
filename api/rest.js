@@ -1,12 +1,18 @@
-import models from './models.js'
 
 
-export default function rest(app, dbCloudUrl) {
+module.exports = (app, dbCloudUrl, models) => {
 
+  // Get all users/houses/rentals
+  app.get('/rest/:model', async (req, res) => {
+    let model = models[req.params.model]
+    let docs = await model.find()
+    res.json(docs)
+  })
+  
   // Get houses by filters 
   app.get('/api/houses/:filters', async (req, res) => {
     let filterObj = JSON.parse(req.body)
-    let docs = await dbCloudUrl.houses.find({ featuresId: filterObj })
+    let docs = await houses.find({ featuresId: filterObj })
     res.json(docs)
   })
 
@@ -14,20 +20,14 @@ export default function rest(app, dbCloudUrl) {
   app.get('/rest/:model/:id', async (req, res) => {
     let model = models[req.params.model]
     // Only populate if ref exists?
-    let docs = await dbCloudUrl.model.findById(req.params.id).populate(['userId', 'houseId', 'bookingId']).exec()
+    let docs = await model.findById(req.params.id).populate(['userId', 'houseId', 'bookingId', 'featureIds']).exec()
     res.json(docs)
   })
 
-  // Get all users/houses/rentals
-  app.get('/rest/:model', async (req, res) => {
-    let model = models[req.params.model]
-    let docs = await dbCloudUrl.model.find()
-    res.json(docs)
-  })
+ 
 
 
   // load models
-  const models = require('./models.js')
   let wifi = new models['features']({
     index: 1,
     name: 'wifi'
@@ -63,4 +63,5 @@ export default function rest(app, dbCloudUrl) {
 
 
 }
+
 

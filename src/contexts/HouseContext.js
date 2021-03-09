@@ -20,7 +20,7 @@ export default function HouseContextProvider(props) {
   // Get houses by filters (checkbox and range) - Does this work with userId as well?
   const fetchHousesByFilters = async filters => {
     // filters should be an object passed to a query
-    let res = await fetch('/api/houses/:filters', {
+    let res = await fetch('/rest/houses/:filters', {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(filters)

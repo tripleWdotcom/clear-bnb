@@ -1,13 +1,14 @@
 global.mongoose = require('mongoose')
 const express = require('express')
+const models = require('./models.js')
+
 
 const app = express()
 
-
 app.use(express.json())
 
-//temp link for testing puroposes
-const dbCloudUrl ='mongodb+srv://Rebecca:hej123@cluster0.sk4ko.mongodb.net/ClearBnB?retryWrites=true&w=majority'
+
+const dbCloudUrl = 'mongodb+srv://Rebecca:hej123@cluster0.sk4ko.mongodb.net/clearbnbTest?retryWrites=true&w=majority'
 
 
 mongoose.connect(dbCloudUrl, {
@@ -16,8 +17,8 @@ mongoose.connect(dbCloudUrl, {
 })
 
 const rest = require('./rest.js')
-rest(app, dbCloudUrl)
+rest(app, dbCloudUrl, models)
 
 
 
-app.listen(3001)
+app.listen(3001, () => { console.log('Server started on port 3001')})
