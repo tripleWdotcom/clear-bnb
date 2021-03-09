@@ -10,9 +10,9 @@ export default function UserContextProvider(props) {
   // A reactive state to store users
   const [users, setUsers] = useState([])
 
-  // Get all users
-  const fetchUsers = async () => {
-    let res = await fetch('/rest/users')
+  // Get user by id
+  const fetchUser = async () => {
+    let res = await fetch('/rest/users/:id')
     res = await res.json()
     setUsers(res)
   }
@@ -35,9 +35,13 @@ export default function UserContextProvider(props) {
   // Remove a user by id
   const removeUserById = async userId => {
     let res = await fetch('/rest/users/:id', {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(userId)
     })
-
+    res = await res.json()
+    let index = users.indexOf(res)
+    users.splice(index, 1)
   }
 
   // The values we want the children components to reach and be able to use
@@ -47,9 +51,10 @@ export default function UserContextProvider(props) {
     removeUserById
   }
 
-  // useEffect(() => {
-  //   fetchUsers()
-  // }, [])
+  // Calls one time, as mounted in Vue
+  useEffect(() => {
+    fetchUser()
+  }, [])
 
   return (
     <UserContext.Provider value={values}>
