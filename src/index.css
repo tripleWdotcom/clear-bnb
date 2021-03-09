@@ -21,16 +21,13 @@
   margin-left: auto;
 }
 
-/* Update later, when other components for Navbar is done 
-  <p> - change it later
-*/
-.navbar p {
+.navbar a {
   margin-left: 16px;
   text-decoration: none;
   padding: 6px;
   cursor: pointer;
 }
-.navbar p:hover {
+.navbar a:hover {
   color: crimson;
 }
 .content {
