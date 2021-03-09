@@ -17,7 +17,7 @@ mongoose.connect(dbCloudUrl, {
 })
 
 const rest = require('./rest.js')
-rest(app, dbCloudUrl, models)
+rest(app, models)
 
 
 
