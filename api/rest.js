@@ -28,8 +28,10 @@ module.exports = (app, models) => {
   // Get user/house/rental by id
   app.get('/rest/:model/:id', async (req, res) => {
     let model = models[req.params.model]
-    // Only populate if ref exists?
-    let docs = await model.findById(req.params.id).populate(['userId', 'houseId', 'featureIds']).exec()
+    // Only populate if ref exists?   answer: yes
+   // let docs = await model.findById(req.params.id).populate(['userId', 'houseId', 'featureIds']).exec()
+    let docs = await model.findById(req.params.id).populate(['userId','featureIds']).exec()
+
     res.json(docs)
   })
 
