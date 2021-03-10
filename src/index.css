@@ -127,14 +127,4 @@ footer.App-Footer{
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
-@media (min-width: 1800px) {
-  .contentGridContainer {
-    width: 70vw;
-  }
-}
 
-@media print {
-  body * {
-    visibility: hidden;
-  }
-}

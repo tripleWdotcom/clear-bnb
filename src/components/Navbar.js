@@ -25,8 +25,6 @@ const Navbar = () => {
   )
 }
 
-// const mobileVersion = useMediaQuery({query: '(max-width: 700)'});
-
 const styles = {
 
   navbar: {
