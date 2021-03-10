@@ -16,13 +16,14 @@ function App() {
       <Router>
         <header className={true ? 'App-Header' : ''}>
           <Navbar />
+
         </header>
 
         <main>
           <Switch>
-
-            <Route exact path="/" component={Home} />
-
+            <div className="content" style={styles.content}>
+              <Route exact path="/" component={Home} />
+            </div>
             <Route path="*" component={page404} />
           </Switch>
         </main>
@@ -36,6 +37,16 @@ function App() {
     </div>
 
   );
+}
+
+const styles = {
+
+  content: {
+    maxWidth: '600px',
+    margin: '100px auto',
+    padding: '20px'
+  }
+
 }
 
 export default App;
