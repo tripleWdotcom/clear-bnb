@@ -2,13 +2,21 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 function App() {
 
-  const page404 = () => (
-    <h1>Page not found: {window.location.pathname}</h1>
-  )
+  const page404 = () => {
+      return (
+        <div className="not-found">
+          <h2>Sorry</h2>
+          <p>That page cannot be found: {window.location.pathname}</p>
+         <Link to="/">Back to the homepage...</Link>
+        </div>
+    )
+  }
+  
 
   return (
     <div className="App">
@@ -39,3 +47,4 @@ function App() {
 }
 
 export default App;
+
