@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import onClickOutside from 'react-onclickoutside';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import MyPages from '../pages/MyPages.js'
 import MyAccount from '../pages/MyAccount.js'
 
