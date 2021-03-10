@@ -1,15 +1,31 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+/* navbar */
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Quicksand";
+  color: #333;
+}
+.navbar {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  border-bottom: 1px solid whitesmoke;
+}
+.navbar h1 {
+  color: crimson;
+}
+.navbar .links {
+  margin-left: auto;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+  cursor: pointer;
 }
 
 .dd-wrapper{
@@ -35,3 +51,17 @@ code {
     width:50%;
     padding:0 20px;  
  }
+.navbar a:hover {
+  color: crimson;
+}
+.content {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+@media (max-width: 767px) { 
+    .navbar{
+        display: none;
+    }
+}

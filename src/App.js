@@ -3,27 +3,41 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Menu from './components/Menu.js'
 import MyPages from './pages/MyPages.js'
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
 
 function App() {
+
+
+
+function App() {
+
   const page404 = () => (
     <h1>Page not found: {window.location.pathname}</h1>
   )
 
   return (
     <div className="App">
+
       <Router>
-        <menu>
-          <Menu />
-        </menu>
+        <header className={true ? 'App-Header' : ''}>
+          <Navbar />
+        </header>
+
+
         <main>
           <Switch>
-            <Route exact path="/myPages" component={MyPages} />
+
+            <Route exact path="/" component={Home} />
+
             <Route path="*" component={page404} />
           </Switch>
         </main>
+
       </Router>
-      
+
     </div>
+
   );
 }
 
