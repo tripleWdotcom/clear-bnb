@@ -55,8 +55,6 @@ module.exports = (app, models) => {
   // filter.parking
   
 
-
-
   // Get user/house/rental by id
   app.get('/rest/:model/:id', async (req, res) => {
     let model = models[req.params.model]
@@ -66,46 +64,6 @@ module.exports = (app, models) => {
   })
 
   
-
-
-
-
-
-  // // load models
-  // let wifi = new models['features']({
-  //   index: 1,
-  //   name: 'wifi'
-  // })
-
-  // //wifi.save()
-
-  // const test = [
-  //   {
-  //     id: 1,
-  //     name: 'jack',
-  //     number: '123'
-  //   }
-  // ]
-
-  // app.get('/rest/test', (req, res) => {
-
-  //   res.json(test)
-
-  // })
-
-
-  // app.get('/rest/:model', async (req, res) => {
-  //   let model = models[req.params.model] // cats, owners
-  //   let test2 = await model.find()
-
-  //   res.json(test2)
-
-  // })
-
-
-
-
-
 }
 
 
