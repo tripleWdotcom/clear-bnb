@@ -1,59 +1,51 @@
 import React, { useState } from 'react';
 import onClickOutside from 'react-onclickoutside';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import MyPages from '../pages/MyPages.js'
+import MyAccount from '../pages/MyAccount.js'
 
-function Menu({title,multiSelect = false}) {
-  const [MyPages, setOpen] = useState(false);
-  const toggle = () => setOpen(!MyPages)
+function Menu() {
+  const [OpenMyPages, setOpen] = useState(false);
+  const toggle = () => setOpen(!OpenMyPages)
   Menu.handleClickOutside = () => setOpen(false);
-
-  const items = [
-    {
-      id: 1,
-      value: 'My pages',
-    },
-    {
-      id: 2,
-      value:'My Account',
-    },
-    {
-      id: 3,
-      value: 'Log Out',
-    }
-  ]
  
-  function handleOnClick(items) {
-    
+  function handleOnClick(item) {
+    if (item === 1) {
+       <Route>
+        <Switch>
+         <Route exact path="/mypages" component={MyPages} />
+        </Switch>
+       </Route >
+    } else if (item === 2) {
+      <Route>
+        <Switch>
+          <Route exact path="/myaccount" component={MyAccount} />
+        </Switch> 
+      </Route>
+    }
   }
  
-  return (
+  return (    
     <div className="dd-wrapper">
       <div
         tabIndex={0}
         className="dd-header"
-        role="button"
-        onKeyPress={() => toggle(!MyPages)}
-        onClick={() => toggle(!MyPages)}
+        onKeyPress={() => toggle(!OpenMyPages)}
+        onClick={() => toggle(!OpenMyPages)}
+        style={menuStyle}
       >
-        <div className="dd-header_title">
-          <p className="dd-header_title--bold">{title}</p>
-        </div>
         <div className="dd-header_action">
-          <p>{MyPages ? 'Close My Pages' :'My Pages'}</p>
+          <p>{OpenMyPages ? 'Close My Pages' : 'My Pages'}</p>
         </div>
       </div>
-      {MyPages && (
-        <ul className="dd-list">
-          {items.map(item => (
-            <li className="dd-list-item" key={item.id}>
-              <button type="button" onClick={() => handleOnClick(item)}>
-                <span>{item.value}</span>
-              </button>
-            </li>
-          ))}
-
-        </ul>
+      {OpenMyPages && (
+        <div className="myPages-sub-menu">
+          <p className="routerLinks" onClick={() => handleOnClick(1)}>My pages</p>
+          <p className="routerLinks" onClick={() => handleOnClick(2)}>My Account</p>
+          <p className="routerLinks" onClick={() => handleOnClick(3)}>Log Out</p>
+        </div >
       )}
-    </div>
+      </div>
   )  
 }
 
@@ -61,6 +53,17 @@ const clickOutsideConfig = {
   handleClickOutside:() => Menu.handleClickOutside
 }
 
+const menuStyle = {
+  
+  'p': {
+    margin: '1em',
+    cursor: 'pointer',
+    ':hover': {
+      color: 'rgba(255, 166, 0, 0.664)'
+    }
+  }
+
+}
 
 export default onClickOutside(Menu, clickOutsideConfig);
 
