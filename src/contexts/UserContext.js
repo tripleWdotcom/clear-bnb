@@ -10,16 +10,25 @@ export default function UserContextProvider(props) {
   // A reactive state to store users
   const [users, setUsers] = useState([])
 
-  // Get user by id
+  // Get all users 
   const fetchUsers = async () => {
-    let res = await fetch('/rest/users')
+    let res = await fetch('/api/users')
     res = await res.json()
     setUsers(res)
   }
 
+  // Get logged in user
+  const loggedInUser = async () => {
+    let res = await fetch('/api/login', {
+      method: 'GET',
+      headers: { 'content-type': 'application/json' },
+    })
+    res = await res.json()
+  }
+
   // Add a new user
   const addUser = async user => {
-    let res = await fetch('/rest/users', {
+    let res = await fetch('/api/users', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(user)
@@ -34,7 +43,7 @@ export default function UserContextProvider(props) {
 
   // Remove a user by id
   const removeUserById = async userId => {
-    let res = await fetch('/rest/users/:id', {
+    let res = await fetch('/api/users/:id', {
       method: 'DELETE',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(userId)
@@ -48,7 +57,8 @@ export default function UserContextProvider(props) {
   const values = {
     users,
     addUser,
-    removeUserById
+    removeUserById,
+    loggedInUser
   }
 
   // Calls one time, as mounted in Vue

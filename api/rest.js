@@ -65,6 +65,14 @@ module.exports = (app, models) => {
     res.json(docs)
   })
 
+
+  // Delete user by id
+  app.delete('/api/users/:id', async (req, res) => {
+    let userId = req.body
+    console.log(req.body)
+    let user = await models['users'].remove({ _id: userId })
+    res.json(user)
+  })
   
 
 
