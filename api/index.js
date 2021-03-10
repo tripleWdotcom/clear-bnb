@@ -1,13 +1,14 @@
 global.mongoose = require('mongoose')
 const express = require('express')
+const models = require('./models.js')
+
 
 const app = express()
 
-
 app.use(express.json())
 
-//temp link for testing puroposes
-const dbCloudUrl ='mongodb+srv://Rebecca:hej123@cluster0.sk4ko.mongodb.net/clearbnbTest?retryWrites=true&w=majority'
+
+const dbCloudUrl = 'mongodb+srv://Rebecca:hej123@cluster0.sk4ko.mongodb.net/clearbnbTest?retryWrites=true&w=majority'
 
 
 mongoose.connect(dbCloudUrl, {
@@ -15,37 +16,9 @@ mongoose.connect(dbCloudUrl, {
   useUnifiedTopology: true
 })
 
-
-// load models
-const models = require('./models.js')
-let wifi = new models['features']({
-  index:1,
-  name: 'wifi'
-})
-
-//wifi.save()
-
-const test=[
-  {
-    id: 1,
-    name: 'jack',
-    number: '123'    
-  }
-]
-
-app.get('/rest/test', (req, res) => {
-
-  res.json(test)
-
-})
+const rest = require('./rest.js')
+rest(app, models)
 
 
-app.get('/rest/:model',async (req,res) =>{
-  let model = models[req.params.model] // cats, owners
-  let test2 = await model.find()
 
-  res.json(test2)
-
-})
-
-app.listen(3001)
+app.listen(3001, () => { console.log('Server started on port 3001')})
