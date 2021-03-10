@@ -5,13 +5,17 @@ import Home from './pages/Home';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 function App() {
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+    rel="stylesheet" />
 
   const page404 = () => (
     <h1>Page not found: {window.location.pathname}</h1>
   )
+  
 
   return (
     <div className="App">
+      <div id="contentGridContainer">
 
       <Router>
         <header className={true ? 'App-Header' : ''}>
@@ -19,9 +23,9 @@ function App() {
 
         </header>
 
-        <main>
+          <main className="content">
           <Switch>
-            <div className="content" style={styles.content}>
+            <div>
               <Route exact path="/" component={Home} />
             </div>
             <Route path="*" component={page404} />
@@ -34,19 +38,10 @@ function App() {
 
       </Router>
 
+      </div>
     </div>
 
   );
-}
-
-const styles = {
-
-  content: {
-    maxWidth: '600px',
-    margin: '100px auto',
-    padding: '20px'
-  }
-
 }
 
 export default App;

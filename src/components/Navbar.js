@@ -47,7 +47,7 @@ const styles = {
     cursor: 'pointer',
     ':hover': {
       color: 'crimson',
-    }
+    },
   },
   signIn: {
 
