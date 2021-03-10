@@ -1,6 +1,10 @@
+import Radium from 'radium'
+import Media from 'react-media';
 
 const Footer = () => {
-  return ( 
+   
+   return ( 
+     <Media query="(max-width: 700px)">
      <nav className="footer">
       <div className="links">
          <a>Home</a>
@@ -9,7 +13,8 @@ const Footer = () => {
      </nav>
 
 
+   </Media>
    );
 }
  
-export default Footer;
+export default Radium(Footer);
