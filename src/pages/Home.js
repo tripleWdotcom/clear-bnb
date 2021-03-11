@@ -13,49 +13,28 @@ const Home = () => {
       <h2>Homepage</h2>
       
       
-      {/* <div className="grid-container" style={styles.container}>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-      </div> */}
-      
       <div className={classes.root}>
 
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <Paper className={classes.paper}>xs=12</Paper>
+            <Paper className={classes.paper}>Search bar</Paper>
           </Grid>
 
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>xs=12 sm=6</Paper>
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>Carousel</Paper>
           </Grid>
 
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>xs=12 sm=6</Paper>
+          <Grid item xs={12}>
+            <Paper className={classes.paper}>Cities</Paper>
           </Grid>
-          <Grid item xs={6} sm={3}>
-            <Paper className={classes.paper}>xs=6 sm=3</Paper>
-          </Grid>
-          <Grid item xs={6} sm={3}>
-            <Paper className={classes.paper}>xs=6 sm=3</Paper>
-          </Grid>
-          <Grid item xs={6} sm={3}>
-            <Paper className={classes.paper}>xs=6 sm=3</Paper>
-          </Grid>
-          <Grid item xs={6} sm={3}>
-            <Paper className={classes.paper}>xs=6 sm=3</Paper>
-          </Grid>
+          
 
           </Grid>
          
-
       
       </div>
         
-
     </div>
-
-    
 
   );
 
@@ -65,11 +44,14 @@ const useStyles = makeStyles((theme) => ({
 
   root: {
     flexGrow: 1,
+    backgroundColor: 'cyan'
   },
   paper: {
-    padding: theme.spacing(5),
+    padding: theme.spacing(15),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+    backgroundColor: 'lightblue',
+    
   }
 
 }));
