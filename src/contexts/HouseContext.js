@@ -10,13 +10,6 @@ export default function HouseContextProvider(props) {
   // A reactive state to store houses
   const [houses, setHouses] = useState([])
 
-  // Get all houses - IS THIS FETCH NEEDED?
-  // const fetchHouses = async () => {
-  //   let res = await fetch('/rest/houses')
-  //   res = await res.json()
-  //   setHouses(res)
-  // }
-
   // Get users rentals/houses they own
   const myRentals = async userId => {
     let res = await fetch('/rest/houses/user/:id', {
@@ -25,18 +18,22 @@ export default function HouseContextProvider(props) {
       body: JSON.stringify(userId)
     })
     res = await res.json()
-    return res
   }
 
   // Get houses by city
   const fetchHousesByCity = async city => {
-    let res = await fetch('/rest/houses/city/:city')
+    let res = await fetch('/rest/houses/city/', {
+      method: 'GET',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(city)
+    })
+    res = await res.json()
   }
 
   // Get houses by filters (checkbox and range) - Does this work with userId as well?
   const fetchHousesByFilters = async filters => {
     // filters should be an object passed to a query
-    let res = await fetch('/rest/houses/:filters', {
+    let res = await fetch('/rest/houses/filters', {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(filters)
@@ -79,6 +76,7 @@ export default function HouseContextProvider(props) {
     addHouses,
     removeHouseById,
     fetchHousesByFilters,
+    fetchHousesByCity,
     myRentals
   }
 
