@@ -8,28 +8,28 @@ module.exports = (app, models) => {
     res.json(docs)
   })
 
-  app.get('/rest/:model/city/:city/', async (req, res) => {
-    let city = req.params.city
-    let model = models[req.params.model]
+  app.get('/rest/houses/city', async (req, res) => {
+    let city = req.body.city
+    let model = models['houses']
     let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' }})
-    console.log(docs)
     res.json(docs)
   })
 
   // Get houses by filters 
-  app.get('/rest/:model/filters/:city/', async (req, res) => {
-    let bedrooms = parseInt(req.params.bedrooms)
-    let country = req.params.country
-    let pool = parseInt(req.params.pool)
+  app.get('/rest/houses/filters', async (req, res) => {
+    console.log(req.body)
+    // let bedrooms = parseInt(req.body.bedrooms)
+    // let country = req.params.country
+    // let pool = parseInt(req.params.pool)
 
-    console.log(bedrooms)
-    console.log(country)
-    console.log(pool)
+    // console.log(bedrooms)
+    // console.log(country)
+    // console.log(pool)
   //   let filter = JSON.parse(req.params.something)
   //   console.log(JSON.parse(req.params.something))
   //   console.log(filter[0])
-    let model = models[req.params.model]
-  //   console.log(model) 
+    let model = models['houses']
+  //   console.log(model)
     let docs = await model.find({featureIds: '6046bf371807457c80418887'}).populate('featureIds').count()
     //let docs = await model.find({ country: country })
     //let docs = await model.find({ $and: [{ bedrooms: { $lt: bedrooms }, country: country}]})
