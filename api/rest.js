@@ -29,7 +29,7 @@ module.exports = (app, models) => {
   //   console.log(JSON.parse(req.params.something))
   //   console.log(filter[0])
     let model = models[req.params.model]
-  //   console.log(model)
+  //   console.log(model) 
     let docs = await model.find({featureIds: '6046bf371807457c80418887'}).populate('featureIds').count()
     //let docs = await model.find({ country: country })
     //let docs = await model.find({ $and: [{ bedrooms: { $lt: bedrooms }, country: country}]})
