@@ -10,17 +10,36 @@ export default function UserContextProvider(props) {
   // A reactive state to store users
   const [users, setUsers] = useState([])
 
-  // Get all users 
+  // Get all users
   const fetchUsers = async () => {
     let res = await fetch('/api/users')
     res = await res.json()
     setUsers(res)
   }
 
-  // Get logged in user
+  // Get the user that is logged in if someone is logged in
   const loggedInUser = async () => {
     let res = await fetch('/api/login', {
       method: 'GET',
+      headers: { 'content-type': 'application/json' },
+    })
+    res = await res.json()
+  }
+
+  // Log in user
+  const logInUser = async userCredentials => {
+    let res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(userCredentials)
+    })
+    res = await res.json()
+  }
+
+  // Log out user
+  const logOutUser = async () => {
+    let res = await fetch('/api/login', {
+      method: 'DELETE',
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
@@ -42,23 +61,24 @@ export default function UserContextProvider(props) {
   }
 
   // Remove a user by id
-  const removeUserById = async userId => {
-    let res = await fetch('/api/users/:id', {
-      method: 'DELETE',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(userId)
-    })
-    res = await res.json()
-    let index = users.indexOf(res)
-    users.splice(index, 1)
-  }
+  // const removeUserById = async userId => {
+  //   let res = await fetch('/api/users/:id', {
+  //     method: 'DELETE',
+  //     headers: { 'content-type': 'application/json' },
+  //     body: JSON.stringify(userId)
+  //   })
+  //   res = await res.json()
+  //   let index = users.indexOf(res)
+  //   users.splice(index, 1)
+  // }
 
   // The values we want the children components to reach and be able to use
   const values = {
     users,
     addUser,
-    removeUserById,
-    loggedInUser
+    loggedInUser,
+    logInUser,
+    logOutUser
   }
 
   // Calls one time, as mounted in Vue

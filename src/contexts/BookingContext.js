@@ -9,8 +9,8 @@ export default function BookingContextProvider(props) {
   const [bookings, setBookings] = useState([])
 
   // Get bookings by userId
-  const fetchBookings = async userId => {
-    let res = await fetch('/rest/bookings/:userId', {
+  const fetchBookingsByUserId = async userId => {
+    let res = await fetch('/rest/bookings/user/:userId', {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(userId)
@@ -32,24 +32,31 @@ export default function BookingContextProvider(props) {
   }
 
   // Remove a booking by id
-  const removeBookingById = async bookingId => {
+  const removeBookingById = async id => {
     let res = await fetch('/rest/booking/:id', {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(id)
     })
-
+    res = await res.json()
+    let index = users.indexOf(res)
+    bookings.splice(index, 1)
   }
+
+  
 
   // The values we want the children components to reach and be able to use
   const values = {
     bookings,
+    fetchBookingsByUserId,
     addBooking,
     removeBookingById
   }
 
   // Calls one time, as mounted in Vue
-  useEffect(() => {
-    fetchBookings()
-  }, [])
+  // useEffect(() => {
+  //   fetchBookings()
+  // }, [])
 
   return (
     <BookingContext.Provider value={values}>

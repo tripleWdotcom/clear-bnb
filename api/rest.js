@@ -55,24 +55,74 @@ module.exports = (app, models) => {
   // filter.parking
   
 
-
-
-  // Get user/house/rental by id
-  app.get('/rest/:model/:id', async (req, res) => {
-    let model = models[req.params.model]
-    // Only populate if ref exists? answer :yes
-    let docs = await model.findById(req.params.id).populate(['userId', 'featureIds']).exec()
+  // Get users houses by userId
+  app.get('/rest/houses/user/:id', async (req, res) => {
+    let model = models['houses']
+    console.log('model', model)
+    console.log(await model.find({ userId: req.params.id }))
+    let docs = await model.find({ userId: req.params.id }).populate(['userId', 'featureIds']).exec()
     res.json(docs)
   })
 
-
-  // Delete user by id
-  app.delete('/api/users/:id', async (req, res) => {
-    let userId = req.body
-    console.log(req.body)
-    let user = await models['users'].remove({ _id: userId })
-    res.json(user)
+  // Get users bookings by userId
+  app.get('/rest/bookings/user/:id', async (req, res) => {
+    let model = models['bookings']
+    let docs = await model.find({ userId: req.params.id }).populate(['userId', 'houseId']).exec()
+    res.json(docs)
   })
+
+  // Add a new house
+  app.post('/rest/houses', async (req, res) => {
+    let model = models['houses']
+    let doc = req.body
+    let docs = await new model(doc)
+    await docs.save()
+    res.json(docs)
+  })
+
+  // Add a new booking
+  app.post('/rest/bookings', async (req, res) => {
+    let model = models['bookings']
+    let doc = req.body
+    let docs = await new model(doc)
+    await docs.save()
+    res.json(docs)
+  })
+
+  // Delete house 
+  app.delete('/rest/houses', async (req, res) => {
+    let houseId = req.body
+    let house = await models['houses'].remove({ _id: houseId.id })
+    res.json(house)
+  })
+
+  // Delete booking
+  app.delete('/rest/bookings', async (req, res) => {
+    let bookingId = req.body
+    let booking = await models['bookings'].remove({ _id: bookingId.id })
+    res.json(booking)
+  })
+
+
+
+
+
+
+
+
+
+
+
+  // Get user/houses by userId
+  // app.get('/rest/:model/user/:id', async (req, res) => {
+  //   let model = models[req.params.model]
+  //   // Only populate if ref exists? answer :yes
+  //   let docs = await model.find({ userId: req.params.id }).populate(['userId', 'featureIds']).exec()
+  //   res.json(docs)
+  // })
+
+
+  
   
 
 

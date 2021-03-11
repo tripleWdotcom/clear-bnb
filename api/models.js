@@ -13,8 +13,8 @@ const House = mongoose.model('House', {
   price: Number,
   bathroom: Number,
   featureIds: [{
-   type: mongoose.Schema.Types.ObjectId,
-   ref: 'Feature'
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Feature'
   }],
   availableStart:Number,
   availableEnd:Number,
