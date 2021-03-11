@@ -11,49 +11,64 @@ module.exports = (app, models) => {
   app.get('/rest/houses/city', async (req, res) => {
     let city = req.body.city
     let model = models['houses']
-    let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' }})
+    let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } })
     res.json(docs)
   })
 
   // Get houses by filters 
   app.get('/rest/houses/filters', async (req, res) => {
-    console.log(req.body)
-    // let bedrooms = parseInt(req.body.bedrooms)
-    // let country = req.params.country
-    // let pool = parseInt(req.params.pool)
+    let b = req.body
 
-    // console.log(bedrooms)
-    // console.log(country)
-    // console.log(pool)
-  //   let filter = JSON.parse(req.params.something)
-  //   console.log(JSON.parse(req.params.something))
-  //   console.log(filter[0])
+    // Feature filters
+    let featureIds = []
+    b.wifi == null ? null : featureIds.push({ featureIds: b.wifi })
+    b.tv == null ? null : featureIds.push({ featureIds: b.tv })
+    b.breakfast == null ? null : featureIds.push({ featureIds: b.breakfast })
+    b.gym == null ? null : featureIds.push({ featureIds: b.gym })
+    b.kitchen == null ? null : featureIds.push({ featureIds: b.kitchen })
+    b.smoking == null ? null : featureIds.push({ featureIds: b.smoking })
+    b.animalFriendly == null ? null : featureIds.push({ featureIds: b.animalFriendly })
+    b.pool == null ? null : featureIds.push({ featureIds: b.pool })
+    b.parking == null ? null : featureIds.push({ featureIds: b.parking })
+
+    console.log(featureIds)
+
     let model = models['houses']
-  //   console.log(model)
-    let docs = await model.find({featureIds: '6046bf371807457c80418887'}).populate('featureIds').count()
-    //let docs = await model.find({ country: country })
-    //let docs = await model.find({ $and: [{ bedrooms: { $lt: bedrooms }, country: country}]})
-  //   console.log(docs)
-  //   //console.log(req.body)
-  //   // let filterObj = JSON.parse(req.body)
-  //   // console.log(filterObj)
-  // //   let docs = await houses.find({ featuresId: filterObj })
-    console.log(docs)
-    res.json(docs)
-  })
+    //   console.log(model)
 
-  // 3001 / rest / houses / filters / [{ "bedrooms": 4 }]
-  // 3001 / rest / houses / filters / bedrooms / :bedrooms / wifi / :wifi / parking /:parking
-  //   let bedrooms = req.params.bedrooms
-  //   let wifi = req.params.wifi
-  //   let parking = req.params.parking
-  
-  
-  // 3001 / rest / houses / filters / { "bedrooms": 4, "wifi": true }
-  // filter.bedrooms
-  // filter.wifi
-  // filter.parking
-  
+    if (!featureIds.length) {
+      // Without any checkbox filters
+      let docs = await model.find({
+        $and: [
+          { $and: [{ bedrooms: { $lte: b.bedroomsMax } }, { bedrooms: { $gte: b.bedroomsMin } }] },
+          { $and: [{ price: { $lte: b.priceMax } }, { price: { $gte: b.priceMin } }] },
+          { city: b.city },
+        ]
+      }).populate(['userId', 'featureIds']).exec()
+      console.log(docs)
+      res.json(docs)
+      return;
+    } else {
+      // With checkbox filters
+      let docs = await model.find({
+        $and: [
+          { $and: [{ bedrooms: { $lte: b.bedroomsMax } }, { bedrooms: { $gte: b.bedroomsMin } }] },
+          { $and: [{ price: { $lte: b.priceMax } }, { price: { $gte: b.priceMin } }] },
+          { city: b.city },
+          { $and: featureIds },
+        ]
+      }).populate(['userId', 'featureIds']).exec()
+      console.log(docs)
+      res.json(docs)
+      return;
+    }
+    
+    // Why doesnt the dates work
+
+    // { availableStart: { $gte: b.availableStart } }
+    // { availableEnd: { $lte: b.availableEnd } },
+    
+  })
 
   // Get users houses by userId
   app.get('/rest/houses/user/:id', async (req, res) => {
@@ -122,8 +137,8 @@ module.exports = (app, models) => {
   // })
 
 
-  
-  
+
+
 
 
 
