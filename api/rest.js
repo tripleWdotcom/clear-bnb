@@ -111,69 +111,6 @@ module.exports = (app, models) => {
     let booking = await models['bookings'].remove({ _id: bookingId })
     res.json(booking)
   })
-
-
-
-
-
-
-
-
-
-
-
-  // Get user/houses by userId
-  // app.get('/rest/:model/user/:id', async (req, res) => {
-  //   let model = models[req.params.model]
-  //   // Only populate if ref exists? answer :yes
-  //   let docs = await model.find({ userId: req.params.id }).populate(['userId', 'featureIds']).exec()
-  //   res.json(docs)
-  // })
-
-
-
-
-
-
-
-
-
-  // // load models
-  // let wifi = new models['features']({
-  //   index: 1,
-  //   name: 'wifi'
-  // })
-
-  // //wifi.save()
-
-  // const test = [
-  //   {
-  //     id: 1,
-  //     name: 'jack',
-  //     number: '123'
-  //   }
-  // ]
-
-  // app.get('/rest/test', (req, res) => {
-
-  //   res.json(test)
-
-  // })
-
-
-  // app.get('/rest/:model', async (req, res) => {
-  //   let model = models[req.params.model] // cats, owners
-  //   let test2 = await model.find()
-
-  //   res.json(test2)
-
-  // })
-
-
-
-
-
-  
   
 }
 
