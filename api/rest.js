@@ -8,16 +8,17 @@ module.exports = (app, models) => {
     res.json(docs)
   })
 
-  app.get('/rest/houses/city', async (req, res) => {
-    let city = req.body.city
+  // Get houses by city (searching for one letter at a time)
+  app.get('/rest/houses/city/:city', async (req, res) => {
+    let city = req.params.city
     let model = models['houses']
     let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } })
     res.json(docs)
   })
 
   // Get houses by filters 
-  app.get('/rest/houses/filters', async (req, res) => {
-    let b = req.body
+  app.get('/rest/houses/filters/:filters', async (req, res) => {
+    let b = JSON.parse(req.params.filters)
 
     // Feature filters
     let featureIds = []
@@ -64,14 +65,10 @@ module.exports = (app, models) => {
       return;
     }  
   })
-  // { $and: [{ availableStart: { $lt: unixTimestamp } }, { availableStart: { $lt: b.availableStart } }] },
-  // { $and: [{ availableEnd: { $gt: unixTimestamp } }, { availableEnd: { $gt: b.availableEnd } }] },
 
   // Get users houses by userId
   app.get('/rest/houses/user/:id', async (req, res) => {
     let model = models['houses']
-    console.log('model', model)
-    console.log(await model.find({ userId: req.params.id }))
     let docs = await model.find({ userId: req.params.id }).populate(['userId', 'featureIds']).exec()
     res.json(docs)
   })
@@ -102,16 +99,16 @@ module.exports = (app, models) => {
   })
 
   // Delete house 
-  app.delete('/rest/houses', async (req, res) => {
-    let houseId = req.body
-    let house = await models['houses'].remove({ _id: houseId.id })
+  app.delete('/rest/houses/:id', async (req, res) => {
+    let houseId = req.params.id
+    let house = await models['houses'].remove({ _id: houseId })
     res.json(house)
   })
 
   // Delete booking
-  app.delete('/rest/bookings', async (req, res) => {
-    let bookingId = req.body
-    let booking = await models['bookings'].remove({ _id: bookingId.id })
+  app.delete('/rest/bookings/:id', async (req, res) => {
+    let bookingId = req.params.id
+    let booking = await models['bookings'].remove({ _id: bookingId })
     res.json(booking)
   })
 

@@ -11,11 +11,12 @@ export default function FeatureContextProvider(props) {
     let res = await fetch('/rest/features')
     res = await res.json()
     setFeatures(res)
+    return res;
   }
 
   // The values we want the children components to reach and be able to use
   const values = {
-    features
+    fetchFeatures
   }
 
   // Calls one time, as mounted in Vue

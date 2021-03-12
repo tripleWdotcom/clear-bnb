@@ -12,68 +12,67 @@ export default function HouseContextProvider(props) {
 
   // Get users rentals/houses they own
   const myRentals = async userId => {
-    let res = await fetch('/rest/houses/user/:id', {
+    let res = await fetch('/rest/houses/user/' + userId, {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(userId)
     })
     res = await res.json()
+    return res;
   }
 
   // Get houses by city
   const fetchHousesByCity = async city => {
-    let res = await fetch('/rest/houses/city/', {
+    let res = await fetch('/rest/houses/city/' + city , {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(city)
     })
     res = await res.json()
+    return res;
   }
 
   // Get houses by filters (checkbox and range) - Does this work with userId as well?
   const fetchHousesByFilters = async filters => {
+    filters = JSON.stringify(filters)
     // filters should be an object passed to a query
-    let res = await fetch('/rest/houses/filters', {
+    let res = await fetch('/rest/houses/filters/' + filters, {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(filters)
     })
     res = await res.json()
-    console.log(res)
-    setHouses(res)
+    return res;
   }
 
   // Add a new house
-  const addHouses = async house => {
+  const addHouse = async house => {
     let res = await fetch('/rest/houses', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(house)
     })
     res = await res.json()
-    house.id = res.id
+    house._id = res._id
     // Append a new house to the reactive house list
     // to trigger reactivity we replace the old list with a new 
     // by spreading the old list (a copy of it) and adding the new house
     setHouses([...houses, house])
+    return res;
   }
 
   // Remove a house by id
   const removeHouseById = async id => {
-    let res = await fetch('/rest/houses/:id', {
+    let res = await fetch('/rest/houses/' + id, {
       method: 'DELETE',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(id)
     })
     res = await res.json()
-    let index = houses.indexOf(res)
-    houses.splice(index, 1)
+    // let index = houses.indexOf(res)
+    // houses.splice(index, 1)
+    return res;
   }
 
   // The values we want the children components to reach and be able to use
   const values = {
-    houses,
-    addHouses,
+    addHouse,
     removeHouseById,
     fetchHousesByFilters,
     fetchHousesByCity,

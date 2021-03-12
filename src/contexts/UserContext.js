@@ -66,13 +66,15 @@ export default function UserContextProvider(props) {
   }
 
   // Remove a user by id
-  const removeUserById = async userId => {
+  // Should we have this?
+  const deleteUserById = async userId => {
     let res = await fetch('/api/users/:id', {
       method: 'DELETE',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(userId)
     })
     res = await res.json()
+    return res;
     let index = users.indexOf(res)
     users.splice(index, 1)
   }
@@ -84,7 +86,6 @@ export default function UserContextProvider(props) {
     loggedInUser,
     logInUser,
     logOutUser,
-    removeUserById
   }
 
   //Calls one time, as mounted in Vue

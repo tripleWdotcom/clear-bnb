@@ -10,13 +10,13 @@ export default function BookingContextProvider(props) {
 
   // Get bookings by userId
   const fetchBookingsByUserId = async userId => {
-    let res = await fetch('/rest/bookings/user/:userId', {
+    let res = await fetch('/rest/bookings/user/' + userId, {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(userId)
     })
     res = await res.json()
-    setBookings(res)
+    // setBookings(res)
+    return res;
   }
 
   // Add a new booking
@@ -27,20 +27,21 @@ export default function BookingContextProvider(props) {
       body: JSON.stringify(booking)
     })
     res = await res.json()
-    booking.id = res.id
-    setBookings([...bookings, booking])
+    // booking.id = res.id
+    // setBookings([...bookings, booking])
+    return res;
   }
 
   // Remove a booking by id
-  const removeBookingById = async id => {
-    let res = await fetch('/rest/booking/:id', {
+  const deleteBookingById = async id => {
+    let res = await fetch('/rest/bookings/' + id, {
       method: 'DELETE',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(id)
     })
     res = await res.json()
-    let index = users.indexOf(res)
-    bookings.splice(index, 1)
+    // let index = users.indexOf(res)
+    // bookings.splice(index, 1)
+    return res;
   }
 
   
@@ -50,7 +51,7 @@ export default function BookingContextProvider(props) {
     bookings,
     fetchBookingsByUserId,
     addBooking,
-    removeBookingById
+    deleteBookingById
   }
 
   // Calls one time, as mounted in Vue
