@@ -31,23 +31,9 @@ module.exports = (app, models) => {
     b.pool == null ? null : featureIds.push({ featureIds: b.pool })
     b.parking == null ? null : featureIds.push({ featureIds: b.parking })
 
-    console.log(featureIds)
-
     let model = models['houses']
-    //   console.log(model)
 
     let unixTimestamp = Math.floor(new Date().getTime())
-    console.log(unixTimestamp)
-    //let timeStamp = b.availableEnd <= unixTimestamp ? unixTimestamp : b.availableEnd
-
-    let docs = await model.find(
-      { availableEnd: b.availableEnd}
-    )
-    console.log(docs)
-    console.log(docs.map(m => m.availableEnd))
-    res.json(docs)
-    return;
-    
 
     if (!featureIds.length) {
       // Without any checkbox filters
@@ -55,7 +41,9 @@ module.exports = (app, models) => {
         $and: [
           { $and: [{ bedrooms: { $lte: b.bedroomsMax } }, { bedrooms: { $gte: b.bedroomsMin } }] },
           { $and: [{ price: { $lte: b.priceMax } }, { price: { $gte: b.priceMin } }] },
-          { city: b.city },
+          { $and: [{ availableEnd: { $gt: unixTimestamp } }, { availableEnd: { $gt: b.availableEnd } }] },
+          { $and: [{ availableStart: { $lt: unixTimestamp } }, { availableStart: { $lt: b.availableStart } }] },
+          { city: b.city }
         ]
       }).populate(['userId', 'featureIds']).exec()
       console.log(docs)
@@ -67,21 +55,19 @@ module.exports = (app, models) => {
         $and: [
           { $and: [{ bedrooms: { $lte: b.bedroomsMax } }, { bedrooms: { $gte: b.bedroomsMin } }] },
           { $and: [{ price: { $lte: b.priceMax } }, { price: { $gte: b.priceMin } }] },
+          { $and: [{ availableEnd: { $gt: unixTimestamp } }, { availableEnd: { $gt: b.availableEnd } }] },
+          { $and: [{ availableStart: { $lt: unixTimestamp } }, { availableStart: { $lt: b.availableStart } }] },
           { city: b.city },
-          { $and: featureIds },
+          { $and: featureIds }
         ]
       }).populate(['userId', 'featureIds']).exec()
       console.log(docs)
       res.json(docs)
       return;
-    }
-    
-    // Why doesnt the dates work
-
-    // { availableStart: { $gte: b.availableStart } }
-    // { availableEnd: { $lte: b.availableEnd } },
-    
+    }  
   })
+  // { $and: [{ availableStart: { $lt: unixTimestamp } }, { availableStart: { $lt: b.availableStart } }] },
+  // { $and: [{ availableEnd: { $gt: unixTimestamp } }, { availableEnd: { $gt: b.availableEnd } }] },
 
   // Get users houses by userId
   app.get('/rest/houses/user/:id', async (req, res) => {
