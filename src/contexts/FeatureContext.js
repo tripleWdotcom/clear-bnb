@@ -19,9 +19,9 @@ export default function FeatureContextProvider(props) {
   }
 
   // Calls one time, as mounted in Vue
-  useEffect(() => {
-    fetchFeatures()
-  }, [])
+  // useEffect(() => {
+  //   fetchFeatures()
+  // }, [])
 
   return (
     <FeatureContext.Provider value={values}>

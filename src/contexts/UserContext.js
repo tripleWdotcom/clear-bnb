@@ -24,6 +24,7 @@ export default function UserContextProvider(props) {
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
+    return res;
   }
 
   // Log in user
@@ -61,16 +62,16 @@ export default function UserContextProvider(props) {
   }
 
   // Remove a user by id
-  // const removeUserById = async userId => {
-  //   let res = await fetch('/api/users/:id', {
-  //     method: 'DELETE',
-  //     headers: { 'content-type': 'application/json' },
-  //     body: JSON.stringify(userId)
-  //   })
-  //   res = await res.json()
-  //   let index = users.indexOf(res)
-  //   users.splice(index, 1)
-  // }
+  const removeUserById = async userId => {
+    let res = await fetch('/api/users/:id', {
+      method: 'DELETE',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(userId)
+    })
+    res = await res.json()
+    let index = users.indexOf(res)
+    users.splice(index, 1)
+  }
 
   // The values we want the children components to reach and be able to use
   const values = {
@@ -78,13 +79,15 @@ export default function UserContextProvider(props) {
     addUser,
     loggedInUser,
     logInUser,
-    logOutUser
+    logOutUser,
+    fetchUsers,
+    removeUserById
   }
 
   // Calls one time, as mounted in Vue
-  useEffect(() => {
-    fetchUsers()
-  }, [])
+  // useEffect(() => {
+  //   fetchUsers()
+  // }, [])
 
   return (
     <UserContext.Provider value={values}>
@@ -92,3 +95,4 @@ export default function UserContextProvider(props) {
     </UserContext.Provider>
   )
 }
+

@@ -81,9 +81,9 @@ export default function HouseContextProvider(props) {
   }
 
   // Calls one time, as mounted in Vue
-  useEffect(() => {
-    fetchHouses()
-  }, [])
+  // useEffect(() => {
+  //   fetchHouses()
+  // }, [])
 
   return (
     <HouseContext.Provider value={values}>

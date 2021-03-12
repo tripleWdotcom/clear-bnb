@@ -36,6 +36,19 @@ module.exports = (app, models) => {
     let model = models['houses']
     //   console.log(model)
 
+    let unixTimestamp = Math.floor(new Date().getTime())
+    console.log(unixTimestamp)
+    //let timeStamp = b.availableEnd <= unixTimestamp ? unixTimestamp : b.availableEnd
+
+    let docs = await model.find(
+      { availableEnd: b.availableEnd}
+    )
+    console.log(docs)
+    console.log(docs.map(m => m.availableEnd))
+    res.json(docs)
+    return;
+    
+
     if (!featureIds.length) {
       // Without any checkbox filters
       let docs = await model.find({
