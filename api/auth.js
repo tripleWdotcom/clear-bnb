@@ -17,7 +17,7 @@ app.use(session({
 
 
 // Route to register a user
-app.post('/api/users', async (req, res) => {
+  app.post('/api/users', async (req, res) => {
   // Encrypt password
   const hash = crypto.createHmac('sha256', secret)
     .update(req.body.password).digest('hex');
@@ -25,17 +25,18 @@ app.post('/api/users', async (req, res) => {
   let user = new models['users']({ ...req.body, password: hash });
   // NOTE: This system is unsafe since you can 
   // choose your own role on registration!
-
   await user.save();
-  res.json({ success: true });
+  res.json(user)
+  // res.json({ success: true });
 });
 
 
 // Login
 
-app.post('/api/login', async (req, res) => {
+  app.post('/api/login', async (req, res) => {
   // note: req.session is unique per user/browser
-  if (req.session.user) {
+    if (req.session.user) {
+    console.log('Someone is already logged in')
     res.json({ error: 'Someone is already logged in' });
 
     return;
@@ -45,11 +46,12 @@ app.post('/api/login', async (req, res) => {
   const hash = crypto.createHmac('sha256', secret)
     .update(req.body.password).digest('hex');
   // Search for user
-  let user = await User.find({ username: req.body.username, password: hash });
+    let user = await User.find({ username: req.body.username, password: hash });
   if (user) {
     // succesful login, save the user to the session object
     req.session.user = user;
-    res.json({ success: 'Logged in' });
+    console.log('session user', req.session.user)
+    res.json(req.session.user);
   }
   else {
     res.json({ error: 'No match.' });

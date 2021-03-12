@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
 // Creating a reference to this context
 // to be used with the useContext hook in components
@@ -10,9 +10,10 @@ export default function UserContextProvider(props) {
   // A reactive state to store users
   const [users, setUsers] = useState([])
 
+
   // Get all users
   const fetchUsers = async () => {
-    let res = await fetch('/api/users')
+    let res = await fetch('/rest/users')
     res = await res.json()
     setUsers(res)
   }
@@ -29,12 +30,14 @@ export default function UserContextProvider(props) {
 
   // Log in user
   const logInUser = async userCredentials => {
+    console.log('Context', userCredentials)
     let res = await fetch('/api/login', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(userCredentials)
     })
     res = await res.json()
+    return res;
   }
 
   // Log out user
@@ -44,6 +47,7 @@ export default function UserContextProvider(props) {
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
+    return res;
   }
 
   // Add a new user
@@ -54,7 +58,7 @@ export default function UserContextProvider(props) {
       body: JSON.stringify(user)
     })
     res = await res.json()
-    user.id = res.id
+    user._id = res._id
     // Append a new user to the reactive users list
     // to trigger reactivity we replace the old list with a new 
     // by spreading the old list (a copy of it) and adding the new user
@@ -80,14 +84,13 @@ export default function UserContextProvider(props) {
     loggedInUser,
     logInUser,
     logOutUser,
-    fetchUsers,
     removeUserById
   }
 
-  // Calls one time, as mounted in Vue
-  // useEffect(() => {
-  //   fetchUsers()
-  // }, [])
+  //Calls one time, as mounted in Vue
+  useEffect(() => {
+    fetchUsers()
+  }, [])
 
   return (
     <UserContext.Provider value={values}>

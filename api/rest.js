@@ -46,7 +46,6 @@ module.exports = (app, models) => {
           { city: b.city }
         ]
       }).populate(['userId', 'featureIds']).exec()
-      console.log(docs)
       res.json(docs)
       return;
     } else {
@@ -61,7 +60,6 @@ module.exports = (app, models) => {
           { $and: featureIds }
         ]
       }).populate(['userId', 'featureIds']).exec()
-      console.log(docs)
       res.json(docs)
       return;
     }  
