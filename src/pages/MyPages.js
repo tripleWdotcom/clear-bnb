@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import React, { useState } from 'react';
 import Bookings from '../components/MyPages/Bookings.js'
 import MyRentals from '../components/MyPages/MyRentals.js'
@@ -25,7 +23,7 @@ function MyPage() {
 }
 
 const leftPageStyle = {
-  margin:'1em',
+  margin: '1em',
   cursor: 'pointer',
   ':hover': {
     color: 'rgba(255, 166, 0, 0.664)'
@@ -34,6 +32,3 @@ const leftPageStyle = {
 
 
 export default Radium(MyPage);
-
->>>>>>> Stashed changes
-

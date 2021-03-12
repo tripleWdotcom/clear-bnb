@@ -1,23 +1,19 @@
-import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import MemberPage from './components/MemberPage.js'
 import Home from './pages/Home';
 import MyPage from './pages/MyPages.js'
 
+
 function App() {
 
+  const page404 = () => (
+    <h1>Page not found: {window.location.pathname}</h1>
+  )
 
+  return (
+    <div className="App">
 
-  function App() {
-
-    const page404 = () => (
-      <h1>Page not found: {window.location.pathname}</h1>
-    )
-
-    return (
-      <div className="App">
-       
       <Router>
         <header className={true ? 'App-Header' : ''}>
           <MemberPage />
@@ -32,12 +28,11 @@ function App() {
           </Switch>
         </main>
 
-        </Router>
+      </Router>
 
-      </div>
+    </div>
 
-    );
-  }
+  );
 }
 
 export default App;

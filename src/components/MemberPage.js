@@ -9,6 +9,7 @@ function MemberPage() {
 
   const goToStartPage = () => {
     history.push("/");
+    window.location.reload(false)
   };
 
   MemberPage.handleClickOutside = () => setOpen(false);
@@ -23,7 +24,7 @@ function MemberPage() {
         tabIndex={0}
         className="dd-header"
         onKeyPress={() => toggle(!open)}
-        onClick={() => toggle(!open)}        
+        onClick={() => toggle(!open)}
       >
         <div className="dd-header_action">
           <p>{open ? 'Close My Pages' : 'User Name'}</p>
@@ -48,7 +49,7 @@ const clickOutsideConfig = {
 const memberPageStyle = {
   margin: '1em',
   padding: '0 20px',
-  cursor: 'pointer',  
+  cursor: 'pointer'
 }
 
 const routerLinkStyle = {
