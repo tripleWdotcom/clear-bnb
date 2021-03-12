@@ -7,8 +7,8 @@ const Footer = () => {
      <Media query="(max-width: 700px)">
      <nav className="footer">
       <div className="links">
-         <a>Home</a>
-         <a>Sign in</a>
+         <div>Home</div>
+         <div>Sign in</div>
       </div>
      </nav>
 

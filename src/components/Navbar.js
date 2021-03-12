@@ -11,13 +11,12 @@ const Navbar = () => {
         <h1 style={{
           color: "crimson"
         }}>ClearBnB</h1>
-
         <div className="links"
           style={{
             marginLeft: 'auto'
           }}>
-          <a style={styles.home}>Home</a>
-          <a style={styles.signIn}>Sign in</a>
+          <span style={styles.home}>Home</span>
+          <span style={styles.signIn}>Sign in</span>
         </div>
       </nav>
     </Media>
