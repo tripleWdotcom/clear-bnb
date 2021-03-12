@@ -1,11 +1,11 @@
 import Radium from 'radium'
 import Media from 'react-media';
-
+import Hidden from '@material-ui/core/Hidden';
 
 const Navbar = () => {
   return (
 
-    <Media query="(min-width: 700px)">
+    <Hidden xsDown >
       <nav className="navbar" style={styles.navbar}>
 
         <h1 style={{
@@ -20,7 +20,7 @@ const Navbar = () => {
           <a style={styles.signIn}>Sign in</a>
         </div>
       </nav>
-    </Media>
+    </Hidden>
 
   )
 }

@@ -1,8 +1,8 @@
 import Radium from 'radium'
-import Media from 'react-media';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
+import Hidden from '@material-ui/core/Hidden';
 
 
 const Home = () => {
@@ -20,9 +20,11 @@ const Home = () => {
             <Paper className={classes.paper}>Search bar</Paper>
           </Grid>
 
+            <Hidden xsDown >
           <Grid item xs={12}>
             <Paper className={classes.paper}>Carousel</Paper>
           </Grid>
+            </Hidden>
 
           <Grid item xs={12}>
             <Paper className={classes.paper}>Cities</Paper>
