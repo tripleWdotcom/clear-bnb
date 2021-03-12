@@ -26,7 +26,7 @@ function App() {
           <MemberPage />
         </header>
 
-          <main className="content">
+        <main className="content">
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/mypage" component={MyPage} />
@@ -39,7 +39,7 @@ function App() {
         </footer>
 
       </Router>
-
+      </div>
     </div>
 
   );
