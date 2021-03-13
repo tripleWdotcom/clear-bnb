@@ -6,6 +6,8 @@ import BookingContextProvider from './contexts/BookingContext'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import HomeResults from './pages/HomeResults'
+
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
@@ -35,9 +37,9 @@ function App() {
 
           <main className="content">
           <Switch>
-            <div>
-              <Route exact path="/" component={Home} />
-            </div>
+               <Route exact path="/" component={Home} />
+               <Route exact path="/home-results" component={HomeResults} />
+
             <Route path="*" component={page404} />
           </Switch>
         </main>

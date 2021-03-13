@@ -1,8 +1,16 @@
 import Radium from 'radium'
 import Media from 'react-media';
 import Hidden from '@material-ui/core/Hidden';
+import { useHistory } from "react-router-dom";
 
 const Navbar = () => {
+
+  let history = useHistory();
+
+
+  const goHome=()=>{
+    history.push("/");
+  }
   return (
 
     <Hidden xsDown >
@@ -16,7 +24,7 @@ const Navbar = () => {
           style={{
             marginLeft: 'auto'
           }}>
-          <a style={styles.home}>Home</a>
+          <a style={styles.home} onClick={goHome}>Home</a>
           <a style={styles.signIn}>Sign in</a>
         </div>
       </nav>

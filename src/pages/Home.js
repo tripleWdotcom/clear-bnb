@@ -3,6 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
+import SearchComponent from '../components/Search'
+
 
 
 const Home = () => {
@@ -10,24 +12,23 @@ const Home = () => {
   
   return (
     <div className="home">
-      <h2>Homepage</h2>
-      
-      
       <div className={classes.root}>
 
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <Paper className={classes.paper}>Search bar</Paper>
+            <Paper className={classes.paper}>Search component
+            <SearchComponent />
+            </Paper>
           </Grid>
 
             <Hidden xsDown >
           <Grid item xs={12}>
-            <Paper className={classes.paper}>Carousel</Paper>
+            <Paper className={classes.paper}>Carousel component</Paper>
           </Grid>
             </Hidden>
 
           <Grid item xs={12}>
-            <Paper className={classes.paper}>Cities</Paper>
+            <Paper className={classes.paper}>Cities list component</Paper>
           </Grid>
           
 
