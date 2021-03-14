@@ -1,48 +1,49 @@
-import React, {useState, useEffect} from 'react';
-import Select from 'react-select';
+import React, { useContext, useState, useEffect, componentDidMount } from 'react';
+import Select, { createFilter } from 'react-select';
 import { HouseContext } from '../contexts/HouseContext'
 
 export default function SearchBar(props) {
 
-  let { houses } = useState(HouseContext)
+  const { fetchAllHouses } = useContext(HouseContext)
+  const [options, setOptions] = useState([])
+  const [selectedOption, setSelectedOption] = useState(null);
 
-  // useEffect(() => {
-  //   fetchAllHouses()
-  //   console.log('houses from search', houses)
-  // }, [])
-  
+  async function setAllOptions() {
+    console.log('Im in getHouses')
+    const cities = await fetchAllHouses()
+    console.log('cities', cities)
+    let sortedCity = [...cities].sort((a, b) => a.city.localeCompare(b.city, { ignorePunctuation: true, ignoreCase: true }))
+    console.log('sortedCity', sortedCity)
+    let newCities = []
+    sortedCity.map((c, i) => { newCities.push({ value: c.city, label: c.city + ', ' + c.country }) })
+    console.log(newCities)
+    setOptions([...newCities])
+  }
 
-  // useEffect(() => {
-  //   options.push(houses.map(h => ({ label: h.city, value: h.city + ', ' + h.country })))
-  // })
-  
-  const options = [{ value: 'Hallo', label: 'Yhellow' }, { value: 'No', label: 'Maybe' }]
-  
-  const getOptions = (() => {
-    console.log('houses from search', houses)
-  })
-  
+  useEffect(() => {
+    setAllOptions()
+  }, [])
 
-  //const options = () => { cities.map(c => options.push({ value: c.city, label: c.city + ', ' + c.country })) }
+  const changeCityList = async (val, e) => {
+    setSelectedOption()
+    console.log("val", val)
+    console.log('e', e)
+  }
 
-
-
-  // const handleChange = (val, e) => {
-  //   console.log('Option selected:', val}
-  // console.log('Options:', options}
-  // }
-
-
-  // const field = ({ options }) => {
-  //   <select name="city"
-  // }
-  
+  const filterConfig = {
+    ignoreCase: true,
+    ignoreAccents: true,
+    trim: true,
+    matchFrom: 'start'
+  }
 
   return (
     <div>
-      <Select 
-        onChange={getOptions}
-        loadOptions={options}
+      <Select
+        defaultValue={selectedOption}
+        onChange={changeCityList}
+        options={options}
+        filterOption={createFilter(filterConfig)}
       />
     </div>
   )

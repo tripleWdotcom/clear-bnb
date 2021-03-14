@@ -18,8 +18,7 @@ export default function HouseContextProvider(props) {
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
-    console.log('houses res', res)
-    setHouses([...res])
+    return res;
   }
 
 
@@ -85,7 +84,6 @@ export default function HouseContextProvider(props) {
 
   useEffect(() => {
     fetchAllHouses()
-    console.log('houses in context', houses)
   }, [])
 
   // The values we want the children components to reach and be able to use
