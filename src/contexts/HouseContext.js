@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
 // Creating a reference to this context
 // to be used with the useContext hook in components
@@ -9,6 +9,18 @@ export default function HouseContextProvider(props) {
 
   // A reactive state to store houses
   const [houses, setHouses] = useState([])
+
+  // Get all houses
+  const fetchAllHouses = async () => {
+    let res = await fetch('/rest/houses', {
+      method: 'GET',
+      headers: { 'content-type': 'application/json' },
+    })
+    res = await res.json()
+    console.log(res)
+    return res;
+  }
+
 
   // Get users rentals/houses they own
   const myRentals = async userId => {
@@ -70,13 +82,19 @@ export default function HouseContextProvider(props) {
     return res;
   }
 
+  // useEffect(() => {
+  //   fetchAllHouses()
+  //   console.log('houses in context', houses)
+  // }, [])
+
   // The values we want the children components to reach and be able to use
   const values = {
     addHouse,
     removeHouseById,
     fetchHousesByFilters,
     fetchHousesByCity,
-    myRentals
+    myRentals,
+    fetchAllHouses
   }
 
   // Calls one time, as mounted in Vue

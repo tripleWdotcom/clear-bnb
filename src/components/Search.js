@@ -1,5 +1,7 @@
 
 import { useHistory } from "react-router-dom";
+import SearchBar from './SearchBar'
+
 const SearchComponent = ()=>{
   let history = useHistory();
 
@@ -10,7 +12,8 @@ const SearchComponent = ()=>{
 
   return(
     <div>
-    <div> place holders location</div>
+      <SearchBar />
+      <br />
     <div> place holder for dates  </div>
       <button type="button" onClick={searchButton}>
         Search
