@@ -6,7 +6,8 @@ export default function SearchBar(props) {
 
   const { fetchAllHouses } = useContext(HouseContext)
   const [options, setOptions] = useState([])
-  const [selectedOption, setSelectedOption] = useState(null);
+  const localSelected = localStorage.getItem('selectedOption');
+  const [selectedOption, setSelectedOption] = useState(localSelected ? localSelected : null);
 
   async function setAllOptions() {
     console.log('Im in getHouses')
@@ -26,6 +27,8 @@ export default function SearchBar(props) {
 
   const changeCityList = async (val, e) => {
     setSelectedOption()
+    localStorage.setItem('selectedOption', val)
+
     console.log("val", val)
     console.log('e', e)
   }
