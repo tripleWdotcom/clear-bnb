@@ -12,13 +12,14 @@ export default function HouseContextProvider(props) {
 
   // Get all houses
   const fetchAllHouses = async () => {
+    console.log('Inside fetch houses')
     let res = await fetch('/rest/houses', {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
-    console.log(res)
-    return res;
+    console.log('houses res', res)
+    setHouses([...res])
   }
 
 
@@ -82,13 +83,14 @@ export default function HouseContextProvider(props) {
     return res;
   }
 
-  // useEffect(() => {
-  //   fetchAllHouses()
-  //   console.log('houses in context', houses)
-  // }, [])
+  useEffect(() => {
+    fetchAllHouses()
+    console.log('houses in context', houses)
+  }, [])
 
   // The values we want the children components to reach and be able to use
   const values = {
+    houses,
     addHouse,
     removeHouseById,
     fetchHousesByFilters,

@@ -4,7 +4,12 @@ import { HouseContext } from '../contexts/HouseContext'
 
 export default function SearchBar(props) {
 
-  const { fetchAllHouses } = useState(HouseContext)
+  let { houses } = useState(HouseContext)
+
+  // useEffect(() => {
+  //   fetchAllHouses()
+  //   console.log('houses from search', houses)
+  // }, [])
   
 
   // useEffect(() => {
@@ -13,16 +18,14 @@ export default function SearchBar(props) {
   
   const options = [{ value: 'Hallo', label: 'Yhellow' }, { value: 'No', label: 'Maybe' }]
   
-  const getOptions = async () => {
-    const houses = await fetchAllHouses()
-    console.log('houses', houses)
-    return []
-  }
+  const getOptions = (() => {
+    console.log('houses from search', houses)
+  })
   
 
   //const options = () => { cities.map(c => options.push({ value: c.city, label: c.city + ', ' + c.country })) }
 
-  const selectedOption = null;
+
 
   // const handleChange = (val, e) => {
   //   console.log('Option selected:', val}
@@ -38,8 +41,8 @@ export default function SearchBar(props) {
   return (
     <div>
       <Select 
-        onChange={opt => console.log(opt.label, opt.value)}
-        loadOptions={getOptions}
+        onChange={getOptions}
+        loadOptions={options}
       />
     </div>
   )
