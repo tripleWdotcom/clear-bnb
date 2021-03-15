@@ -41,6 +41,16 @@ export default function HouseContextProvider(props) {
     return res;
   }
 
+  // Get houses by city2
+  const fetchHousesByCity2 = async city => {
+    let res = await fetch('/rest/houses/ccity/' + city, {
+      method: 'GET',
+      headers: { 'content-type': 'application/json' },
+    })
+    res = await res.json()
+    return res;
+  }
+
   // Get houses by filters (checkbox and range) - Does this work with userId as well?
   const fetchHousesByFilters = async filters => {
     filters = JSON.stringify(filters)
@@ -92,6 +102,7 @@ export default function HouseContextProvider(props) {
     removeHouseById,
     fetchHousesByFilters,
     fetchHousesByCity,
+    fetchHousesByCity2,
     myRentals,
     fetchAllCities
   }

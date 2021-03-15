@@ -10,12 +10,12 @@ module.exports = (app, models) => {
 
 
 
-  //app.get('/rest/houses/city/:city', async (req, res) => {
- // let city = req.params.city
-   //let model = models['houses']
-    //let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } }).populate('featureIds')
-    //res.json(docs)
-  //})
+  app.get('/rest/houses/ccity/:city', async (req, res) => {
+    let city = req.params.city
+    let model = models['houses']
+    let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } }).populate('featureIds')
+    res.json(docs)
+  })
 
 
   // Get houses by city (searching for one letter at a time or all citys distinct)
@@ -23,7 +23,7 @@ module.exports = (app, models) => {
     let city = req.params.city
     let model = models['houses']
     if (!city) {
-      let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } }).populate('featureIds')
+      let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } })
       res.json(docs)
       return;
     }
