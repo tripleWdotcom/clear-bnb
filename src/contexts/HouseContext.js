@@ -12,7 +12,6 @@ export default function HouseContextProvider(props) {
 
   // Get all houses
   const fetchAllCities = async () => {
-    console.log('Inside fetch houses')
     let res = await fetch('/rest/houses/city/' + null, {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
@@ -96,11 +95,6 @@ export default function HouseContextProvider(props) {
     myRentals,
     fetchAllCities
   }
-
-  // Calls one time, as mounted in Vue
-  // useEffect(() => {
-  //   fetchHouses()
-  // }, [])
 
   return (
     <HouseContext.Provider value={values}>
