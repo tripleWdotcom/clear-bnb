@@ -19,15 +19,15 @@ module.exports = (app, models) => {
     }
     let docs = await model.aggregate([{
       $group: {
-        _id: "$country",
-        city: {
-          $first: "$city",
+        _id: "$city",
+        country: {
+          $first: "$country",
         }
       }
     },
     {
-      $sort: { city: 1 }
-    }])
+      $sort: { _id: 1 }
+      }])
     res.json(docs)
   })
 

@@ -13,8 +13,8 @@ export default function SearchBar(props) {
     setSelectedOption(JSON.parse(localStorage.getItem('selectedOption')))
     const cities = await fetchAllCities()
     let optionCities = []
-    cities.map((c, i) => {
-      optionCities.push({ value: c.city, label: c.city + ', ' + c._id })
+    cities.map(c => {
+      optionCities.push({ value: c._id, label: c._id + ', ' + c.country })
     })
     setOptions([...optionCities])
   }
