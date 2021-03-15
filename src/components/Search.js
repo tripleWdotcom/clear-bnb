@@ -5,8 +5,7 @@ import SearchBar from './SearchBar'
 const SearchComponent = ()=>{
   let history = useHistory();
 
-  const searchButton= ()=> {
-  
+  const searchButton= (e)=> {
       history.push("/home-results");
   }
 

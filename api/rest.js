@@ -8,11 +8,26 @@ module.exports = (app, models) => {
     res.json(docs)
   })
 
-  // Get houses by city (searching for one letter at a time)
+  // Get houses by city (searching for one letter at a time or all citys distinct)
   app.get('/rest/houses/city/:city', async (req, res) => {
     let city = req.params.city
     let model = models['houses']
-    let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } })
+    if (!city) {
+      let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } })
+      res.json(docs)
+      return;
+    }
+    let docs = await model.aggregate([{
+      $group: {
+        _id: "$country",
+        city: {
+          $first: "$city",
+        }
+      }
+    },
+    {
+      $sort: { city: 1 }
+    }])
     res.json(docs)
   })
 
@@ -63,7 +78,7 @@ module.exports = (app, models) => {
       }).populate(['userId', 'featureIds']).exec()
       res.json(docs)
       return;
-    }  
+    }
   })
 
   // Get users houses by userId
@@ -111,7 +126,7 @@ module.exports = (app, models) => {
     let booking = await models['bookings'].remove({ _id: bookingId })
     res.json(booking)
   })
-  
+
 }
 
 

@@ -4,21 +4,18 @@ import { HouseContext } from '../contexts/HouseContext'
 
 export default function SearchBar(props) {
 
-  const { fetchAllHouses } = useContext(HouseContext)
+  const { fetchAllCities } = useContext(HouseContext)
   const [options, setOptions] = useState([])
   const localSelected = localStorage.getItem('selectedOption');
   const [selectedOption, setSelectedOption] = useState(localSelected ? localSelected : null);
 
   async function setAllOptions() {
-    console.log('Im in getHouses')
-    const cities = await fetchAllHouses()
-    console.log('cities', cities)
-    let sortedCity = [...cities].sort((a, b) => a.city.localeCompare(b.city, { ignorePunctuation: true, ignoreCase: true }))
-    console.log('sortedCity', sortedCity)
-    let newCities = []
-    sortedCity.map((c, i) => { newCities.push({ value: c.city, label: c.city + ', ' + c.country }) })
-    console.log(newCities)
-    setOptions([...newCities])
+    const cities = await fetchAllCities()
+    let optionCities = []
+    cities.map((c, i) => {
+      optionCities.push({ value: c.city, label: c.city + ', ' + c._id })
+    })
+    setOptions([...optionCities])
   }
 
   useEffect(() => {

@@ -11,9 +11,9 @@ export default function HouseContextProvider(props) {
   const [houses, setHouses] = useState([])
 
   // Get all houses
-  const fetchAllHouses = async () => {
+  const fetchAllCities = async () => {
     console.log('Inside fetch houses')
-    let res = await fetch('/rest/houses', {
+    let res = await fetch('/rest/houses/city/' + null, {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
     })
@@ -82,9 +82,9 @@ export default function HouseContextProvider(props) {
     return res;
   }
 
-  useEffect(() => {
-    fetchAllHouses()
-  }, [])
+  // useEffect(() => {
+  //   fetchAllCities()
+  // }, [])
 
   // The values we want the children components to reach and be able to use
   const values = {
@@ -94,7 +94,7 @@ export default function HouseContextProvider(props) {
     fetchHousesByFilters,
     fetchHousesByCity,
     myRentals,
-    fetchAllHouses
+    fetchAllCities
   }
 
   // Calls one time, as mounted in Vue
