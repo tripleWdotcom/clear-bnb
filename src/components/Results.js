@@ -7,11 +7,14 @@ import { useState, useEffect, useContext } from "react";
 
 export default function Results() {
   const { fetchHousesByCity2 } = useContext(HouseContext)
+  const { houses } = useContext(HouseContext)
+
   const [cities, setCities] = useState([]);
 
   const test = c => (
 
-    <div key={c._id}>
+    <div style={{width:"100%"}} key={c._id}>
+      <hr/>
       <img style={{
         height: '100px'
       }}
@@ -20,7 +23,7 @@ export default function Results() {
 
       />
 
-      <h4 style={{ cursor: 'pointer' }}>{c.slogan}</h4><h5>{c.price} USD per night</h5>
+      <h4 style={{ cursor: 'pointer' }}>{c.slogan}</h4><h5> USD{c.price} (per night)</h5>
       <p>{c.featureIds.map(f => <span style={{fontSize:"10px"}} key={f._id}> {(() => {
         switch (f.name) {
           case "tv": return "\📺 TV";
