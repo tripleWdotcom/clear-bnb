@@ -29,8 +29,10 @@ const Home = () => {
             </Hidden>
 
           <Grid item xs={12}>
-            <Paper className={classes.paper}>Cities list component</Paper>
-            <CityIconList />
+            <Paper className={classes.paper}>Cities list component
+             <CityIconList />
+             </Paper>
+           
           </Grid>
           
 

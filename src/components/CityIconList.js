@@ -50,6 +50,7 @@ const CityIconList = () => {
         <Hidden smDown>
           {cities.map((c, key) => (
             <Grid item xs key={key}>
+              
               <div style={styles.cityItemBig} key={key} onClick={(e) => goToResultList(c, e)}>{c._id}</div>
             </Grid>
           ))}
