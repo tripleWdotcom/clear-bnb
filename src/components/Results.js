@@ -2,25 +2,26 @@
 
 import { useHistory } from "react-router-dom";
 import { HouseContext } from '../contexts/HouseContext'
-import { useContext } from 'react'
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 
 
 export default function Results() {
   const { fetchHousesByCity2 } = useContext(HouseContext)
-  const [cf, setCf] = useState([])
-  let x = JSON.parse(localStorage.getItem('selectedOption'))
-  x=x.value
-  console.log(x," erukvheheörovir")
- 
-
+  const [cities, setCities] = useState([]);
 
   const test = c => (
 
     <div key={c._id}>
+      <img style={{
+        height: '100px'
+      }}
+        src={c.pics[0]}
+        alt={'picture ' + c.id}
+
+      />
 
       <h4 style={{ cursor: 'pointer' }}>{c.slogan}</h4><h5>{c.price} USD per night</h5>
-      <p>{c.featureIds.map(f => <span key={f._id}> {(() => {
+      <p>{c.featureIds.map(f => <span style={{fontSize:"10px"}} key={f._id}> {(() => {
         switch (f.name) {
           case "tv": return "\📺 TV";
           case "gym": return "\🏋️ GYM";
@@ -35,26 +36,25 @@ export default function Results() {
 
           default: return "#FFFFFF";
         }
-      })()}</span>)}</p>
+      })()}     </span>)}</p>
     </div>
   )
-
-  const cityHouses = async () => {
+ 
+  async function cityHouses() {
+    let x = JSON.parse(localStorage.getItem('selectedCity'))
+    x = x.value
     let citiesFound = await fetchHousesByCity2(x)
-    console.table(citiesFound)
-    setCf(citiesFound)
-
+    setCities(citiesFound);
   }
-  cityHouses()
-  console.table(cf)
+  useEffect(() => {
+    cityHouses();
+  }, [])
 
   return (
-    <div>{x}
+    <div>
       <div >
-        {cf.map(c => test(c))}
+        {cities.map(c => test(c))}
       </div>
     </div>
   )
-
-
 }

@@ -6,12 +6,15 @@ import SearchBar from './SearchBar'
 const SearchComponent = () => {
   let history = useHistory();
 
+
   useEffect(() => {
     localStorage.setItem('selectedOption', null)
   })
 
   const searchButton = () => {
     history.push("/home-results");
+ 
+ 
   }
 
   const handleData = (ev) => {
