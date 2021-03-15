@@ -7,7 +7,7 @@ const SearchComponent = () => {
   let history = useHistory();
 
   useEffect(() => {
-    localStorage.clear()
+    localStorage.setItem('selectedOption', null)
   })
 
   const searchButton = () => {
@@ -16,6 +16,7 @@ const SearchComponent = () => {
 
   const handleData = (ev) => {
     localStorage.setItem('selectedOption', JSON.stringify(ev))
+    localStorage.setItem('selectedCity', JSON.stringify(ev))
   }
 
   return (
