@@ -37,7 +37,7 @@ const CityIconList = () => {
       <Hidden smDown>
         <div className="bigList" style={styles} key="1">
           {cities.map((c, key) => (
-            <h3 style={styles.cityItem} key={key} onClick={(e) => goToResultList(c, e)} id={c._id}>{c._id}</h3>
+            <h3 style={styles.cityItem} key={key + 3} onClick={(e) => goToResultList(c, e)} id={c._id}>{c._id}</h3>
           ))}
         </div>
       </Hidden>
@@ -59,12 +59,16 @@ const styles = {
   textAlign: 'center',
   height: '50px',
   cityItem: {
-    borderLine: 'solid #fff 2px',
+    borderLine: 'solid #000000 2px',
     borderRadius: '5px',
     backgroundColor: 'white',
     padding: '10px',
     flexGrow: '1',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    margin: '0 2px',
+    ':hover': {
+      scale: '1.05'
+    }
   }
 }
 
