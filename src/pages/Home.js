@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
 import SearchComponent from '../components/Search'
+import CityIconList from '../components/CityIconList'
 
 
 
@@ -29,6 +30,7 @@ const Home = () => {
 
           <Grid item xs={12}>
             <Paper className={classes.paper}>Cities list component</Paper>
+            <CityIconList />
           </Grid>
           
 
