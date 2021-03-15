@@ -1,8 +1,11 @@
 import { useState, useEffect, useContext } from 'react'
 import { HouseContext } from '../contexts/HouseContext'
+import { useHistory } from "react-router-dom";
 import Hidden from '@material-ui/core/Hidden';
 import Radium from 'radium'
-import { useHistory } from "react-router-dom"; 
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+
 
 const CityIconList = () => {
   const { fetchAllCities } = useContext(HouseContext)
@@ -21,7 +24,7 @@ const CityIconList = () => {
       cities[i] = cities[city]
       cities[city] = temp
     }
-    setCities([...cities.slice(0, 5)])
+    setCities([...cities.slice(0, 4)])
   }
 
   const goToResultList = (c, e) => {
@@ -31,45 +34,55 @@ const CityIconList = () => {
     history.push("/home-results");
   }
 
+  const randomBackground = (key) => {
+    const colorArray = ['#FF874F',
+      '#FFD966',
+      '#A9D164',
+      '#7DA9AD'];
+    return colorArray[key];
+  }
+
   return (
     <div>
       <h1>IM IN ICON LIST</h1>
-      <Hidden smDown>
-        <div className="bigList" style={styles} key="1">
+
+      <Grid container spacing={3}>
+        <Hidden smDown>
           {cities.map((c, key) => (
-            <h3 style={styles.cityItem} key={key + 3} onClick={(e) => goToResultList(c, e)} id={c._id}>{c._id}</h3>
+            <Grid item xs key={key}>
+              <div style={styles.cityItemBig} key={key} onClick={(e) => goToResultList(c, e)}>{c._id}</div>
+            </Grid>
           ))}
-        </div>
-      </Hidden>
-      <Hidden smUp>
-        <div className="smallList" style={styles} key="1">
-          {cities.slice(0, 3).map((c, key) => (
-            <h3 style={styles.cityItem} key={key} onClick={goToResultList}>{c._id}</h3>
-          ))}
-        </div>
-      </Hidden>
+        </Hidden>
+      </Grid>
     </div>
   )
 }
 
 const styles = {
-  display: 'flex',
-  justifyContent: 'space-evenly',
-  alignItems: 'stretch',
-  textAlign: 'center',
-  height: '50px',
-  cityItem: {
-    borderLine: 'solid #000000 2px',
-    borderRadius: '5px',
-    backgroundColor: 'white',
-    padding: '10px',
-    flexGrow: '1',
-    cursor: 'pointer',
-    margin: '0 2px',
+  cityItemBig: {
+    padding: '20px',
+    textAlign: 'center',
+    backgroundColor: "#4158D0",
+    backgroundImage: "linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)",
+    borderRadius: "10px",
+    margin: '0 10px',
+    cursor: "pointer",
+    transition: "all ease-in-out 3s",
     ':hover': {
-      scale: '1.05'
+      transform: 'translate(scale(1.05))'
     }
-  }
+  },
+
 }
+
+
+// < Hidden smUp>
+//   <div className="smallList" style={styles} key="1">
+//     {cities.slice(0, 3).map((c, key) => (
+//       <div style={styles.cityItem} key={key} onClick={goToResultList}>{c._id}</div>
+//     ))}
+//   </div>
+//     </Hidden >
 
 export default Radium(CityIconList)
