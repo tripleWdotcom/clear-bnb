@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import HomeResults from './pages/HomeResults'
+import Login from './components/Login.js'
 
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
@@ -37,9 +38,9 @@ function App() {
 
           <main className="content">
           <Switch>
-               <Route exact path="/" component={Home} />
-               <Route exact path="/home-results" component={HomeResults} />
-
+              <Route exact path="/" component={Home} />
+              <Route exact path="/home-results" component={HomeResults} />
+              <Route exact path="/login" component={Login} />
             <Route path="*" component={page404} />
           </Switch>
         </main>

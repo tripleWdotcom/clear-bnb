@@ -2,15 +2,34 @@ import Radium from 'radium'
 import Media from 'react-media';
 import Hidden from '@material-ui/core/Hidden';
 import { useHistory } from "react-router-dom";
+import { useRef, useContext } from 'react'
+import { UserContext } from '../contexts/UserContext'
+import { useState } from 'react';
 
 const Navbar = () => {
-
+  const { logOutUser } = useContext(UserContext);
   let history = useHistory();
+  const [signIn, setSignIn] = useState(true);
+  const toggle = () => setSignIn(!signIn);
 
 
-  const goHome=()=>{
+  const goHome = () => {
     history.push("/");
   }
+
+  async function handleOnClick(url) {
+    if (signIn) {
+      history.push(url)
+      toggle(!signIn)
+    }
+    else {
+      await logOutUser
+      toggle(!signIn)
+      history.push("/");
+    }
+
+  }
+
   return (
 
     <Hidden xsDown >
@@ -25,7 +44,8 @@ const Navbar = () => {
             marginLeft: 'auto'
           }}>
           <a style={styles.home} onClick={goHome}>Home</a>
-          <a style={styles.signIn}>Sign in</a>
+          <a style={styles.signIn} onClick={() => handleOnClick("/login")}>{signIn ? 'Sign in' : 'Sign out'}</a>
+
         </div>
       </nav>
     </Hidden>

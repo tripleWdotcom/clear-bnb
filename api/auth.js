@@ -46,7 +46,7 @@ app.use(session({
   const hash = crypto.createHmac('sha256', secret)
     .update(req.body.password).digest('hex');
   // Search for user
-    let user = await User.find({ username: req.body.email, password: hash });
+    let user = await User.find({ email: req.body.email, password: hash });
   if (user) {
     // succesful login, save the user to the session object
     req.session.user = user;
@@ -75,6 +75,7 @@ app.delete('/api/login', (req, res) => {
 app.get('/api/login', (req, res) => {
   if (req.session.user) {
     let user = { ...req.session.user };
+    console.log("user i auth.js", user[0].password);
     delete user[0].password; // remove password in answer
     res.json(user);
   }
