@@ -14,7 +14,7 @@ export default function SignIn() {
 
   return (
     <div style={modalStyle}>
-      {isSignUp ? <SignUp /> : '' />}
+      {isSignUp ? <SignUp /> : ''}
       <form>
         <input type="email" placeholder="Email..."></input>
         <input type="password" placeholder="Password..."></input>
