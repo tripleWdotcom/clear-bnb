@@ -23,7 +23,11 @@ export default function SignIn() {
 }
 
 const modalStyle = {
+  position: 'absolute',
+  top: '100%',
   width: "300px",
   height: "300px",
-  backgroundColor: 'purple'
+  backgroundColor: 'purple',
+  zIndex: '10',
+  marginTop: '-600px'
 }

@@ -24,7 +24,7 @@ const Navbar = () => {
     history.push("/");
   }
   return (
-
+<>
     <Hidden xsDown >
       <nav className="navbar" style={styles.navbar}>
 
@@ -39,11 +39,12 @@ const Navbar = () => {
           <a style={styles.home} onClick={goHome}>Home</a>
           <a style={styles.signIn} onClick={signInModal}>Sign In</a>
           <a style={styles.signIn} onClick={closeSignInModal}>Close sign In</a>
+          </div>
           {showSignIn ? <SignIn /> : ''}
-        </div>
       </nav>
     </Hidden>
-
+    
+</>
   )
 }
 
