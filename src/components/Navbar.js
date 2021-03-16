@@ -4,10 +4,13 @@ import Hidden from '@material-ui/core/Hidden';
 import { useHistory } from "react-router-dom";
 import SignIn from './SignIn'
 import {useState} from 'react'
+import React, { useState } from 'react';
+import Login from './Login.js'
 
 const Navbar = () => {
 
   let history = useHistory();
+  const [IsLogin, setAction] = useState('setIsLogin')
 
   const [showSignIn, setShowSignIn] = useState(false)
 
@@ -20,7 +23,7 @@ const Navbar = () => {
   }
 
 
-  const goHome=()=>{
+  const goHome = () => {
     history.push("/");
   }
   return (
@@ -41,6 +44,9 @@ const Navbar = () => {
           <a style={styles.signIn} onClick={closeSignInModal}>Close sign In</a>
           </div>
           {showSignIn ? <SignIn /> : ''}
+          <a style={styles.signIn} onClick={() => setAction('setIsLogin')}>Sign in</a>
+        </div>          
+        {IsLogin && <Login />}
       </nav>
     </Hidden>
     
