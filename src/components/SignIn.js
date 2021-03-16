@@ -1,7 +1,10 @@
 import SignUp from './SignUp'
 import { useState } from 'react'
+import { useContext } from 'react'
+import {UserContext} from '../contexts/UserContext'
 
 export default function SignIn() {
+  const { logInUser } = useContext(UserContext)
   const [isSignUp, setIsSignUp] = useState(false)
 
   const signUpForm = () => {
@@ -12,12 +15,32 @@ export default function SignIn() {
     setIsSignUp(false)
   }
 
+  const login = async e => {
+    e.preventDefault()
+
+    // setModal(!modal)
+    const inputUser = {
+      username: username.current.value,
+      password: password.current.value
+    }
+
+    const U = await logInUser(inputUser)
+    console.log('user', U)
+    // const User = await loggedInUser()
+    // localStorage.setItem("currentUser", JSON.stringify(User))
+    //const currentUser = JSON.parse(localStorage.getItem("currentUser.username"))
+    // const currentUser = JSON.parse(localStorage.getItem("currentUser[0].username"))
+    // console.log('currentUser username', currentUser)
+
+  }
+
   return (
     <div style={modalStyle}>
       {isSignUp ? <SignUp /> : ''}
       <form>
-        <input type="email" placeholder="Email..."></input>
-        <input type="password" placeholder="Password..."></input>
+        <input required ref={email} type="email" placeholder="Email..."></input>
+        <input required ref={password} type="password" placeholder="Password..."></input>
+        <Button onClick={login}>Log in</Button>
       </form>
       <button style={modalStyle.form} onClick={signUpForm}>Sign Up</button>
       <button style={modalStyle.close} onClick={closeSignUp}>Close</button>
