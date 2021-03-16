@@ -10,7 +10,7 @@ import CityIconList from '../components/CityIconList'
 
 const Home = () => {
   const classes = useStyles();
-  
+
   return (
     <div className="home">
       <div className={classes.root}>
@@ -22,25 +22,18 @@ const Home = () => {
             </Paper>
           </Grid>
 
-            <Hidden xsDown >
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>Carousel component</Paper>
-          </Grid>
-            </Hidden>
+          <Hidden xsDown >
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>Carousel component</Paper>
+            </Grid>
+          </Hidden>
 
           <Grid item xs={12}>
-            <Paper className={classes.paper}>Cities list component
              <CityIconList />
-             </Paper>
-           
           </Grid>
-          
 
-          </Grid>
-         
-      
+        </Grid>
       </div>
-        
     </div>
 
   );
@@ -58,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
     backgroundColor: 'lightblue',
-    
+
   }
 
 }));

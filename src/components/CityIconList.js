@@ -44,14 +44,20 @@ const CityIconList = () => {
 
   return (
     <div>
-      <h1>IM IN ICON LIST</h1>
-
       <Grid container spacing={3}>
-        <Hidden smDown>
+        <Hidden xsDown>
           {cities.map((c, key) => (
             <Grid item xs key={key}>
-              
-              <div style={styles.cityItemBig} key={key} onClick={(e) => goToResultList(c, e)}>{c._id}</div>
+              <div style={styles.cityItem} key={key} onClick={(e) => goToResultList(c, e)}><h3 style={styles.title}>{c._id}</h3></div>
+            </Grid>
+          ))}
+        </Hidden>
+      </Grid>
+      <Grid container spacing={2}>
+        <Hidden smUp>
+          {cities.slice(0, 3).map((c, key) => (
+            <Grid item xs key={key}>
+              <div style={styles.cityItem} key={key} onClick={(e) => goToResultList(c, e)}><h5 style={styles.title}>{c._id}</h5></div>
             </Grid>
           ))}
         </Hidden>
@@ -61,7 +67,7 @@ const CityIconList = () => {
 }
 
 const styles = {
-  cityItemBig: {
+  cityItem: {
     padding: '20px',
     textAlign: 'center',
     backgroundColor: "#4158D0",
@@ -69,21 +75,11 @@ const styles = {
     borderRadius: "10px",
     margin: '0 10px',
     cursor: "pointer",
-    transition: "all ease-in-out 3s",
-    ':hover': {
-      transform: 'translate(scale(1.05))'
-    }
   },
-
+  title: {
+    color: '#C820C0',
+    textShadow: '0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7)',
+  },
 }
-
-
-// < Hidden smUp>
-//   <div className="smallList" style={styles} key="1">
-//     {cities.slice(0, 3).map((c, key) => (
-//       <div style={styles.cityItem} key={key} onClick={goToResultList}>{c._id}</div>
-//     ))}
-//   </div>
-//     </Hidden >
 
 export default Radium(CityIconList)
