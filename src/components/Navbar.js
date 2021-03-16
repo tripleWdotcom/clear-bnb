@@ -2,13 +2,16 @@ import Radium from 'radium'
 import Media from 'react-media';
 import Hidden from '@material-ui/core/Hidden';
 import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+import Login from './Login.js'
 
 const Navbar = () => {
 
   let history = useHistory();
+  const [IsLogin, setAction] = useState('setIsLogin')
 
 
-  const goHome=()=>{
+  const goHome = () => {
     history.push("/");
   }
   return (
@@ -25,8 +28,9 @@ const Navbar = () => {
             marginLeft: 'auto'
           }}>
           <a style={styles.home} onClick={goHome}>Home</a>
-          <a style={styles.signIn}>Sign in</a>
-        </div>
+          <a style={styles.signIn} onClick={() => setAction('setIsLogin')}>Sign in</a>
+        </div>          
+        {IsLogin && <Login />}
       </nav>
     </Hidden>
 
