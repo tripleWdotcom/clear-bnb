@@ -1,15 +1,29 @@
+import Radium from 'radium'
+import Media from 'react-media';
+import { useHistory } from "react-router-dom";
+
 
 const Footer = () => {
-  return ( 
+
+   let history = useHistory();
+
+
+   const goHome = () => {
+      history.push("/");
+   }
+   
+   return ( 
+     <Media query="(max-width: 700px)">
      <nav className="footer">
       <div className="links">
-         <a>Home</a>
+         <a onClick={goHome}>Home</a>
          <a>Sign in</a>
       </div>
      </nav>
 
 
+   </Media>
    );
 }
  
-export default Footer;
+export default Radium(Footer);

@@ -1,14 +1,15 @@
+
 import Radium from 'radium'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import Hidden from '@material-ui/core/Hidden';
-import SearchComponent from '../components/Search'
-import CityIconList from '../components/CityIconList'
+import Filters from '../components/Filters'
+
+import Search from '../components/Search'
+import Results from '../components/Results';
 
 
-
-const Home = () => {
+const HomeResults = () => {
   const classes = useStyles();
 
   return (
@@ -18,22 +19,29 @@ const Home = () => {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>Search component
-            <SearchComponent />
+            <Search />
             </Paper>
           </Grid>
 
-          <Hidden xsDown >
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>Carousel component</Paper>
-            </Grid>
-          </Hidden>
 
-          <Grid item xs={12}>
-             <CityIconList />
+          <Grid item xs={12} sm={6}>
+            <Paper className={classes.paper}>
+              <Filters /></Paper>
           </Grid>
 
+
+          <Grid item sm={6}>
+            <Paper className={classes.paper}>
+              <Results />
+            </Paper>
+          </Grid>
+
+
         </Grid>
+
+
       </div>
+
     </div>
 
   );
@@ -57,4 +65,4 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default Radium(Home);
+export default Radium(HomeResults);
