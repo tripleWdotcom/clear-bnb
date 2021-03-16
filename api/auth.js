@@ -46,7 +46,7 @@ app.use(session({
   const hash = crypto.createHmac('sha256', secret)
     .update(req.body.password).digest('hex');
   // Search for user
-    let user = await User.find({ username: req.body.username, password: hash });
+    let user = await User.find({ username: req.body.email, password: hash });
   if (user) {
     // succesful login, save the user to the session object
     req.session.user = user;

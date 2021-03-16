@@ -4,12 +4,13 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
 import SearchComponent from '../components/Search'
+import CityIconList from '../components/CityIconList'
 
 
 
 const Home = () => {
   const classes = useStyles();
-  
+
   return (
     <div className="home">
       <div className={classes.root}>
@@ -21,22 +22,18 @@ const Home = () => {
             </Paper>
           </Grid>
 
-            <Hidden xsDown >
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>Carousel component</Paper>
-          </Grid>
-            </Hidden>
+          <Hidden xsDown >
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>Carousel component</Paper>
+            </Grid>
+          </Hidden>
 
           <Grid item xs={12}>
-            <Paper className={classes.paper}>Cities list component</Paper>
+             <CityIconList />
           </Grid>
-          
 
-          </Grid>
-         
-      
+        </Grid>
       </div>
-        
     </div>
 
   );
@@ -54,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
     backgroundColor: 'lightblue',
-    
+
   }
 
 }));
