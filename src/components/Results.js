@@ -6,24 +6,24 @@ import { useState, useEffect, useContext } from "react";
 
 
 export default function Results() {
-  const { fetchHousesByCity2 } = useContext(HouseContext)
-  const { houses } = useContext(HouseContext)
+  const { cities,fetchHousesByCity2 } = useContext(HouseContext)
+  //onst { houses } = useContext(HouseContext)
 
-  const [cities, setCities] = useState([]);
+ // const [cities, setCities] = useState([]);
 
   const test = c => (
 
     <div style={{width:"100%"}} key={c._id}>
       <hr/>
       <img style={{
-        height: '100px'
+        height: '150px'
       }}
         src={c.pics[0]}
         alt={'picture ' + c.id}
 
       />
 
-      <h4 style={{ cursor: 'pointer' }}>{c.slogan}</h4><h5> USD{c.price} (per night)</h5>
+      <h4 style={{ cursor: 'pointer' }}>{c.slogan}</h4><h5> SEK{c.price} (per night)</h5>
       <p>{c.featureIds.map(f => <span style={{fontSize:"10px"}} key={f._id}> {(() => {
         switch (f.name) {
           case "tv": return "\📺 TV";
@@ -43,15 +43,16 @@ export default function Results() {
     </div>
   )
  
-  async function cityHouses() {
-    let x = JSON.parse(localStorage.getItem('selectedCity'))
-    x = x.value
-    let citiesFound = await fetchHousesByCity2(x)
-    setCities(citiesFound);
+ /*  async function cityHouses() {
+    let x = JSON.parse(localStorage.getItem('selectedCity')).value
+    await fetchHousesByCity2(x)
+
   }
-  useEffect(() => {
-    cityHouses();
-  }, [])
+
+   useEffect(() => {
+    localStorage.getItem('selectedCity')
+    cityHouses()
+  }, []) */
 
   return (
     <div>
