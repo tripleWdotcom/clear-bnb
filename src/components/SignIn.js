@@ -1,28 +1,30 @@
-import SignUp from './SignUp'
-import { useState } from 'react'
-import { useContext } from 'react'
-import {UserContext} from '../contexts/UserContext'
+import { useState, useContext, useRef } from 'react'
+import { UserContext } from '../contexts/UserContext'
+import Radium from 'radium'
 
-export default function SignIn() {
+function SignIn() {
   const { logInUser } = useContext(UserContext)
-  const [isSignUp, setIsSignUp] = useState(false)
-  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const signUpForm = () => {
-    setIsSignUp(true)
-  }
+  // const email = useRef()
+  // const password = useRef()
 
-  const closeSignUp = () => {
-    setIsSignUp(false)
-  }
+  const handleSubmit = async e => {
+    console.log('Login button clicked!')
 
-  const login = async e => {
+    console.log(`
+      Email: ${email}
+      Password: ${password}
+    `);
+
+
     e.preventDefault()
 
     // setModal(!modal)
     const inputUser = {
-      email: email.current.value,
-      password: password.current.value
+      email: email,
+      password: password
     }
 
     const U = await logInUser(inputUser)
@@ -36,32 +38,143 @@ export default function SignIn() {
   }
 
   return (
-    <div style={modalStyle}>
-      {isSignUp ? <SignUp /> : ''}
-      <form>
-        <input required ref={email} type="email" placeholder="Email..."></input>
-        <input required ref={password} type="password" placeholder="Password..."></input>
-        <Button onClick={login}>Log in</Button>
+    <div>
+      <form onSubmit={handleSubmit} style={modalStyle.form}>
+        <h1>Log in</h1>
+        <label style={modalStyle.label} key="1">
+          Email:
+          <input
+            required
+            name="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={modalStyle.input} key="2">
+          </input>
+        </label>
+        <label style={modalStyle.label} key="3">
+          Password
+          <input
+            required
+            name="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={modalStyle.input} key="4">
+          </input>
+        </label>
+        <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="5">Log in</button>
+        <button style={{ ...modalStyle.button, ...modalStyle.btnUp }} key="6">Sign up</button>
       </form>
-      <button style={modalStyle.form} onClick={signUpForm}>Sign Up</button>
-      <button style={modalStyle.close} onClick={closeSignUp}>Close</button>
     </div>
   )
 }
 
+export default Radium(SignIn)
+
 const modalStyle = {
-  position: "fixed",
-  left: "25%",
-  right: "25%",
-  top: "25%",
-  bottom: "25%",
-  margin: "auto",
-  background: "grey",
-  zIndex: '10',
-  close: {
-    marginBottom: '5px'
-  }
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    width: "400px",
+    minWidth: "100px",
+    minHeight: "400px",
+    padding: "20px 40px 40px 40px",
+    borderRadius: "6px",
+    boxShadow: "0px 8px 36px #222",
+    backgroundColor: "#fefefe",
+  },
+  label: {
+    marginBottom: "0.5em",
+    color: "#444",
+    fontWeight: "lighter",
+  },
+  input: {
+    display: "flex",
+    flexDirection: "column",
+    marginBottom: "15px",
+    width: "100%",
+    padding: "10px 10px",
+    borderRadius: "5px",
+    border: "1px solid #d6d1d5",
+    marginTop: "5px",
+  },
+  button: {
+    minWidth: "100%",
+    cursor: "pointer",
+    marginRight: "0.25em",
+    marginTop: "0.5em",
+    borderRadius: "4px",
+    ':hover': {
+      backgroundColor: "#A8BACE",
+      border: "none",
+      color: "#fefefe"
+    }
+  },
+  btnIn: {
+    backgroundColor: "#22223B",
+    border: "none",
+    color: "#fefefe",
+    padding: "1.2em",
+  },
+  btnUp: {
+    border: "solid #22223B 2px",
+    backgroundColor: "white",
+    color: "#22223B",
+    padding: "0.938em",
+  }, 
 }
+
+
+
+
+// form > h1 {
+//   display: flex;
+//   justify - content: center;
+//   font - family: "Segoe UI", "Ubuntu", "Roboto", "Open Sans", "Helvetica Neue", sans - serif;
+//   font - size: 2em;
+//   font - weight: lighter;
+//   margin - top: 0.25em;
+//   color: #222;
+//   letter - spacing: 2px;
+// }
+
+// .info {
+//   padding - bottom: 1em;
+//   padding - left: 0.5em;
+//   padding - right: 0.5em;
+// }
+
+
+
+
+
+// select {
+//   display: block;
+//   width: 100 %;
+//   height: 35px;
+// }
+// input[type = "checkbox"] {
+//   display: inline - block;
+//   width: auto;
+//   margin - top: 2em;
+//   margin - right: 10px;
+// }
+
+
+
+
+// .error {
+//   color:#db2269;
+//   font - size: 0.5em;
+//   display: relative;
+// }
+
+// .submit {
+//   width: 100 %;
+//   display: flex;
+//   flex - wrap: wrap;
+// }
 
 
 

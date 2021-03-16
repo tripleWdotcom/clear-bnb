@@ -2,7 +2,7 @@ import Radium from 'radium'
 import Media from 'react-media';
 import Hidden from '@material-ui/core/Hidden';
 import { useHistory } from "react-router-dom";
-import SignIn from './SignIn'
+import Modal from './Modal'
 import {useState} from 'react'
 
 const Navbar = () => {
@@ -40,7 +40,7 @@ const Navbar = () => {
           <a style={styles.signIn} onClick={signInModal}>Sign In</a>
           <a style={styles.signIn} onClick={closeSignInModal}>Close sign In</a>
           </div>
-          {showSignIn ? <SignIn /> : ''}
+          {showSignIn ? <Modal /> : ''}
       </nav>
     </Hidden>
     
