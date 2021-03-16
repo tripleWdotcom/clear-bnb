@@ -16,7 +16,9 @@ export default function Results() {
     <div style={{width:"100%"}} key={c._id}>
       <hr/>
       <img style={{
-        height: '150px'
+        height: '200px',
+        width:'100%',
+        borderRadius:'10px'
       }}
         src={c.pics[0]}
         alt={'picture ' + c.id}

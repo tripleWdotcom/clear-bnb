@@ -32,7 +32,7 @@ const Filters = () => {
 
   return (
     <div>
-      <h2>filters not sending info at the moment</h2>
+    
       <hr/>
       <div style={slidecontainer}>
         <div>
