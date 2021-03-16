@@ -6,6 +6,7 @@ import {UserContext} from '../contexts/UserContext'
 export default function SignIn() {
   const { logInUser } = useContext(UserContext)
   const [isSignUp, setIsSignUp] = useState(false)
+  
 
   const signUpForm = () => {
     setIsSignUp(true)
@@ -20,7 +21,7 @@ export default function SignIn() {
 
     // setModal(!modal)
     const inputUser = {
-      username: username.current.value,
+      email: email.current.value,
       password: password.current.value
     }
 
