@@ -24,31 +24,31 @@ function App() {
     <div className="App">
       <UserContextProvider>
         <BookingContextProvider>
-        <HouseContextProvider>
-        <FeatureContextProvider>
-          
-      <div id="contentGridContainer">
+          <HouseContextProvider>
+            <FeatureContextProvider>
 
-      <Router>
-        <header className={true ? 'App-Header' : ''}>
-          <Navbar />
+              <div id="contentGridContainer">
 
-        </header>
+                <Router>
+                  <header className={true ? 'App-Header' : ''}>
+                    <Navbar />
 
-          <main className="content">
-          <Switch>
-               <Route exact path="/" component={Home} />
-               <Route exact path="/home-results" component={HomeResults} />
+                  </header>
 
-            <Route path="*" component={page404} />
-          </Switch>
-        </main>
+                  <main className="content">
+                    <Switch>
+                      <Route exact path="/" component={Home} />
+                      <Route exact path="/home-results" component={HomeResults} />
 
-        <footer className={true ? 'App-Footer' : ''}>
-          <Footer />
-        </footer>
+                      <Route path="*" component={page404} />
+                    </Switch>
+                  </main>
 
-      </Router>
+                  <footer className={true ? 'App-Footer' : ''}>
+                    <Footer />
+                  </footer>
+
+                </Router>
 
               </div>
             </FeatureContextProvider>

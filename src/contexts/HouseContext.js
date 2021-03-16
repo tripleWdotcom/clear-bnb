@@ -9,6 +9,8 @@ export default function HouseContextProvider(props) {
 
   // A reactive state to store houses
   const [houses, setHouses] = useState([])
+  const [rentals, setRentals]=useState([])
+  const [cities, setCities] = useState([])
 
   // Get all houses
   const fetchAllCities = async () => {
@@ -28,7 +30,10 @@ export default function HouseContextProvider(props) {
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
-    return res;
+
+    setRentals(res)
+ 
+   // return res;
   }
 
   // Get houses by city
@@ -48,7 +53,8 @@ export default function HouseContextProvider(props) {
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
-    return res;
+    setCities(res)
+  //  return res;
   }
 
   // Get houses by filters (checkbox and range) - Does this work with userId as well?
@@ -90,14 +96,16 @@ export default function HouseContextProvider(props) {
     // houses.splice(index, 1)
     return res;
   }
-
-  // useEffect(() => {
-  //   fetchAllCities()
-  // }, [])
-
+/* 
+  useEffect(() => {
+    myRentals()
+   }, [])
+ */
   // The values we want the children components to reach and be able to use
   const values = {
     houses,
+    rentals,
+    cities,
     addHouse,
     removeHouseById,
     fetchHousesByFilters,

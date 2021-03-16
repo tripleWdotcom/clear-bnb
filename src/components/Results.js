@@ -6,8 +6,10 @@ import { useState, useEffect, useContext } from "react";
 
 
 export default function Results() {
-  const { fetchHousesByCity2 } = useContext(HouseContext)
-  const [cities, setCities] = useState([]);
+  const { cities,fetchHousesByCity2 } = useContext(HouseContext)
+  //onst { houses } = useContext(HouseContext)
+
+ // const [cities, setCities] = useState([]);
 
   const test = c => (
 
@@ -40,15 +42,16 @@ export default function Results() {
     </div>
   )
  
-  async function cityHouses() {
-    let x = JSON.parse(localStorage.getItem('selectedCity'))
-    x = x.value
-    let citiesFound = await fetchHousesByCity2(x)
-    setCities(citiesFound);
+ /*  async function cityHouses() {
+    let x = JSON.parse(localStorage.getItem('selectedCity')).value
+    await fetchHousesByCity2(x)
+
   }
-  useEffect(() => {
-    cityHouses();
-  }, [])
+
+   useEffect(() => {
+    localStorage.getItem('selectedCity')
+    cityHouses()
+  }, []) */
 
   return (
     <div>
