@@ -16,18 +16,22 @@ export default function SignIn() {
   return (
     <div style={modalStyle}>
       {isSignUp ? <SignUp /> : ''}
-      <button onClick={signUpForm}>Sign Up</button>
-      <button onClick={closeSignUp}>Close</button>
+      <button style={modalStyle.form} onClick={signUpForm}>Sign Up</button>
+      <button style={modalStyle.close} onClick={closeSignUp}>Close</button>
     </div>
   )
 }
 
 const modalStyle = {
-  position: 'absolute',
-  top: '100%',
-  width: "300px",
-  height: "300px",
-  backgroundColor: 'purple',
+  position: "fixed",
+  left: "25%",
+  right: "25%",
+  top: "25%",
+  bottom: "25%",
+  margin: "auto",
+  background: "grey",
   zIndex: '10',
-  marginTop: '-600px'
+  close: {
+    marginBottom: '5px'
+  }
 }
