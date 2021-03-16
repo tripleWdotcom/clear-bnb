@@ -3,13 +3,20 @@ import Media from 'react-media';
 import Hidden from '@material-ui/core/Hidden';
 import { useHistory } from "react-router-dom";
 import Modal from './Modal'
-import {useState} from 'react'
+import { useState, useContext, useEffect } from 'react'
+import { UserContext } from '../contexts/UserContext';
 
 const Navbar = () => {
 
   let history = useHistory();
 
+  const { loggedInUser, logOutUser } = useContext(UserContext)
   const [showSignIn, setShowSignIn] = useState(false)
+
+  // useEffect(async () => {
+  //   const u = await loggedInUser
+  //   console.log('u', u)
+  // }, [])
 
   const signInModal = () => {
     setShowSignIn(true)
@@ -19,32 +26,46 @@ const Navbar = () => {
     setShowSignIn(false)
   }
 
+  const logOut = async () => {
+    const u = await logOutUser()
+    console.log('Logged out: ', u)
+    localStorage.setItem('currentUser', null)
+  }
 
-  const goHome=()=>{
+  // const checkWhosLoggedIn = async () => {
+  //   const u = await loggedInUser()
+  //   console.log('u', u);
+  //   return u;
+  // }
+
+
+  const goHome = () => {
     history.push("/");
   }
   return (
-<>
-    <Hidden xsDown >
-      <nav className="navbar" style={styles.navbar}>
+    <>
+      <Hidden xsDown >
+        <nav className="navbar" style={styles.navbar}>
 
-        <h1 style={{
-          color: "crimson"
-        }}>ClearBnB</h1>
+          <h1 style={{
+            color: "crimson"
+          }}>ClearBnB</h1>
 
-        <div className="links"
-          style={{
-            marginLeft: 'auto'
-          }}>
-          <a style={styles.home} onClick={goHome}>Home</a>
-          <a style={styles.signIn} onClick={signInModal}>Sign In</a>
-          <a style={styles.signIn} onClick={closeSignInModal}>Close sign In</a>
+          <div className="links"
+            style={{
+              marginLeft: 'auto'
+            }}>
+            <a style={styles.home} onClick={goHome}>Home</a>
+            {!!JSON.parse(localStorage.getItem('currentUser')) ? <a>Hej</a> && setShowSignIn(false) : ''}
+            <a style={styles.signIn} onClick={signInModal}>Sign In</a>
+            <a style={styles.signIn} onClick={closeSignInModal}>Close sign In</a>
+            <a style={styles.signIn} onClick={logOut}>Log out</a>
           </div>
           {showSignIn ? <Modal /> : ''}
-      </nav>
-    </Hidden>
-    
-</>
+        </nav>
+      </Hidden>
+
+    </>
   )
 }
 

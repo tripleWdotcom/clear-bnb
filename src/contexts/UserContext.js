@@ -9,6 +9,7 @@ export default function UserContextProvider(props) {
 
   // A reactive state to store users
   const [users, setUsers] = useState([])
+  const [loggedIn, setLoggedIn] = useState([])
 
 
   // Get all users
@@ -25,6 +26,7 @@ export default function UserContextProvider(props) {
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
+    console.log('logged in', res)
     return res;
   }
 
@@ -62,7 +64,9 @@ export default function UserContextProvider(props) {
     // Append a new user to the reactive users list
     // to trigger reactivity we replace the old list with a new 
     // by spreading the old list (a copy of it) and adding the new user
-    setUsers([...users, user])
+    // setUsers([...users, user])
+    setLoggedIn(user)
+    return res;
   }
 
   // Remove a user by id
@@ -81,6 +85,7 @@ export default function UserContextProvider(props) {
 
   // The values we want the children components to reach and be able to use
   const values = {
+    loggedIn,
     users,
     addUser,
     loggedInUser,

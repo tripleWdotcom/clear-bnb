@@ -1,6 +1,6 @@
 import SignUp from './SignUp'
 import SignIn from './SignIn'
-import { useState } from 'react'
+import { useState} from 'react'
 
 
 export default function Modal() {

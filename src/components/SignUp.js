@@ -35,6 +35,7 @@ function SignUp() {
 
     const U = await addUser(newUser)
     console.log('new user', U)
+
     // const User = await loggedInUser()
     // localStorage.setItem("currentUser", JSON.stringify(User))
     //const currentUser = JSON.parse(localStorage.getItem("currentUser.username"))
@@ -42,6 +43,7 @@ function SignUp() {
     // console.log('currentUser username', currentUser)
 
   }
+
 
 
   return (

@@ -28,6 +28,7 @@ function SignIn() {
     }
 
     const U = await logInUser(inputUser)
+    localStorage.setItem('currentUser', JSON.stringify({firstName: U[0].firstName}))
     console.log('user', U)
     // const User = await loggedInUser()
     // localStorage.setItem("currentUser", JSON.stringify(User))
