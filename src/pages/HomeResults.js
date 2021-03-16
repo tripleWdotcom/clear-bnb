@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Filters from '../components/Filters'
 
 import Search from '../components/Search'
+import Results from '../components/Results';
 
 
 const HomeResults = () => {
@@ -30,21 +31,8 @@ const HomeResults = () => {
 
 
           <Grid item sm={6}>
-            <Paper className={classes.paper}>Show list of houses components
-            Show list of houses components
-            Show list of houses components
-            Show list of houses components
-            Show list of houses components
-            Show list of houses components
-            Show list of houses components
-            Show list of houses components
-            Show list of houses components
-            Show list of houses components
-            Show list of houses components
-            Show list of houses components
-
-            Show list of houses components
-            Show list of houses components
+            <Paper className={classes.paper}>
+              <Results />
             </Paper>
           </Grid>
 

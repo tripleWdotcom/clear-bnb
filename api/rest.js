@@ -8,6 +8,16 @@ module.exports = (app, models) => {
     res.json(docs)
   })
 
+
+
+  app.get('/rest/houses/ccity/:city', async (req, res) => {
+    let city = req.params.city
+    let model = models['houses']
+    let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } }).populate('featureIds')
+    res.json(docs)
+  })
+
+
   // Get houses by city (searching for one letter at a time or all citys distinct)
   app.get('/rest/houses/city/:city', async (req, res) => {
     let city = req.params.city
