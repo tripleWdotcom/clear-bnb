@@ -16,14 +16,14 @@ export default function Results() {
     <div style={{width:"100%"}} key={c._id}>
       <hr/>
       <img style={{
-        height: '100px'
+        height: '150px'
       }}
         src={c.pics[0]}
         alt={'picture ' + c.id}
 
       />
 
-      <h4 style={{ cursor: 'pointer' }}>{c.slogan}</h4><h5> USD{c.price} (per night)</h5>
+      <h4 style={{ cursor: 'pointer' }}>{c.slogan}</h4><h5> SEK{c.price} (per night)</h5>
       <p>{c.featureIds.map(f => <span style={{fontSize:"10px"}} key={f._id}> {(() => {
         switch (f.name) {
           case "tv": return "\📺 TV";
