@@ -8,57 +8,59 @@ export const HouseContext = createContext()
 export default function HouseContextProvider(props) {
 
   // A reactive state to store houses
-  const [houses, setHouses] = useState([])
-  const [rentals, setRentals]=useState([])
-  const [cities, setCities] = useState([])
+  const [citiesAndCountriesNames, setCitiesAndCountriesNames] = useState([])
+  const [myRentals, setMyRentals] = useState([])
+  const [housesByCityTemp, setHousesByCityTemp] = useState([]) //Temp will be dates later
+  const [housesByCityAndDate, setHousesByCityAndDate] = useState([]) //Temp will be dates later
 
-  // Get all houses
-  const fetchAllCities = async () => {
+
+
+  // Get all citiesAndCountriesNames 
+  const fetchCitiesAndCountriesNames = async () => {
     let res = await fetch('/rest/houses/city/' + null, {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
-    return res;
+    setCitiesAndCountriesNames(res)
+
   }
 
 
   // Get users rentals/houses they own
-  const myRentals = async userId => {
+  const fetchMyRentals = async userId => {
     let res = await fetch('/rest/houses/user/' + userId, {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
 
-    setRentals(res)
- 
-   // return res;
+    setMyRentals(res)
+
   }
 
   // Get houses by city
-  const fetchHousesByCity = async city => {
+  /* const fetchHousesByCity = async city => {
     let res = await fetch('/rest/houses/city/' + city , {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
     return res;
-  }
+  } */
 
-  // Get houses by city2
+  // Get houses by city2 - temp method. This will be removed. Fetch by filters will do this.
   const fetchHousesByCity2 = async city => {
     let res = await fetch('/rest/houses/ccity/' + city, {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
-    setCities(res)
-  //  return res;
+    setHousesByCityTemp(res)
   }
 
   // Get houses by filters (checkbox and range) - Does this work with userId as well?
-  const fetchHousesByFilters = async filters => {
+  const fetchHousesByCityAndDate = async filters => {
     filters = JSON.stringify(filters)
     // filters should be an object passed to a query
     let res = await fetch('/rest/houses/filters/' + filters, {
@@ -66,53 +68,53 @@ export default function HouseContextProvider(props) {
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
-    return res;
+    setHousesByCityAndDate(res);
   }
 
-  // Add a new house
-  const addHouse = async house => {
+  // Add a new rental and spread it.
+  const addNewRental = async newRental => {
     let res = await fetch('/rest/houses', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(house)
+      body: JSON.stringify(newRental)
     })
     res = await res.json()
-    house._id = res._id
+    newRental._id = res._id
     // Append a new house to the reactive house list
     // to trigger reactivity we replace the old list with a new 
     // by spreading the old list (a copy of it) and adding the new house
-    setHouses([...houses, house])
-    return res;
+    setMyRentals([...myRentals, newRental])
   }
 
   // Remove a house by id
-  const removeHouseById = async id => {
-    let res = await fetch('/rest/houses/' + id, {
+  const removeRentalById = async rentalId => {
+    let res = await fetch('/rest/houses/' + rentalId, {
       method: 'DELETE',
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
-    // let index = houses.indexOf(res)
-    // houses.splice(index, 1)
-    return res;
+    let index = myRentals.indexOf(res)
+    myRentals.splice(index, 1)
+
   }
-/* 
-  useEffect(() => {
-    myRentals()
-   }, [])
- */
+  /* 
+    useEffect(() => {
+      myRentals()
+     }, [])
+   */
   // The values we want the children components to reach and be able to use
   const values = {
-    houses,
-    rentals,
-    cities,
-    addHouse,
-    removeHouseById,
-    fetchHousesByFilters,
-    fetchHousesByCity,
-    fetchHousesByCity2,
     myRentals,
-    fetchAllCities
+    citiesAndCountriesNames,
+    housesByCityAndDate,
+    housesByCityTemp,
+    addNewRental,
+    fetchMyRentals,
+    removeRentalById,
+    fetchHousesByCityAndDate,
+   // fetchHousesByCity,
+    fetchHousesByCity2,
+    fetchCitiesAndCountriesNames
   }
 
   return (
