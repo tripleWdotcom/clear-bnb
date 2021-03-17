@@ -6,7 +6,7 @@ import { useState, useEffect, useContext } from "react";
 
 
 export default function Results() {
-  const { cities,fetchHousesByCity2 } = useContext(HouseContext)
+  const { cities} = useContext(HouseContext)
   //onst { houses } = useContext(HouseContext)
 
  // const [cities, setCities] = useState([]);

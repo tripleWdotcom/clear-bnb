@@ -28,7 +28,7 @@ export default function SearchBar(props) {
     setSelectedOption()
   }
 
-  const filterConfig = {
+  const filterConfig = { 
     ignoreCase: true,
     ignoreAccents: true,
     trim: true,
