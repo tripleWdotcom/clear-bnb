@@ -35,6 +35,7 @@ const Navbar = () => {
 
 const styles = {
 
+
   navbar: {
 
     padding: '20px',
