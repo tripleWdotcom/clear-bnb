@@ -17,7 +17,6 @@ const Filters = () => {
     animalF: false,
     pool: false,
     parking: false
-
   })
   function handleBoxes(e) {
     const value =
@@ -25,8 +24,6 @@ const Filters = () => {
     setState({ ...boxes, [e.target.name]: value });
     console.log("value is :", e.target.name, value)
   }
-
-
 
 
 
