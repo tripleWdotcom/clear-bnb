@@ -8,16 +8,20 @@ import Paper from '@material-ui/core/Paper';
 
 
 const CityIconList = () => {
-  const { fetchAllCities } = useContext(HouseContext)
+  const { citiesAndCountriesNames } = useContext(HouseContext)
   const [cities, setCities] = useState([])
   let history = useHistory();
 
-  useEffect(() => {
-    shuffleCities()
-  }, [])
+  useEffect(() => { 
+    console.log("3 citiesAndCountriesNames", citiesAndCountriesNames)
 
-  async function shuffleCities() {
-    const cities = await fetchAllCities(null)
+    shuffleCities()
+  }, []) 
+
+  function shuffleCities() {
+    setCities(citiesAndCountriesNames)
+    console.log("4 citiesAndCountriesNames", citiesAndCountriesNames)
+
     for (let i = cities.length - 1; i > 0; i--) {
       const city = Math.floor(Math.random() * i)
       const temp = cities[i]
@@ -39,7 +43,7 @@ const CityIconList = () => {
       '#FFD966',
       '#A9D164',
       '#7DA9AD'];
-    return colorArray[key];
+    return colorArray[key]; 
   }
 
   return (

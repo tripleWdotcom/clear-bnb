@@ -4,16 +4,15 @@ import { HouseContext } from '../contexts/HouseContext'
 
 export default function SearchBar(props) {
 
-  const { fetchAllCities } = useContext(HouseContext)
+  const { citiesAndCountriesNames } = useContext(HouseContext)
   const [options, setOptions] = useState([])
   const [selectedOption, setSelectedOption] = useState(JSON.parse(localStorage.getItem('selectedOption')));
 
   
   async function setAllOptions() {
     setSelectedOption(JSON.parse(localStorage.getItem('selectedOption')))
-    const cities = await fetchAllCities()
     let optionCities = []
-    cities.map(c => {
+    citiesAndCountriesNames.map(c => {
       optionCities.push({ value: c._id, label: c._id + ', ' + c.country })
     })
     setOptions([...optionCities])

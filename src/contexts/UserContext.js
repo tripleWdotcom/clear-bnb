@@ -92,7 +92,7 @@ export default function UserContextProvider(props) {
 
   //Calls one time, as mounted in Vue
   useEffect(() => {
-    whoIsLoggedIn
+    whoIsLoggedIn()
     }, [])
 
   return (

@@ -23,6 +23,7 @@ export default function HouseContextProvider(props) {
     })
     res = await res.json()
     setCitiesAndCountriesNames(res)
+    console.log("2 citiesAndCountriesNames", citiesAndCountriesNames)
 
   }
 
@@ -97,11 +98,7 @@ export default function HouseContextProvider(props) {
     myRentals.splice(index, 1)
 
   }
-  /* 
-    useEffect(() => {
-      myRentals()
-     }, [])
-   */
+  
   // The values we want the children components to reach and be able to use
   const values = {
     myRentals,
@@ -114,8 +111,13 @@ export default function HouseContextProvider(props) {
     fetchHousesByCityAndDate,
    // fetchHousesByCity,
     fetchHousesByCity2,
-    fetchCitiesAndCountriesNames
   }
+
+  useEffect(() => {
+    fetchCitiesAndCountriesNames()
+    console.log("1 citiesAndCountriesNames", citiesAndCountriesNames)
+  }, [])
+
 
   return (
     <HouseContext.Provider value={values}>
