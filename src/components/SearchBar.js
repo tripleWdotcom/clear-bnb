@@ -1,16 +1,15 @@
-import React, { useContext, useState, useEffect} from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom'
 import Select, { createFilter } from 'react-select';
 import { HouseContext } from '../contexts/HouseContext'
 
 export default function SearchBar(props) {
-
   const { citiesAndCountriesNames } = useContext(HouseContext)
   const [options, setOptions] = useState([])
-  const [selectedOption, setSelectedOption] = useState(JSON.parse(localStorage.getItem('selectedOption')));
-
+  const location = useLocation();
+  const [selectedOption, setSelectedOption] = useState(location.pathname == '/' ? null : JSON.parse(localStorage.getItem('selectedOption')));
   
   async function setAllOptions() {
-    setSelectedOption(JSON.parse(localStorage.getItem('selectedOption')))
     let optionCities = []
     citiesAndCountriesNames.map(c => {
       optionCities.push({ value: c._id, label: c._id + ', ' + c.country })
@@ -20,7 +19,7 @@ export default function SearchBar(props) {
 
   useEffect(() => {
     setAllOptions()
-  }, [])
+  }, [citiesAndCountriesNames])
 
   const changeCityList = async (val, e) => {
     props.getData(val)

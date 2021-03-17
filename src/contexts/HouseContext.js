@@ -7,6 +7,7 @@ export const HouseContext = createContext()
 // Create function for HouseContext
 export default function HouseContextProvider(props) {
 
+
   // A reactive state to store houses
   const [citiesAndCountriesNames, setCitiesAndCountriesNames] = useState([])
   const [myRentals, setMyRentals] = useState([])
