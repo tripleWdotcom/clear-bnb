@@ -24,8 +24,6 @@ export default function HouseContextProvider(props) {
     })
     res = await res.json()
     setCitiesAndCountriesNames(res)
-    console.log("2 citiesAndCountriesNames", citiesAndCountriesNames)
-
   }
 
 
@@ -116,7 +114,6 @@ export default function HouseContextProvider(props) {
 
   useEffect(() => {
     fetchCitiesAndCountriesNames()
-    console.log("1 citiesAndCountriesNames", citiesAndCountriesNames)
   }, [])
 
 
