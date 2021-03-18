@@ -5,7 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
 import SearchComponent from '../components/Search'
 import CityIconList from '../components/CityIconList'
-import MyCarousel from '../components/Carousel'
+import Ok from '../components/Carousel';
+
 
 
 
@@ -28,7 +29,7 @@ const Home = () => {
             <Grid item xs={12}>
               <Paper className={classes.paper}> 
       
-              <MyCarousel />
+              <Ok />
             
               </Paper>
               
