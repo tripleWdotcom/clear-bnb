@@ -4,9 +4,9 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Filters from '../components/Filters'
-
-import Search from '../components/Search'
+import SearchComponent from '../components/Search'
 import Results from '../components/Results';
+import Calen from '../components/Calen';
 
 
 const HomeResults = () => {
@@ -19,7 +19,8 @@ const HomeResults = () => {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>Search component
-            <Search />
+            <SearchComponent />
+              <Calen />
             </Paper>
           </Grid>
 
