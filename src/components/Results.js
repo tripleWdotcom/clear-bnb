@@ -1,30 +1,29 @@
-
-
-import { useHistory } from "react-router-dom";
 import { HouseContext } from '../contexts/HouseContext'
-import { useState, useEffect, useContext } from "react";
-
+import { useEffect, useContext } from "react";
 
 export default function Results() {
-  const { cities,fetchHousesByCity2 } = useContext(HouseContext)
-  //onst { houses } = useContext(HouseContext)
+  const { housesByCityTemp, fetchHousesByCity2 } = useContext(HouseContext)
 
- // const [cities, setCities] = useState([]);
+  useEffect(async () => {
+    let city = JSON.parse(localStorage.getItem('selectedCity')).value
+    await fetchHousesByCity2(city)
+  }, [localStorage.getItem('selectedCity')])
 
   const test = c => (
 
-    <div style={{width:"100%"}} key={c._id}>
-      <hr/>
+    <div style={{ width: "100%" }} key={c._id}>
+      <hr />
       <img style={{
-        height: '150px'
+        height: '200px',
+        width: '100%',
+        borderRadius: '10px'
       }}
         src={c.pics[0]}
         alt={'picture ' + c.id}
-
       />
 
       <h4 style={{ cursor: 'pointer' }}>{c.slogan}</h4><h5> SEK{c.price} (per night)</h5>
-      <p>{c.featureIds.map(f => <span style={{fontSize:"10px"}} key={f._id}> {(() => {
+      <p>{c.featureIds.map(f => <span style={{ fontSize: "10px" }} key={f._id}> {(() => {
         switch (f.name) {
           case "tv": return "\📺 TV";
           case "gym": return "\🏋️ GYM";
@@ -35,29 +34,16 @@ export default function Results() {
           case "parking": return "\🅿️ Parking";
           case "kitchen": return "\🍳 Kitchen";
           case "breakfast": return "\🍞 Breakfast";
-
-
           default: return "#FFFFFF";
         }
       })()}     </span>)}</p>
     </div>
   )
- 
- /*  async function cityHouses() {
-    let x = JSON.parse(localStorage.getItem('selectedCity')).value
-    await fetchHousesByCity2(x)
-
-  }
-
-   useEffect(() => {
-    localStorage.getItem('selectedCity')
-    cityHouses()
-  }, []) */
 
   return (
     <div>
       <div >
-        {cities.map(c => test(c))}
+        {housesByCityTemp.map(c => test(c))}
       </div>
     </div>
   )

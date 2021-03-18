@@ -1,3 +1,4 @@
+import { set } from 'mongoose';
 import React, { createContext, useState, useEffect } from 'react';
 
 // Creating a reference to this context
@@ -7,27 +8,27 @@ export const UserContext = createContext()
 // Create function for UserContext
 export default function UserContextProvider(props) {
 
+  const [isLoggedIn, setIsLoggedIn] = useState([])
+
   // A reactive state to store users
-  const [users, setUsers] = useState([])
-  const [loggedIn, setLoggedIn] = useState([])
+  //const [users, setUsers] = useState([])
 
 
   // Get all users
-  const fetchUsers = async () => {
-    let res = await fetch('/rest/users')
-    res = await res.json()
-    setUsers(res)
-  }
+  /*   const fetchUsers = async () => {
+      let res = await fetch('/rest/users')
+      res = await res.json()
+      setUsers(res)
+    } */
 
   // Get the user that is logged in if someone is logged in
-  const loggedInUser = async () => {
+  const whoIsLoggedIn = async () => {
     let res = await fetch('/api/login', {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
-    console.log('logged in', res)
-    return res;
+    setIsLoggedIn(res);
   }
 
   // Log in user
@@ -39,7 +40,7 @@ export default function UserContextProvider(props) {
       body: JSON.stringify(userCredentials)
     })
     res = await res.json()
-    return res;
+    setIsLoggedIn(res)
   }
 
   // Log out user
@@ -49,29 +50,27 @@ export default function UserContextProvider(props) {
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
-    return res;
+    setIsLoggedIn([])
   }
 
-  // Add a new user
-  const addUser = async user => {
+  // Add a new user when signup is clicked/run
+  const addUser = async newUser => {
     let res = await fetch('/api/users', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(user)
+      body: JSON.stringify(newUser)
     })
     res = await res.json()
-    user._id = res._id
+    newUser._id = res._id
     // Append a new user to the reactive users list
     // to trigger reactivity we replace the old list with a new 
     // by spreading the old list (a copy of it) and adding the new user
-    // setUsers([...users, user])
-    setLoggedIn(user)
-    return res;
+    setIsLoggedIn(newUser)
   }
 
   // Remove a user by id
   // Should we have this?
-  const deleteUserById = async userId => {
+ /*  const deleteUserById = async userId => {
     let res = await fetch('/api/users/:id', {
       method: 'DELETE',
       headers: { 'content-type': 'application/json' },
@@ -82,21 +81,19 @@ export default function UserContextProvider(props) {
     let index = users.indexOf(res)
     users.splice(index, 1)
   }
-
+ */
   // The values we want the children components to reach and be able to use
   const values = {
-    loggedIn,
-    users,
+    isLoggedIn,
     addUser,
-    loggedInUser,
     logInUser,
     logOutUser,
   }
 
   //Calls one time, as mounted in Vue
   useEffect(() => {
-    fetchUsers()
-  }, [])
+    whoIsLoggedIn()
+    }, [])
 
   return (
     <UserContext.Provider value={values}>

@@ -44,13 +44,13 @@ const useStyles = makeStyles((theme) => ({
 
   root: {
     flexGrow: 1,
-    backgroundColor: 'cyan'
+    backgroundColor: '#383D59'
   },
   paper: {
     padding: theme.spacing(15),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#99AABF',
 
   }
 
