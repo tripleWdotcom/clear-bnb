@@ -25,7 +25,7 @@ const Ok= () => {
         </div>
       
      
-    <div>
+          <div >
             <h1>Italy</h1>
             <img alt="" src="https://s1.1zoom.me/big0/530/Italy_Lake_Houses_Lake_Maggiore_Cannobio_602033_1280x701.jpg" />
 
@@ -65,11 +65,9 @@ const styles = {
 
   picStyle: {
     cursor: 'pointer',
-    transition: '200ms',
     
-
+  
     ':hover': {
-      transform: 'scale(1.03)',
       backgroundColor: 'whitesmoke'
     }
   }
