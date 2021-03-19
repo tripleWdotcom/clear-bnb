@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
-import onClickOutside from 'react-onclickoutside';
+import Radium from 'radium';
 
 function MemberPage() {
   const [open, setOpen] = useState(false);
@@ -27,12 +27,11 @@ function MemberPage() {
         onClick={() => toggle(!open)}
       >
         <div className="dd-header_action">
-          <p>{open ? 'Close My Pages' : 'User Name'}</p>
+          <p>{open ? 'CloseMyPages' : 'User Name'}</p>
         </div>
       </div>
       {open && (
         <div className="myPages-sub-menu">
-          <p ><u>My page</u></p>
           <p className="routerLinks" key="1" style={routerLinkStyle} onClick={() => handleOnClick("/mypage")}>My Page</p>
           <p className="routerLinks" key="2" style={routerLinkStyle} onClick={goToStartPage}>Log Out</p>
         </div >
@@ -41,14 +40,12 @@ function MemberPage() {
   )
 }
 
-const clickOutsideConfig = {
-  handleClickOutside: () => MemberPage.handleClickOutside
-}
+
 
 
 const memberPageStyle = {
-  margin: '1em',
-  padding: '0 20px',
+  margin: '0.5em',
+  padding: '5px 5px',
   cursor: 'pointer'
 }
 
@@ -60,6 +57,6 @@ const routerLinkStyle = {
   }
 }
 
-export default onClickOutside(MemberPage, clickOutsideConfig);
+export default Radium(MemberPage);
 
 
