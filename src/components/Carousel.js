@@ -7,18 +7,18 @@ const Ok= () => {
   return(
    
 
-    <div className="carousel-grid-container" styles={styles.container}>
+    <div className="carousel-grid-container" style={styles.picStyle}>
       <div className="banner" style={styles.banner}>
         <h1 style={styles.banner}>Our best offers</h1>
       </div>
   
-    <Grid style={styles.pic1}>
+    <Grid style={styles.pics}>
 
 
     <Carousel autoPlay showArrows={false} showThumbs={false} showIndicators={false} infiniteLoop={true} showStatus={false} 
         transitionTime={1000} interval={5000}
         >
-    <div>
+          <div>
             <h1>Norway</h1>
             <img alt="" src="https://s1.1zoom.me/b5053/673/Lofoten_Norway_Houses_Mountains_Reine_Night_Bay_521644_2560x1440.jpg" />
 
@@ -56,12 +56,23 @@ const styles = {
     width: '100%'
   },
 
-  pic1: {
+  pics: {
     
     width: '100%',
     height: '600px',
    
   },
+
+  picStyle: {
+    cursor: 'pointer',
+    transition: '200ms',
+    
+
+    ':hover': {
+      transform: 'scale(1.03)',
+      backgroundColor: 'whitesmoke'
+    }
+  }
   
 }
 
