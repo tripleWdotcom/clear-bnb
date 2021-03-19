@@ -5,36 +5,60 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const Ok= () => {
   return(
-      <Grid style={styles.pic1}>
-    <Carousel autoPlay showArrows={false} showThumbs={false} showIndicators={false} infiniteLoop={true} showStatus={false}>
+   
+
+    <div className="carousel-grid-container" styles={styles.container}>
+      <div className="banner" style={styles.banner}>
+        <h1 style={styles.banner}>Our best offers</h1>
+      </div>
+  
+    <Grid style={styles.pic1}>
+
+
+    <Carousel autoPlay showArrows={false} showThumbs={false} showIndicators={false} infiniteLoop={true} showStatus={false} 
+        transitionTime={1000} interval={5000}
+        >
     <div>
-        <img alt="" src="https://image.shutterstock.com/shutterstock/photos/1702125637/display_1500/stock-photo-new-construction-homes-in-texas-built-in-1702125637.jpg" />
+            <img alt="" src="https://s1.1zoom.me/b5053/673/Lofoten_Norway_Houses_Mountains_Reine_Night_Bay_521644_2560x1440.jpg" />
 
         </div>
       
+     
     <div>
-        <img alt="" src="https://image.shutterstock.com/shutterstock/photos/683283169/display_1500/stock-photo-big-modern-beautiful-house-683283169.jpg" />
+            <img alt="" src="https://s1.1zoom.me/big0/530/Italy_Lake_Houses_Lake_Maggiore_Cannobio_602033_1280x701.jpg" />
 
     </div>
     <div>
-        <img alt="" src="https://image.shutterstock.com/shutterstock/photos/1538417255/display_1500/stock-photo-exterior-view-of-modern-white-house-with-garage-decorated-with-wood-1538417255.jpg" />
+            <img alt="" src="https://s1.1zoom.me/big0/253/Germany_Houses_Quedlinburg_Street_Stairs_Night_602533_1280x720.jpg" />
 
     </div>
     <div>
-        <img alt="" src="https://image.shutterstock.com/shutterstock/photos/1702012048/display_1500/stock-photo-real-estate-exterior-front-house-1702012048.jpg" />
+            <img alt="" src="https://s1.1zoom.me/big0/755/Netherlands_Amsterdam_Houses_Boats_Canal_Night_585376_1280x794.jpg" />
 
       </div>
     
   </Carousel>
-      </Grid>
+     </Grid>
+    </div>
   
 );
 }
 
 const styles = {
-  pic1: {
-    width: '900px'
+  
+  banner: {
+    backgroundColor: 'black',
+    color: 'whitesmoke',
+    width: '100%'
   },
+
+  pic1: {
+    
+    width: '100%',
+    height: '600px',
+   
+  },
+  
 }
 
 export default Radium(Ok)
