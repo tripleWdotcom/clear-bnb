@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState , useEffect} from 'react';
 
 export const FeatureContext = createContext()
 
@@ -11,17 +11,18 @@ export default function FeatureContextProvider(props) {
     let res = await fetch('/rest/features')
     res = await res.json()
     setFeatures(res)
+  
   }
 
   // The values we want the children components to reach and be able to use
   const values = {
-    features
+    features,
   }
 
   // Calls one time, as mounted in Vue
-  useEffect(() => {
+   useEffect(() => {
     fetchFeatures()
-  }, [])
+   }, [])
 
   return (
     <FeatureContext.Provider value={values}>

@@ -1,10 +1,15 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
-import MemberPage from './components/MemberPage.js'
+import UserContextProvider from './contexts/UserContext'
+import FeatureContextProvider from './contexts/FeatureContext'
+import HouseContextProvider from './contexts/HouseContext'
+import BookingContextProvider from './contexts/BookingContext'
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import MyPage from './pages/MyPages.js'
+import HomeResults from './pages/HomeResults'
+import MemberPage from './components/MemberPage.js'
+import MyPage from './pages/MyPage.js'
+
 
 
 function App() {
@@ -14,32 +19,44 @@ function App() {
   const page404 = () => (
     <h1>Page not found: {window.location.pathname}</h1>
   )
-  
+  localStorage.clear()
 
   return (
     <div className="App">
-      <div id="contentGridContainer">
+      <UserContextProvider>
+        <BookingContextProvider>
+          <HouseContextProvider>
+            <FeatureContextProvider>
 
-      <Router>
-        <header className={true ? 'App-Header' : ''}>
-          <Navbar />
-          <MemberPage />
-        </header>
+              <div id="contentGridContainer">
 
-        <main className="content">
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/mypage" component={MyPage} />
-            <Route path="*" component={page404} />
-          </Switch>
-        </main>
+                <Router>
+                  <header className={true ? 'App-Header' : ''}>
+                    <Navbar />
+                    <MemberPage />
 
-        <footer className={true ? 'App-Footer' : ''}>
-          <Footer />
-        </footer>
+                  </header>
 
-      </Router>
-      </div>
+                  <main className="content">
+                    <Switch>
+                      <Route exact path="/" component={Home} />
+                      <Route exact path="/home-results" component={HomeResults} />
+                      <Route exact path="/mypage" component={MyPage} />
+                      <Route path="*" component={page404} />
+                    </Switch>
+                  </main>
+
+                  <footer className={true ? 'App-Footer' : ''}>
+                    <Footer />
+                  </footer>
+
+                </Router>
+
+              </div>
+            </FeatureContextProvider>
+          </HouseContextProvider>
+        </BookingContextProvider>
+      </UserContextProvider>
     </div>
 
   );

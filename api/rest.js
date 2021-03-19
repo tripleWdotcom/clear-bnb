@@ -8,58 +8,92 @@ module.exports = (app, models) => {
     res.json(docs)
   })
 
-  app.get('/rest/houses/city', async (req, res) => {
-    let city = req.body.city
+
+
+    app.get('/rest/houses/ccity/:city', async (req, res) => {
+      let city = req.params.city
+      let model = models['houses']
+      let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } }).populate('featureIds')
+      res.json(docs)
+    })
+
+
+  // Get houses by city (searching for one letter at a time or all citys distinct)
+  app.get('/rest/houses/city/:city', async (req, res) => {
+    let city = req.params.city
     let model = models['houses']
-    let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' }})
+    if (!city) {
+      let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } })
+      res.json(docs)
+      return;
+    }
+    let docs = await model.aggregate([{
+      $group: {
+        _id: "$city",
+        country: {  
+          $first: "$country",
+        }
+      }
+    },
+    {
+      $sort: { _id: 1 }
+      }])
     res.json(docs)
   })
 
   // Get houses by filters 
-  app.get('/rest/houses/filters', async (req, res) => {
-    console.log(req.body)
-    // let bedrooms = parseInt(req.body.bedrooms)
-    // let country = req.params.country
-    // let pool = parseInt(req.params.pool)
+  app.get('/rest/houses/filters/:filters', async (req, res) => {
+    let b = JSON.parse(req.params.filters)
 
-    // console.log(bedrooms)
-    // console.log(country)
-    // console.log(pool)
-  //   let filter = JSON.parse(req.params.something)
-  //   console.log(JSON.parse(req.params.something))
-  //   console.log(filter[0])
+    // Feature filters
+    let featureIds = []
+    b.wifi == null ? null : featureIds.push({ featureIds: b.wifi })
+    b.tv == null ? null : featureIds.push({ featureIds: b.tv })
+    b.breakfast == null ? null : featureIds.push({ featureIds: b.breakfast })
+    b.gym == null ? null : featureIds.push({ featureIds: b.gym })
+    b.kitchen == null ? null : featureIds.push({ featureIds: b.kitchen })
+    b.smoking == null ? null : featureIds.push({ featureIds: b.smoking })
+    b.animalFriendly == null ? null : featureIds.push({ featureIds: b.animalFriendly })
+    b.pool == null ? null : featureIds.push({ featureIds: b.pool })
+    b.parking == null ? null : featureIds.push({ featureIds: b.parking })
+
     let model = models['houses']
-  //   console.log(model)
-    let docs = await model.find({featureIds: '6046bf371807457c80418887'}).populate('featureIds').count()
-    //let docs = await model.find({ country: country })
-    //let docs = await model.find({ $and: [{ bedrooms: { $lt: bedrooms }, country: country}]})
-  //   console.log(docs)
-  //   //console.log(req.body)
-  //   // let filterObj = JSON.parse(req.body)
-  //   // console.log(filterObj)
-  // //   let docs = await houses.find({ featuresId: filterObj })
-    console.log(docs)
-    res.json(docs)
-  })
 
-  // 3001 / rest / houses / filters / [{ "bedrooms": 4 }]
-  // 3001 / rest / houses / filters / bedrooms / :bedrooms / wifi / :wifi / parking /:parking
-  //   let bedrooms = req.params.bedrooms
-  //   let wifi = req.params.wifi
-  //   let parking = req.params.parking
-  
-  
-  // 3001 / rest / houses / filters / { "bedrooms": 4, "wifi": true }
-  // filter.bedrooms
-  // filter.wifi
-  // filter.parking
-  
+    let unixTimestamp = Math.floor(new Date().getTime())
+
+    if (!featureIds.length) {
+      // Without any checkbox filters
+      let docs = await model.find({ 
+        $and: [
+          { $and: [{ bedrooms: { $lte: b.bedroomsMax } }, { bedrooms: { $gte: b.bedroomsMin } }] },
+          { $and: [{ price: { $lte: b.priceMax } }, { price: { $gte: b.priceMin } }] },
+          { $and: [{ availableEnd: { $gt: unixTimestamp } }, { availableEnd: { $gt: b.availableEnd } }] },
+          { $and: [{ availableStart: { $lt: unixTimestamp } }, { availableStart: { $lt: b.availableStart } }] },
+          { city: b.city }
+        ]
+      }).populate(['userId', 'featureIds']).exec()
+      res.json(docs)
+      return;
+    } else {
+      // With checkbox filters
+      let docs = await model.find({
+        $and: [
+          { $and: [{ bedrooms: { $lte: b.bedroomsMax } }, { bedrooms: { $gte: b.bedroomsMin } }] },
+          { $and: [{ price: { $lte: b.priceMax } }, { price: { $gte: b.priceMin } }] },
+          { $and: [{ availableEnd: { $gt: unixTimestamp } }, { availableEnd: { $gt: b.availableEnd } }] },
+          { $and: [{ availableStart: { $lt: unixTimestamp } }, { availableStart: { $lt: b.availableStart } }] },
+          { city: b.city },
+          { $and: featureIds }
+        ]
+      }).populate(['userId', 'featureIds']).exec()
+      res.json(docs)
+      return;
+    }
+  })
 
   // Get users houses by userId
   app.get('/rest/houses/user/:id', async (req, res) => {
     let model = models['houses']
-    console.log('model', model)
-    console.log(await model.find({ userId: req.params.id }))
     let docs = await model.find({ userId: req.params.id }).populate(['userId', 'featureIds']).exec()
     res.json(docs)
   })
@@ -90,40 +124,19 @@ module.exports = (app, models) => {
   })
 
   // Delete house 
-  app.delete('/rest/houses', async (req, res) => {
-    let houseId = req.body
-    let house = await models['houses'].remove({ _id: houseId.id })
+  app.delete('/rest/houses/:id', async (req, res) => {
+    let houseId = req.params.id
+    let house = await models['houses'].remove({ _id: houseId })
     res.json(house)
   })
 
   // Delete booking
-  app.delete('/rest/bookings', async (req, res) => {
-    let bookingId = req.body
-    let booking = await models['bookings'].remove({ _id: bookingId.id })
+  app.delete('/rest/bookings/:id', async (req, res) => {
+    let bookingId = req.params.id
+    let booking = await models['bookings'].remove({ _id: bookingId })
     res.json(booking)
   })
 
-
-
-
-
-
-
-
-
-
-
-  // Get user/houses by userId
-  // app.get('/rest/:model/user/:id', async (req, res) => {
-  //   let model = models[req.params.model]
-  //   // Only populate if ref exists? answer :yes
-  //   let docs = await model.find({ userId: req.params.id }).populate(['userId', 'featureIds']).exec()
-  //   res.json(docs)
-  // })
-
-
-  
-  
 }
 
 
