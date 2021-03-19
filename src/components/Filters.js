@@ -1,11 +1,12 @@
 import Radium from 'radium'
 import React, { useState } from "react";
+import RangeSlider from './RangeFilters'
 
 
 const Filters = () => {
 
 
-  const [valueBeds, onChange] = useState(1)
+  const [valueBeds, setValueBeds] = useState(1)
 
   const [boxes, setState] = useState({
     tv: true,
@@ -19,6 +20,8 @@ const Filters = () => {
     parking: true
 
   })
+
+
   function handleBoxes(e) {
     const value =
       e.target.type === "checkbox" ? e.target.checked : e.target.value;
@@ -36,10 +39,13 @@ const Filters = () => {
       <hr/>
       <div style={slidecontainer}>
         <div>
+          <RangeSlider />
           <p>number of beds?</p>
           <input type="range" id="popo" min="1" max="5" value={valueBeds}
             onChange={({ target: { value: x } }) => {
-              onChange(x);
+              setValueBeds(x);
+              localStorage.setItem('bedsNumber',x)
+              console.log("this is beds",x)
             }}
           />
           <div >

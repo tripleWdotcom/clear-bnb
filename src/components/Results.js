@@ -4,12 +4,26 @@ import { useHistory } from "react-router-dom";
 import { HouseContext } from '../contexts/HouseContext'
 import { useState, useEffect, useContext } from "react";
 
-
 export default function Results() {
-  const { cities,fetchHousesByCity2 } = useContext(HouseContext)
-  //onst { houses } = useContext(HouseContext)
+  const { housesByCityAndDate, fetchHousesByCityAndDate } = useContext(HouseContext)
 
- // const [cities, setCities] = useState([]);
+  useEffect(async () => {
+    //let city = JSON.parse(localStorage.getItem('selectedCity')).value
+    let objects ={
+    city: JSON.parse(localStorage.getItem('selectedCity')).value,
+    availableStart: localStorage.getItem("startDateChosen"),
+    availableEnd: localStorage.getItem("endDateChosen"),
+    priceMin: 1,
+    priceMax: 4550,
+    bedroomsMin: 1 || localStorage.getItem("bedsNumber"),
+    bedroomsMax: 10,
+  }
+    await fetchHousesByCityAndDate(objects)
+    console.log(objects)
+  }, [localStorage.getItem('selectedCity'),
+    localStorage.getItem("bedsNumber")])
+
+
 
   const test = c => (
 
