@@ -1,17 +1,52 @@
+import { useEffect, useContext } from 'react';
+import { BookingContext } from '../../contexts/BookingContext'
+
 
 function Bookings() {
+  const { myBookings, fetchMyBookingsByUserId, deleteBookingById } = useContext(BookingContext)
+
+  useEffect(async () => {
+    console.log('Something has changed in my bookings')
+    await fetchMyBookingsByUserId('6047715d04ac3c37f09f7f10')
+  }, [])
+
+  useEffect(() => {
+    console.log('My bookings is now', myBookings)
+  }, [myBookings])
+
+  const structureBookings = (b, i) =>
+  (
+    <div style={style.item} key={i}>
+      <img style={style.img} key={i} src={b.houseId.pics[0]} /><div style={style.info}>Info</div>
+    </div>
+  )
+
   return (
     <div className="Bookings">
       <h2>My Bookings Page</h2>
-      <p>What is Lorem Ipsum?
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-      Why do we use it?
-      It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-
- </p>
+      <div>
+        {myBookings.map((b, i) => structureBookings(b, i))}
+      </div>
     </div>
   )
 }
 
 export default Bookings;
+
+const style = {
+  item: {
+    margin: '5px',
+    padding: '10px',
+  },
+  img: {
+    width: '300px',
+    height: 'auto',
+    alignItems: 'center'
+  },
+  info: {
+    width: '150px',
+    height: 'auto',
+    backgroundColor: 'blue',
+    float: 'right'
+  },
+}

@@ -16,7 +16,6 @@ export default function BookingContextProvider(props) {
     })
     res = await res.json()
     setMyBookings(res)
-
   }
 
   // Add a new booking
