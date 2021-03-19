@@ -19,20 +19,24 @@ const Ok= () => {
         transitionTime={1000} interval={5000}
         >
     <div>
+            <h1>Norway</h1>
             <img alt="" src="https://s1.1zoom.me/b5053/673/Lofoten_Norway_Houses_Mountains_Reine_Night_Bay_521644_2560x1440.jpg" />
 
         </div>
       
      
     <div>
+            <h1>Italy</h1>
             <img alt="" src="https://s1.1zoom.me/big0/530/Italy_Lake_Houses_Lake_Maggiore_Cannobio_602033_1280x701.jpg" />
 
     </div>
     <div>
+            <h1>Germany</h1>
             <img alt="" src="https://s1.1zoom.me/big0/253/Germany_Houses_Quedlinburg_Street_Stairs_Night_602533_1280x720.jpg" />
 
     </div>
     <div>
+            <h1>Netherlands</h1>
             <img alt="" src="https://s1.1zoom.me/big0/755/Netherlands_Amsterdam_Houses_Boats_Canal_Night_585376_1280x794.jpg" />
 
       </div>
@@ -45,7 +49,7 @@ const Ok= () => {
 }
 
 const styles = {
-  
+
   banner: {
     backgroundColor: 'black',
     color: 'whitesmoke',
