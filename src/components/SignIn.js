@@ -1,14 +1,11 @@
-import { useState, useContext, useRef } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext'
 import Radium from 'radium'
 
 function SignIn() {
-  const { logInUser } = useContext(UserContext)
+  const { logInUser} = useContext(UserContext)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // const email = useRef()
-  // const password = useRef()
 
   const handleSubmit = async e => {
     console.log('Login button clicked!')
@@ -18,7 +15,6 @@ function SignIn() {
       Password: ${password}
     `);
 
-
     e.preventDefault()
 
     // setModal(!modal)
@@ -26,16 +22,7 @@ function SignIn() {
       email: email,
       password: password
     }
-
-    const U = await logInUser(inputUser)
-    localStorage.setItem('currentUser', JSON.stringify({firstName: U[0].firstName}))
-    console.log('user', U)
-    // const User = await loggedInUser()
-    // localStorage.setItem("currentUser", JSON.stringify(User))
-    //const currentUser = JSON.parse(localStorage.getItem("currentUser.username"))
-    // const currentUser = JSON.parse(localStorage.getItem("currentUser[0].username"))
-    // console.log('currentUser username', currentUser)
-
+    await logInUser(inputUser)
   }
 
   return (
@@ -123,7 +110,7 @@ const modalStyle = {
     backgroundColor: "white",
     color: "#22223B",
     padding: "0.938em",
-  }, 
+  },
 }
 
 

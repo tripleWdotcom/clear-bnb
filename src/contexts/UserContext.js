@@ -50,7 +50,7 @@ export default function UserContextProvider(props) {
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
-    setIsLoggedIn([])
+    setIsLoggedIn([])   
   }
 
   // Add a new user when signup is clicked/run
@@ -87,13 +87,13 @@ export default function UserContextProvider(props) {
     isLoggedIn,
     addUser,
     logInUser,
-    logOutUser,
+    logOutUser,    
   }
 
   //Calls one time, as mounted in Vue
   useEffect(() => {
-    whoIsLoggedIn()
-    }, [])
+    whoIsLoggedIn()   
+  }, [])
 
   return (
     <UserContext.Provider value={values}>
