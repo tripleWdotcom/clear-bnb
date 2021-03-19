@@ -12,44 +12,33 @@ const Navbar = () => {
 
   const { isLoggedIn, logOutUser } = useContext(UserContext)
 
-  console.log('currentUser in Navbar', isLoggedIn)
-  console.log('currentUser in Navbar 2')
   const [showSignIn, setShowSignIn] = useState(false)
-  const [showName,setShowName] = useState(false)
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
+
   useEffect(async () => {
-   // const u = await loggedInUser
-   // console.log('u', u)
-    if (isLoggedIn.length > 0)
-    {
-      setLoginInUser();
-      setShowName(true)
+
+    if (isLoggedIn.length > 0) {
+      setShowSignIn(false)
+      setIsUserLoggedIn(true)
     }
-    else
-    { console.log('no one is here') }
-  //  console.log('isLoggedIn i Navbar',isLoggedIn)
-   }, [isLoggedIn]) 
+  }, [isLoggedIn])
 
-  const signInModal = async() => {
+
+  const signInModal = async () => {
     setShowSignIn(true)
-  }
-
-  const closeSignInModal = () => {
-    setShowSignIn(false)
   }
 
   const logOut = async () => {
     const u = await logOutUser()
     console.log('Logged out: ', u)
   }
-
-  
+    
 
   const goHome = () => {
     history.push("/");
   }
-  function setLoginInUser()  {
-    setShowSignIn(false)
-  }
+
+
   return (
     <>
       <Hidden xsDown >
@@ -64,10 +53,9 @@ const Navbar = () => {
               marginLeft: 'auto'
             }}>
             <a style={styles.home} onClick={goHome}>Home</a>
-            {showName ? <a>Hej {isLoggedIn[0].firstName} </a> :'' }
-            <a style={styles.signIn} onClick={signInModal}>Sign In</a>
-            <a style={styles.signIn} onClick={closeSignInModal}>Close sign In</a>
-            <a style={styles.signIn} onClick={logOut}>Log out</a>
+            {isUserLoggedIn && <a>Hej {isLoggedIn[0].firstName}</a>}
+            {!isUserLoggedIn && <a style={styles.signIn} onClick={() => { signInModal() }}>Sign In</a>}
+            <a style={styles.signIn} onClick={() => { logOut() }}>Log out</a>
           </div>
           {showSignIn ? <Modal /> : ''}
         </nav>
