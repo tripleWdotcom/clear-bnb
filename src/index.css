@@ -6,7 +6,9 @@
   --font4: 'Roboto', sans-serif;
   --font5: 'Roboto', sans-serif;
   
-  --c1: rgb(252, 249, 249);
+/*   --c1: rgb(252, 249, 249);
+ */  
+  --c1: #69688C;
   --c2: rgb(124, 124, 122);
   --c3: rgb(116, 106, 91);
   --c4: rgb(78, 73, 64);
@@ -38,7 +40,7 @@
 }
 
 body {
-  background-color: var(--c1);
+  background-color: beige
 }
 
 #app {
@@ -116,6 +118,10 @@ main.content{
 footer.App-Footer{
   grid-column: 1/4;
   grid-row: 3;
+}
+
+.calen{
+  background-color: rgb(69, 90, 49);
 }
 
 .noselect {

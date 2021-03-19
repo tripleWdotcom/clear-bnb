@@ -9,16 +9,15 @@ const Filters = () => {
   const [valueBeds, setValueBeds] = useState(1)
 
   const [boxes, setState] = useState({
-    tv: true,
-    wifi: true,
-    breakfast: true,
-    gym: true,
-    kitchen: true,
-    smoking: true,
-    animalF: true,
-    pool: true,
-    parking: true
-
+    tv: false,
+    wifi: false,
+    breakfast: false,
+    gym: false,
+    kitchen: false,
+    smoking: false,
+    animalF: false,
+    pool: false,
+    parking: false
   })
 
 
@@ -31,11 +30,9 @@ const Filters = () => {
 
 
 
-
-
   return (
     <div>
-      <h2>filters not sending info at the moment</h2>
+    
       <hr/>
       <div style={slidecontainer}>
         <div>
