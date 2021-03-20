@@ -65,12 +65,11 @@ function MyPage() {
           direction="row"
           key="2"
         >
-          <Hidden xsDown>
-            <Grid item xs={4} key="1">
-              <Menu getNewAction={changeAction} />
-            </Grid>
-          </Hidden>
-          <Grid item xs={8}>
+          <Grid item xs={4} key="1">
+            <Menu getNewAction={changeAction} />
+          </Grid>
+          <Grid item xs={1}><div style={style.line}></div></Grid>
+          <Grid item xs={7}>
             {action === 'showBookings' ? <Bookings /> : ''}
             {action === 'showRentals' ? <MyRentals /> : ''}
             {action === 'showNewRental' ? <AddNewRental /> : ''}
@@ -99,4 +98,9 @@ const style = {
   desktopMenu: {
 
   },
+  line: {
+    height: '300px',
+    width: '5px',
+    background: 'linear-gradient(to top, transparent 1%, gray 50%, transparent 100%)'
+  }
 }

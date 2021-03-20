@@ -39,7 +39,7 @@ function Bookings() {
     <div className="Bookings">
       <Grid container direction="column" alignItems="center">
         <h2>My Bookings Page</h2>
-        {myBookings.map((b, i) => structureBookings(b, i))}
+        {myBookings.length > 0 ? myBookings.map((b, i) => structureBookings(b, i)) : <h3 style={style.noBook}>Here will your future bookings be...</h3>}
       </Grid>
     </div>
   )
@@ -70,7 +70,7 @@ const style = {
     transition: 'all 500ms ease-in-out',
     overflow: 'hidden',
     ':hover': {
-      height: '100px',
+      height: '110px',
       cursor: 'pointer',
       transition: 'all 500ms ease-in-out'
     }
@@ -79,5 +79,8 @@ const style = {
     margin: '5px 0 5px 10px',
     lineHeight: '150%',
     letterSpacing: '5px',
+  },
+  noBook: {
+    marginTop: '60px'
   }
 }

@@ -59,8 +59,7 @@ const style = {
     },
   },
   containerDesktop: {
-    backgroundColor: 'grey',
-    marginTop: '30px',
+    marginTop: '45px',
     padding: '20px',
     borderRadius: '20px',
   },
