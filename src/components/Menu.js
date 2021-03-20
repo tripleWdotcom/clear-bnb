@@ -13,7 +13,7 @@ function MenuContainer(props) {
   return (
     <>
       <Hidden smUp>
-        <Grid container spacing={1} direction="column" style={style.containerMobile} key="1" justify="space-around">
+        <Grid container direction="column" style={style.containerMobile} key="1" justify="space-around">
           <Grid item xs>
             <h4 style={style.titleMobile} key="2" onClick={() => { sendNewAction('showBookings') }}>My bookings</h4>
           </Grid>
@@ -32,9 +32,9 @@ function MenuContainer(props) {
         </Grid>
       </Hidden>
 
-    
-    
-    
+
+
+
     </>
   )
 }
@@ -45,6 +45,9 @@ const style = {
   color: 'white',
   containerMobile: {
     backgroundColor: 'purple',
+    zIndex: '10',
+    position: 'fixed',
+    right: '0',
   },
   titleMobile: {
     padding: '10px 5px 10px 5px',
@@ -52,9 +55,8 @@ const style = {
     cursor: 'pointer',
     margin: '0 1px',
     ':hover': {
-      backgroundColor: 'white',
-      
-    }
+      color: 'white',
+    },
   },
   containerDesktop: {
     backgroundColor: 'grey',
@@ -67,6 +69,9 @@ const style = {
     cursor: 'pointer',
     ':hover': {
       color: 'white'
+    },
+    ':target': {
+      color: 'red'
     }
   },
 }

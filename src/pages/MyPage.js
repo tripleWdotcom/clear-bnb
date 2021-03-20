@@ -12,7 +12,7 @@ function MyPage() {
   const [action, setAction] = useState('showBookings')
   const [width, setWidth] = useState(window.innerWidth)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [contentShowing, setContentShowing] = useState()
+  const [menuShowing, setMenuShowing] = useState()
 
   const changeAction = (newAction) => {
     setAction(newAction)
@@ -33,34 +33,40 @@ function MyPage() {
     setIsMenuOpen(!isMenuOpen)
   }
 
-  useEffect(() => {
-    showContent()
-  }, [isMenuOpen])
+  // useEffect(() => {
+  //   showContent()
+  // }, [isMenuOpen])
 
-  function showContent() {
-    let content = isMenuOpen ? <Menu getNewAction={changeAction} /> :
-      (action === 'showBookings' ? <Bookings />
-        : action === 'showRentals' ? <MyRentals />
-        : action === 'showNewRental' ? <AddNewRental /> : '')
-    setContentShowing(content)
-  }
+  // function showContent() {
+  //   let content = isMenuOpen ?  : ''
+  //   setMenuShowing(content)
+  // }
 
   return (
     <>
       <Hidden smUp>
-        <Grid container spacing={8} style={style.container} wrap="nowrap" direction="column" key="1">
+        <Grid container style={style.container} wrap="nowrap" direction="column" key="1" justify="center">
           <button onClick={toggleMenu}>Menu</button>
           <Grid item xs>
-            {contentShowing}
+            {isMenuOpen ? <Menu getNewAction={changeAction} /> : ''}
+            {action === 'showBookings' ? <Bookings /> : ''}
+            {action === 'showRentals' ? <MyRentals /> : ''}
+            {action === 'showNewRental' ? <AddNewRental /> : ''}
           </Grid>
         </Grid>
       </Hidden>
 
 
       <Hidden xsDown>
-        <Grid container spacing={8} style={style.container} wrap="nowrap" direction="row" key="2">
+        <Grid container
+          spacing={8}
+          style={style.container}
+          wrap="nowrap"
+          direction="row"
+          key="2"
+        >
           <Hidden xsDown>
-            <Grid item xs={4} style={style.desktopMenu} key="1">
+            <Grid item xs={4} key="1">
               <Menu getNewAction={changeAction} />
             </Grid>
           </Hidden>
@@ -83,9 +89,14 @@ const style = {
     marginTop: '30px'
   },
   mobileMenu: {
-
+    transform: 'translateX(0%)',
+    transition: 'all 500ms ease-in-out',
+    ':after': {
+      backgroundColor: 'pink',
+      transform: 'translateX(-100%)',
+    },
   },
   desktopMenu: {
 
-  }
+  },
 }

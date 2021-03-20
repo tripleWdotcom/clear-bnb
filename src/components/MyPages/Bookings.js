@@ -1,5 +1,7 @@
 import { useEffect, useContext } from 'react';
 import { BookingContext } from '../../contexts/BookingContext'
+import Radium from 'radium'
+import Grid from '@material-ui/core/Grid'
 
 
 function Bookings() {
@@ -16,37 +18,66 @@ function Bookings() {
 
   const structureBookings = (b, i) =>
   (
-    <div style={style.item} key={i}>
-      <img style={style.img} key={i} src={b.houseId.pics[0]} /><div style={style.info}>Info</div>
-    </div>
+    <Grid item xs style={style.item} key={"a" + i}>
+      <img style={style.img} key={"b" + i} src={b.houseId.pics[0]} />
+      <div style={style.info} key={"c" + i}>
+        <div style={style.infoText} key={"d" + i}>
+          <h3>{b.houseId.city}</h3>
+          <a>{new Date(b.startDate * 1000).toLocaleString().substr(0, 11)} - {new Date(b.endDate * 1000).toLocaleString().substr(0, 11)}
+          </a>
+          <br />
+          <br />
+          <a style={style.infoMore} key={"e" + i}>
+            See more details...
+          </a>
+        </div>
+      </div>
+    </Grid>
   )
 
   return (
     <div className="Bookings">
-      <h2>My Bookings Page</h2>
-      <div>
+      <Grid container direction="column" alignItems="center">
+        <h2>My Bookings Page</h2>
         {myBookings.map((b, i) => structureBookings(b, i))}
-      </div>
+      </Grid>
     </div>
   )
 }
 
-export default Bookings;
+export default Radium(Bookings);
 
 const style = {
   item: {
+    position: 'relative',
     margin: '5px',
     padding: '10px',
   },
   img: {
     width: '300px',
     height: 'auto',
-    alignItems: 'center'
+    borderRadius: '20px',
+    boxShadow: '0 8px 6px -6px black',
   },
   info: {
-    width: '150px',
-    height: 'auto',
-    backgroundColor: 'blue',
-    float: 'right'
+    position: 'absolute',
+    backgroundColor: 'rgba(255,255,255, 0.8)',
+    width: '300px',
+    height: '60px',
+    bottom: '14px',
+    borderBottomLeftRadius: '20px',
+    borderBottomRightRadius: '20px',
+    transition: 'all 500ms ease-in-out',
+    overflow: 'hidden',
+    ':hover': {
+      height: '100px',
+      cursor: 'pointer',
+      transition: 'all 500ms ease-in-out'
+    }
   },
+  infoText: {
+    margin: '5px 0 5px 10px',
+    lineHeight: '150%',
+    letterSpacing: '5px',
+  }
 }
