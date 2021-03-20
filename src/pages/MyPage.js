@@ -11,8 +11,8 @@ function MyPage() {
 
   const [action, setAction] = useState('showBookings')
   const [width, setWidth] = useState(window.innerWidth)
-  const [open, setOpen] = useState(false)
-  const [showingContent, setShowingContent] = useState(<Bookings />)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [contentShowing, setContentShowing] = useState()
 
   const changeAction = (newAction) => {
     setAction(newAction)
@@ -20,6 +20,7 @@ function MyPage() {
 
   useEffect(() => {
     console.log('The new action is: ', action)
+    setIsMenuOpen(false)
     // if (open === true) {
     //   console.log('Btn exist and open is', open)
     //   setOpen(!open)
@@ -27,30 +28,30 @@ function MyPage() {
     // console.log('Does the menu button exist?', btn)
   }, [action])
 
-  // const toggleMenu = () => {
-  //   console.log('Pushing menu button, button is open:', open)
-  //   setOpen(!open)
-  // }
+  const toggleMenu = () => {
+    console.log('Pushing menu button, button is open:', isMenuOpen)
+    setIsMenuOpen(!isMenuOpen)
+  }
 
-  // useEffect(() => {
-  //   console.log('Open is', open)
-  //   showContent()
-  // }, [open])
+  useEffect(() => {
+    showContent()
+  }, [isMenuOpen])
 
-  // const showContent = () => {
-  //   setShowingContent(open ? <Menu getNewAction = { changeAction } style = {style.mobileMenu } /> :
-  //   (action === 'showBookings' ? <Bookings /> : action === 'showRentals' ? <MyRentals /> : action === 'showNewRental' ? <AddNewRental /> : ''))
-  // }
+  function showContent() {
+    let content = isMenuOpen ? <Menu getNewAction={changeAction} /> :
+      (action === 'showBookings' ? <Bookings />
+        : action === 'showRentals' ? <MyRentals />
+        : action === 'showNewRental' ? <AddNewRental /> : '')
+    setContentShowing(content)
+  }
 
   return (
     <>
       <Hidden smUp>
         <Grid container spacing={8} style={style.container} wrap="nowrap" direction="column" key="1">
-            <Menu getNewAction={changeAction} />
+          <button onClick={toggleMenu}>Menu</button>
           <Grid item xs>
-            {action === 'showBookings' ? <Bookings /> : ''}
-            {action === 'showRentals' ? <MyRentals /> : ''}
-            {action === 'showNewRental' ? <AddNewRental /> : ''}
+            {contentShowing}
           </Grid>
         </Grid>
       </Hidden>
@@ -79,6 +80,7 @@ export default Radium(MyPage)
 const style = {
   container: {
     width: '100%',
+    marginTop: '30px'
   },
   mobileMenu: {
 
