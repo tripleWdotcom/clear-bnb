@@ -1,6 +1,7 @@
 import Radium from 'radium'
 import { useState, useContext, useRef } from 'react'
 import { HouseContext } from '../../contexts/HouseContext'
+import Slider from '@material-ui/core/Slider'
 
 function AddNewRental() {
   const { addNewRental } = useContext(HouseContext)
@@ -45,13 +46,60 @@ function AddNewRental() {
 
   }
 
+  const marks = [
+    {
+      value: 0,
+      label: '1',
+    },
+    {
+      value: 1,
+      label: '2',
+    },
+    {
+      value: 2,
+      label: '3',
+    },
+    {
+      value: 3,
+      label: '4',
+    },
+    {
+      value: 4,
+      label: '5',
+    },
+    {
+      value: 5,
+      label: '6',
+    },
+    {
+      value: 6,
+      label: '7',
+    },
+    {
+      value: 7,
+      label: '8',
+    },
+    {
+      value: 8,
+      label: '9',
+    },
+    {
+      value: 9,
+      label: '10',
+    },
+  ];
+
+
+  function valuetext(value) {
+    return `${value}`;
+  }
+
 
   return (
     <div className="AddNewRental">
-      <h2>Add New Rental Page</h2>
       <div>
         <form onSubmit={handleSubmit} style={modalStyle.form}>
-          <h1>Sign up</h1>
+          <h1>Add New Rental</h1>
           <label style={modalStyle.label} key="1">
             Slogan
           <input
@@ -85,29 +133,48 @@ function AddNewRental() {
               style={modalStyle.input} key="6">
             </input>
           </label>
-          {/* <label style={modalStyle.label} key="7">
-            Password
+          <label style={modalStyle.label} key="7">
+            City
           <input
               required
-              name="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              name="city"
+              type="city"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
               style={modalStyle.input} key="8">
             </input>
           </label>
           <label style={modalStyle.label} key="9">
-            Password
+            Country
           <input
               required
-              name="password"
-              type="password"
-              value={password2}
-              onChange={(e) => setPassword2(e.target.value)}
+              name="country"
+              type="country"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
               style={modalStyle.input} key="10">
             </input>
-          </label> */}
-          <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="11">Create account</button>
+          </label>
+          <label style={modalStyle.label} key="9">
+            Pictures
+          <input
+              required
+              name="pics"
+              type="pics"
+              value={pics}
+              onChange={(e) => setPics([...pics, ...e.target.value])}
+              style={modalStyle.input} key="10">
+            </input>
+          </label>
+          <button>Add more pics</button>
+          <Slider
+            defaultValue={1}
+            getAriaValueText={valuetext}
+            step={1}
+            marks={marks}
+            valueLabelDisplay="on"
+          />
+          <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="11">Create rental</button>
         </form>
       </div>
 
@@ -128,7 +195,7 @@ const modalStyle = {
     minHeight: "400px",
     padding: "20px 40px 40px 40px",
     borderRadius: "6px",
-    boxShadow: "0px 8px 36px #222",
+    boxShadow: '0 8px 6px -6px black',
     backgroundColor: "#fefefe",
   },
   label: {
