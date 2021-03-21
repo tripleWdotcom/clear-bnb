@@ -56,6 +56,19 @@ function AddNewRental() {
     return `${value}`;
   }
 
+  const [boxes, setState] = useState({
+    tv: false,
+    wifi: false,
+    breakfast: false,
+    gym: false,
+    kitchen: false,
+    smoking: false,
+    animalF: false,
+    pool: false,
+    parking: false
+  })
+
+
 
   return (
     <div className="AddNewRental">
@@ -145,17 +158,73 @@ function AddNewRental() {
             Number of beds
           </label>
           <label>
-          <Slider
-            defaultValue={1}
-            getAriaValueText={valuetextPrice}
-            step={10}
-            valueLabelDisplay="on"
-            max={1000}
-            min={10}
-            onChange={(e) => setPrice(e.target.value)}
-          />
+            <Slider
+              defaultValue={1}
+              getAriaValueText={valuetextPrice}
+              step={10}
+              valueLabelDisplay="on"
+              max={1000}
+              min={10}
+              onChange={(e) => setPrice(e.target.value)}
+            />
             Price per night $
           </label>
+          <input
+            type="checkbox"
+            name="wifi"
+            checked={boxes.wifi}
+            onChange={(e) => setFeatureIds([...featureIds, ...{ wifi: e.target.value}])}
+            /> <label>Wifi</label><br></br>
+          <input
+            type="checkbox"
+            name="tv"
+            checked={boxes.tv}
+            onChange={(e) => setFeatureIds([...featureIds, ...{ tv: e.target.value}])}
+            /> <label>TV</label><br></br>
+          <input
+            type="checkbox"
+            name="breakfast"
+            checked={boxes.breakfast}
+            onChange={(e) => setFeatureIds([...featureIds, ...{ breakfast: e.target.value}])}
+            /> <label>Breakfast</label><br></br>
+          <input
+            type="checkbox"
+            name="gym"
+            checked={boxes.gym}
+            onChange={(e) => setFeatureIds([...featureIds, ...{ gym: e.target.value}])}
+            /><label>Gym</label><br></br>
+          <input
+            type="checkbox"
+            name="kitchen"
+            checked={boxes.kitchen}
+            onChange={(e) => setFeatureIds([...featureIds, ...{ kitchen: e.target.value}])}
+            /><label>Kitchen</label><br></br>
+          <input
+            type="checkbox"
+            name="smoking"
+            checked={boxes.smoking}
+            onChange={(e) => setFeatureIds([...featureIds, ...{ smoking: e.target.value}])}
+          /><span>Smoking</span><br></br>
+          <input
+            type="checkbox"
+            name="animalF"
+            checked={boxes.animalF}
+            onChange={(e) => setFeatureIds([...featureIds, ...{ animalFriendly: e.target.value}])}
+            /><label>Animal Frienldy</label><br></br>
+          <input
+            type="checkbox"
+            name="pool"
+            checked={boxes.pool}
+            onChange={(e) => setFeatureIds([...featureIds, ...{ pool: e.target.value}])}
+            /><label>Pool</label><br></br>
+          <input
+            type="checkbox"
+            name="parking"
+            checked={boxes.parking}
+            onChange={(e) => setFeatureIds([...featureIds, ...{ parking: e.target.value}])}
+            /><label>Parking</label><br></br>
+
+
           <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="11">Create rental</button>
         </form>
       </div>
@@ -220,4 +289,9 @@ const modalStyle = {
     padding: "0.938em",
   },
 }
+
+
+
+
+
 
