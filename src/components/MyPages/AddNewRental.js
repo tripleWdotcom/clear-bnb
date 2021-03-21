@@ -18,7 +18,17 @@ function AddNewRental() {
   const [pics, setPics] = useState([]);
   const [beds, setBeds] = useState(0);
   const [price, setPrice] = useState(0);
-  const [featureIds, setFeatureIds] = useState([]);
+  const [featureIds, setFeatureIds] = useState([
+    { tv: false },
+    { wifi: false },
+    { breakfast: false },
+    { gym: false },
+    { kitchen: false },
+    { smoking: false },
+    { animalFriendly: false },
+    { pool: false },
+    { parking: false }
+  ]);
   const [availableStart, setAvailableStart] = useState(0);
   const [availableEnd, setAvailableEnd] = useState(0);
 
@@ -30,7 +40,20 @@ function AddNewRental() {
       FirstName: ${firstName} 
       LastName: ${lastName}
       Email: ${email}
+      UserId: ${userId}
+      City: ${city}
+      Country: ${country}
+      Slogan: ${slogan}
+      Description: ${description}
+      Adress: ${adress}
+      Pics: ${pics}
+      Beds: ${beds}
+      Price: ${price}
+      FetureIds: ${featureIds}
     `);
+    featureIds.map(f => {
+      console.log('feature ', f)
+    })
 
     e.preventDefault()
 
@@ -56,17 +79,9 @@ function AddNewRental() {
     return `${value}`;
   }
 
-  const [boxes, setState] = useState({
-    tv: false,
-    wifi: false,
-    breakfast: false,
-    gym: false,
-    kitchen: false,
-    smoking: false,
-    animalF: false,
-    pool: false,
-    parking: false
-  })
+  function handleCheckBox(value) {
+    console.log('Im checkboxing', value)
+  }
 
 
 
@@ -77,25 +92,31 @@ function AddNewRental() {
           <h1>Add New Rental</h1>
           <label style={modalStyle.label} key="1">
             Slogan
-          <input
+          <textarea
               required
               name="slogan"
+              cols="1"
+              rows="2"
+              maxlength="50"
               type="text"
               value={slogan}
               onChange={(e) => setSlogan(e.target.value)}
               style={modalStyle.input} key="2">
-            </input>
+            </textarea>
           </label>
           <label style={modalStyle.label} key="3">
             Description
-          <input
+          <textarea
               required
               name="description"
+              cols="1"
+              rows="8"
+              maxlength="250"
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               style={modalStyle.input} key="4">
-            </input>
+            </textarea>
           </label>
           <label style={modalStyle.label} key="5">
             Adress
@@ -135,7 +156,7 @@ function AddNewRental() {
           <input
               required
               name="pics"
-              type="pics"
+              type="text"
               value={pics}
               onChange={(e) => setPics([...pics, ...e.target.value])}
               style={modalStyle.input} key="10">
@@ -145,7 +166,7 @@ function AddNewRental() {
           <br />
           <br />
           <br />
-          <label>
+          <label style={modalStyle.label} key="10">
             <Slider
               defaultValue={1}
               getAriaValueText={valuetextBeds}
@@ -153,11 +174,11 @@ function AddNewRental() {
               valueLabelDisplay="on"
               max={10}
               min={1}
-              onChange={(e) => setBeds(e.target.value)}
+              onChangeCommitted={(e, val) => setBeds(val)}
             />
             Number of beds
           </label>
-          <label>
+          <label style={modalStyle.label} key="11">
             <Slider
               defaultValue={1}
               getAriaValueText={valuetextPrice}
@@ -165,64 +186,69 @@ function AddNewRental() {
               valueLabelDisplay="on"
               max={1000}
               min={10}
-              onChange={(e) => setPrice(e.target.value)}
+              onChangeCommitted={(e, val) => setPrice(val)}
             />
             Price per night $
           </label>
-          <input
-            type="checkbox"
-            name="wifi"
-            checked={boxes.wifi}
-            onChange={(e) => setFeatureIds([...featureIds, ...{ wifi: e.target.value}])}
+          <label style={modalStyle.label} key="12">
+            Check the features of your house
+             <br />
+            <input
+              type="checkbox"
+              name="wifi"
+              value={featureIds[0].wifi}
+              checked={featureIds[0].wifi}
+              onChange={(e, val) => console.log('val', val)}
             /> <label>Wifi</label><br></br>
-          <input
-            type="checkbox"
-            name="tv"
-            checked={boxes.tv}
-            onChange={(e) => setFeatureIds([...featureIds, ...{ tv: e.target.value}])}
+            <input
+              type="checkbox"
+              name="tv"
+              checked={featureIds.tv}
+              onChange={(e) => handleCheckBox(e.target.value)}
             /> <label>TV</label><br></br>
-          <input
-            type="checkbox"
-            name="breakfast"
-            checked={boxes.breakfast}
-            onChange={(e) => setFeatureIds([...featureIds, ...{ breakfast: e.target.value}])}
+            <input
+              type="checkbox"
+              name="breakfast"
+              checked={featureIds.breakfast}
+              onChange={(e) => handleCheckBox(e.target.value)}
             /> <label>Breakfast</label><br></br>
-          <input
-            type="checkbox"
-            name="gym"
-            checked={boxes.gym}
-            onChange={(e) => setFeatureIds([...featureIds, ...{ gym: e.target.value}])}
-            /><label>Gym</label><br></br>
-          <input
-            type="checkbox"
-            name="kitchen"
-            checked={boxes.kitchen}
-            onChange={(e) => setFeatureIds([...featureIds, ...{ kitchen: e.target.value}])}
-            /><label>Kitchen</label><br></br>
-          <input
-            type="checkbox"
-            name="smoking"
-            checked={boxes.smoking}
-            onChange={(e) => setFeatureIds([...featureIds, ...{ smoking: e.target.value}])}
-          /><span>Smoking</span><br></br>
-          <input
-            type="checkbox"
-            name="animalF"
-            checked={boxes.animalF}
-            onChange={(e) => setFeatureIds([...featureIds, ...{ animalFriendly: e.target.value}])}
-            /><label>Animal Frienldy</label><br></br>
-          <input
-            type="checkbox"
-            name="pool"
-            checked={boxes.pool}
-            onChange={(e) => setFeatureIds([...featureIds, ...{ pool: e.target.value}])}
-            /><label>Pool</label><br></br>
-          <input
-            type="checkbox"
-            name="parking"
-            checked={boxes.parking}
-            onChange={(e) => setFeatureIds([...featureIds, ...{ parking: e.target.value}])}
-            /><label>Parking</label><br></br>
+            <input
+              type="checkbox"
+              name="gym"
+              checked={featureIds.gym}
+              onChange={(e) => handleCheckBox(e.target.value)}
+            /> <label>Gym</label><br></br>
+            <input
+              type="checkbox"
+              name="kitchen"
+              checked={featureIds.kitchen}
+              onChange={(e) => handleCheckBox(e.target.value)}
+            /> <label>Kitchen</label><br></br>
+            <input
+              type="checkbox"
+              name="smoking"
+              checked={featureIds.smoking}
+              onChange={(e) => handleCheckBox(e.target.value)}
+            /> <label>Smoking</label><br></br>
+            <input
+              type="checkbox"
+              name="animalF"
+              checked={featureIds.animalFriendly}
+              onChange={(e) => handleCheckBox(e.target.value)}
+            /> <label>Animal Frienldy</label><br></br>
+            <input
+              type="checkbox"
+              name="pool"
+              checked={featureIds.pool}
+              onChange={(e) => handleCheckBox(e.target.value)}
+            /> <label>Pool</label><br></br>
+            <input
+              type="checkbox"
+              name="parking"
+              checked={featureIds.parking}
+              onChange={(e) => handleCheckBox(e.target.value)}
+            /> <label>Parking</label><br></br>
+          </label>
 
 
           <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="11">Create rental</button>
