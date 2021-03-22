@@ -1,7 +1,12 @@
 import Radium from 'radium'
-import { useState, useContext, useRef } from 'react'
+import { useState, useContext } from 'react'
 import { HouseContext } from '../../contexts/HouseContext'
 import Slider from '@material-ui/core/Slider'
+import Switch from '@material-ui/core/Switch';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import { useEffect } from 'react';
 
 function AddNewRental() {
   const { addNewRental } = useContext(HouseContext)
@@ -16,11 +21,12 @@ function AddNewRental() {
   const [slogan, setSlogan] = useState("");
   const [adress, setAdress] = useState("");
   const [pics, setPics] = useState([]);
+  const [numOfPics, setNumOfPics] = useState(['h'])
   const [beds, setBeds] = useState(0);
   const [price, setPrice] = useState(0);
   const [featureIds, setFeatureIds] = useState([
-    { tv: false },
     { wifi: false },
+    { tv: false },
     { breakfast: false },
     { gym: false },
     { kitchen: false },
@@ -46,11 +52,13 @@ function AddNewRental() {
       Slogan: ${slogan}
       Description: ${description}
       Adress: ${adress}
-      Pics: ${pics}
       Beds: ${beds}
       Price: ${price}
       FetureIds: ${featureIds}
     `);
+    pics.map(p => {
+      console.log('pics ', p)
+    })
     featureIds.map(f => {
       console.log('feature ', f)
     })
@@ -69,6 +77,10 @@ function AddNewRental() {
 
   }
 
+  // useEffect(() => {
+  //   console.log('numOfPics has changed value', numOfPics)
+  //   pictureFields()
+  // }, [numOfPics])
 
 
 
@@ -79,9 +91,28 @@ function AddNewRental() {
     return `${value}`;
   }
 
-  function handleCheckBox(value) {
-    console.log('Im checkboxing', value)
-  }
+  // const pictureFields = () => {
+  //   console.log('I want to render pics')
+  //   let inputFields = []
+  //   for (let i = 0; i < numOfPics; i++) {
+  //     inputFields.push(
+  //       <label style={modalStyle.label} key={'a' + i}>
+  //         Picture link
+  //         <input
+  //           required
+  //           name="url"
+  //           type="url"
+  //           onChange={(e) => setPics([...pics, ...e.target.value])}
+  //           style={modalStyle.input} key={'b' + i}>
+  //         </input>
+  //       </label>
+  //     )
+  //   }
+  //   console.log('input fields', inputFields)
+  //   return <>inputFields</>;
+  // }
+
+
 
 
 
@@ -97,7 +128,7 @@ function AddNewRental() {
               name="slogan"
               cols="1"
               rows="2"
-              maxlength="50"
+              maxLength="50"
               type="text"
               value={slogan}
               onChange={(e) => setSlogan(e.target.value)}
@@ -111,7 +142,7 @@ function AddNewRental() {
               name="description"
               cols="1"
               rows="8"
-              maxlength="250"
+              maxLength="250"
               type="text"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -151,18 +182,26 @@ function AddNewRental() {
               style={modalStyle.input} key="10">
             </input>
           </label>
-          <label style={modalStyle.label} key="9">
-            Pictures
-          <input
-              required
-              name="pics"
-              type="text"
-              value={pics}
-              onChange={(e) => setPics([...pics, ...e.target.value])}
-              style={modalStyle.input} key="10">
-            </input>
-          </label>
-          <button>Add more pics</button>
+
+          {numOfPics.map((n, i) =>
+            <label style={modalStyle.label} key={'a' + i}>
+              Picture link
+              <input
+                required
+                name="url"
+                type="url"
+                onChange={(e) => setPics([...pics, e.target.value])}
+                style={modalStyle.input} key={'b' + i}>
+              </input>
+            </label>
+          )
+          }
+
+          <div onClick={() => setNumOfPics([...numOfPics, ...'h'])}>+ Add more pics</div>
+          <br />
+
+
+          <br />
           <br />
           <br />
           <br />
@@ -178,6 +217,8 @@ function AddNewRental() {
             />
             Number of beds
           </label>
+          <br />
+          <br />
           <label style={modalStyle.label} key="11">
             <Slider
               defaultValue={1}
@@ -190,73 +231,93 @@ function AddNewRental() {
             />
             Price per night $
           </label>
-          <label style={modalStyle.label} key="12">
-            Check the features of your house
+          <br />
+          <br />
+          <FormControl component="fieldset">
+            <FormGroup aria-label="position">
+              <label style={modalStyle.label} key="12">
+                Amenities
              <br />
-            <input
-              type="checkbox"
-              name="wifi"
-              value={featureIds[0].wifi}
-              checked={featureIds[0].wifi}
-              onChange={(e, val) => console.log('val', val)}
-            /> <label>Wifi</label><br></br>
-            <input
-              type="checkbox"
-              name="tv"
-              checked={featureIds.tv}
-              onChange={(e) => handleCheckBox(e.target.value)}
-            /> <label>TV</label><br></br>
-            <input
-              type="checkbox"
-              name="breakfast"
-              checked={featureIds.breakfast}
-              onChange={(e) => handleCheckBox(e.target.value)}
-            /> <label>Breakfast</label><br></br>
-            <input
-              type="checkbox"
-              name="gym"
-              checked={featureIds.gym}
-              onChange={(e) => handleCheckBox(e.target.value)}
-            /> <label>Gym</label><br></br>
-            <input
-              type="checkbox"
-              name="kitchen"
-              checked={featureIds.kitchen}
-              onChange={(e) => handleCheckBox(e.target.value)}
-            /> <label>Kitchen</label><br></br>
-            <input
-              type="checkbox"
-              name="smoking"
-              checked={featureIds.smoking}
-              onChange={(e) => handleCheckBox(e.target.value)}
-            /> <label>Smoking</label><br></br>
-            <input
-              type="checkbox"
-              name="animalF"
-              checked={featureIds.animalFriendly}
-              onChange={(e) => handleCheckBox(e.target.value)}
-            /> <label>Animal Frienldy</label><br></br>
-            <input
-              type="checkbox"
-              name="pool"
-              checked={featureIds.pool}
-              onChange={(e) => handleCheckBox(e.target.value)}
-            /> <label>Pool</label><br></br>
-            <input
-              type="checkbox"
-              name="parking"
-              checked={featureIds.parking}
-              onChange={(e) => handleCheckBox(e.target.value)}
-            /> <label>Parking</label><br></br>
-          </label>
-
-
-          <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="11">Create rental</button>
+                <FormControlLabel
+                  value={featureIds[0].wifi}
+                  control={<Switch color="primary" />}
+                  label="Wifi"
+                  labelPlacement="end"
+                  onChange={(e, val) => featureIds[0].wifi = val}
+                />
+                <br />
+                <FormControlLabel
+                  value={featureIds[1].tv}
+                  control={<Switch color="primary" />}
+                  label="Tv"
+                  labelPlacement="end"
+                  onChange={(e, val) => featureIds[1].tv = val}
+                />
+                <br />
+                <FormControlLabel
+                  value={featureIds[2].breakfast}
+                  control={<Switch color="primary" />}
+                  label="Breakfast"
+                  labelPlacement="end"
+                  onChange={(e, val) => featureIds[2].breakfast = val}
+                />
+                <br />
+                <FormControlLabel
+                  value={featureIds[3].gym}
+                  control={<Switch color="primary" />}
+                  label="Gym"
+                  labelPlacement="end"
+                  onChange={(e, val) => featureIds[3].gym = val}
+                />
+                <br />
+                <FormControlLabel
+                  value={featureIds[4].kitchen}
+                  control={<Switch color="primary" />}
+                  label="Kitchen"
+                  labelPlacement="end"
+                  onChange={(e, val) => featureIds[4].kitchen = val}
+                />
+                <br />
+                <FormControlLabel
+                  value={featureIds[5].smoking}
+                  control={<Switch color="primary" />}
+                  label="Smoking"
+                  labelPlacement="end"
+                  onChange={(e, val) => featureIds[5].smoking = val}
+                />
+                <br />
+                <FormControlLabel
+                  value={featureIds[6].animalFriendly}
+                  control={<Switch color="primary" />}
+                  label="Animal friendly"
+                  labelPlacement="end"
+                  onChange={(e, val) => featureIds[6].animalFriendly = val}
+                />
+                <br />
+                <FormControlLabel
+                  value={featureIds.pool}
+                  control={<Switch color="primary" />}
+                  label="Pool"
+                  labelPlacement="end"
+                  onChange={(e, val) => featureIds[7].pool = val}
+                />
+                <br />
+                <FormControlLabel
+                  value={featureIds[8].parking}
+                  control={<Switch color="primary" />}
+                  label="Parking"
+                  labelPlacement="end"
+                  onChange={(e, val) => featureIds[8].parking = val}
+                />
+              </label>
+            </FormGroup>
+          </FormControl>
+          <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="15">Create rental</button>
         </form>
       </div>
 
 
-    </div>
+    </div >
   )
 }
 
@@ -279,6 +340,7 @@ const modalStyle = {
     marginBottom: "0.5em",
     color: "#444",
     fontWeight: "lighter",
+    fontSize: '20px',
   },
   input: {
     display: "flex",
@@ -314,6 +376,9 @@ const modalStyle = {
     color: "#22223B",
     padding: "0.938em",
   },
+  removePicField: {
+    color: 'red'
+  }
 }
 
 
