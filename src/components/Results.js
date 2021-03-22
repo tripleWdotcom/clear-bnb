@@ -21,7 +21,7 @@ export default function Results() {
     await fetchHousesByCityAndDate(toto)
     //await fetchHousesByCityAndDate(objects)
 
-    console.log("what is my obejc???", toto)
+   // console.log("what is my obejc???", toto)
   }, [localStorage.getItem('selectedCity'),
   localStorage.getItem("bedsNumberMin"),
   localStorage.getItem("bedsNumberMax"),

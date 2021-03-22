@@ -31,7 +31,7 @@ export default function PriceSlider() {
 
     //onmouseup(console.log("mouse is up"))
 
-    console.log("minB:", minB, "maxB:", maxB)
+   // console.log("minB:", minB, "maxB:", maxB)
 
     localStorage.setItem('priceMin', minB)
     localStorage.setItem('priceMax', maxB)

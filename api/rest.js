@@ -44,7 +44,7 @@ module.exports = (app, models) => {
   // Get houses by filters 
   app.get('/rest/houses/filters/:filters', async (req, res) => {
     let b = JSON.parse(req.params.filters)
-    console.log(b)
+    //console.log(b)
 
     // Feature filters
     let featureIds = []
@@ -57,7 +57,7 @@ module.exports = (app, models) => {
     !b.animalFriendly ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f1f" })
     !b.pool ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f20" })
     !b.parking ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f21" })
-    console.log("so what is feaurures here?:", featureIds)
+   // console.log("so what is feaurures here?:", featureIds)
     let model = models['houses']
 
     let unixTimestamp = Math.floor(new Date().getTime())
@@ -87,7 +87,7 @@ module.exports = (app, models) => {
           { $and: featureIds }
         ]
       }).populate(['userId', 'featureIds']).exec()
-      console.log("populated?:", docs)
+      //console.log("populated?:", docs)
       res.json(docs)
       return;
     }

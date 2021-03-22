@@ -18,8 +18,8 @@ const Calen= ()=>{
 
   let sd = state[0].startDate
   let ed = state[0].endDate
-  console.log("start date: ", state[0].startDate, " In timestamp:", sd.getTime())
-  console.log("end date:", state[0].endDate, " In timestamp:", (ed ? ed.getTime() : "Not defined yet"))
+  //console.log("start date: ", state[0].startDate, " In timestamp:", sd.getTime())
+  //console.log("end date:", state[0].endDate, " In timestamp:", (ed ? ed.getTime() : "Not defined yet"))
   localStorage.setItem('startDateChosen', sd.getTime())
   localStorage.setItem('endDateChosen', ed.getTime())
 
