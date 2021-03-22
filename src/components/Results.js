@@ -3,9 +3,13 @@
 import { useHistory } from "react-router-dom";
 import { HouseContext } from '../contexts/HouseContext'
 import { useState, useEffect, useContext } from "react";
-
+import Popup from '../pages/HomeDetails';
 
 export default function Results() {
+
+  const [buttonPopup, setButtonPopup] = useState(false);
+
+
   const { fetchHousesByCity2 } = useContext(HouseContext)
   const { houses } = useContext(HouseContext)
 
@@ -40,6 +44,19 @@ export default function Results() {
           default: return "#FFFFFF";
         }
       })()}     </span>)}</p>
+
+
+      <div>
+        <button onClick={() => setButtonPopup(true)}>Open
+      </button>
+
+        <Popup trigger={buttonPopup} setTrigger=
+          {setButtonPopup}>
+          <h3>This house</h3>
+          <p>Here you can see more information about this house</p>
+        </Popup>
+        </div>
+        
     </div>
   )
  

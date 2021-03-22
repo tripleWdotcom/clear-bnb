@@ -43,6 +43,7 @@ export default function SearchBar(props) {
         options={options}
         filterOption={createFilter(filterConfig)}
       />
+     
     </div>
   )
 }

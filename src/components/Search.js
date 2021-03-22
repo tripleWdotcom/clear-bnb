@@ -3,6 +3,7 @@ import { useEffect} from 'react';
 import { useHistory } from "react-router-dom";
 import SearchBar from './SearchBar'
 
+
 const SearchComponent = () => {
   let history = useHistory();
 
