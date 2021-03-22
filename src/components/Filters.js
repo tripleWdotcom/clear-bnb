@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BedSlider from './BedsRangeFilter';
 import PriceSlider from './PriceRangeFilter';
 import FormLabel from '@material-ui/core/FormLabel';
@@ -56,12 +56,18 @@ export default function Filters(){
     parking: false
   });
 
-  const handleChange = (event) => {
+
+  useEffect(()=>{
+    localStorage.setItem('features', JSON.stringify(state))
+    console.log("value of features is :", localStorage.getItem('features'))
+  },[state])
+
+  const handleChange = async (event) => {
+    
     setState({ ...state, [event.target.name]: event.target.checked });
    
     console.log("value of switch is :", event.target.name,event.target.checked)
-    localStorage.setItem('features', JSON.stringify(state))
-    console.log("value of features is :", localStorage.getItem('features'))
+   
     renFilters()
 
   };
