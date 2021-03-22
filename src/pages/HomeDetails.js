@@ -28,7 +28,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-
+    
        
 
   },
@@ -40,12 +40,14 @@ const styles = {
     maxWidth: '640px',
     backgroundColor: '#FFF',
     
+    
   },
 
    closeBtn: {
     position: 'absolute',
     top: '16px',
-     right: '16px'
+     right: '16px',
+     cursor: 'pointer'
     
 
   }

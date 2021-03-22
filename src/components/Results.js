@@ -47,7 +47,7 @@ export default function Results() {
 
 
       <div>
-        <button onClick={() => setButtonPopup(true)}>Open
+        <button style={{ cursor: 'pointer' }} onClick={() => setButtonPopup(true)}>Open
       </button>
 
         <Popup trigger={buttonPopup} setTrigger=
