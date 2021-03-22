@@ -10,12 +10,12 @@ module.exports = (app, models) => {
 
 
 
-  app.get('/rest/houses/ccity/:city', async (req, res) => {
-    let city = req.params.city
-    let model = models['houses']
-    let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } }).populate('featureIds')
-    res.json(docs)
-  })
+    app.get('/rest/houses/ccity/:city', async (req, res) => {
+      let city = req.params.city
+      let model = models['houses']
+      let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } }).populate('featureIds')
+      res.json(docs)
+    })
 
 
   // Get houses by city (searching for one letter at a time or all citys distinct)
@@ -30,7 +30,7 @@ module.exports = (app, models) => {
     let docs = await model.aggregate([{
       $group: {
         _id: "$city",
-        country: {
+        country: {  
           $first: "$country",
         }
       }
@@ -64,7 +64,7 @@ module.exports = (app, models) => {
 
     if (!featureIds.length) {
       // Without any checkbox filters
-      let docs = await model.find({
+      let docs = await model.find({ 
         $and: [
           { $and: [{ bedrooms: { $lte: b.bedroomsMax } }, { bedrooms: { $gte: b.bedroomsMin } }] },
           { $and: [{ price: { $lte: b.priceMax } }, { price: { $gte: b.priceMin } }] },
