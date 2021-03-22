@@ -19,7 +19,7 @@ function App() {
   const page404 = () => (
     <h1>Page not found: {window.location.pathname}</h1>
   )
-  localStorage.clear()
+ // localStorage.clear() // we might need to add/remove later
 
   return (
     <div className="App">
