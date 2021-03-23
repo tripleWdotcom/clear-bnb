@@ -31,6 +31,11 @@ function SignUp(props) {
    
     e.preventDefault()
 
+    if (!email || !password || !password2 || !firstName || !lastName) {
+      setBadCredentials(true)
+      return;
+    }
+
     const newUser = {
       email: email,
       password: password,
@@ -45,9 +50,7 @@ function SignUp(props) {
     // CHECK IF EMAIL IS OK 
 
     if (badCredentials) {
-      console.log('im gonna let modal know i wanna close because i have good credentials')
-      console.log('My credentials', badCredentials)
-      
+      console.log('My credentials in Sign UP', badCredentials)
       props.isClicked()
     }
   }

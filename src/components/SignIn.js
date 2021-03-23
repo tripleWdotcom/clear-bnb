@@ -16,6 +16,7 @@ function SignIn(props) {
       console.log('Im in bad credentials')
       setBadCredentials(true)
     }
+    
   }, [isLoggedIn])
 
   const handleSubmit = async e => {
@@ -28,10 +29,16 @@ function SignIn(props) {
 
     e.preventDefault()
 
+    if (!email || !password) {
+      setBadCredentials(true)
+      return;
+    }
+
     const inputUser = {
       email: email,
       password: password
     }
+
     await logInUser(inputUser)
 
     if (badCredentials) {
