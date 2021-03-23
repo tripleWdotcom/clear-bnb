@@ -1,5 +1,5 @@
 import Radium from 'radium'
-import { useState, useContext,useEffect } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext'
 
 function SignUp(props) {
@@ -14,7 +14,7 @@ function SignUp(props) {
   const handleSubmit = async e => {
     console.log('Add user button clicked!')
 
-    props.isClicked()
+
 
     console.log(`
       FirstName: ${firstName}
@@ -23,7 +23,7 @@ function SignUp(props) {
       Password: ${password}
       Password2: ${password2}
     `);
-   
+
     e.preventDefault()
 
     const newUser = {
@@ -32,8 +32,9 @@ function SignUp(props) {
       firstName: firstName,
       lastName: lastName,
     }
-    console.log('before addUser', newUser)   
+    console.log('before addUser', newUser)
     await addUser(newUser)
+    props.isClicked()
   }
 
   return (
@@ -98,9 +99,9 @@ function SignUp(props) {
         <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="11">Create account</button>
       </form>
     </div>
-    
+
   )
- }
+}
 
 export default Radium(SignUp)
 

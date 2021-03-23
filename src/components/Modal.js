@@ -10,8 +10,7 @@ function Modal(props) {
   const [isShowSignUp, setIsShowSignUp] = useState(false)
 
   useEffect(async () => {
-
-    if (isLoggedIn.length > 0) {
+    if (!Array.isArray(isLoggedIn)) {
       setIsShowSignUp(false)
     }
   }, [isLoggedIn])
@@ -37,7 +36,7 @@ function Modal(props) {
   return (
     <div style={modalStyle}>
       <button style={modalStyle.close} onClick={closeSignUp}>X</button>
-      {isShowSignUp ? <SignUp isClicked={whenClicked} /> : <SignIn />}
+      {isShowSignUp ? <SignUp isClicked={whenClicked} /> : <SignIn isClicked={whenClicked}/>}
       {!isShowSignUp ? <button style={modalStyle.btn} key="2" onClick={signUpForm}>Sign Up</button> : ''}
     </div>
   )
