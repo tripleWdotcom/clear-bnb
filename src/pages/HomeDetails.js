@@ -68,7 +68,7 @@ const styles = {
     position: 'relative',
     padding: '300px 0px 300px 0px',
    
-    width: '50%',
+    width: '65%',
    height: '50%',
     backgroundColor: '#FFF',
   },
