@@ -1,5 +1,4 @@
-import React from 'react'
-import Radium from 'radium'
+
 
 const Popup = (props) => {
   return (props.trigger) ? (
@@ -54,4 +53,4 @@ const styles = {
 
 }
  
-export default Radium(Popup);
+export default Popup;
