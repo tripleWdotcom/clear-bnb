@@ -1,12 +1,8 @@
-import { useHistory } from "react-router-dom";
+
 import SearchBar from './SearchBar'
 
 const SearchComponent = () => {
-  let history = useHistory();
 
-  const searchButton = async () => {
-    history.push("/home-results");
-  }
 
   const handleData = (ev) => {
     localStorage.setItem('selectedOption', JSON.stringify(ev))
@@ -16,11 +12,9 @@ const SearchComponent = () => {
   return (
     <div>
       <SearchBar getData={handleData} />
-      <br />
-      <div> place holder for dates  </div>
-      <button type="button" onClick={searchButton}>
-        Search
-    </button>
+      <br />  <br />
+
+     
     </div>
   )
 }

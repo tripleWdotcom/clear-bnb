@@ -12,6 +12,7 @@ import MyPage from './pages/MyPage.js'
 
 
 
+
 function App() {
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300&display=swap"
     rel="stylesheet" />
@@ -19,7 +20,7 @@ function App() {
   const page404 = () => (
     <h1>Page not found: {window.location.pathname}</h1>
   )
-  localStorage.clear()
+ // localStorage.clear() // we might need to add/remove later
 
   return (
     <div className="App">

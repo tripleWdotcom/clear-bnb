@@ -5,33 +5,39 @@ import { makeStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
 import SearchComponent from '../components/Search'
 import CityIconList from '../components/CityIconList'
-
+import Calen from '../components/Calen';
+import { useHistory } from "react-router-dom";
+import searchBtn from '../images/searchButton.png';
 
 
 const Home = () => {
-  const classes = useStyles();
+  let history = useHistory();
 
+  const searchButton = async () => {
+    history.push("/home-results");
+  }
+
+  const classes = useStyles();
   return (
     <div className="home">
       <div className={classes.root}>
-
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper className={classes.paper}>Search component
             <SearchComponent />
+              <Calen />
+            <br/><br/>
+              <img src={searchBtn} style={{height:'50px' , cursor:'pointer'}} alt="buttonnn" onClick={searchButton} />
             </Paper>
           </Grid>
-
           <Hidden xsDown >
             <Grid item xs={12}>
               <Paper className={classes.paper}>Carousel component</Paper>
             </Grid>
           </Hidden>
-
           <Grid item xs={12}>
-             <CityIconList />
+            <CityIconList />
           </Grid>
-
         </Grid>
       </div>
     </div>
@@ -53,7 +59,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#99AABF',
 
   }
-
 }));
 
 

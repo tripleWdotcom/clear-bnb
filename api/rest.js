@@ -37,26 +37,27 @@ module.exports = (app, models) => {
     },
     {
       $sort: { _id: 1 }
-      }])
+    }])
     res.json(docs)
   })
 
   // Get houses by filters 
   app.get('/rest/houses/filters/:filters', async (req, res) => {
     let b = JSON.parse(req.params.filters)
+    //console.log(b)
 
     // Feature filters
     let featureIds = []
-    b.wifi == null ? null : featureIds.push({ featureIds: b.wifi })
-    b.tv == null ? null : featureIds.push({ featureIds: b.tv })
-    b.breakfast == null ? null : featureIds.push({ featureIds: b.breakfast })
-    b.gym == null ? null : featureIds.push({ featureIds: b.gym })
-    b.kitchen == null ? null : featureIds.push({ featureIds: b.kitchen })
-    b.smoking == null ? null : featureIds.push({ featureIds: b.smoking })
-    b.animalFriendly == null ? null : featureIds.push({ featureIds: b.animalFriendly })
-    b.pool == null ? null : featureIds.push({ featureIds: b.pool })
-    b.parking == null ? null : featureIds.push({ featureIds: b.parking })
-
+    !b.wifi ? null : featureIds.push({ featureIds: "6046bf371807457c80418887" })
+    !b.tv ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f1a" })
+    !b.breakfast ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f1b" })
+    !b.gym ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f1c" })
+    !b.kitchen ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f1d" })
+    !b.smoking ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f1e" })
+    !b.animalFriendly ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f1f" })
+    !b.pool ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f20" })
+    !b.parking ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f21" })
+   // console.log("so what is feaurures here?:", featureIds)
     let model = models['houses']
 
     let unixTimestamp = Math.floor(new Date().getTime())
@@ -86,6 +87,7 @@ module.exports = (app, models) => {
           { $and: featureIds }
         ]
       }).populate(['userId', 'featureIds']).exec()
+      //console.log("populated?:", docs)
       res.json(docs)
       return;
     }
