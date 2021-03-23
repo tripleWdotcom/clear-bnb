@@ -1,35 +1,68 @@
 import Radium from 'radium'
-import Media from 'react-media';
 import Hidden from '@material-ui/core/Hidden';
 import { useHistory } from "react-router-dom";
+import Modal from './Modal'
+import { useState, useContext, useEffect } from 'react'
+import { UserContext } from '../contexts/UserContext';
+import MemberPage from './MemberPage.js'
 
 const Navbar = () => {
 
   let history = useHistory();
 
+  const { isLoggedIn, logOutUser } = useContext(UserContext)
 
-  const goHome=()=>{
+  const [showSignIn, setShowSignIn] = useState(false)
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
+
+  const [showMyPage, setShowMyPage] = useState(false)
+
+  const toggleShowMyPage = () => setShowMyPage(!showMyPage)
+  
+  useEffect(async () => {
+    console.log('a user is logged in', isLoggedIn)
+    if (isLoggedIn.length > 0) {
+      setShowSignIn(false)
+      setIsUserLoggedIn(true)
+    }
+  }, [isLoggedIn])
+
+  const signInModal = async () => {
+    setShowSignIn(true)
+  }
+
+  const goHome = () => {
     history.push("/");
   }
+
+  const logOut = async () => {
+    setIsUserLoggedIn(false)
+    await logOutUser()
+  }
+
   return (
+    <>
+      <Hidden xsDown >
+        <nav className="navbar" style={styles.navbar}>
 
-    <Hidden xsDown >
-      <nav className="navbar" style={styles.navbar}>
+          <h1 style={{
+            color: "crimson"
+          }}>ClearBnB</h1>
 
-        <h1 style={{
-          color: "crimson"
-        }}>ClearBnB</h1>
+          <div className="links"
+            style={{
+              marginLeft: 'auto'
+            }}>
+            <a style={styles.home} onClick={goHome}>Home</a>
+            {isUserLoggedIn && <a style={styles.userName} onClick={() => { toggleShowMyPage()}}>Hej {isLoggedIn[0].firstName}</a>}
+            {!isUserLoggedIn ? <a style={styles.signIn} onClick={() => { signInModal() }}>Sign In</a> : <a style={styles.signIn} onClick={logOut}>Log out</a>}
+          </div>
+          {showSignIn ? <Modal closeModal={() => setShowSignIn(false)}/> : ''}
+          {showMyPage ? <MemberPage />: ''}
+        </nav>
+      </Hidden>
 
-        <div className="links"
-          style={{
-            marginLeft: 'auto'
-          }}>
-          <a style={styles.home} onClick={goHome}>Home</a>
-          <a style={styles.signIn}>Sign in</a>
-        </div>
-      </nav>
-    </Hidden>
-
+    </>
   )
 }
 
@@ -65,6 +98,13 @@ const styles = {
     padding: '6px',
     cursor: 'pointer'
 
+  },
+
+  userName: {
+    marginLeft: '16px',
+    textDecoration: 'none',
+    padding: '6px',
+    cursor: 'pointer'
   }
 
 

@@ -9,7 +9,7 @@ export const UserContext = createContext()
 export default function UserContextProvider(props) {
 
   const [isLoggedIn, setIsLoggedIn] = useState([])
-
+   
   // A reactive state to store users
   //const [users, setUsers] = useState([])
 
@@ -65,7 +65,9 @@ export default function UserContextProvider(props) {
     // Append a new user to the reactive users list
     // to trigger reactivity we replace the old list with a new 
     // by spreading the old list (a copy of it) and adding the new user
-    setIsLoggedIn(newUser)
+    // setIsLoggedIn(newUser)
+    logInUser({email: newUser.email, password: newUser.password})
+    // console.log('IsLoggedIn after setIsLoggedIn(newUser)', isLoggedIn)
   }
 
   // Remove a user by id
@@ -87,13 +89,14 @@ export default function UserContextProvider(props) {
     isLoggedIn,
     addUser,
     logInUser,
-    logOutUser,
+    logOutUser,    
   }
 
   //Calls one time, as mounted in Vue
   useEffect(() => {
-    whoIsLoggedIn()
-    }, [])
+    whoIsLoggedIn()    
+  }, [])
+
 
   return (
     <UserContext.Provider value={values}>
