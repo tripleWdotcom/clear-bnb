@@ -27,10 +27,12 @@ const Calen = () => {
   return (<div>
     {/* Change onclick() from checkin and checkout  to remove warning */}
     <span>
-     
-      <div className="checkIn" style={styles.checkIn} onClick={() => { setToggle(!toggle) }}> <div style={{ color: 'green', WebkitUserSelect: 'none' }}>Check-In </div>{sd.toDateString()}</div>
-      <div className="checkOut" style={styles.checkOut} onClick={() => { setToggle(!toggle) }}><div style={{ color: 'red' }}> Check-Out</div>{sd.toDateString()}</div>
-      
+      <div className="checkIn" style={styles.checkIn } onClick={() => { setToggle(!toggle) }}>
+        <div style={{ color: 'black', WebkitUserSelect: 'none' }}>Check-In </div>{sd.toDateString()}
+      </div>
+      <div className="checkOut" style={styles.checkOut} onClick={() => { setToggle(!toggle) }}>
+        <div style={{ color: 'black', WebkitUserSelect: 'none' }}> Check-Out</div>{sd.toDateString()}
+      </div>
     </span>
     <div className="calendarContainer">
       {
@@ -57,7 +59,7 @@ const Calen = () => {
 
 const styles = {
   checkIn: {
-    backgroundColor:'white',
+    backgroundColor: 'white',
     height: '50px',
     borderRadius: '50px',
     fontFamily: 'initial',
