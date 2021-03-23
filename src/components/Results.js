@@ -1,9 +1,8 @@
-
-
 import { useHistory } from "react-router-dom";
 import { HouseContext } from '../contexts/HouseContext'
 import { useState, useEffect, useContext } from "react";
 import Popup from '../pages/HomeDetails';
+import Grid from '@material-ui/core/Grid';
 
 export default function Results() {
 
@@ -46,18 +45,20 @@ export default function Results() {
       })()}     </span>)}</p>
 
 
+  
       <div>
         <button style={{ cursor: 'pointer' }} onClick={() => setButtonPopup(true)}>Open
       </button>
-
+      
         <Popup trigger={buttonPopup} setTrigger=
           {setButtonPopup}>
           <h3>This house</h3>
           <p>Here you can see more information about this house</p>
         </Popup>
+           
         </div>
-        
     </div>
+       
   )
  
   async function cityHouses() {
