@@ -1,5 +1,5 @@
 import Radium from 'radium'
-import { useState, useContext,useEffect } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext'
 
 function SignUp(props) {
@@ -28,7 +28,8 @@ function SignUp(props) {
       Password: ${password}
       Password2: ${password2}
     `);
-   
+
+
     e.preventDefault()
 
     const newUser = {
@@ -37,7 +38,7 @@ function SignUp(props) {
       firstName: firstName,
       lastName: lastName,
     }
-    console.log('before addUser', newUser)   
+    console.log('before addUser', newUser)
     await addUser(newUser)
 
     // CHECK IF EMAIL IS OK 
@@ -50,6 +51,18 @@ function SignUp(props) {
 
 
     // props.isClicked()
+  }
+  const matchPass = () => {
+    if (!password2 || !password || password !== password2)
+      return true
+    else
+      return false
+  }
+  const matchPass2 = () => {
+    if (password2 > 1 && matchPass())
+      return true
+    else
+      return false
   }
 
   return (
@@ -101,7 +114,7 @@ function SignUp(props) {
           </input>
         </label>
         <label style={modalStyle.label} key="9">
-          Password
+          Re-enter Password
           <input
             required
             name="password"
@@ -111,12 +124,13 @@ function SignUp(props) {
             style={modalStyle.input} key="10">
           </input>
         </label>
-        <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="11">Create account</button>
+        <h5 style={matchPass2() ? { color: 'red', textAlign: 'center' } : { display: 'none' }}> Passwords don't match</h5>
+        <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} disabled={matchPass()} key="11">Create account</button>
       </form>
     </div>
-    
+
   )
- }
+}
 
 export default Radium(SignUp)
 
