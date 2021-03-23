@@ -3,10 +3,16 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRange } from 'react-date-range';
 import { useState } from 'react'
 import '../pages/cal.css'
+import searchBtn from '../images/searchButton.png';
+import { useHistory } from "react-router-dom";
 
 const Calen = () => {
+  let history = useHistory();
 
   const [toggle, setToggle] = useState(false)
+  const searchButton = async () => {
+    history.push("/home-results");
+  }
 
   const [state, setState] = useState([
     {
@@ -53,6 +59,8 @@ const Calen = () => {
         </DateRange> : null
       }
     </div>
+    <br /><br />
+    <img src={searchBtn} style={{ height: '50px', cursor: 'pointer' }} alt="buttonnn" onClick={searchButton} />
   </div>
   )
 }
