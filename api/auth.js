@@ -20,6 +20,15 @@ module.exports = (app, models, dbCloudUrl) => {
   app.post('/api/users', async (req, res) => {
     // Encrypt password
 
+    const duplicateEmail = await models['users'].find({ email: req.body.email })
+
+    if (duplicateEmail.length > 0) {
+      res.json({ error: 'Email already in use' });
+      return;
+    }
+
+    console.log('Im adding a user anyways')
+
     const hash = crypto.createHmac('sha256', salt)
       .update(req.body.password).digest('hex');
     // Create new user

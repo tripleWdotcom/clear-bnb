@@ -3,7 +3,7 @@ import { useState, useContext,useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext'
 
 function SignUp(props) {
-  const { addUser } = useContext(UserContext)
+  const { isLoggedIn , addUser} = useContext(UserContext)
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,12 +11,12 @@ function SignUp(props) {
   const [password2, setPassword2] = useState("");
   const [badCredentials, setBadCredentials] = useState(false)
 
-  // useEffect(() => {
-  //   if (isLoggedIn.error === 'No match.') {
-  //     console.log('Im in bad credentials')
-  //     setBadCredentials(true)
-  //   }
-  // }, [isLoggedIn])
+  useEffect(() => {
+    if (isLoggedIn.error === 'Email already in use') {
+      console.log('Im in bad credentials for sign up')
+      setBadCredentials(true)
+    }
+  }, [isLoggedIn])
 
   const handleSubmit = async e => {
     console.log('Add user button clicked!')
@@ -37,20 +37,21 @@ function SignUp(props) {
       firstName: firstName,
       lastName: lastName,
     }
-    console.log('before addUser', newUser)   
+    console.log('before addUser', newUser)
+
     await addUser(newUser)
+    
 
     // CHECK IF EMAIL IS OK 
 
-    // if (badCredentials) {
-    //   console.log('im gonna let modal know i wanna close because i have good credentials')
-    //   console.log('My credentials', badCredentials)
-    //   props.isClicked()
-    // }
-
-
-    // props.isClicked()
+    if (badCredentials) {
+      console.log('im gonna let modal know i wanna close because i have good credentials')
+      console.log('My credentials', badCredentials)
+      
+      props.isClicked()
+    }
   }
+
 
   return (
     <div>
@@ -111,6 +112,7 @@ function SignUp(props) {
             style={modalStyle.input} key="10">
           </input>
         </label>
+        {badCredentials ? <a>Email already in use</a> : ''}
         <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="11">Create account</button>
       </form>
     </div>
