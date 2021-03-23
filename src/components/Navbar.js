@@ -12,7 +12,7 @@ const Navbar = () => {
 
   const { isLoggedIn, logOutUser } = useContext(UserContext)
 
-  const [showSignIn, setShowSignIn] = useState(false)
+  const [showModal, setShowModal] = useState(false)
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
 
   const [showMyPage, setShowMyPage] = useState(false)
@@ -22,17 +22,18 @@ const Navbar = () => {
   useEffect(async () => {
     console.log('who is logged in', isLoggedIn)
     console.log('is logged in array', isLoggedIn.length)
-    if (!Array.isArray(isLoggedIn) || isLoggedIn.length > 0) {
+    console.log('who is logged error', isLoggedIn.error)
+    if (!showModal && !Array.isArray(isLoggedIn) || isLoggedIn.length > 0) {
       if (isLoggedIn.error == 'Not logged in') {
         console.log('No one is logged in')
         setIsUserLoggedIn(false)
       } else if (isLoggedIn.error == 'Someone already logged in') {
         console.log('someone is already logged in')
         setIsUserLoggedIn(true)
-      } else {
+      } else if (!isLoggedIn.error) {
         console.log('It is an object - im in')
         console.log('first name of logged in', isLoggedIn)
-        setShowSignIn(false)
+        setShowModal(false)
         setIsUserLoggedIn(true)
         console.log('isUserLoggedIn', isUserLoggedIn)
       }
@@ -42,7 +43,7 @@ const Navbar = () => {
   }, [isLoggedIn])
 
   const signInModal = async () => {
-    setShowSignIn(true)
+    setShowModal(true)
   }
 
   const goHome = () => {
@@ -69,10 +70,10 @@ const Navbar = () => {
               marginLeft: 'auto'
             }}>
             <a style={styles.home} onClick={goHome}>Home</a>
-            {isUserLoggedIn ? <a style={styles.userName} onClick={() => { toggleShowMyPage() }}>Hej {isLoggedIn[0].firstName}</a> : ''}
+            {isUserLoggedIn && !showModal ? <a style={styles.userName} onClick={() => { toggleShowMyPage() }}>Hej {isLoggedIn[0].firstName}</a> : ''}
             {!isUserLoggedIn ? <a style={styles.signIn} onClick={() => { signInModal() }}>Sign In</a> : <a style={styles.signIn} onClick={logOut}>Log out</a>}
           </div>
-          {showSignIn ? <Modal closeModal={() => setShowSignIn(false)} /> : ''}
+          {showModal ? <Modal closeModal={() => setShowModal(false)} /> : ''}
           {showMyPage ? <MemberPage /> : ''}
         </nav>
       </Hidden>

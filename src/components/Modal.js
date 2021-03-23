@@ -37,7 +37,7 @@ function Modal(props) {
   return (
     <div style={modalStyle}>
       <button style={modalStyle.close} onClick={closeSignUp}>X</button>
-      {isShowSignUp ? <SignUp isClicked={whenClicked} /> : <SignIn />}
+      {isShowSignUp ? <SignUp isClicked={whenClicked} /> : <SignIn isClicked={whenClicked} />}
       {!isShowSignUp ? <button style={modalStyle.btn} key="2" onClick={signUpForm}>Sign Up</button> : ''}
     </div>
   )

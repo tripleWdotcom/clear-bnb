@@ -9,12 +9,17 @@ function SignUp(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const [badCredentials, setBadCredentials] = useState(false)
 
+  // useEffect(() => {
+  //   if (isLoggedIn.error === 'No match.') {
+  //     console.log('Im in bad credentials')
+  //     setBadCredentials(true)
+  //   }
+  // }, [isLoggedIn])
 
   const handleSubmit = async e => {
     console.log('Add user button clicked!')
-
-    props.isClicked()
 
     console.log(`
       FirstName: ${firstName}
@@ -34,6 +39,17 @@ function SignUp(props) {
     }
     console.log('before addUser', newUser)   
     await addUser(newUser)
+
+    // CHECK IF EMAIL IS OK 
+
+    // if (badCredentials) {
+    //   console.log('im gonna let modal know i wanna close because i have good credentials')
+    //   console.log('My credentials', badCredentials)
+    //   props.isClicked()
+    // }
+
+
+    // props.isClicked()
   }
 
   return (

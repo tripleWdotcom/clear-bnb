@@ -1,11 +1,22 @@
-import { useState, useContext} from 'react'
+import { useState, useContext } from 'react'
 import { UserContext } from '../contexts/UserContext'
 import Radium from 'radium'
+import id from 'date-fns/esm/locale/id/index.js';
+import { useEffect } from 'react';
 
-function SignIn() {
-  const { logInUser} = useContext(UserContext)
+
+function SignIn(props) {
+  const { isLoggedIn, logInUser } = useContext(UserContext)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [badCredentials, setBadCredentials] = useState(false)
+
+  useEffect(() => {
+    if (isLoggedIn.error === 'No match.') {
+      console.log('Im in bad credentials')
+      setBadCredentials(true)
+    }
+  }, [isLoggedIn])
 
   const handleSubmit = async e => {
     console.log('Login button clicked!')
@@ -22,11 +33,16 @@ function SignIn() {
       password: password
     }
     await logInUser(inputUser)
+
+    if (badCredentials) {
+      props.isClicked()
+    }
+
   }
 
   return (
     <div>
-      <form  style={modalStyle.form}>
+      <form style={modalStyle.form}>
         <h1>Log in</h1>
         <label style={modalStyle.label} key="1">
           Email:
@@ -50,9 +66,10 @@ function SignIn() {
             style={modalStyle.input} key="4">
           </input>
         </label>
+        {badCredentials ? <a>Bad credentials</a> : ''}
         <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} onClick={handleSubmit} key="5">Log in</button>
       </form>
-      </div>
+    </div>
   )
 }
 
