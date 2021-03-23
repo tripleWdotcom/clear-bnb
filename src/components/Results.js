@@ -2,12 +2,35 @@ import { HouseContext } from '../contexts/HouseContext'
 import { useEffect, useContext } from "react";
 
 export default function Results() {
-  const { housesByCityTemp, fetchHousesByCity2 } = useContext(HouseContext)
+  const { housesByCityAndDate, fetchHousesByCityAndDate } = useContext(HouseContext)
 
   useEffect(async () => {
-    let city = JSON.parse(localStorage.getItem('selectedCity')).value
-    await fetchHousesByCity2(city)
-  }, [localStorage.getItem('selectedCity')])
+    //let city = JSON.parse(localStorage.getItem('selectedCity')).value
+
+    let objects = {
+      city: JSON.parse(localStorage.getItem('selectedCity')).value,
+      availableStart: localStorage.getItem("startDateChosen"),
+      availableEnd: localStorage.getItem("endDateChosen"),
+      priceMin: (localStorage.getItem("priceMin") === null ? 1 : localStorage.getItem("priceMin")),
+      priceMax: (localStorage.getItem("priceMax") === null ? 500 : localStorage.getItem("priceMax")),
+      bedroomsMin: (localStorage.getItem("bedsNumberMin") === null ? 1 : localStorage.getItem("bedsNumberMin")),
+      bedroomsMax: (localStorage.getItem("bedsNumberMax") === null ? 10 : localStorage.getItem("bedsNumberMax"))
+    }
+    let x = JSON.parse(localStorage.getItem('features'))
+    let toto = { ...objects, ...x }
+    await fetchHousesByCityAndDate(toto)
+    //await fetchHousesByCityAndDate(objects)
+
+   // console.log("what is my obejc???", toto)
+  }, [localStorage.getItem('selectedCity'),
+  localStorage.getItem("bedsNumberMin"),
+  localStorage.getItem("bedsNumberMax"),
+  localStorage.getItem("priceMin"),
+  localStorage.getItem("priceMax"),
+  localStorage.getItem('features')])
+  //])
+
+
 
   const test = c => (
 
@@ -43,7 +66,7 @@ export default function Results() {
   return (
     <div>
       <div >
-        {housesByCityTemp.map(c => test(c))}
+        {housesByCityAndDate.map(c => test(c))}
       </div>
     </div>
   )

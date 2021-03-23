@@ -1,0 +1,9 @@
+.calen{
+  position: absolute;
+  background-color: rgb(228, 217, 213);
+  border-radius: 20px;
+  z-index: 2;
+}
+.rdrDayDisabled {
+   background-color:transparent;
+}
