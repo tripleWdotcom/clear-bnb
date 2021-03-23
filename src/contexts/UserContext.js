@@ -65,23 +65,31 @@ export default function UserContextProvider(props) {
     // Append a new user to the reactive users list
     // to trigger reactivity we replace the old list with a new 
     // by spreading the old list (a copy of it) and adding the new user
-    setIsLoggedIn(newUser)
+    // setIsLoggedIn(newUser)
+    console.log('Context for sign up', res)
+    if (res.error === 'Email already in use') {
+      setIsLoggedIn(res)
+    } else {
+      logInUser({ email: newUser.email, password: newUser.password })
+    }
+
+    // console.log('IsLoggedIn after setIsLoggedIn(newUser)', isLoggedIn)
   }
 
   // Remove a user by id
   // Should we have this?
- /*  const deleteUserById = async userId => {
-    let res = await fetch('/api/users/:id', {
-      method: 'DELETE',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(userId)
-    })
-    res = await res.json()
-    return res;
-    let index = users.indexOf(res)
-    users.splice(index, 1)
-  }
- */
+  /*  const deleteUserById = async userId => {
+     let res = await fetch('/api/users/:id', {
+       method: 'DELETE',
+       headers: { 'content-type': 'application/json' },
+       body: JSON.stringify(userId)
+     })
+     res = await res.json()
+     return res;
+     let index = users.indexOf(res)
+     users.splice(index, 1)
+   }
+  */
   // The values we want the children components to reach and be able to use
   const values = {
     isLoggedIn,
@@ -93,7 +101,8 @@ export default function UserContextProvider(props) {
   //Calls one time, as mounted in Vue
   useEffect(() => {
     whoIsLoggedIn()
-    }, [])
+  }, [])
+
 
   return (
     <UserContext.Provider value={values}>

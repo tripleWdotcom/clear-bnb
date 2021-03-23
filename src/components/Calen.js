@@ -37,7 +37,7 @@ const Calen = () => {
         <div style={{ color: 'black', WebkitUserSelect: 'none' }}>Check-In </div>{sd.toDateString()}
       </div>
       <div className="checkOut" style={styles.checkOut} onClick={() => { setToggle(!toggle) }}>
-        <div style={{ color: 'black', WebkitUserSelect: 'none' }}> Check-Out</div>{sd.toDateString()}
+        <div style={{ color: 'black', WebkitUserSelect: 'none' }}> Check-Out</div>{ed.toDateString()}
       </div>
     </span>
     <div className="calendarContainer">
