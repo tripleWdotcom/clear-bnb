@@ -11,6 +11,8 @@ const Calen = () => {
 
   const [toggle, setToggle] = useState(false)
   const searchButton = async () => {
+    localStorage.setItem('startDateChosen', sd.getTime())
+    localStorage.setItem('endDateChosen', ed.getTime())
     history.push("/home-results");
   }
 
@@ -25,15 +27,13 @@ const Calen = () => {
   let sd = state[0].startDate
   let ed = state[0].endDate
 
+
   //console.log("start date: ", state[0].startDate, " In timestamp:", sd.getTime())
   //console.log("end date:", state[0].endDate, " In timestamp:", (ed ? ed.getTime() : "Not defined yet"))
-  localStorage.setItem('startDateChosen', sd.getTime())
-  localStorage.setItem('endDateChosen', ed.getTime())
-
   return (<div>
-    {/* Change onclick() from checkin and checkout  to remove warning */}
+
     <span>
-      <div className="checkIn" style={styles.checkIn } onClick={() => { setToggle(!toggle) }}>
+      <div className="checkIn" style={styles.checkIn} onClick={() => { setToggle(!toggle) }}>
         <div style={{ color: 'black', WebkitUserSelect: 'none' }}>Check-In </div>{sd.toDateString()}
       </div>
       <div className="checkOut" style={styles.checkOut} onClick={() => { setToggle(!toggle) }}>
