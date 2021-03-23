@@ -1,9 +1,9 @@
 import Radium from 'radium'
-import { useState, useContext, useRef } from 'react'
+import { useState, useContext,useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext'
 
 function SignUp() {
-  const { addUser } = useContext(UserContext)
+  const { addUser,isLoggedIn} = useContext(UserContext)
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +13,7 @@ function SignUp() {
 
   const handleSubmit = async e => {
     console.log('Add user button clicked!')
-
+    
     console.log(`
       FirstName: ${firstName}
       LastName: ${lastName}
@@ -21,8 +21,7 @@ function SignUp() {
       Password: ${password}
       Password2: ${password2}
     `);
-
-
+   
     e.preventDefault()
 
     // setModal(!modal)
@@ -32,19 +31,12 @@ function SignUp() {
       firstName: firstName,
       lastName: lastName,
     }
-
-    const U = await addUser(newUser)
-    console.log('new user', U)
-
-    // const User = await loggedInUser()
-    // localStorage.setItem("currentUser", JSON.stringify(User))
-    //const currentUser = JSON.parse(localStorage.getItem("currentUser.username"))
-    // const currentUser = JSON.parse(localStorage.getItem("currentUser[0].username"))
-    // console.log('currentUser username', currentUser)
-
+    console.log('before addUser', newUser)   
+    await addUser(newUser)
+    
   }
-
-
+  useEffect(() => {
+  }, [handleSubmit])
 
   return (
     <div>

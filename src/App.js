@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import HomeResults from './pages/HomeResults'
-import MemberPage from './components/MemberPage.js'
+//import MemberPage from './components/MemberPage.js'
 import MyPage from './pages/MyPage.js'
 
 
@@ -33,7 +33,6 @@ function App() {
                 <Router>
                   <header className={true ? 'App-Header' : ''}>
                     <Navbar />
-                    <MemberPage />
 
                   </header>
 

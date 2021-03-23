@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState,useContext} from 'react';
 import { useHistory } from "react-router-dom";
+import { UserContext } from '../contexts/UserContext';
 import Radium from 'radium';
+
 
 function MemberPage() {
   const [open, setOpen] = useState(false);
   const toggle = () => setOpen(!open)
   const history = useHistory()
 
-  const goToStartPage = () => {
+  const { logOutUser } = useContext(UserContext)
+
+  const goToStartPage = async () => {
     history.push("/");
-    window.location.reload(false)
+    const u = await logOutUser()
+    window.location.reload()
   };
 
   MemberPage.handleClickOutside = () => setOpen(false);

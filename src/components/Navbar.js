@@ -1,10 +1,10 @@
 import Radium from 'radium'
-import Media from 'react-media';
 import Hidden from '@material-ui/core/Hidden';
 import { useHistory } from "react-router-dom";
 import Modal from './Modal'
 import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext';
+import MemberPage from './MemberPage.js'
 
 const Navbar = () => {
 
@@ -15,6 +15,10 @@ const Navbar = () => {
   const [showSignIn, setShowSignIn] = useState(false)
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
 
+  const [showMyPage, setShowMyPage] = useState(false)
+
+  const toggleShowMyPage = () => setShowMyPage(!showMyPage)
+  
   useEffect(async () => {
 
     if (isLoggedIn.length > 0) {
@@ -28,16 +32,14 @@ const Navbar = () => {
     setShowSignIn(true)
   }
 
-  const logOut = async () => {
-    const u = await logOutUser()
-    console.log('Logged out: ', u)
-  }
-    
 
   const goHome = () => {
     history.push("/");
   }
-
+  const logOut = async () => {
+    setIsUserLoggedIn(false)
+    const u = await logOutUser()
+  }
 
   return (
     <>
@@ -53,11 +55,12 @@ const Navbar = () => {
               marginLeft: 'auto'
             }}>
             <a style={styles.home} onClick={goHome}>Home</a>
-            {isUserLoggedIn && <a>Hej {isLoggedIn[0].firstName}</a>}
+            {isUserLoggedIn && <a style={styles.userName} onClick={() => { toggleShowMyPage()}}>Hej {isLoggedIn[0].firstName}</a>}
             {!isUserLoggedIn && <a style={styles.signIn} onClick={() => { signInModal() }}>Sign In</a>}
-            <a style={styles.signIn} onClick={() => { logOut() }}>Log out</a>
+            <a style={styles.signIn} onClick={logOut}>Log out</a>
           </div>
           {showSignIn ? <Modal /> : ''}
+          {showMyPage ? <MemberPage />: ''}
         </nav>
       </Hidden>
 
@@ -97,6 +100,13 @@ const styles = {
     padding: '6px',
     cursor: 'pointer'
 
+  },
+
+  userName: {
+    marginLeft: '16px',
+    textDecoration: 'none',
+    padding: '6px',
+    cursor: 'pointer'
   }
 
 

@@ -7,7 +7,7 @@ export default function SearchBar(props) {
   const { citiesAndCountriesNames } = useContext(HouseContext)
   const [options, setOptions] = useState([])
   const location = useLocation();
-  const [selectedOption, setSelectedOption] = useState(location.pathname == '/' ? null : JSON.parse(localStorage.getItem('selectedOption')));
+  const [selectedOption, setSelectedOption] = useState(location.pathname === '/' ? null : JSON.parse(localStorage.getItem('selectedOption')));
   
   async function setAllOptions() {
     let optionCities = []
