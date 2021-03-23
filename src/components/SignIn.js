@@ -17,7 +17,6 @@ function SignIn() {
 
     e.preventDefault()
 
-    // setModal(!modal)
     const inputUser = {
       email: email,
       password: password
@@ -67,9 +66,9 @@ const modalStyle = {
     minWidth: "100px",
     minHeight: "300px",
     padding: "20px 40px 40px 40px",
-    borderRadius: "6px",
     boxShadow: "0px 8px 36px #222",
     backgroundColor: "#fefefe",
+    borderRadius: "6px",
   },
   label: {
     marginBottom: "0.5em",

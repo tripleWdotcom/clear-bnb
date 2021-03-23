@@ -2,8 +2,8 @@ import Radium from 'radium'
 import { useState, useContext,useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext'
 
-function SignUp() {
-  const { addUser,isLoggedIn} = useContext(UserContext)
+function SignUp(props) {
+  const { addUser } = useContext(UserContext)
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +13,9 @@ function SignUp() {
 
   const handleSubmit = async e => {
     console.log('Add user button clicked!')
-    
+
+    props.isClicked()
+
     console.log(`
       FirstName: ${firstName}
       LastName: ${lastName}
@@ -24,7 +26,6 @@ function SignUp() {
    
     e.preventDefault()
 
-    // setModal(!modal)
     const newUser = {
       email: email,
       password: password,
@@ -33,10 +34,7 @@ function SignUp() {
     }
     console.log('before addUser', newUser)   
     await addUser(newUser)
-    
   }
-  useEffect(() => {
-  }, [handleSubmit])
 
   return (
     <div>

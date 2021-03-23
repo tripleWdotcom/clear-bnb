@@ -20,25 +20,24 @@ const Navbar = () => {
   const toggleShowMyPage = () => setShowMyPage(!showMyPage)
   
   useEffect(async () => {
-
+    console.log('a user is logged in', isLoggedIn)
     if (isLoggedIn.length > 0) {
       setShowSignIn(false)
       setIsUserLoggedIn(true)
     }
   }, [isLoggedIn])
 
-
   const signInModal = async () => {
     setShowSignIn(true)
   }
 
-
   const goHome = () => {
     history.push("/");
   }
+
   const logOut = async () => {
     setIsUserLoggedIn(false)
-    const u = await logOutUser()
+    await logOutUser()
   }
 
   return (
@@ -56,10 +55,9 @@ const Navbar = () => {
             }}>
             <a style={styles.home} onClick={goHome}>Home</a>
             {isUserLoggedIn && <a style={styles.userName} onClick={() => { toggleShowMyPage()}}>Hej {isLoggedIn[0].firstName}</a>}
-            {!isUserLoggedIn && <a style={styles.signIn} onClick={() => { signInModal() }}>Sign In</a>}
-            <a style={styles.signIn} onClick={logOut}>Log out</a>
+            {!isUserLoggedIn ? <a style={styles.signIn} onClick={() => { signInModal() }}>Sign In</a> : <a style={styles.signIn} onClick={logOut}>Log out</a>}
           </div>
-          {showSignIn ? <Modal /> : ''}
+          {showSignIn ? <Modal closeModal={() => setShowSignIn(false)}/> : ''}
           {showMyPage ? <MemberPage />: ''}
         </nav>
       </Hidden>

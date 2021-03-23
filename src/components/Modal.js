@@ -2,45 +2,48 @@ import SignUp from './SignUp'
 import SignIn from './SignIn'
 import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext'
+import Radium from 'radium'
 
 
-export default function Modal() {
-  const [isSignUp, setIsSignUp] = useState(false)
+function Modal(props) {
   const { isLoggedIn } = useContext(UserContext)
   const [isShowSignUp, setIsShowSignUp] = useState(false)
 
   useEffect(async () => {
 
     if (isLoggedIn.length > 0) {
-      setIsSignUp(false)
       setIsShowSignUp(false)
     }
   }, [isLoggedIn])
 
   const signUpForm = () => {
     console.log('signUpForm clicked')
-    setIsSignUp(true)
     setIsShowSignUp(true)
-    console.log('isSignUp in Modal', isSignUp)
+    console.log('isSignUp in Modal', isShowSignUp)
   }
 
   const closeSignUp = () => {
-    setIsSignUp(false)
-    console.log('isSignUp in Modal(const closeSignUp)', isSignUp)
+    setIsShowSignUp(false)
+    props.closeModal()
+    console.log('isSignUp in Modal(const closeSignUp)', isShowSignUp)
   }
 
-  const whenClicked = (value) => {
-    setIsSignUp(false)
+  const whenClicked = () => {
+    console.log('Create account button from sign up is clicked')
+    setIsShowSignUp(false)
+    props.closeModal()
   }
 
   return (
     <div style={modalStyle}>
-      {isSignUp && isShowSignUp ? <SignUp  /> : <SignIn />}
-      <button style={modalStyle.form} onClick={signUpForm}>Sign Up</button>
-      <button style={modalStyle.close} onClick={closeSignUp}>Close</button>
+      <button style={modalStyle.close} onClick={closeSignUp}>X</button>
+      {isShowSignUp ? <SignUp isClicked={whenClicked} /> : <SignIn />}
+      {!isShowSignUp ? <button style={modalStyle.btn} key="2" onClick={signUpForm}>Sign Up</button> : ''}
     </div>
   )
 }
+
+
 
 const modalStyle = {
   position: "fixed",
@@ -49,8 +52,42 @@ const modalStyle = {
   top: "15%",
   bottom: "auto",
   margin: "auto",
-  background: "transparent",  
+  background: "transparent",
   zIndex: '10',
-  
+  btn: {
+    minWidth: "100%",
+    cursor: "pointer",
+    marginRight: "0.25em",
+    marginTop: "0.5em",
+    borderRadius: "4px",
+    backgroundColor: "#fefefe",
+    border: "none",
+    color: "#22223B",
+    padding: "1.2em",
+    boxShadow: "0px 8px 36px #222",
+    ':hover': {
+      backgroundColor: "#A8BACE",
+      border: "none",
+      color: "#fefefe"
+    },
+  },
+  close: {
+    cursor: "pointer",
+    marginRight: "0.25em",
+    marginBottom: "0.5em",
+    borderRadius: "4px",
+    backgroundColor: "#fefefe",
+    border: "none",
+    color: "#22223B",
+    padding: "0.8em 1em",
+    boxShadow: "0px 2px 36px #222",
+    textAlign: 'right',
+    ':hover': {
+      backgroundColor: "#A8BACE",
+      border: "none",
+      color: "#fefefe"
+    },
+  }
 }
 
+export default Radium(Modal)
