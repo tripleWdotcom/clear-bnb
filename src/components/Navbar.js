@@ -21,7 +21,7 @@ const Navbar = () => {
   
   useEffect(async () => {
     console.log('a user is logged in', isLoggedIn)
-    if (isLoggedIn.length > 0) {
+    if (!!isLoggedIn) {
       setShowSignIn(false)
       setIsUserLoggedIn(true)
     }
