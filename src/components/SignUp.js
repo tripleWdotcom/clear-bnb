@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext'
 
 function SignUp(props) {
-  const { addUser } = useContext(UserContext)
+  const { isLoggedIn, addUser } = useContext(UserContext)
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,12 +11,12 @@ function SignUp(props) {
   const [password2, setPassword2] = useState("");
   const [badCredentials, setBadCredentials] = useState(false)
 
-  // useEffect(() => {
-  //   if (isLoggedIn.error === 'No match.') {
-  //     console.log('Im in bad credentials')
-  //     setBadCredentials(true)
-  //   }
-  // }, [isLoggedIn])
+  useEffect(() => {
+    if (isLoggedIn.error === 'Email already in use') {
+      console.log('Im in bad credentials for sign up')
+      setBadCredentials(true)
+    }
+  }, [isLoggedIn])
 
   const handleSubmit = async e => {
     console.log('Add user button clicked!')
@@ -32,6 +32,11 @@ function SignUp(props) {
 
     e.preventDefault()
 
+    if (!email || !password || !password2 || !firstName || !lastName) {
+      setBadCredentials(true)
+      return;
+    }
+
     const newUser = {
       email: email,
       password: password,
@@ -41,16 +46,13 @@ function SignUp(props) {
     console.log('before addUser', newUser)
     await addUser(newUser)
 
+
     // CHECK IF EMAIL IS OK 
 
-    // if (badCredentials) {
-    //   console.log('im gonna let modal know i wanna close because i have good credentials')
-    //   console.log('My credentials', badCredentials)
-    //   props.isClicked()
-    // }
-
-
-    // props.isClicked()
+    if (badCredentials) {
+      console.log('My credentials in Sign UP', badCredentials)
+      props.isClicked()
+    }
   }
   const matchPass = () => {
     if (!password2 || !password || password !== password2)
@@ -64,6 +66,7 @@ function SignUp(props) {
     else
       return false
   }
+
 
   return (
     <div>
@@ -125,7 +128,10 @@ function SignUp(props) {
           </input>
         </label>
         <h5 style={matchPass2() ? { color: 'red', textAlign: 'center' } : { display: 'none' }}> Passwords don't match</h5>
+
+        {badCredentials ? <a>Email already in use</a> : ''}
         <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} disabled={matchPass()} key="11">Create account</button>
+
       </form>
     </div>
 
