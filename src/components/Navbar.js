@@ -18,10 +18,9 @@ const Navbar = () => {
   const [showMyPage, setShowMyPage] = useState(false)
 
   const toggleShowMyPage = () => setShowMyPage(!showMyPage)
-  
+
   useEffect(async () => {
-    console.log('a user is logged in', isLoggedIn)
-    if (isLoggedIn.length > 0) {
+    if (!Array.isArray(isLoggedIn)) {
       setShowSignIn(false)
       setIsUserLoggedIn(true)
     }
@@ -54,11 +53,11 @@ const Navbar = () => {
               marginLeft: 'auto'
             }}>
             <a style={styles.home} onClick={goHome}>Home</a>
-            {isUserLoggedIn && <a style={styles.userName} onClick={() => { toggleShowMyPage()}}>Hej {isLoggedIn[0].firstName}</a>}
+            {isUserLoggedIn && <a style={styles.userName} onClick={() => { toggleShowMyPage() }}>Hej {isLoggedIn[0].firstName}</a>}
             {!isUserLoggedIn ? <a style={styles.signIn} onClick={() => { signInModal() }}>Sign In</a> : <a style={styles.signIn} onClick={logOut}>Log out</a>}
           </div>
-          {showSignIn ? <Modal closeModal={() => setShowSignIn(false)}/> : ''}
-          {showMyPage ? <MemberPage />: ''}
+          {showSignIn ? <Modal closeModal={() => setShowSignIn(false)} /> : ''}
+          {showMyPage ? <MemberPage /> : ''}
         </nav>
       </Hidden>
 
