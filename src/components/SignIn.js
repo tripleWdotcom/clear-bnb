@@ -29,10 +29,6 @@ function SignIn(props) {
 
     e.preventDefault()
 
-    if (!email || !password) {
-      setBadCredentials(true)
-      return;
-    }
 
     const inputUser = {
       email: email,
@@ -49,7 +45,7 @@ function SignIn(props) {
 
   return (
     <div>
-      <form style={modalStyle.form}>
+      <form onSubmit={handleSubmit} style={modalStyle.form}>
         <h1>Log in</h1>
         <label style={modalStyle.label} key="1">
           Email:
@@ -59,7 +55,7 @@ function SignIn(props) {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            style={modalStyle.input} key="2">
+            style={modalStyle.input} key="2" >
           </input>
         </label>
         <label style={modalStyle.label} key="3">
@@ -74,7 +70,7 @@ function SignIn(props) {
           </input>
         </label>
         {badCredentials ? <a>Bad credentials</a> : ''}
-        <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} onClick={handleSubmit} key="5">Log in</button>
+        <button style={{ ...modalStyle.button, ...modalStyle.btnIn }}  key="5">Log in</button>
       </form>
     </div>
   )
