@@ -6,7 +6,7 @@ export default function Results() {
 
   useEffect(async () => {
     //let city = JSON.parse(localStorage.getItem('selectedCity')).value
-
+    let x = JSON.parse(localStorage.getItem('features'))
     let objects = {
       city: JSON.parse(localStorage.getItem('selectedCity')).value,
       availableStart: localStorage.getItem("startDateChosen"),
@@ -16,7 +16,7 @@ export default function Results() {
       bedroomsMin: (localStorage.getItem("bedsNumberMin") === null ? 1 : localStorage.getItem("bedsNumberMin")),
       bedroomsMax: (localStorage.getItem("bedsNumberMax") === null ? 10 : localStorage.getItem("bedsNumberMax"))
     }
-    let x = JSON.parse(localStorage.getItem('features'))
+   
     let toto = { ...objects, ...x }
     await fetchHousesByCityAndDate(toto)
     //await fetchHousesByCityAndDate(objects)
@@ -45,7 +45,7 @@ export default function Results() {
         alt={'picture ' + c.id}
       />
 
-      <h4 style={{ cursor: 'pointer' }}>{c.slogan}</h4><h5> SEK{c.price} (per night)</h5>
+      <h4 style={{ cursor: 'pointer' }}>{c.slogan}</h4><h5> USD{c.price} (per night)</h5>
       <p>{c.featureIds.map(f => <span style={{ fontSize: "10px" }} key={f._id}> {(() => {
         switch (f.name) {
           case "tv": return "\📺 TV";

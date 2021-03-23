@@ -40,7 +40,8 @@
 }
 
 body {
-  background-color: beige
+ background: url(../src/images/test5.jpg) no-repeat center fixed;
+    background-size: cover;
 }
 
 #app {
@@ -125,9 +126,6 @@ footer.App-Footer{
   grid-row: 3;
 }
 
-.calen{
-  background-color: rgb(69, 90, 49);
-}
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */

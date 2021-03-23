@@ -6,8 +6,16 @@ import Hidden from '@material-ui/core/Hidden';
 import SearchComponent from '../components/Search'
 import CityIconList from '../components/CityIconList'
 import Calen from '../components/Calen';
+import { useHistory } from "react-router-dom";
+import searchBtn from '../images/searchButton.png';
+
 
 const Home = () => {
+  let history = useHistory();
+
+  const searchButton = async () => {
+    history.push("/home-results");
+  }
 
   const classes = useStyles();
   return (
@@ -18,6 +26,8 @@ const Home = () => {
             <Paper className={classes.paper}>Search component
             <SearchComponent />
               <Calen />
+            <br/><br/>
+              <img src={searchBtn} style={{height:'50px' , cursor:'pointer'}} alt="buttonnn" onClick={searchButton} />
             </Paper>
           </Grid>
           <Hidden xsDown >
