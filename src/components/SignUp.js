@@ -32,10 +32,6 @@ function SignUp(props) {
 
     e.preventDefault()
 
-    if (!email || !password || !password2 || !firstName || !lastName) {
-      setBadCredentials(true)
-      return;
-    }
 
     const newUser = {
       email: email,
