@@ -1,16 +1,18 @@
 import { useEffect, useContext } from 'react';
 import { HouseContext } from '../../contexts/HouseContext'
+import { UserContext } from '../../contexts/UserContext'
 import Radium from 'radium'
 import Grid from '@material-ui/core/Grid'
 
 
 function MyRentals() {
 
-  const {myRentals, fetchMyRentals} = useContext(HouseContext)
+  const { myRentals, fetchMyRentals } = useContext(HouseContext)
+  const { isLoggedIn } = useContext(UserContext)
 
   useEffect(async () => {
     console.log('Something has changed in my bookings')
-    await fetchMyRentals('605075a7af357c396c738fba')
+    await fetchMyRentals(isLoggedIn[0]._id)
   }, [])
 
   useEffect(() => {

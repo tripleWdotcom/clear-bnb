@@ -1,15 +1,17 @@
 import { useEffect, useContext } from 'react';
 import { BookingContext } from '../../contexts/BookingContext'
+import { UserContext } from '../../contexts/UserContext'
 import Radium from 'radium'
 import Grid from '@material-ui/core/Grid'
 
 
 function Bookings() {
   const { myBookings, fetchMyBookingsByUserId, deleteBookingById } = useContext(BookingContext)
+  const {isLoggedIn} = useContext(UserContext)
 
   useEffect(async () => {
     console.log('Something has changed in my bookings')
-    await fetchMyBookingsByUserId('6047715d04ac3c37f09f7f10')
+    await fetchMyBookingsByUserId(isLoggedIn[0]._id)
   }, [])
 
   useEffect(() => {

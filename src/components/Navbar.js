@@ -11,13 +11,9 @@ const Navbar = () => {
   let history = useHistory();
 
   const { isLoggedIn, logOutUser } = useContext(UserContext)
-
   const [showModal, setShowModal] = useState(false)
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
-
   const [showMyPage, setShowMyPage] = useState(false)
-
-  const toggleShowMyPage = () => setShowMyPage(!showMyPage)
 
   useEffect(async () => {
     console.log('who is logged in', isLoggedIn)
@@ -53,7 +49,7 @@ const Navbar = () => {
   const logOut = async () => {
     setIsUserLoggedIn(false)
     await logOutUser()
-
+    history.push("/");
   }
 
   return (
@@ -70,7 +66,7 @@ const Navbar = () => {
               marginLeft: 'auto'
             }}>
             <a style={styles.home} onClick={goHome}>Home</a>
-            {isUserLoggedIn && !showModal ? <a style={styles.userName} onClick={() => { toggleShowMyPage() }}>Hej {isLoggedIn[0].firstName}</a> : ''}
+            {isUserLoggedIn && !showModal ? <a style={styles.userName} onClick={() => { history.push('/mypage') }}>Hej {isLoggedIn[0].firstName}</a> : ''}
             {!isUserLoggedIn ? <a style={styles.signIn} onClick={() => { signInModal() }}>Sign In</a> : <a style={styles.signIn} onClick={logOut}>Log out</a>}
           </div>
           {showModal ? <Modal closeModal={() => setShowModal(false)} /> : ''}
