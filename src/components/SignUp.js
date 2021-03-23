@@ -3,18 +3,23 @@ import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext'
 
 function SignUp(props) {
-  const { addUser } = useContext(UserContext)
+  const { isLoggedIn , addUser} = useContext(UserContext)
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const [badCredentials, setBadCredentials] = useState(false)
 
+  useEffect(() => {
+    if (isLoggedIn.error === 'Email already in use') {
+      console.log('Im in bad credentials for sign up')
+      setBadCredentials(true)
+    }
+  }, [isLoggedIn])
 
   const handleSubmit = async e => {
     console.log('Add user button clicked!')
-
-
 
     console.log(`
       FirstName: ${firstName}
@@ -26,6 +31,11 @@ function SignUp(props) {
 
     e.preventDefault()
 
+    if (!email || !password || !password2 || !firstName || !lastName) {
+      setBadCredentials(true)
+      return;
+    }
+
     const newUser = {
       email: email,
       password: password,
@@ -33,9 +43,18 @@ function SignUp(props) {
       lastName: lastName,
     }
     console.log('before addUser', newUser)
+
     await addUser(newUser)
-    props.isClicked()
+    
+
+    // CHECK IF EMAIL IS OK 
+
+    if (badCredentials) {
+      console.log('My credentials in Sign UP', badCredentials)
+      props.isClicked()
+    }
   }
+
 
   return (
     <div>
@@ -96,6 +115,7 @@ function SignUp(props) {
             style={modalStyle.input} key="10">
           </input>
         </label>
+        {badCredentials ? <a>Email already in use</a> : ''}
         <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="11">Create account</button>
       </form>
     </div>
