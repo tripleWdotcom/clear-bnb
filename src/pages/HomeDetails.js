@@ -25,7 +25,10 @@ const Popup = (props) => {
         <button className="close-btn"
           style={styles.closeBtn}
           onClick={() => props.setTrigger(false)}
-          >close</button>
+                >close</button>
+                
+                <div className="gallery"></div>
+
         { props.children }
       </div>
         
