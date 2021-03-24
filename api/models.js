@@ -2,6 +2,29 @@ const mongoose = global.mongoose
 
 // schemas for entities in mongo Atlas
 
+// const Offer = mongoose.model('Offer', {
+//   city: String,
+//   country: String,
+//   description: String,
+//   slogan: String,
+//   address: String,
+//   pics: [String],
+//   bedrooms: Number,
+//   price: Number,
+//   bathroom: Number,
+//   featureIds: [{
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: 'Feature'
+//   }],
+//   availableStart: Number,
+//   availableEnd: Number,
+//   userId: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: 'User'
+//   },
+// })
+
+
 const House = mongoose.model('House', {
   city: String,
   country: String,
@@ -16,12 +39,12 @@ const House = mongoose.model('House', {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Feature'
   }],
-  availableStart: Number,
-  availableEnd: Number,
+  dateRanges: [{}],
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  isOffer:Boolean
 })
 
 const Booking = mongoose.model('Booking', {

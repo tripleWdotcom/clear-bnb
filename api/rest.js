@@ -125,6 +125,22 @@ module.exports = (app, models) => {
     res.json(docs)
   })
 
+  // // Add a new offer
+  // app.post('/rest/offers', async (req, res) => {
+  //   let model = models['offers']
+  //   let doc = req.body
+  //   let docs = await new model(doc)
+  //   await docs.save()
+  //   res.json(docs)
+  // })
+
+  // // Delete offer
+  // app.delete('/rest/offers/:id', async (req, res) => {
+  //   let offerId = req.params.id
+  //   let offer = await models['offers'].remove({ _id: offerId })
+  //   res.json(house)
+  // })
+
   // Delete house 
   app.delete('/rest/houses/:id', async (req, res) => {
     let houseId = req.params.id

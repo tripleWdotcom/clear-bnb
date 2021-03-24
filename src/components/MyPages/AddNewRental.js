@@ -11,13 +11,13 @@ import FormControl from '@material-ui/core/FormControl';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRange } from 'react-date-range';
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 function AddNewRental(props) {
   let history = useHistory();
-  const { addNewRental, myRentals } = useContext(HouseContext)
+  const { addNewRental, myRentals, offers, addNewRentalOffer } = useContext(HouseContext)
   const { isLoggedIn } = useContext(UserContext)
-  const {features } = useContext(FeatureContext)
+  const { features } = useContext(FeatureContext)
 
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
@@ -50,6 +50,10 @@ function AddNewRental(props) {
       key: 'selection',
     }
   ]);
+
+  useEffect(() => {
+    console.log('Somethings up with my offers???', offers)
+  }, [offers])
 
   useEffect(() => {
     console.log('Somethings up with my rentals???', myRentals)
@@ -89,31 +93,35 @@ function AddNewRental(props) {
 
     let unixTimeDates = []
     ranges.map(r => {
-      unixTimeDates.push({startDate: r.startDate.getTime(), endDate: r.endDate.getTime()})
+      unixTimeDates.push({ startDate: r.startDate.getTime(), endDate: r.endDate.getTime() })
     })
 
-    const newRental = {
-      firstName: isLoggedIn[0].firstName,
-      lastName: isLoggedIn[0].lastName,
-      email: isLoggedIn[0].email,
-      userId: isLoggedIn[0]._id,
-      city: city,
-      country: country,
-      slogan: slogan,
-      description: description,
-      adress: adress,
-      beds: beds,
-      price: price,
-      pics: pics,
-      featureIds: idsOfFeatures,
-      dateRanges: unixTimeDates
-    }
+    console.log('is offer true?', !!isOffer)
 
-    console.log('New Rental: ', newRental)
+      const newRental = {
+        firstName: isLoggedIn[0].firstName,
+        lastName: isLoggedIn[0].lastName,
+        email: isLoggedIn[0].email,
+        userId: isLoggedIn[0]._id,
+        city: city,
+        country: country,
+        slogan: slogan,
+        description: description,
+        adress: adress,
+        beds: beds,
+        price: price,
+        pics: pics,
+        featureIds: idsOfFeatures,
+        dateRanges: unixTimeDates,
+        isOffer: isOffer
+      }
 
-    await addNewRental(newRental)
+      console.log('New Rental: ', newRental)
 
-    history.push('/mypage')
+      await addNewRental(newRental)
+    
+
+
     // find a way to set to my rentals, props not working???
 
     // const U = await addUser(newUser)
