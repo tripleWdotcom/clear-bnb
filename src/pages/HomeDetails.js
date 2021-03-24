@@ -1,5 +1,6 @@
 import Media from 'react-media';
-
+import Carousel from '@brainhubeu/react-carousel';
+import '@brainhubeu/react-carousel/lib/style.css';
 
 const Popup = (props) => {
 
@@ -27,7 +28,16 @@ const Popup = (props) => {
           onClick={() => props.setTrigger(false)}
                 >close</button>
                 
-                <div className="gallery"></div>
+                <div className="gallery" >
+
+                  <Carousel>
+                    <img style={styles.gallery} src="https://markstewart.com/wp-content/uploads/2020/04/MARK-STEWART-SKINNY-MODERN-HOUSE-PLAN-MM-1251-FRONT--scaled.jpg" />
+                    <img style={styles.gallery} src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" />
+
+
+                  </Carousel>
+
+                </div>
 
         { props.children }
       </div>
@@ -74,6 +84,7 @@ const styles = {
     width: '65%',
    height: '50%',
     backgroundColor: '#FFF',
+    overflow: 'scroll'
   },
 
    closeBtn: {
@@ -81,8 +92,12 @@ const styles = {
     top: '16px',
      right: '16px',
      cursor: 'pointer'
-    
+  },
 
+  gallery: {
+    width: 'auto',
+    height: '500px',
+   
   }
 
 }
