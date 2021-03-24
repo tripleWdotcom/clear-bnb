@@ -16,12 +16,12 @@ export default function Results() {
       bedroomsMin: (localStorage.getItem("bedsNumberMin") === null ? 1 : localStorage.getItem("bedsNumberMin")),
       bedroomsMax: (localStorage.getItem("bedsNumberMax") === null ? 10 : localStorage.getItem("bedsNumberMax"))
     }
-   
+
     let toto = { ...objects, ...x }
     await fetchHousesByCityAndDate(toto)
     //await fetchHousesByCityAndDate(objects)
 
-   // console.log("what is my obejc???", toto)
+    console.log("what is my obejc???", toto)
   }, [localStorage.getItem('selectedCity'),
   localStorage.getItem("bedsNumberMin"),
   localStorage.getItem("bedsNumberMax"),
@@ -62,9 +62,14 @@ export default function Results() {
       })()}     </span>)}</p>
     </div>
   )
-
+  let x = +localStorage.getItem("startDateChosen")
+  let y=new Date(x)
+  let xx = +localStorage.getItem("endDateChosen")
+  let yy = new Date(xx)
+ 
   return (
-    <div>
+    <div> Houses available from:
+      {y.toDateString()} to {yy.toDateString()}
       <div >
         {housesByCityAndDate.map(c => test(c))}
       </div>

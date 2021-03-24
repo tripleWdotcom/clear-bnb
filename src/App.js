@@ -20,7 +20,7 @@ function App() {
   const page404 = () => (
     <h1>Page not found: {window.location.pathname}</h1>
   )
- // localStorage.clear() // we might need to add/remove later
+  // localStorage.clear() // we might need to add/remove later
 
   return (
     <div className="App">
@@ -34,9 +34,7 @@ function App() {
                 <Router>
                   <header className={true ? 'App-Header' : ''}>
                     <Navbar />
-
                   </header>
-
                   <main className="content">
                     <Switch>
                       <Route exact path="/" component={Home} />
@@ -46,7 +44,7 @@ function App() {
                     </Switch>
                   </main>
 
-                  <footer className={true ? 'App-Footer' : ''}>
+                  <footer className={true ? 'App-Footer' : ''}>npm 
                     <Footer />
                   </footer>
 

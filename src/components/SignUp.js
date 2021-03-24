@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext'
 
 function SignUp(props) {
-  const { isLoggedIn , addUser} = useContext(UserContext)
+  const { isLoggedIn, addUser } = useContext(UserContext)
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -31,10 +31,6 @@ function SignUp(props) {
 
     e.preventDefault()
 
-    if (!email || !password || !password2 || !firstName || !lastName) {
-      setBadCredentials(true)
-      return;
-    }
 
     const newUser = {
       email: email,
@@ -43,9 +39,8 @@ function SignUp(props) {
       lastName: lastName,
     }
     console.log('before addUser', newUser)
-
     await addUser(newUser)
-    
+
 
     // CHECK IF EMAIL IS OK 
 
@@ -53,6 +48,18 @@ function SignUp(props) {
       console.log('My credentials in Sign UP', badCredentials)
       props.isClicked()
     }
+  }
+  const matchPass = () => {
+    if (!password2 || !password || password !== password2)
+      return true
+    else
+      return false
+  }
+  const matchPass2 = () => {
+    if (password2 > 1 && matchPass())
+      return true
+    else
+      return false
   }
 
 
@@ -105,7 +112,7 @@ function SignUp(props) {
           </input>
         </label>
         <label style={modalStyle.label} key="9">
-          Password
+          Re-enter Password
           <input
             required
             name="password"
@@ -115,8 +122,11 @@ function SignUp(props) {
             style={modalStyle.input} key="10">
           </input>
         </label>
+        <h5 style={matchPass2() ? { color: 'red', textAlign: 'center' } : { display: 'none' }}> Passwords don't match</h5>
+
         {badCredentials ? <a>Email already in use</a> : ''}
-        <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="11">Create account</button>
+        <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} disabled={matchPass()} key="11">Create account</button>
+
       </form>
     </div>
 

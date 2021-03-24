@@ -3,10 +3,18 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRange } from 'react-date-range';
 import { useState } from 'react'
 import '../pages/cal.css'
+import searchBtn from '../images/searchButton.png';
+import { useHistory } from "react-router-dom";
 
 const Calen = () => {
+  let history = useHistory();
 
   const [toggle, setToggle] = useState(false)
+  const searchButton = async () => {
+    localStorage.setItem('startDateChosen', sd.getTime())
+    localStorage.setItem('endDateChosen', ed.getTime())
+    history.push("/home-results");
+  }
 
   const [state, setState] = useState([
     {
@@ -19,19 +27,17 @@ const Calen = () => {
   let sd = state[0].startDate
   let ed = state[0].endDate
 
+
   //console.log("start date: ", state[0].startDate, " In timestamp:", sd.getTime())
   //console.log("end date:", state[0].endDate, " In timestamp:", (ed ? ed.getTime() : "Not defined yet"))
-  localStorage.setItem('startDateChosen', sd.getTime())
-  localStorage.setItem('endDateChosen', ed.getTime())
-
   return (<div>
-    {/* Change onclick() from checkin and checkout  to remove warning */}
+
     <span>
-      <div className="checkIn" style={styles.checkIn } onClick={() => { setToggle(!toggle) }}>
+      <div className="checkIn" style={styles.checkIn} onClick={() => { setToggle(!toggle) }}>
         <div style={{ color: 'black', WebkitUserSelect: 'none' }}>Check-In </div>{sd.toDateString()}
       </div>
       <div className="checkOut" style={styles.checkOut} onClick={() => { setToggle(!toggle) }}>
-        <div style={{ color: 'black', WebkitUserSelect: 'none' }}> Check-Out</div>{sd.toDateString()}
+        <div style={{ color: 'black', WebkitUserSelect: 'none' }}> Check-Out</div>{ed.toDateString()}
       </div>
     </span>
     <div className="calendarContainer">
@@ -53,6 +59,8 @@ const Calen = () => {
         </DateRange> : null
       }
     </div>
+    <br /><br />
+    <img src={searchBtn} style={{ height: '50px', cursor: 'pointer' }} alt="buttonnn" onClick={searchButton} />
   </div>
   )
 }
