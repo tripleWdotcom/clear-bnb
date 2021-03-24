@@ -51,7 +51,7 @@ function MyPage() {
             {isMenuOpen ? <Menu getNewAction={changeAction} /> : ''}
             {action === 'showBookings' ? <Bookings /> : ''}
             {action === 'showRentals' ? <MyRentals /> : ''}
-            {action === 'showNewRental' ? <AddNewRental /> : ''}
+            {action === 'showNewRental' ? <AddNewRental setNewAction={changeAction} /> : ''}
           </Grid>
         </Grid>
       </Hidden>

@@ -1,20 +1,23 @@
 import Radium from 'radium'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { HouseContext } from '../../contexts/HouseContext'
 import { UserContext } from '../../contexts/UserContext'
+import { FeatureContext } from '../../contexts/FeatureContext'
 import Slider from '@material-ui/core/Slider'
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import { useEffect } from 'react';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRange } from 'react-date-range';
+import {useHistory} from 'react-router-dom'
 
-function AddNewRental() {
-  const { addNewRental } = useContext(HouseContext)
+function AddNewRental(props) {
+  let history = useHistory();
+  const { addNewRental, myRentals } = useContext(HouseContext)
   const { isLoggedIn } = useContext(UserContext)
+  const {features } = useContext(FeatureContext)
 
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
@@ -25,7 +28,7 @@ function AddNewRental() {
   const [beds, setBeds] = useState(0);
   const [price, setPrice] = useState(0);
   const [featureIds, setFeatureIds] = useState([
-    { name: 'wifi', value: 'false' },
+    { name: 'wifi', value: false },
     { name: 'tv', value: false },
     { name: 'breakfast', value: false },
     { name: 'gym', value: false },
@@ -48,6 +51,10 @@ function AddNewRental() {
     }
   ]);
 
+  useEffect(() => {
+    console.log('Somethings up with my rentals???', myRentals)
+  }, [myRentals])
+
   const handleSubmit = async e => {
     console.log('Add new rental button clicked!')
 
@@ -63,6 +70,7 @@ function AddNewRental() {
       Adress: ${adress}
       Beds: ${beds}
       Price: ${price}
+      Offer: ${isOffer}
     `);
     console.log('Pics: ', pics)
     console.log('FeatureIds: ', featureIds)
@@ -70,12 +78,43 @@ function AddNewRental() {
 
     e.preventDefault()
 
-    // const newUser = {
-    //   email: email,
-    //   password: password,
-    //   firstName: firstName,
-    //   lastName: lastName,
-    // }
+    let idsOfFeatures = []
+    featureIds.map(f => {
+      if (f.value == true) {
+        let featureObj = features.filter(fea => fea.name == f.name)
+        console.log('featureObj', featureObj)
+        idsOfFeatures.push(featureObj[0]._id)
+      }
+    })
+
+    let unixTimeDates = []
+    ranges.map(r => {
+      unixTimeDates.push({startDate: r.startDate.getTime(), endDate: r.endDate.getTime()})
+    })
+
+    const newRental = {
+      firstName: isLoggedIn[0].firstName,
+      lastName: isLoggedIn[0].lastName,
+      email: isLoggedIn[0].email,
+      userId: isLoggedIn[0]._id,
+      city: city,
+      country: country,
+      slogan: slogan,
+      description: description,
+      adress: adress,
+      beds: beds,
+      price: price,
+      pics: pics,
+      featureIds: idsOfFeatures,
+      dateRanges: unixTimeDates
+    }
+
+    console.log('New Rental: ', newRental)
+
+    await addNewRental(newRental)
+
+    history.push('/mypage')
+    // find a way to set to my rentals, props not working???
 
     // const U = await addUser(newUser)
     // console.log('new user', U)
@@ -135,7 +174,8 @@ function AddNewRental() {
     <div className="AddNewRental">
       <div>
         <form onSubmit={handleSubmit} style={modalStyle.form}>
-          <h1>Add New Rental</h1>
+          <h2 style={{ textAlign: 'center' }}>Create your new rental</h2>
+          <br />
           <label style={modalStyle.label} key="1">
             Slogan
           <textarea
@@ -146,6 +186,7 @@ function AddNewRental() {
               maxLength="50"
               type="text"
               value={slogan}
+              placeholder="e.g. A lovely house by the lake..."
               onChange={(e) => setSlogan(e.target.value)}
               style={modalStyle.input} key="2">
             </textarea>
@@ -160,6 +201,7 @@ function AddNewRental() {
               maxLength="250"
               type="text"
               value={description}
+              placeholder="e.g. Sip on your coffee while looking out over the lake..."
               onChange={(e) => setDescription(e.target.value)}
               style={modalStyle.input} key="4">
             </textarea>
@@ -171,6 +213,7 @@ function AddNewRental() {
               name="adress"
               type="adress"
               value={adress}
+              placeholder="e.g. Lake road 34"
               onChange={(e) => setAdress(e.target.value)}
               style={modalStyle.input} key="6">
             </input>
@@ -182,6 +225,7 @@ function AddNewRental() {
               name="city"
               type="city"
               value={city}
+              placeholder="e.g. Amsterdam"
               onChange={(e) => setCity(e.target.value)}
               style={modalStyle.input} key="8">
             </input>
@@ -193,6 +237,7 @@ function AddNewRental() {
               name="country"
               type="country"
               value={country}
+              placeholder="e.g. Netherlands"
               onChange={(e) => setCountry(e.target.value)}
               style={modalStyle.input} key="10">
             </input>
@@ -217,9 +262,8 @@ function AddNewRental() {
           )
           )}
 
-          {pics.length < 5 ? <div style={{ cursor: 'pointer', ':hover': { color: 'red' } }} onClick={() => setPics([...pics, 'url'])}>+ Add more pictures</div> : 'Get more pictures with premium'}
+          {pics.length < 5 ? <div style={{ cursor: 'pointer', ':hover': { color: 'green' } }} onClick={() => setPics([...pics, 'url'])}>+ Add more pictures</div> : 'Get more pictures with premium'}
 
-          <br />
           <br />
           <br />
           <br />
@@ -275,9 +319,10 @@ function AddNewRental() {
               </label>
               <br />
               <br />
-              <label>
+              <label style={modalStyle.label} key="15">
                 Do you wanna make this a special offer?
-              <FormControlLabel
+                 <br />
+                <FormControlLabel
                   value={isOffer}
                   control={<Switch color="primary" />}
                   label={isOffer ? 'Yes' : 'No'}
@@ -298,7 +343,7 @@ function AddNewRental() {
 
           {ranges.map((r, i) => (
             <label style={modalStyle.label} key={'e' + i}>
-              Your {isOffer ? '' : i == 0 ? '1st' : i == 1 ? '2nd' : '3d'} availablitity range
+              {isOffer ? 'A' : i == 0 ? '1st a' : i == 1 ? '2nd a' : '3d a'}vailablitity range
               <input
                 required
                 name="startDate"
@@ -316,11 +361,11 @@ function AddNewRental() {
                 style={modalStyle.input} key={'g' + i}>
               </input>
               {i > 0 ? <h6 style={{ cursor: 'pointer', textAlign: 'right', marginTop: '-10px', ':hover': { color: 'red' } }} key={'h' + i}
-                onClick={() => setRanges([...ranges.slice(0, i), ...ranges.slice(i + 1)])}>remove date range</h6> : ''}
+                onClick={() => setRanges([...ranges.slice(0, i), ...ranges.slice(i + 1)])}>remove</h6> : ''}
             </label>
           )
           )}
-          {ranges.length < 3 && !isOffer ? <div onClick={() => setRanges([...ranges, {
+          {ranges.length < 3 && !isOffer ? <div style={{ cursor: 'pointer', ':hover': { color: 'green' } }} key="16" onClick={() => setRanges([...ranges, {
             startDate: new Date(),
             endDate: new Date(),
             key: 'selection',
@@ -357,8 +402,9 @@ function AddNewRental() {
             weekStartsOn={1}
             ranges={[ranges[2]]}
           /> : ''}
-
-          <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="15">Create rental</button>
+          <br />
+          <br />
+          <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="17">Create rental</button>
         </form>
       </div>
 
@@ -385,8 +431,9 @@ const modalStyle = {
   label: {
     marginBottom: "0.5em",
     color: "#444",
-    fontWeight: "lighter",
-    fontSize: '20px',
+    fontWeight: "500px",
+    fontSize: '17px',
+    fontFamily: 'Roboto, sans-serif'
   },
   input: {
     display: "flex",
@@ -397,6 +444,8 @@ const modalStyle = {
     borderRadius: "5px",
     border: "1px solid #d6d1d5",
     marginTop: "5px",
+    fontFamily: 'Roboto, sans-serif',
+    fontSize: '15px'
   },
   button: {
     minWidth: "100%",
