@@ -31,9 +31,20 @@ const Popup = (props) => {
                 <div className="gallery" >
 
                   <Carousel>
+                    <div>
+                      <h3>House</h3>
                     <img style={styles.gallery} src="https://markstewart.com/wp-content/uploads/2020/04/MARK-STEWART-SKINNY-MODERN-HOUSE-PLAN-MM-1251-FRONT--scaled.jpg" />
-                    <img style={styles.gallery} src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" />
+                    </div>
 
+                    <div>
+                      <h3>House</h3>
+                    <img style={styles.gallery} src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" />
+                    </div>
+
+                    <div>
+                      <h3>Toilet</h3>
+                    <img style={styles.gallery} src="https://cdn.bigbathroomshop.co.uk/media/catalog/product/cache/07469e52453ec3e9e92a88c7a63b12d8/b/c/bctbw102_ls_1000_2.jpg" />
+                    </div>
 
                   </Carousel>
 
