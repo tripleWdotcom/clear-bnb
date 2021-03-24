@@ -22,7 +22,6 @@ function AddNewRental() {
   const [slogan, setSlogan] = useState("");
   const [adress, setAdress] = useState("");
   const [pics, setPics] = useState(['url']);
-  const [numOfPics, setNumOfPics] = useState(1)
   const [beds, setBeds] = useState(0);
   const [price, setPrice] = useState(0);
   const [featureIds, setFeatureIds] = useState([
@@ -37,7 +36,6 @@ function AddNewRental() {
     { name: 'parking', value: false }
   ]);
   const [isOffer, setIsOffer] = useState(false)
-  const [numOfRanges, setNumOfRanges] = useState(1)
   const [showCalOne, setShowCalOne] = useState(false)
   const [showCalTwo, setShowCalTwo] = useState(false)
   const [showCalThree, setShowCalThree] = useState(false)
@@ -49,13 +47,6 @@ function AddNewRental() {
       key: 'selection',
     }
   ]);
-
-  useEffect(() => {
-    console.log('How many ranges are their and how do they look?', ranges.length)
-    console.log('Range', ranges)
-  }, [ranges])
-
-
 
   const handleSubmit = async e => {
     console.log('Add new rental button clicked!')
@@ -72,14 +63,10 @@ function AddNewRental() {
       Adress: ${adress}
       Beds: ${beds}
       Price: ${price}
-      FetureIds: ${featureIds}
     `);
-    pics.map(p => {
-      console.log('pics ', p)
-    })
-    featureIds.map(f => {
-      console.log('feature ', f)
-    })
+    console.log('Pics: ', pics)
+    console.log('FeatureIds: ', featureIds)
+    console.log('Date Ranges: ', ranges)
 
     e.preventDefault()
 
@@ -95,12 +82,6 @@ function AddNewRental() {
 
   }
 
-  // useEffect(() => {
-  //   console.log('numOfPics has changed value', numOfPics)
-  //   pictureFields()
-  // }, [numOfPics])
-
-
 
   function valuetextBeds(value) {
     return `${value}`;
@@ -108,7 +89,6 @@ function AddNewRental() {
   function valuetextPrice(value) {
     return `${value}`;
   }
-
 
   const handleSelect = (newRange, name) => {
     console.log('Ranges', newRange)
@@ -218,7 +198,7 @@ function AddNewRental() {
             </input>
           </label>
 
-          <label style={modalStyle.label} key="88">
+          <label style={modalStyle.label} key="11">
             Pictures
              </label>
           {pics.map((p, i) => (
@@ -231,7 +211,7 @@ function AddNewRental() {
                 onChange={(e) => pics[i] = e.target.value}
                 style={modalStyle.input} key={'b' + i}>
               </input>
-              {i > 0 ? <h6 style={{ cursor: 'pointer', textAlign: 'right', marginTop: '-10px', ':hover': { color: 'red' } }} key={'k' + i}
+              {i > 0 ? <h6 style={{ cursor: 'pointer', textAlign: 'right', marginTop: '-10px', ':hover': { color: 'red' } }} key={'c' + i}
                 onClick={() => setPics([...pics.slice(0, i), ...pics.slice(i + 1)])}>remove</h6> : ''}
             </label>
           )
@@ -244,7 +224,7 @@ function AddNewRental() {
           <br />
           <br />
           <br />
-          <label style={modalStyle.label} key="10">
+          <label style={modalStyle.label} key="12">
             <Slider
               defaultValue={1}
               getAriaValueText={valuetextBeds}
@@ -258,7 +238,7 @@ function AddNewRental() {
           </label>
           <br />
           <br />
-          <label style={modalStyle.label} key="11">
+          <label style={modalStyle.label} key="13">
             <Slider
               defaultValue={1}
               getAriaValueText={valuetextPrice}
@@ -274,7 +254,7 @@ function AddNewRental() {
           <br />
           <FormControl component="fieldset">
             <FormGroup aria-label="position">
-              <label style={modalStyle.label} key="12">
+              <label style={modalStyle.label} key="14">
                 Amenities
              <br />
 
@@ -286,7 +266,7 @@ function AddNewRental() {
                       label={f.name}
                       labelPlacement="end"
                       onChange={(e, val) => updateAmenities(val, f.name)}
-                      key={'n' + i}
+                      key={'d' + i}
                     />
                     <br />
                   </>
@@ -317,7 +297,7 @@ function AddNewRental() {
           <br />
 
           {ranges.map((r, i) => (
-            <label style={modalStyle.label} key={'y' + i}>
+            <label style={modalStyle.label} key={'e' + i}>
               Your {isOffer ? '' : i == 0 ? '1st' : i == 1 ? '2nd' : '3d'} availablitity range
               <input
                 required
@@ -325,7 +305,7 @@ function AddNewRental() {
                 value={'Start date: ' + r.startDate.toDateString()}
                 onChange={(e) => console.log('What is the new start date ', i, e.target.value)}
                 onClick={() => { (i == 0 ? setShowCalOne(!showCalOne) : i == 1 ? setShowCalTwo(!showCalTwo) : setShowCalThree(!showCalThree)); console.log('im clicking to show cal') }}
-                style={modalStyle.input} key={'e' + i}>
+                style={modalStyle.input} key={'f' + i}>
               </input>
               <input
                 required
@@ -333,9 +313,9 @@ function AddNewRental() {
                 name="endDate"
                 value={'End date: ' + r.endDate.toDateString()}
                 onChange={(e) => console.log('What is the new end date', i, e.target.value)}
-                style={modalStyle.input} key={'f' + i}>
+                style={modalStyle.input} key={'g' + i}>
               </input>
-              {i > 0 ? <h6 style={{ cursor: 'pointer', textAlign: 'right', marginTop: '-10px', ':hover': { color: 'red' } }} key={'k' + i}
+              {i > 0 ? <h6 style={{ cursor: 'pointer', textAlign: 'right', marginTop: '-10px', ':hover': { color: 'red' } }} key={'h' + i}
                 onClick={() => setRanges([...ranges.slice(0, i), ...ranges.slice(i + 1)])}>remove date range</h6> : ''}
             </label>
           )
