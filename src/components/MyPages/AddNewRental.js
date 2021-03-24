@@ -47,18 +47,13 @@ function AddNewRental() {
       startDate: new Date(),
       endDate: new Date(),
       key: 'selection',
-    },
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: 'selection',
-    },
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: 'selection',
     }
   ]);
+
+  useEffect(() => {
+    console.log('How many ranges are their and how do they look?', ranges.length)
+    console.log('Range', ranges)
+  }, [ranges])
 
 
 
@@ -115,7 +110,34 @@ function AddNewRental() {
   }
 
 
-  const handleSelect = (ranges) => {
+  const handleSelect = (newRange, name) => {
+    console.log('Ranges', newRange)
+    console.log('name ', name)
+    let copyOfRanges = [...ranges]
+
+    switch (name) {
+      case 'calOne': {
+        let item = { ...copyOfRanges[0] }
+        item = newRange
+        copyOfRanges[0] = item
+        setRanges(copyOfRanges)
+      };
+        break;
+      case 'calTwo': {
+        let item = { ...copyOfRanges[1] }
+        item = newRange
+        copyOfRanges[1] = item
+        setRanges(copyOfRanges)
+      };
+        break;
+      case 'calThree': {
+        let item = { ...copyOfRanges[2] }
+        item = newRange
+        copyOfRanges[2] = item
+        setRanges(copyOfRanges)
+      };
+        break;
+    }
     console.log('the new range is', ranges)
     // setRange(range[0] = [ranges])
   }
@@ -343,17 +365,23 @@ function AddNewRental() {
                   control={<Switch color="primary" />}
                   label={isOffer ? 'Yes' : 'No'}
                   labelPlacement="end"
-                  onChange={(e, val) => { setIsOffer(val); setNumOfRanges(1); }}
+                  onChange={(e, val) => {
+                    setIsOffer(val); setRanges([{
+                      startDate: new Date(),
+                      endDate: new Date(),
+                      key: 'selection',
+                    }]); }}
                 />
               </label>
             </FormGroup>
           </FormControl>
           <br />
           <br />
-          {ranges.map((r, i) => {
-            <label key={'d' + i}>
-              Your {isOffer ? '' : i == 1 ? 'first' : i == 2 ? 'second' : 'third'} availablitity range
-             <input
+
+          {ranges.map((r, i) => (
+            <label style={modalStyle.label} key={'y' + i}>
+              Your {isOffer ? '' : i == 0 ? '1st' : i == 1 ? '2nd' : '3d'} availablitity range
+              <input
                 required
                 name="startDate"
                 value={'Start date: ' + r.startDate.toDateString()}
@@ -369,10 +397,18 @@ function AddNewRental() {
                 onChange={(e) => console.log('What is the new end date', i, e.target.value)}
                 style={modalStyle.input} key={'f' + i}>
               </input>
+              {i > 0 ? <h6 style={{ cursor: 'pointer', textAlign: 'right', marginTop: '-10px', ':hover': { color: 'red' } }} key={'k' + i}
+                onClick={() => setRanges([...ranges.slice(0, i), ...ranges.slice(i + 1)])}>remove date range</h6> : ''}
             </label>
-          }
           )
-          }
+          )}
+          {ranges.length < 3 && !isOffer ? <div onClick={() => setRanges([...ranges, {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: 'selection',
+          }])}>+ Add more date ranges</div> : ''}
+
+
           {/* <label key={'d' + numOfRanges}>
                 Your {isOffer ? '' : numOfRanges == 1 ? 'first' : numOfRanges == 2 ? 'second' : 'third'} availablitity range
                 <input
@@ -392,34 +428,37 @@ function AddNewRental() {
                   style={modalStyle.input} key="35">
                 </input> */}
           {showCalOne ? <DateRange
+            className="calOne"
             minDate={new Date()}
             showPreview={true}
-            onChange={item => handleSelect(item.selection)}
+            onChange={e => handleSelect(e.selection, 'calOne')}
             moveRangeOnFirstSelection={false}
             showDateDisplay={false}
             showMonthAndYearPickers={false}
             weekStartsOn={1}
-            ranges={ranges[0]}
+            ranges={[ranges[0]]}
           /> : showCalTwo ? <DateRange
+            className="calTwo"
             minDate={ranges[0].endDate}
             showPreview={true}
-            onChange={item => handleSelect(item.selection)}
+            onChange={e => handleSelect(e.selection, 'calTwo')}
             moveRangeOnFirstSelection={false}
             showDateDisplay={false}
             showMonthAndYearPickers={false}
             weekStartsOn={1}
-            ranges={ranges[1]}
+            ranges={[ranges[1]]}
           /> : showCalThree ? <DateRange
+            className="calThree"
             minDate={ranges[1].endDate}
             showPreview={true}
-            onChange={item => handleSelect(item.selection)}
+            onChange={e => handleSelect(e.selection, 'calThree')}
             moveRangeOnFirstSelection={false}
             showDateDisplay={false}
             showMonthAndYearPickers={false}
             weekStartsOn={1}
-            ranges={ranges[2]}
+            ranges={[ranges[2]]}
           /> : ''}
-          {numOfRanges < 3 && !isOffer ? <div>+ Add more date ranges</div> : ''}
+
 
           <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="15">Create rental</button>
         </form>
