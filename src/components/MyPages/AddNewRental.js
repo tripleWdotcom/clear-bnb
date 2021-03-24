@@ -370,7 +370,8 @@ function AddNewRental() {
                       startDate: new Date(),
                       endDate: new Date(),
                       key: 'selection',
-                    }]); }}
+                    }]);
+                  }}
                 />
               </label>
             </FormGroup>
@@ -406,7 +407,7 @@ function AddNewRental() {
             startDate: new Date(),
             endDate: new Date(),
             key: 'selection',
-          }])}>+ Add more date ranges</div> : ''}
+          }])}>+ Add more date ranges</div> : 'Get more date ranges with premium'}
 
 
           {/* <label key={'d' + numOfRanges}>
