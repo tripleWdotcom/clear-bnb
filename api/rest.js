@@ -1,3 +1,5 @@
+const { Checkbox } = require("@material-ui/core")
+const { bookings } = require("./models")
 
 module.exports = (app, models) => {
 
@@ -10,12 +12,12 @@ module.exports = (app, models) => {
 
 
 
-    app.get('/rest/houses/ccity/:city', async (req, res) => {
-      let city = req.params.city
-      let model = models['houses']
-      let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } }).populate('featureIds')
-      res.json(docs)
-    })
+  app.get('/rest/houses/ccity/:city', async (req, res) => {
+    let city = req.params.city
+    let model = models['houses']
+    let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } }).populate('featureIds')
+    res.json(docs)
+  })
 
 
   // Get houses by city (searching for one letter at a time or all citys distinct)
@@ -30,7 +32,7 @@ module.exports = (app, models) => {
     let docs = await model.aggregate([{
       $group: {
         _id: "$city",
-        country: {  
+        country: {
           $first: "$country",
         }
       }
@@ -57,23 +59,57 @@ module.exports = (app, models) => {
     !b.animalFriendly ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f1f" })
     !b.pool ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f20" })
     !b.parking ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f21" })
-   // console.log("so what is feaurures here?:", featureIds)
+    // console.log("so what is feaurures here?:", featureIds)
     let model = models['houses']
 
     let unixTimestamp = Math.floor(new Date().getTime())
 
+    let doIt = false
+
+    let checkBookingCollection = await bookings.find({
+      $or: [
+        { $and: [{ endDate: { $gt: b.availableStart } }, { endDate: { $lt: b.availableEnd } }] }, // overlapping a booking
+        { $and: [{ startDate: { $gt: b.availableStart } }, { startDate: { $lt: b.availableEnd } }] }, // overlappign a booking
+        { $and: [{ startDate: { $lt: b.availableStart } }, { endDate: { $gt: b.availableEnd } }] }, //inside a booking range
+        { $and: [{ startDate: { $gt: b.availableStart } }, { endDate: { $gt: b.availableEnd } }] },// booking range inside chosen dates
+      ]
+    })
+    console.log("this is the stuff", checkBookingCollection)
+    if (checkBookingCollection.length !== 0) {
+      console.log("can u see me??")
+      doIt = true
+
+    }
+
     if (!featureIds.length) {
+      console.log("do it is :", doIt)
       // Without any checkbox filters
-      let docs = await model.find({ 
+      let docs = await model.find({
         $and: [
           { $and: [{ bedrooms: { $lte: b.bedroomsMax } }, { bedrooms: { $gte: b.bedroomsMin } }] },
           { $and: [{ price: { $lte: b.priceMax } }, { price: { $gte: b.priceMin } }] },
           { $and: [{ availableEnd: { $gt: unixTimestamp } }, { availableEnd: { $gt: b.availableEnd } }] },
-          { $and: [{ availableStart: { $lt: unixTimestamp } }, { availableStart: { $lt: b.availableStart } }] },
+          { $and: [{ availableStart: { $lt: b.availableStart } }] },
           { city: b.city }
         ]
       }).populate(['userId', 'featureIds']).exec()
-      res.json(docs)
+
+      if (doIt) {
+        //let c = await docs.filter(x => !checkBookingCollection.filter(y => y.houseId === x._id).length);
+        let c = docs.filter(function (objFromH) {
+          let result= !checkBookingCollection.find(function (objFromB) {
+            console.log("check the ids B and H", objFromB.houseId, objFromH._id)
+            return objFromH._id === objFromB.houseId
+          });
+          console.log("line 103",result)
+          return result
+        })
+       
+        res.json(c)
+      }
+      else {
+        res.json(docs)
+      }
       return;
     } else {
       // With checkbox filters
