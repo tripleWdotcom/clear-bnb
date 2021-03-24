@@ -95,26 +95,28 @@ module.exports = (app, models) => {
       }).populate(['userId', 'featureIds']).lean().exec()
 
       if (doIt) {
-        //let c = docs.filter(x => !checkBookingCollection.filter(y => y.houseId === x._id).length);
+
         let filtered = [];
         docs.filter(function (house) {
-          return checkBookingCollection.filter(function (booking) {
-            if (house._id !== booking.houseId) {
-              console.log("1",(house._id !== booking.houseId))
-              console.log("2",house._id)
-              console.log("3",booking.houseId)
+          checkBookingCollection.filter(function (booking) {
+            if (!house._id.equals(booking.houseId)) {
+              console.log("1", (house._id.equals(booking.houseId)))
+              console.log("2", house._id)
+              console.log("3", booking.houseId)
               filtered.push(house)
             }
           })
         });
+        console.log(filtered)
+        res.json(filtered)
         return;
       }
-      else {       
+      else {
         console.log(docs)
         res.json(docs)
         return;
       }
-    
+
     } else {
       // With checkbox filters
       let docs = await model.find({
@@ -128,8 +130,28 @@ module.exports = (app, models) => {
         ]
       }).populate(['userId', 'featureIds']).exec()
       //console.log("populated?:", docs)
-      res.json(docs)
-      return;
+      if (doIt) {
+
+        let filtered = [];
+        docs.filter(function (house) {
+          checkBookingCollection.filter(function (booking) {
+            if (!house._id.equals(booking.houseId)) {
+              console.log("1", (house._id.equals(booking.houseId)))
+              console.log("2", house._id)
+              console.log("3", booking.houseId)
+              filtered.push(house)
+            }
+          })
+        });
+        console.log(filtered)
+        res.json(filtered)
+        return;
+      }
+      else {
+        console.log(docs)
+        res.json(docs)
+        return;
+      }
     }
   })
 
