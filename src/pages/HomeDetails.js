@@ -1,40 +1,11 @@
 import Media from 'react-media';
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
-import { Dots } from '@brainhubeu/react-carousel';
-
+import Radium from 'radium'
+import { slidesToShowPlugin } from '@brainhubeu/react-carousel';
 const Popup = (props) => {
 
-  const thumbnailsIo = {
-  value: 0,
-    slides: [
-      (<div>
-        <h3>House</h3>
-      <img style={styles.gallery} src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" />
-      </div>),
-
-      (<div>
-        <h3>Bathroom</h3>
-      <img style={styles.gallery} src="https://www.lux-review.com/wp-content/uploads/2020/02/luxury-bathroom.jpg" />
-      </div>),
-
-      (<div>
-      <h3>Toilet</h3>
-      <img style={styles.gallery} src="https://cdn.bigbathroomshop.co.uk/media/catalog/product/cache/07469e52453ec3e9e92a88c7a63b12d8/b/c/bctbw102_ls_1000_2.jpg" /> 
-      </div>),
-    ],
-      thumbnails: [
-        (<img style={styles.thumbnails} src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" />),
-        (<img style={styles.thumbnails} src="https://www.lux-review.com/wp-content/uploads/2020/02/luxury-bathroom.jpg" />),
-        (<img style={styles.thumbnails} src="https://cdn.bigbathroomshop.co.uk/media/catalog/product/cache/07469e52453ec3e9e92a88c7a63b12d8/b/c/bctbw102_ls_1000_2.jpg" />),
-      ],
-    }
-   onchange = onchange.bind(this);
-
-  function onchange(value) {
-    this.setThumbnailsIo({ value });
-  }
-
+  
 
 
   return (props.trigger) ? (
@@ -53,6 +24,27 @@ const Popup = (props) => {
           style={styles.closeBtn}
           onClick={() => props.setTrigger(false)}
           >close</button>
+
+              <div className="mobileGallery">
+                <Carousel>
+                  <div>
+                    <h3>House</h3>
+                    <img style={styles.mobileGallery} src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" />
+                  </div>
+                  <div>
+                    <h3>Bathroom</h3>
+                    <img style={styles.mobileGallery} src="https://www.lux-review.com/wp-content/uploads/2020/02/luxury-bathroom.jpg" />
+                  </div>
+
+                  <div>
+                    <h3>Toilet</h3>
+                    <img style={styles.mobileGallery} src="https://cdn.bigbathroomshop.co.uk/media/catalog/product/cache/07469e52453ec3e9e92a88c7a63b12d8/b/c/bctbw102_ls_1000_2.jpg" />
+                  </div>
+
+                </Carousel>
+              </div>
+
+
         { props.children }
       </div>
        ) : ( 
@@ -62,12 +54,10 @@ const Popup = (props) => {
           onClick={() => props.setTrigger(false)}
                 >close</button>
                 
-                <div className="gallery" >
+                <div className="computerGallery" >
+                  <Carousel>
 
-                  <Carousel value={thumbnailsIo.value}
-                    slides={thumbnailsIo.slides}
-                    onChange={thumbnailsIo.onchange} />
-                    {/* <div>
+                     <div>
                       <h3>House</h3>
                       <img style={styles.gallery} src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" />
                     </div>
@@ -80,10 +70,32 @@ const Popup = (props) => {
                     <div>
                       <h3>Toilet</h3>
                     <img style={styles.gallery} src="https://cdn.bigbathroomshop.co.uk/media/catalog/product/cache/07469e52453ec3e9e92a88c7a63b12d8/b/c/bctbw102_ls_1000_2.jpg" />
-                    </div> */}
+                    </div> 
+                      
+                   
 
-                  <Dots number={thumbnailsIo.length} thumbnails={thumbnailsIo.thumbnails} value={thumbnailsIo.value} onChange={thumbnailsIo.onchange} number={thumbnailsIo.slides.length} />
+                  </Carousel>
 
+                  <div className="thumbnails" style={styles.thumbnailsContainer}>
+                    
+                      <img
+                      style={styles.thumbnails} 
+                      src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" 
+                     
+                      />
+                      
+                   
+
+                    
+                      <img style={styles.thumbnails} src="https://www.lux-review.com/wp-content/uploads/2020/02/luxury-bathroom.jpg" />
+                   
+
+
+                   
+                      <img style={styles.thumbnails} src="https://cdn.bigbathroomshop.co.uk/media/catalog/product/cache/07469e52453ec3e9e92a88c7a63b12d8/b/c/bctbw102_ls_1000_2.jpg" />
+                
+
+                  </div>
                 </div>
 
         { props.children }
@@ -95,6 +107,7 @@ const Popup = (props) => {
     </div>
   ) : "";
 }
+
 
 const styles = {
   
@@ -108,18 +121,15 @@ const styles = {
     
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
-    
-       
+    alignItems: 'center',     
 
   },
 
   popupInnerMobile: {
     position: 'relative',
     padding: '300px 0px 300px 0px',
-   
     width: '100%',
-   height: '100%',
+    height: '100%',
     backgroundColor: '#FFF',
     
   },
@@ -144,14 +154,24 @@ const styles = {
   gallery: {
     width: 'auto',
     height: '500px',
-   
+
+  },
+
+  mobileGallery: {
+   width: 'auto',
+    height: '250px',
+    padding: '25px'
   },
 
   thumbnails: {
     width: 'auto',
     height: '100px',
+    border: '2px solid #C0C0C0',
+    padding: '5px',
+    cursor: 'pointer',
+    
   }
 
 }
- 
-export default Popup;
+
+export default Radium(Popup);
