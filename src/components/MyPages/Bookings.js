@@ -1,13 +1,16 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { BookingContext } from '../../contexts/BookingContext'
 import { UserContext } from '../../contexts/UserContext'
+import RecieptBook from './RecieptBook'
 import Radium from 'radium'
 import Grid from '@material-ui/core/Grid'
 
 
 function Bookings() {
   const { myBookings, fetchMyBookingsByUserId, deleteBookingById } = useContext(BookingContext)
-  const {isLoggedIn} = useContext(UserContext)
+  const { isLoggedIn } = useContext(UserContext)
+  const [showReciept, setShowReciept] = useState(false)
+  const [bookId, setBookId] = useState('')
 
   useEffect(async () => {
     console.log('Something has changed in my bookings')
@@ -22,10 +25,10 @@ function Bookings() {
   (
     <Grid item xs style={style.item} key={"a" + i}>
       <img style={style.img} key={"b" + i} src={b.houseId.pics[0]} />
-      <div style={style.info} key={"c" + i}>
+      <div style={style.info} key={"c" + i} onClick={() => { setShowReciept(true); setBookId(b._id); }}>
         <div style={style.infoText} key={"d" + i}>
           <h3>{b.houseId.city}</h3>
-          <a>{new Date(b.startDate * 1000).toLocaleString().substr(0, 11)} - {new Date(b.endDate * 1000).toLocaleString().substr(0, 11)}
+          <a>{new Date(b.startDate).toString().substr(0, 11)} - {new Date(b.endDate).toString().substr(0, 11)}
           </a>
           <br />
           <br />
@@ -43,6 +46,7 @@ function Bookings() {
         <h2>My Bookings Page</h2>
         {myBookings.length > 0 ? myBookings.map((b, i) => structureBookings(b, i)) : <h3 style={style.noBook}>Here will your future bookings be...</h3>}
       </Grid>
+      {showReciept ? <RecieptBook bookId={bookId}/> : ''}
     </div>
   )
 }
