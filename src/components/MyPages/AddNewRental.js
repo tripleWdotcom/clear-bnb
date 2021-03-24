@@ -8,22 +8,21 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { useEffect } from 'react';
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import { DateRange } from 'react-date-range';
 
 function AddNewRental() {
   const { addNewRental } = useContext(HouseContext)
   const { isLoggedIn } = useContext(UserContext)
-  // const [firstName, setFirstName] = useState();
-  // const [lastName, setLastName] = useState("The logged in user");
-  // const [email, setEmail] = useState("The logged in user");
-  // const [userId, setUserId] = useState("The logged in user");
 
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [description, setDescription] = useState("");
   const [slogan, setSlogan] = useState("");
   const [adress, setAdress] = useState("");
-  const [pics, setPics] = useState(['']);
-  // const [numOfPics, setNumOfPics] = useState(['h'])
+  const [pics, setPics] = useState(['url']);
+  const [numOfPics, setNumOfPics] = useState(1)
   const [beds, setBeds] = useState(0);
   const [price, setPrice] = useState(0);
   const [featureIds, setFeatureIds] = useState([
@@ -38,8 +37,29 @@ function AddNewRental() {
     { parking: false }
   ]);
   const [isOffer, setIsOffer] = useState(false)
-  const [availableStart, setAvailableStart] = useState([]);
-  const [availableEnd, setAvailableEnd] = useState([]);
+  const [numOfRanges, setNumOfRanges] = useState(1)
+  const [showCalOne, setShowCalOne] = useState(false)
+  const [showCalTwo, setShowCalTwo] = useState(false)
+  const [showCalThree, setShowCalThree] = useState(false)
+
+  const [ranges, setRanges] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection',
+    },
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection',
+    },
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection',
+    }
+  ]);
+
 
 
   const handleSubmit = async e => {
@@ -94,27 +114,11 @@ function AddNewRental() {
     return `${value}`;
   }
 
-  // const pictureFields = () => {
-  //   console.log('I want to render pics')
-  //   let inputFields = []
-  //   for (let i = 0; i < numOfPics; i++) {
-  //     inputFields.push(
-  //       <label style={modalStyle.label} key={'a' + i}>
-  //         Picture link
-  //         <input
-  //           required
-  //           name="url"
-  //           type="url"
-  //           onChange={(e) => setPics([...pics, ...e.target.value])}
-  //           style={modalStyle.input} key={'b' + i}>
-  //         </input>
-  //       </label>
-  //     )
-  //   }
-  //   console.log('input fields', inputFields)
-  //   return <>inputFields</>;
-  // }
 
+  const handleSelect = (ranges) => {
+    console.log('the new range is', ranges)
+    // setRange(range[0] = [ranges])
+  }
 
 
 
@@ -185,21 +189,41 @@ function AddNewRental() {
               style={modalStyle.input} key="10">
             </input>
           </label>
-
-          {pics.map((n, i) =>
+          {/* <label>
+            Select how many pictures you want to upload.
+            <h5>Want to upload more than 5 pictures? Get premium</h5>
+            <select
+              style={modalStyle.input} key="77"
+              onChange={(e) => setNumOfPics(e.target.value)}>
+              <option value="1" selected>1 picture</option>
+              <option value="2">2 pictures</option>
+              <option value="3">3 pictures</option>
+              <option value="4">4 pictures</option>
+              <option value="5">5 pictures</option>
+            </select>
+          </label> */}
+          <label style={modalStyle.label} key="88">
+            Pictures
+             </label>
+          {pics.map((p, i) => (
             <label style={modalStyle.label} key={'a' + i}>
-              Picture link
               <input
                 required
+                placeholder="Input picture url"
                 name="url"
                 type="url"
                 onChange={(e) => pics[i] = e.target.value}
                 style={modalStyle.input} key={'b' + i}>
               </input>
+              {i > 0 ? <h6 style={{ cursor: 'pointer', textAlign: 'right', marginTop: '-10px', ':hover': { color: 'red' } }} key={'k' + i}
+                onClick={() => setPics([...pics.slice(0, i), ...pics.slice(i + 1)])}>remove</h6> : ''}
             </label>
           )
-          }
-          {pics.length < 5 ? <div style={ modalStyle.adding} onClick={() => setPics([...pics, ''])}>+ Add more pictures</div> : ''}
+          )}
+
+          {pics.length < 5 ? <div style={{ cursor: 'pointer', ':hover': { color: 'red' } }} onClick={() => setPics([...pics, 'url'])}>+ Add more pictures</div> : 'Get more pictures with premium'}
+
+
           <br />
           <br />
           <br />
@@ -295,7 +319,7 @@ function AddNewRental() {
                 />
                 <br />
                 <FormControlLabel
-                  value={featureIds.pool}
+                  value={featureIds[7].pool}
                   control={<Switch color="primary" />}
                   label="Pool"
                   labelPlacement="end"
@@ -310,19 +334,93 @@ function AddNewRental() {
                   onChange={(e, val) => featureIds[8].parking = val}
                 />
               </label>
+              <br />
+              <br />
               <label>
                 Do you wanna make this a special offer?
               <FormControlLabel
-                value={isOffer}
-                control={<Switch color="primary" />}
-                label="Offer"
-                labelPlacement="end"
-                onChange={(e, val) => setIsOffer(val)}
+                  value={isOffer}
+                  control={<Switch color="primary" />}
+                  label={isOffer ? 'Yes' : 'No'}
+                  labelPlacement="end"
+                  onChange={(e, val) => { setIsOffer(val); setNumOfRanges(1); }}
                 />
               </label>
             </FormGroup>
           </FormControl>
-  
+          <br />
+          <br />
+          {ranges.map((r, i) => {
+            <label key={'d' + i}>
+              Your {isOffer ? '' : i == 1 ? 'first' : i == 2 ? 'second' : 'third'} availablitity range
+             <input
+                required
+                name="startDate"
+                value={'Start date: ' + r.startDate.toDateString()}
+                onChange={(e) => console.log('What is the new start date ', i, e.target.value)}
+                onClick={() => { (i == 0 ? setShowCalOne(!showCalOne) : i == 1 ? setShowCalTwo(!showCalTwo) : setShowCalThree(!showCalThree)); console.log('im clicking to show cal') }}
+                style={modalStyle.input} key={'e' + i}>
+              </input>
+              <input
+                required
+                disabled
+                name="endDate"
+                value={'End date: ' + r.endDate.toDateString()}
+                onChange={(e) => console.log('What is the new end date', i, e.target.value)}
+                style={modalStyle.input} key={'f' + i}>
+              </input>
+            </label>
+          }
+          )
+          }
+          {/* <label key={'d' + numOfRanges}>
+                Your {isOffer ? '' : numOfRanges == 1 ? 'first' : numOfRanges == 2 ? 'second' : 'third'} availablitity range
+                <input
+                  required
+                  name="startDate"
+                  value={'Start date: ' + range[0].startDate.toDateString()}
+                  onChange={(e) => console.log('What is the new start date', e.target.value)}
+                  onClick={() => { setShowCalOne(!showCalOne); console.log('im clicking to show cal') }}
+                  style={modalStyle.input} key="33">
+                </input>
+                <input
+                  required
+                  disabled
+                  name="endDate"
+                  value={'End date: ' + range[0].endDate.toDateString()}
+                  onChange={(e) => console.log('What is the new end date', e.target.value)}
+                  style={modalStyle.input} key="35">
+                </input> */}
+          {showCalOne ? <DateRange
+            minDate={new Date()}
+            showPreview={true}
+            onChange={item => handleSelect(item.selection)}
+            moveRangeOnFirstSelection={false}
+            showDateDisplay={false}
+            showMonthAndYearPickers={false}
+            weekStartsOn={1}
+            ranges={ranges[0]}
+          /> : showCalTwo ? <DateRange
+            minDate={ranges[0].endDate}
+            showPreview={true}
+            onChange={item => handleSelect(item.selection)}
+            moveRangeOnFirstSelection={false}
+            showDateDisplay={false}
+            showMonthAndYearPickers={false}
+            weekStartsOn={1}
+            ranges={ranges[1]}
+          /> : showCalThree ? <DateRange
+            minDate={ranges[1].endDate}
+            showPreview={true}
+            onChange={item => handleSelect(item.selection)}
+            moveRangeOnFirstSelection={false}
+            showDateDisplay={false}
+            showMonthAndYearPickers={false}
+            weekStartsOn={1}
+            ranges={ranges[2]}
+          /> : ''}
+          {numOfRanges < 3 && !isOffer ? <div>+ Add more date ranges</div> : ''}
+
           <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="15">Create rental</button>
         </form>
       </div>
@@ -392,7 +490,7 @@ const modalStyle = {
   },
   adding: {
     cursor: 'pointer',
-    ':hover': { 
+    ':hover': {
       color: "red"
     }
   }
