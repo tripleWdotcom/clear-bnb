@@ -100,9 +100,9 @@ module.exports = (app, models) => {
         docs.filter(function (house) {
           checkBookingCollection.filter(function (booking) {
             if (!house._id.equals(booking.houseId)) {
-              console.log("1", (house._id.equals(booking.houseId)))
+           /*    console.log("1", (house._id.equals(booking.houseId)))
               console.log("2", house._id)
-              console.log("3", booking.houseId)
+              console.log("3", booking.houseId) */
               filtered.push(house)
             }
           })
@@ -136,9 +136,9 @@ module.exports = (app, models) => {
         docs.filter(function (house) {
           checkBookingCollection.filter(function (booking) {
             if (!house._id.equals(booking.houseId)) {
-              console.log("1", (house._id.equals(booking.houseId)))
+            /*   console.log("1", (house._id.equals(booking.houseId)))
               console.log("2", house._id)
-              console.log("3", booking.houseId)
+              console.log("3", booking.houseId) */
               filtered.push(house)
             }
           })

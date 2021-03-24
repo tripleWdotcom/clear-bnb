@@ -11,11 +11,16 @@ const House = mongoose.model('House', {
   pics: [String],
   bedrooms: Number,
   price: Number,
+  isOffer:Boolean,
   bathroom: Number,
   featureIds: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Feature'
   }],
+/*   dateRange: [{
+    availableStart: Number,
+    availableEnd: Number
+  }], */
   availableStart: Number,
   availableEnd: Number,
   userId: {
