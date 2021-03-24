@@ -26,15 +26,15 @@ function AddNewRental() {
   const [beds, setBeds] = useState(0);
   const [price, setPrice] = useState(0);
   const [featureIds, setFeatureIds] = useState([
-    { wifi: false },
-    { tv: false },
-    { breakfast: false },
-    { gym: false },
-    { kitchen: false },
-    { smoking: false },
-    { animalFriendly: false },
-    { pool: false },
-    { parking: false }
+    { name: 'wifi', value: 'false' },
+    { name: 'tv', value: false },
+    { name: 'breakfast', value: false },
+    { name: 'gym', value: false },
+    { name: 'kitchen', value: false },
+    { name: 'smoking', value: false },
+    { name: 'animalFriendly', value: false },
+    { name: 'pool', value: false },
+    { name: 'parking', value: false }
   ]);
   const [isOffer, setIsOffer] = useState(false)
   const [numOfRanges, setNumOfRanges] = useState(1)
@@ -138,10 +138,16 @@ function AddNewRental() {
       };
         break;
     }
-    console.log('the new range is', ranges)
-    // setRange(range[0] = [ranges])
   }
 
+  const updateAmenities = (newValue, name) => {
+    featureIds.map((f, i) => {
+      if (f.name === name) {
+        featureIds[i].value = newValue
+        return;
+      }
+    })
+  }
 
 
 
@@ -211,19 +217,7 @@ function AddNewRental() {
               style={modalStyle.input} key="10">
             </input>
           </label>
-          {/* <label>
-            Select how many pictures you want to upload.
-            <h5>Want to upload more than 5 pictures? Get premium</h5>
-            <select
-              style={modalStyle.input} key="77"
-              onChange={(e) => setNumOfPics(e.target.value)}>
-              <option value="1" selected>1 picture</option>
-              <option value="2">2 pictures</option>
-              <option value="3">3 pictures</option>
-              <option value="4">4 pictures</option>
-              <option value="5">5 pictures</option>
-            </select>
-          </label> */}
+
           <label style={modalStyle.label} key="88">
             Pictures
              </label>
@@ -244,7 +238,6 @@ function AddNewRental() {
           )}
 
           {pics.length < 5 ? <div style={{ cursor: 'pointer', ':hover': { color: 'red' } }} onClick={() => setPics([...pics, 'url'])}>+ Add more pictures</div> : 'Get more pictures with premium'}
-
 
           <br />
           <br />
@@ -284,77 +277,21 @@ function AddNewRental() {
               <label style={modalStyle.label} key="12">
                 Amenities
              <br />
-                <FormControlLabel
-                  value={featureIds[0].wifi}
-                  control={<Switch color="primary" />}
-                  label="Wifi"
-                  labelPlacement="end"
-                  onChange={(e, val) => featureIds[0].wifi = val}
-                />
-                <br />
-                <FormControlLabel
-                  value={featureIds[1].tv}
-                  control={<Switch color="primary" />}
-                  label="Tv"
-                  labelPlacement="end"
-                  onChange={(e, val) => featureIds[1].tv = val}
-                />
-                <br />
-                <FormControlLabel
-                  value={featureIds[2].breakfast}
-                  control={<Switch color="primary" />}
-                  label="Breakfast"
-                  labelPlacement="end"
-                  onChange={(e, val) => featureIds[2].breakfast = val}
-                />
-                <br />
-                <FormControlLabel
-                  value={featureIds[3].gym}
-                  control={<Switch color="primary" />}
-                  label="Gym"
-                  labelPlacement="end"
-                  onChange={(e, val) => featureIds[3].gym = val}
-                />
-                <br />
-                <FormControlLabel
-                  value={featureIds[4].kitchen}
-                  control={<Switch color="primary" />}
-                  label="Kitchen"
-                  labelPlacement="end"
-                  onChange={(e, val) => featureIds[4].kitchen = val}
-                />
-                <br />
-                <FormControlLabel
-                  value={featureIds[5].smoking}
-                  control={<Switch color="primary" />}
-                  label="Smoking"
-                  labelPlacement="end"
-                  onChange={(e, val) => featureIds[5].smoking = val}
-                />
-                <br />
-                <FormControlLabel
-                  value={featureIds[6].animalFriendly}
-                  control={<Switch color="primary" />}
-                  label="Animal friendly"
-                  labelPlacement="end"
-                  onChange={(e, val) => featureIds[6].animalFriendly = val}
-                />
-                <br />
-                <FormControlLabel
-                  value={featureIds[7].pool}
-                  control={<Switch color="primary" />}
-                  label="Pool"
-                  labelPlacement="end"
-                  onChange={(e, val) => featureIds[7].pool = val}
-                />
-                <br />
-                <FormControlLabel
-                  value={featureIds[8].parking}
-                  control={<Switch color="primary" />}
-                  label="Parking"
-                  labelPlacement="end"
-                  onChange={(e, val) => featureIds[8].parking = val}
-                />
+
+                {featureIds.map((f, i) => (
+                  <>
+                    <FormControlLabel
+                      value={f.value}
+                      control={<Switch color="primary" />}
+                      label={f.name}
+                      labelPlacement="end"
+                      onChange={(e, val) => updateAmenities(val, f.name)}
+                      key={'n' + i}
+                    />
+                    <br />
+                  </>
+                )
+                )}
               </label>
               <br />
               <br />
@@ -407,27 +344,8 @@ function AddNewRental() {
             startDate: new Date(),
             endDate: new Date(),
             key: 'selection',
-          }])}>+ Add more date ranges</div> : 'Get more date ranges with premium'}
+          }])}>+ Add more date ranges</div> : !isOffer ? 'Get more date ranges with premium' : ''}
 
-
-          {/* <label key={'d' + numOfRanges}>
-                Your {isOffer ? '' : numOfRanges == 1 ? 'first' : numOfRanges == 2 ? 'second' : 'third'} availablitity range
-                <input
-                  required
-                  name="startDate"
-                  value={'Start date: ' + range[0].startDate.toDateString()}
-                  onChange={(e) => console.log('What is the new start date', e.target.value)}
-                  onClick={() => { setShowCalOne(!showCalOne); console.log('im clicking to show cal') }}
-                  style={modalStyle.input} key="33">
-                </input>
-                <input
-                  required
-                  disabled
-                  name="endDate"
-                  value={'End date: ' + range[0].endDate.toDateString()}
-                  onChange={(e) => console.log('What is the new end date', e.target.value)}
-                  style={modalStyle.input} key="35">
-                </input> */}
           {showCalOne ? <DateRange
             className="calOne"
             minDate={new Date()}
@@ -459,7 +377,6 @@ function AddNewRental() {
             weekStartsOn={1}
             ranges={[ranges[2]]}
           /> : ''}
-
 
           <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="15">Create rental</button>
         </form>
