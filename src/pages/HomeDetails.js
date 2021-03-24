@@ -1,11 +1,34 @@
 import Media from 'react-media';
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
+import { Dots } from '@brainhubeu/react-carousel';
 
 const Popup = (props) => {
 
+  const thumbnailsIo = {
+  value: 0,
+    slides: [
+      (<img style={styles.gallery} src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" />),
+      (<img style={styles.gallery} src="https://www.lux-review.com/wp-content/uploads/2020/02/luxury-bathroom.jpg" />),
+      (<img style={styles.gallery} src="https://cdn.bigbathroomshop.co.uk/media/catalog/product/cache/07469e52453ec3e9e92a88c7a63b12d8/b/c/bctbw102_ls_1000_2.jpg" />),
+    ],
+      thumbnails: [
+        (<img style={styles.thumbnails} src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" />),
+        (<img style={styles.thumbnails} src="https://www.lux-review.com/wp-content/uploads/2020/02/luxury-bathroom.jpg" />),
+        (<img style={styles.thumbnails} src="https://cdn.bigbathroomshop.co.uk/media/catalog/product/cache/07469e52453ec3e9e92a88c7a63b12d8/b/c/bctbw102_ls_1000_2.jpg" />),
+      ],
+    }
+   onchange = onchange.bind(this);
+
+  function onchange(value) {
+    this.setThumbnailsIo({ value });
+  }
+
+
+
   return (props.trigger) ? (
 
+    
 
     <div className="popup" style={styles.popup}>
     
@@ -30,23 +53,25 @@ const Popup = (props) => {
                 
                 <div className="gallery" >
 
-                  <Carousel>
-                    <div>
+                  <Carousel value={thumbnailsIo.value}
+                    slides={thumbnailsIo.slides}
+                    onChange={thumbnailsIo.onchange} />
+                    {/* <div>
                       <h3>House</h3>
-                    <img style={styles.gallery} src="https://markstewart.com/wp-content/uploads/2020/04/MARK-STEWART-SKINNY-MODERN-HOUSE-PLAN-MM-1251-FRONT--scaled.jpg" />
+                      <img style={styles.gallery} src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" />
                     </div>
 
                     <div>
-                      <h3>House</h3>
-                    <img style={styles.gallery} src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" />
+                      <h3>Bathroom</h3>
+                      <img style={styles.gallery} src="https://www.lux-review.com/wp-content/uploads/2020/02/luxury-bathroom.jpg" />
                     </div>
 
                     <div>
                       <h3>Toilet</h3>
                     <img style={styles.gallery} src="https://cdn.bigbathroomshop.co.uk/media/catalog/product/cache/07469e52453ec3e9e92a88c7a63b12d8/b/c/bctbw102_ls_1000_2.jpg" />
-                    </div>
+                    </div> */}
 
-                  </Carousel>
+                  <Dots number={thumbnailsIo.length} thumbnails={thumbnailsIo.thumbnails} value={thumbnailsIo.value} onChange={thumbnailsIo.onchange} number={thumbnailsIo.slides.length} />
 
                 </div>
 
@@ -109,6 +134,11 @@ const styles = {
     width: 'auto',
     height: '500px',
    
+  },
+
+  thumbnails: {
+    width: 'auto',
+    height: '100px',
   }
 
 }
