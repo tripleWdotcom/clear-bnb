@@ -23,11 +23,12 @@ function MyRentals() {
   (
     <Grid item xs style={style.item} key={"a" + i}>
       <img style={style.img} key={"b" + i} src={r.pics[0]} />
+      {r.isOffer ? <div style={style.offer} key={"f" + i}><div style={style.offerText} key={"g" + i}>Special offer</div></div> : ''}
       <div style={style.info} key={"c" + i}>
         <div style={style.infoText} key={"d" + i}>
           <h3>{r.city}</h3>
-          <a>{new Date(r.availableStart * 1000).toLocaleString().substr(0, 11)} - {new Date(r.availableEnd * 1000).toLocaleString().substr(0, 11)}
-          </a>
+          {r.dateRanges.length < 2 ? <a>{new Date(r.dateRanges[0].startDate).toString().substr(3, 13)}
+          - {new Date(r.dateRanges[0].endDate).toString().substr(3, 13)}</a> : <a>Multiple date ranges</a>}
           <br />
           <br />
           <a style={style.infoMore} key={"e" + i}>
@@ -82,6 +83,21 @@ const style = {
     margin: '5px 0 5px 10px',
     lineHeight: '150%',
     letterSpacing: '5px',
+  },
+  offer: {
+    position: 'absolute',
+    width: '120px',
+    height: '30px',
+    top: '10px',
+    backgroundColor: 'crimson',
+    borderTopLeftRadius: '20px',
+    borderBottomRightRadius: '20px',
+  },
+  offerText: {
+    margin: '6px 0 5px 12px',
+    fontFamily: 'Roboto, sans-serif',
+    fontWeight: '300px',
+    fontSize: '15px'
   },
   noBook: {
     marginTop: '60px'
