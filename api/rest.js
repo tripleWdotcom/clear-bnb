@@ -92,25 +92,29 @@ module.exports = (app, models) => {
           { $and: [{ availableStart: { $lt: b.availableStart } }] },
           { city: b.city }
         ]
-      }).populate(['userId', 'featureIds']).exec()
+      }).populate(['userId', 'featureIds']).lean().exec()
 
       if (doIt) {
-        //let c = await docs.filter(x => !checkBookingCollection.filter(y => y.houseId === x._id).length);
-        let c = docs.filter(function (objFromH) {
-          let result= !checkBookingCollection.find(function (objFromB) {
-            console.log("check the ids B and H", objFromB.houseId, objFromH._id)
-            return objFromH._id === objFromB.houseId
-          });
-          console.log("line 103",result)
-          return result
-        })
-       
-        res.json(c)
+        //let c = docs.filter(x => !checkBookingCollection.filter(y => y.houseId === x._id).length);
+        let filtered = [];
+        docs.filter(function (house) {
+          return checkBookingCollection.filter(function (booking) {
+            if (house._id !== booking.houseId) {
+              console.log("1",(house._id !== booking.houseId))
+              console.log("2",house._id)
+              console.log("3",booking.houseId)
+              filtered.push(house)
+            }
+          })
+        });
+        return;
       }
-      else {
+      else {       
+        console.log(docs)
         res.json(docs)
+        return;
       }
-      return;
+    
     } else {
       // With checkbox filters
       let docs = await model.find({
