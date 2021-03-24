@@ -1,6 +1,7 @@
 import Radium from 'radium'
 import { useState, useContext } from 'react'
 import { HouseContext } from '../../contexts/HouseContext'
+import { UserContext } from '../../contexts/UserContext'
 import Slider from '@material-ui/core/Slider'
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -10,18 +11,19 @@ import { useEffect } from 'react';
 
 function AddNewRental() {
   const { addNewRental } = useContext(HouseContext)
-  const [firstName, setFirstName] = useState("The logged in user");
-  const [lastName, setLastName] = useState("The logged in user");
-  const [email, setEmail] = useState("The logged in user");
-  const [userId, setUserId] = useState("The logged in user");
+  const { isLoggedIn } = useContext(UserContext)
+  // const [firstName, setFirstName] = useState();
+  // const [lastName, setLastName] = useState("The logged in user");
+  // const [email, setEmail] = useState("The logged in user");
+  // const [userId, setUserId] = useState("The logged in user");
 
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [description, setDescription] = useState("");
   const [slogan, setSlogan] = useState("");
   const [adress, setAdress] = useState("");
-  const [pics, setPics] = useState([]);
-  const [numOfPics, setNumOfPics] = useState(['h'])
+  const [pics, setPics] = useState(['']);
+  // const [numOfPics, setNumOfPics] = useState(['h'])
   const [beds, setBeds] = useState(0);
   const [price, setPrice] = useState(0);
   const [featureIds, setFeatureIds] = useState([
@@ -35,18 +37,19 @@ function AddNewRental() {
     { pool: false },
     { parking: false }
   ]);
-  const [availableStart, setAvailableStart] = useState(0);
-  const [availableEnd, setAvailableEnd] = useState(0);
+  const [isOffer, setIsOffer] = useState(false)
+  const [availableStart, setAvailableStart] = useState([]);
+  const [availableEnd, setAvailableEnd] = useState([]);
 
 
   const handleSubmit = async e => {
     console.log('Add new rental button clicked!')
 
     console.log(`
-      FirstName: ${firstName} 
-      LastName: ${lastName}
-      Email: ${email}
-      UserId: ${userId}
+      FirstName: ${isLoggedIn[0].firstName} 
+      LastName: ${isLoggedIn[0].lastName}
+      Email: ${isLoggedIn[0].email}
+      UserId: ${isLoggedIn[0]._id}
       City: ${city}
       Country: ${country}
       Slogan: ${slogan}
@@ -183,24 +186,21 @@ function AddNewRental() {
             </input>
           </label>
 
-          {numOfPics.map((n, i) =>
+          {pics.map((n, i) =>
             <label style={modalStyle.label} key={'a' + i}>
               Picture link
               <input
                 required
                 name="url"
                 type="url"
-                onChange={(e) => setPics([...pics, e.target.value])}
+                onChange={(e) => pics[i] = e.target.value}
                 style={modalStyle.input} key={'b' + i}>
               </input>
             </label>
           )
           }
-
-          <div onClick={() => setNumOfPics([...numOfPics, ...'h'])}>+ Add more pics</div>
+          {pics.length < 5 ? <div style={ modalStyle.adding} onClick={() => setPics([...pics, ''])}>+ Add more pictures</div> : ''}
           <br />
-
-
           <br />
           <br />
           <br />
@@ -310,8 +310,19 @@ function AddNewRental() {
                   onChange={(e, val) => featureIds[8].parking = val}
                 />
               </label>
+              <label>
+                Do you wanna make this a special offer?
+              <FormControlLabel
+                value={isOffer}
+                control={<Switch color="primary" />}
+                label="Offer"
+                labelPlacement="end"
+                onChange={(e, val) => setIsOffer(val)}
+                />
+              </label>
             </FormGroup>
           </FormControl>
+  
           <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="15">Create rental</button>
         </form>
       </div>
@@ -378,6 +389,12 @@ const modalStyle = {
   },
   removePicField: {
     color: 'red'
+  },
+  adding: {
+    cursor: 'pointer',
+    ':hover': { 
+      color: "red"
+    }
   }
 }
 
