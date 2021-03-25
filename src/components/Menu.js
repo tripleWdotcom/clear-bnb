@@ -1,71 +1,76 @@
-import React, { useState } from 'react';
-import onClickOutside from 'react-onclickoutside';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useHistory } from "react-router-dom";
-import MyPages from '../pages/MyPages.js'
-import MyAccount from '../pages/MyAccount.js'
+import Radium from 'radium'
+import { useEffect, useState } from 'react'
+import Hidden from '@material-ui/core/Hidden'
+import Grid from '@material-ui/core/Grid'
 
-function Menu() {
-  const [OpenMyPages, setOpen] = useState(false);
-  const toggle = () => setOpen(!OpenMyPages)
-  Menu.handleClickOutside = () => setOpen(false);
- 
-  function handleOnClick(item) {
-    if (item === 1) {
-       <Route>
-        <Switch>
-         <Route exact path="/mypages" component={MyPages} />
-        </Switch>
-       </Route >
-    } else if (item === 2) {
-      <Route>
-        <Switch>
-          <Route exact path="/myaccount" component={MyAccount} />
-        </Switch> 
-      </Route>
-    }
+
+function MenuContainer(props) {
+
+  const sendNewAction = (newAction) => {
+    props.getNewAction(newAction)
   }
- 
-  return (    
-    <div className="dd-wrapper">
-      <div
-        tabIndex={0}
-        className="dd-header"
-        onKeyPress={() => toggle(!OpenMyPages)}
-        onClick={() => toggle(!OpenMyPages)}
-        style={menuStyle}
-      >
-        <div className="dd-header_action">
-          <p>{OpenMyPages ? 'Close My Pages' : 'My Pages'}</p>
-        </div>
-      </div>
-      {OpenMyPages && (
-        <div className="myPages-sub-menu">
-          <p className="routerLinks" onClick={() => handleOnClick(1)}>My pages</p>
-          <p className="routerLinks" onClick={() => handleOnClick(2)}>My Account</p>
-          <p className="routerLinks" onClick={() => handleOnClick(3)}>Log Out</p>
-        </div >
-      )}
-      </div>
-  )  
+
+  return (
+    <>
+      <Hidden smUp>
+        <Grid container direction="column" style={style.containerMobile} key="1" justify="space-around">
+          <Grid item xs>
+            <h4 style={style.titleMobile} key="2" onClick={() => { sendNewAction('showBookings') }}>My bookings</h4>
+          </Grid>
+          <Grid item xs><h4 style={style.titleMobile} key="3" onClick={() => { sendNewAction('showRentals') }}>My Rentals</h4></Grid>
+          <Grid item xs><h4 style={style.titleMobile} key="4" onClick={() => { sendNewAction('showNewRental') }}>Add new rental</h4></Grid>
+        </Grid>
+      </Hidden>
+
+      <Hidden xsDown>
+        <Grid container spacing={3} direction="column" style={style.containerDesktop} key="5">
+          <Grid item xs>
+            <h3 style={style.titleDesktop} key="6" onClick={() => { sendNewAction('showBookings') }}>My bookings</h3>
+          </Grid>
+          <Grid item xs><h3 style={style.titleDesktop} key="7" onClick={() => { sendNewAction('showRentals') }}>My rentals</h3></Grid>
+          <Grid item xs><h3 style={style.titleDesktop} key="8" onClick={() => { sendNewAction('showNewRental') }}>Add new rental</h3></Grid>
+        </Grid>
+      </Hidden>
+
+
+
+
+    </>
+  )
 }
 
-const clickOutsideConfig = {
-  handleClickOutside:() => Menu.handleClickOutside
-}
+export default Radium(MenuContainer)
 
-const menuStyle = {
-  
-  'p': {
-    margin: '1em',
+const style = {
+  color: 'white',
+  containerMobile: {
+    backgroundColor: 'purple',
+    zIndex: '10',
+    position: 'fixed',
+    right: '0',
+  },
+  titleMobile: {
+    padding: '10px 5px 10px 5px',
+    color: 'black',
+    cursor: 'pointer',
+    margin: '0 1px',
+    ':hover': {
+      color: 'white',
+    },
+  },
+  containerDesktop: {
+    marginTop: '45px',
+    padding: '20px',
+    borderRadius: '20px',
+  },
+  titleDesktop: {
+    color: 'black',
     cursor: 'pointer',
     ':hover': {
-      color: 'rgba(255, 166, 0, 0.664)'
+      color: 'white'
+    },
+    ':target': {
+      color: 'red'
     }
-  }
-
+  },
 }
-
-export default onClickOutside(Menu, clickOutsideConfig);
-
-

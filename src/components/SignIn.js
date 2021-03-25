@@ -21,7 +21,7 @@ function SignIn(props) {
 
   const handleSubmit = async e => {
     console.log('Login button clicked!')
-
+    
     console.log(`
       Email: ${email}
       Password: ${password}

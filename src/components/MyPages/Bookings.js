@@ -1,17 +1,88 @@
+import { useEffect, useContext } from 'react';
+import { BookingContext } from '../../contexts/BookingContext'
+import { UserContext } from '../../contexts/UserContext'
+import Radium from 'radium'
+import Grid from '@material-ui/core/Grid'
+
 
 function Bookings() {
+  const { myBookings, fetchMyBookingsByUserId, deleteBookingById } = useContext(BookingContext)
+  const {isLoggedIn} = useContext(UserContext)
+
+  useEffect(async () => {
+    console.log('Something has changed in my bookings')
+    await fetchMyBookingsByUserId(isLoggedIn[0]._id)
+  }, [])
+
+  useEffect(() => {
+    console.log('My bookings is now', myBookings)
+  }, [myBookings])
+
+  const structureBookings = (b, i) =>
+  (
+    <Grid item xs style={style.item} key={"a" + i}>
+      <img style={style.img} key={"b" + i} src={b.houseId.pics[0]} />
+      <div style={style.info} key={"c" + i}>
+        <div style={style.infoText} key={"d" + i}>
+          <h3>{b.houseId.city}</h3>
+          <a>{new Date(b.startDate * 1000).toLocaleString().substr(0, 11)} - {new Date(b.endDate * 1000).toLocaleString().substr(0, 11)}
+          </a>
+          <br />
+          <br />
+          <a style={style.infoMore} key={"e" + i}>
+            See more details...
+          </a>
+        </div>
+      </div>
+    </Grid>
+  )
+
   return (
     <div className="Bookings">
-      <h2>My Bookings Page</h2>
-      <p>What is Lorem Ipsum?
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-
-      Why do we use it?
-      It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-
- </p>
+      <Grid container direction="column" alignItems="center">
+        <h2>My Bookings Page</h2>
+        {myBookings.length > 0 ? myBookings.map((b, i) => structureBookings(b, i)) : <h3 style={style.noBook}>Here will your future bookings be...</h3>}
+      </Grid>
     </div>
   )
 }
 
-export default Bookings;
+export default Radium(Bookings);
+
+const style = {
+  item: {
+    position: 'relative',
+    margin: '5px',
+    padding: '10px',
+  },
+  img: {
+    width: '300px',
+    height: 'auto',
+    borderRadius: '20px',
+    boxShadow: '0 8px 6px -6px black',
+  },
+  info: {
+    position: 'absolute',
+    backgroundColor: 'rgba(255,255,255, 0.8)',
+    width: '300px',
+    height: '60px',
+    bottom: '14px',
+    borderBottomLeftRadius: '20px',
+    borderBottomRightRadius: '20px',
+    transition: 'all 500ms ease-in-out',
+    overflow: 'hidden',
+    ':hover': {
+      height: '110px',
+      cursor: 'pointer',
+      transition: 'all 500ms ease-in-out'
+    }
+  },
+  infoText: {
+    margin: '5px 0 5px 10px',
+    lineHeight: '150%',
+    letterSpacing: '5px',
+  },
+  noBook: {
+    marginTop: '60px'
+  }
+}

@@ -29,7 +29,6 @@ function SignUp(props) {
       Password2: ${password2}
     `);
 
-
     e.preventDefault()
 
 

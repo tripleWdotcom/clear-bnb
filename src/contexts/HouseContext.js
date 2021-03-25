@@ -13,6 +13,7 @@ export default function HouseContextProvider(props) {
   const [myRentals, setMyRentals] = useState([])
   const [housesByCityTemp, setHousesByCityTemp] = useState([]) //Temp will be dates later
   const [housesByCityAndDate, setHousesByCityAndDate] = useState([]) //Temp will be dates later
+  const [offers, setOffers] = useState([])
 
 
 
@@ -71,6 +72,21 @@ export default function HouseContextProvider(props) {
     setHousesByCityAndDate(res);
   }
 
+  // const addNewRentalOffer = async newRentalOffer => {
+  //   let res = await fetch('/rest/offers', {
+  //     method: 'POST',
+  //     headers: { 'content-type': 'application/json' },
+  //     body: JSON.stringify(newRentalOffer)
+  //   })
+  //   res = await res.json()
+  //   newRentalOffer._id = res._id
+  //   // Append a new house to the reactive house list
+  //   // to trigger reactivity we replace the old list with a new 
+  //   // by spreading the old list (a copy of it) and adding the new house
+  //   setOffers([...offers, newRentalOffer])
+  //   setMyRentals([...myRentals, newRentalOffer])
+  // }
+
   // Add a new rental and spread it.
   const addNewRental = async newRental => {
     let res = await fetch('/rest/houses', {
@@ -95,8 +111,23 @@ export default function HouseContextProvider(props) {
     res = await res.json()
     let index = myRentals.indexOf(res)
     myRentals.splice(index, 1)
-
   }
+
+  // Remove offer when booked
+  // const removeRentalOfferById = async rentalOfferId => {
+  //   let res = await fetch('/rest/houses/' + rentalOfferId, {
+  //     method: 'DELETE',
+  //     headers: { 'content-type': 'application/json' },
+  //   })
+  //   res = await res.json()
+
+  //   let indexOffer = offers.indexOf(res)
+  //   offers.splice(indexOffer, 1)
+
+  //   let index = myRentals.indexOf(res)
+  //   myRentals.splice(index, 1)
+
+  // }
   
   // The values we want the children components to reach and be able to use
   const values = {

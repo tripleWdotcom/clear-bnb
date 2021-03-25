@@ -10,8 +10,7 @@ function Modal(props) {
   const [isShowSignUp, setIsShowSignUp] = useState(false)
 
   useEffect(async () => {
-
-    if (isLoggedIn.length > 0) {
+    if (!Array.isArray(isLoggedIn)) {
       setIsShowSignUp(false)
     }
   }, [isLoggedIn])
