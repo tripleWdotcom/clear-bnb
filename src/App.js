@@ -4,11 +4,11 @@ import FeatureContextProvider from './contexts/FeatureContext'
 import HouseContextProvider from './contexts/HouseContext'
 import BookingContextProvider from './contexts/BookingContext'
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import Home from './pages/Home';
 import HomeResults from './pages/HomeResults'
-//import MemberPage from './components/MemberPage.js'
 import MyPage from './pages/MyPage.js'
+import React, { useState,useEffect } from 'react'
+import Footer from './components/Footer';
 
 
 
@@ -20,7 +20,25 @@ function App() {
   const page404 = () => (
     <h1>Page not found: {window.location.pathname}</h1>
   )
-  // localStorage.clear() // we might need to add/remove later
+  
+  const [dimensions, setDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth
+  })
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const handleResize = (e) => {
+    setDimensions({
+      height: window.innerHeight,
+      width: window.innerWidth
+    })
+  };
 
   return (
     <div className="App">
@@ -33,7 +51,7 @@ function App() {
 
                 <Router>
                   <header className={true ? 'App-Header' : ''}>
-                    <Navbar />
+                    {dimensions.width >= 700 ? <Navbar /> : ''}
                   </header>
                   <main className="content">
                     <Switch>
@@ -44,8 +62,8 @@ function App() {
                     </Switch>
                   </main>
 
-                  <footer className={true ? 'App-Footer' : ''}>npm 
-                    <Footer />
+                  <footer className={true ? 'App-Footer' : ''}>
+                    {dimensions.width < 700 ? <Footer /> : ''}
                   </footer>
 
                 </Router>

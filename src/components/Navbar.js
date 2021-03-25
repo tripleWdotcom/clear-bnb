@@ -58,32 +58,30 @@ const Navbar = () => {
 
   return (
     <>
-      <Hidden xsDown >
-        <nav className="navbar" style={styles.navbar}>
+      <nav className="navbar" style={styles.navbar}>
 
-          <h1 style={{
-            color: "crimson"
-          }}>ClearBnB</h1>
+        <h1 style={{
+          color: "crimson"
+        }}>ClearBnB</h1>
 
-          <div className="links"
-            style={{
-              marginLeft: 'auto'
-            }}>
-            <a style={styles.home} onClick={goHome}>Home</a>
-            {isUserLoggedIn && !showModal ? <a style={styles.userName} onClick={() => { toggleShowMyPage() }}>Hej {isLoggedIn[0].firstName}</a> : ''}
-            {!isUserLoggedIn ? <a style={styles.signIn} onClick={() => { signInModal() }}>Sign In</a> : <a style={styles.signIn} onClick={logOut}>Log out</a>}
-          </div>
-          {showModal ? <Modal closeModal={() => setShowModal(false)} /> : ''}
-          {showMyPage ? <MemberPage /> : ''}
-        </nav>
-      </Hidden>
+        <div className="links"
+          style={{
+            marginLeft: 'auto'
+          }}>
+          <a style={styles.home} onClick={goHome}>🏠Home</a>
+          {isUserLoggedIn && !showModal ? <a style={styles.userName} onClick={() => { toggleShowMyPage() }}>Hej {isLoggedIn[0].firstName}</a> : ''}
+          {!isUserLoggedIn ? <a style={styles.signIn} onClick={() => { signInModal() }}>Sign In</a> : <a style={styles.signIn} onClick={logOut}>Log out</a>}
+        </div>
+        {showModal ? <Modal closeModal={() => setShowModal(false)} /> : ''}
+        {showMyPage ? <MemberPage /> : ''}
+      </nav>
 
     </>
   )
 }
 
 const styles = {
-
+  
   navbar: {
 
     padding: '20px',
