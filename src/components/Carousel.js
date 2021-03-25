@@ -16,7 +16,7 @@ const Ok= () => {
 
 
     <Carousel autoPlay showArrows={false} showThumbs={false} showIndicators={false} infiniteLoop={true} showStatus={false} 
-        transitionTime={1000} interval={5000}
+        transitionTime={1000} interval={5000} 
         >
           <div>
             <h1>Norway</h1>

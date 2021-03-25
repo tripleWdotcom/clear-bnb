@@ -1,11 +1,11 @@
 import Media from 'react-media';
 
 import '@brainhubeu/react-carousel/lib/style.css';
-import Radium from 'radium'
 import { Carousel } from "react-responsive-carousel";
 
 
 const Popup = (props) => {
+
 
   
 
@@ -43,30 +43,30 @@ const Popup = (props) => {
                 
                 <div className="computerGallery" >
                   
-                  <Carousel showArrows={true} onChange={true} onClickItem={true} onClickThumb={true}>
+                  <Carousel thumbWidth={150} width={'70%'} >
 
-                    <div>
-                      <img src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" 
-                        style={styles.gallery}
-                      />
+                    <div >
+                      <img src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl"
+                        
+                      ></img>
                       <p className="house">House</p>
                     </div>
-                    <div>
+                    <div >
                       <img src="https://www.sheknows.com/wp-content/uploads/2018/12/grze9k17tibahlq3lvaf.jpeg" 
-                        style={styles.gallery}
+                       
                       />
                       <p className="bathroom">Bathroom</p>
                     </div>
                     <div>
                       <img src="https://media.designcafe.com/wp-content/uploads/2019/12/20235309/luxury-modern-bathroom-for-your-home.jpg" 
-                        style={styles.gallery}
+                      
                       />
                       <p className="toilet">Toilet</p>
                     </div>
-                    <div>
-                    </div>
-                  </Carousel>
+                    
+                    
 
+                  </Carousel>
                 </div>
 
         { props.children }
@@ -147,4 +147,4 @@ const styles = {
 
 }
 
-export default Radium(Popup);
+export default Popup;
