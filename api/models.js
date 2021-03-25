@@ -34,12 +34,18 @@ const House = mongoose.model('House', {
   pics: [String],
   bedrooms: Number,
   price: Number,
+  isOffer:Boolean,
   bathroom: Number,
   featureIds: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Feature'
   }],
-  dateRanges: [{}],
+   dateRanges: [{
+    availableStart: Number,
+    availableEnd: Number
+  }],
+/*   availableStart: Number,
+  availableEnd: Number, */
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
