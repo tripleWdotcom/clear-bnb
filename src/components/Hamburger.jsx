@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 
 const StyledBurger = styled.div`
@@ -14,14 +14,17 @@ const StyledBurger = styled.div`
     div {
       width: 2rem;
       height: 0.25rem;
-      background-color: #333;
+      background-color: ${({ open }) => open ? '#ccc' : '#333'};
       border-radius: 10px;
     }
 `;
 
 const Burger = () => {
-  return (
-    <StyledBurger>
+
+  const [open, setOpen] = useState(false)
+
+  return ( 
+    <StyledBurger open={open} onClick={() => setOpen(!open)}>
       <div />
       <div />
       <div />

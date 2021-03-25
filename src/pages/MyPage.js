@@ -6,6 +6,7 @@ import Radium from 'radium'
 import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 import Menu from '../components/Menu'
+import Burger from '../components/Hamburger.jsx'
 
 
 function MyPage() {
@@ -43,17 +44,20 @@ function MyPage() {
   //   setMenuShowing(content)
   // }
 
+  //<button onClick={toggleMenu}>Menu</button>
+
   return (
     <>
       <Hidden smUp>
         <Grid container style={style.container} wrap="nowrap" direction="column" key="1" justify="center">
-          <button onClick={toggleMenu}>Menu</button>
+          <Burger> </Burger>
           <Grid item xs>
-            {isMenuOpen ? <Menu getNewAction={changeAction} /> : ''}
+            {isMenuOpen ? <Burger getNewAction={changeAction} /> : ''}
             {action === 'showBookings' ? <Bookings /> : ''}
             {action === 'showRentals' ? <MyRentals /> : ''}
             {action === 'showNewRental' ? <AddNewRental setNewAction={changeAction} /> : ''}
-          </Grid>
+            </Grid>
+            
         </Grid>
       </Hidden>
 
