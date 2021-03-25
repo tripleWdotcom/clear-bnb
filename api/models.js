@@ -17,12 +17,12 @@ const House = mongoose.model('House', {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Feature'
   }],
-/*   dateRange: [{
+   dateRanges: [{
     availableStart: Number,
     availableEnd: Number
-  }], */
-  availableStart: Number,
-  availableEnd: Number,
+  }],
+/*   availableStart: Number,
+  availableEnd: Number, */
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

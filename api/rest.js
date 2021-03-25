@@ -62,7 +62,7 @@ module.exports = (app, models) => {
     // console.log("so what is feaurures here?:", featureIds)
     let model = models['houses']
 
-    let unixTimestamp = Math.floor(new Date().getTime())
+    let unixTimestamp = Math.floor(new Date().getTime()/1000)
 
     let doIt = false
 
@@ -83,13 +83,30 @@ module.exports = (app, models) => {
 
     if (!featureIds.length) {
       console.log("do it is :", doIt)
+      console.log("what is check in :",b.availableStart)
+      console.log("what is check OUT :", b.availableEnd)
+
       // Without any checkbox filters
+    /*   let docs = await model.find({
+        $and: [
+          { $and: [{ 'dateRanges.availableEnd': { $gt: unixTimestamp } }, { 'dateRanges.availableEnd': { $gt: b.availableEnd } }] },
+          { 'dateRanges.availableStart': { $lte: b.availableStart } },
+          { city: b.city }
+        ]
+      }).populate(['userId', 'featureIds']).lean().exec() */
+
       let docs = await model.find({
         $and: [
-          { $and: [{ bedrooms: { $lte: b.bedroomsMax } }, { bedrooms: { $gte: b.bedroomsMin } }] },
-          { $and: [{ price: { $lte: b.priceMax } }, { price: { $gte: b.priceMin } }] },
-          { $and: [{ availableEnd: { $gt: unixTimestamp } }, { availableEnd: { $gt: b.availableEnd } }] },
-          { $and: [{ availableStart: { $lt: b.availableStart } }] },
+          {
+            dateRanges:
+            {
+              $elemMatch: {
+                availableEnd: { $gt: unixTimestamp },
+                availableEnd: { $gte: b.availableEnd },
+                availableStart: { $lte: b.availableStart }
+              },
+            }
+          },
           { city: b.city }
         ]
       }).populate(['userId', 'featureIds']).lean().exec()
@@ -100,9 +117,9 @@ module.exports = (app, models) => {
         docs.filter(function (house) {
           checkBookingCollection.filter(function (booking) {
             if (!house._id.equals(booking.houseId)) {
-           /*    console.log("1", (house._id.equals(booking.houseId)))
-              console.log("2", house._id)
-              console.log("3", booking.houseId) */
+              /*    console.log("1", (house._id.equals(booking.houseId)))
+                 console.log("2", house._id)
+                 console.log("3", booking.houseId) */
               filtered.push(house)
             }
           })
@@ -119,26 +136,44 @@ module.exports = (app, models) => {
 
     } else {
       // With checkbox filters
+    /*   let docs = await model.find({
+        $and: [
+          { $and: [{ bedrooms: { $lte: b.bedroomsMax } }, { bedrooms: { $gte: b.bedroomsMin } }] },
+          { $and: [{ price: { $lte: b.priceMax } }, { price: { $gte: b.priceMin } }] },
+          { $and: [{ 'dateRanges.availableEnd': { $gt: unixTimestamp } }, { 'dateRanges.availableEnd': { $gt: b.availableEnd } }] },
+          { 'dateRanges.availableStart': { $lt: b.availableStart } },
+          { city: b.city },
+          { $and: featureIds }
+        ]
+      }).populate(['userId', 'featureIds']).exec() */
+      //console.log("populated?:", docs)
       let docs = await model.find({
         $and: [
           { $and: [{ bedrooms: { $lte: b.bedroomsMax } }, { bedrooms: { $gte: b.bedroomsMin } }] },
           { $and: [{ price: { $lte: b.priceMax } }, { price: { $gte: b.priceMin } }] },
-          { $and: [{ availableEnd: { $gt: unixTimestamp } }, { availableEnd: { $gt: b.availableEnd } }] },
-          { $and: [{ availableStart: { $lt: unixTimestamp } }, { availableStart: { $lt: b.availableStart } }] },
-          { city: b.city },
-          { $and: featureIds }
+          {
+            dateRanges:
+            {
+              $elemMatch: {
+                availableEnd: { $gt: unixTimestamp },
+                availableEnd: { $gte: b.availableEnd },
+                availableStart: { $lte: b.availableStart }
+              },
+            }
+          },
+          { city: b.city }
         ]
-      }).populate(['userId', 'featureIds']).exec()
-      //console.log("populated?:", docs)
+      }).populate(['userId', 'featureIds']).lean().exec()
+
       if (doIt) {
 
         let filtered = [];
         docs.filter(function (house) {
           checkBookingCollection.filter(function (booking) {
             if (!house._id.equals(booking.houseId)) {
-            /*   console.log("1", (house._id.equals(booking.houseId)))
-              console.log("2", house._id)
-              console.log("3", booking.houseId) */
+              /*   console.log("1", (house._id.equals(booking.houseId)))
+                console.log("2", house._id)
+                console.log("3", booking.houseId) */
               filtered.push(house)
             }
           })
