@@ -1,8 +1,10 @@
 import Media from 'react-media';
-import Carousel from '@brainhubeu/react-carousel';
+
 import '@brainhubeu/react-carousel/lib/style.css';
 import Radium from 'radium'
-import { slidesToShowPlugin } from '@brainhubeu/react-carousel';
+import { Carousel } from "react-responsive-carousel";
+
+
 const Popup = (props) => {
 
   
@@ -25,22 +27,8 @@ const Popup = (props) => {
           >close</button>
 
               <div className="mobileGallery">
-                <Carousel>
-                  <div>
-                    <h3>House</h3>
-                    <img style={styles.mobileGallery} src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" />
-                  </div>
-                  <div>
-                    <h3>Bathroom</h3>
-                    <img style={styles.mobileGallery} src="https://www.lux-review.com/wp-content/uploads/2020/02/luxury-bathroom.jpg" />
-                  </div>
+                
 
-                  <div>
-                    <h3>Toilet</h3>
-                    <img style={styles.mobileGallery} src="https://cdn.bigbathroomshop.co.uk/media/catalog/product/cache/07469e52453ec3e9e92a88c7a63b12d8/b/c/bctbw102_ls_1000_2.jpg" />
-                  </div>
-
-                </Carousel>
               </div>
 
 
@@ -54,47 +42,31 @@ const Popup = (props) => {
                 >close</button>
                 
                 <div className="computerGallery" >
-                  <Carousel>
-
-                     <div>
-                      <h3>House</h3>
-                      <img style={styles.gallery} src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" />
-                    </div>
+                  
+                  <Carousel showArrows={true} onChange={true} onClickItem={true} onClickThumb={true}>
 
                     <div>
-                      <h3>Bathroom</h3>
-                      <img style={styles.gallery} src="https://www.lux-review.com/wp-content/uploads/2020/02/luxury-bathroom.jpg" />
+                      <img src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" 
+                        style={styles.gallery}
+                      />
+                      <p className="house">House</p>
                     </div>
-
                     <div>
-                      <h3>Toilet</h3>
-                    <img style={styles.gallery} src="https://cdn.bigbathroomshop.co.uk/media/catalog/product/cache/07469e52453ec3e9e92a88c7a63b12d8/b/c/bctbw102_ls_1000_2.jpg" />
-                    </div> 
-                      
-                   
-
+                      <img src="https://www.sheknows.com/wp-content/uploads/2018/12/grze9k17tibahlq3lvaf.jpeg" 
+                        style={styles.gallery}
+                      />
+                      <p className="bathroom">Bathroom</p>
+                    </div>
+                    <div>
+                      <img src="https://media.designcafe.com/wp-content/uploads/2019/12/20235309/luxury-modern-bathroom-for-your-home.jpg" 
+                        style={styles.gallery}
+                      />
+                      <p className="toilet">Toilet</p>
+                    </div>
+                    <div>
+                    </div>
                   </Carousel>
 
-                  <div className="thumbnails" style={styles.thumbnailsContainer}>
-                    
-                      <img
-                      style={styles.thumbnails} 
-                      src="https://www.kontio.com/static/studio/pub/Models/Glass+House+talo+143/Glass+House+143.jpg?c=model_xl" 
-                     
-                      />
-                      
-                   
-
-                    
-                      <img style={styles.thumbnails} src="https://www.lux-review.com/wp-content/uploads/2020/02/luxury-bathroom.jpg" />
-                   
-
-
-                   
-                      <img style={styles.thumbnails} src="https://cdn.bigbathroomshop.co.uk/media/catalog/product/cache/07469e52453ec3e9e92a88c7a63b12d8/b/c/bctbw102_ls_1000_2.jpg" />
-                
-
-                  </div>
                 </div>
 
         { props.children }
