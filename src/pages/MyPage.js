@@ -7,6 +7,7 @@ import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 import Menu from '../components/Menu'
 
+
 function MyPage() {
 
   const [action, setAction] = useState('showBookings')

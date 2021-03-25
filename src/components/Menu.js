@@ -2,6 +2,7 @@ import Radium from 'radium'
 import { useEffect, useState } from 'react'
 import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
+import Burger from '../components/Hamburger.jsx'
 
 
 function MenuContainer(props) {
@@ -14,15 +15,18 @@ function MenuContainer(props) {
     <>
       <Hidden smUp>
         <Grid container direction="column" style={style.containerMobile} key="1" justify="space-around">
+          <Burger>
           <Grid item xs>
             <h4 style={style.titleMobile} key="2" onClick={() => { sendNewAction('showBookings') }}>My bookings</h4>
           </Grid>
           <Grid item xs><h4 style={style.titleMobile} key="3" onClick={() => { sendNewAction('showRentals') }}>My Rentals</h4></Grid>
-          <Grid item xs><h4 style={style.titleMobile} key="4" onClick={() => { sendNewAction('showNewRental') }}>Add new rental</h4></Grid>
+            <Grid item xs><h4 style={style.titleMobile} key="4" onClick={() => { sendNewAction('showNewRental') }}>Add new rental</h4></Grid>
+            </Burger>
         </Grid>
       </Hidden>
 
       <Hidden xsDown>
+       
         <Grid container spacing={3} direction="column" style={style.containerDesktop} key="5">
           <Grid item xs>
             <h3 style={style.titleDesktop} key="6" onClick={() => { sendNewAction('showBookings') }}>My bookings</h3>
