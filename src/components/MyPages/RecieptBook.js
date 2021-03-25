@@ -1,7 +1,7 @@
 import Radium from 'radium'
 import { useState, useEffect } from 'react'
 import { useContext } from 'react'
-import {BookingContext} from '../../contexts/BookingContext'
+import { BookingContext } from '../../contexts/BookingContext'
 
 function RecieptBook(props) {
   const { myBookings } = useContext(BookingContext)
@@ -14,7 +14,7 @@ function RecieptBook(props) {
   // }, [props.bookId])
 
   return (
-    <div style={style}>
+    <div style={style.modal}>
       Price: {currentBooking[0].totalPrice}<br />
       Start date: {new Date(currentBooking[0].startDate).toString().substr(0, 11)}<br />
       End date: {new Date(currentBooking[0].endDate).toString().substr(0, 11)}<br />
@@ -23,9 +23,17 @@ function RecieptBook(props) {
 }
 
 const style = {
-  width: '300px',
-  height: '300px',
-  backgroundColor: 'purple'
+  modal: {
+    position: "fixed",
+    left: "10vw",
+    right: "10vw",
+    top: "15%",
+    bottom: "auto",
+    margin: "auto",
+    zIndex: '10',
+    backgroundColor: 'purple'
+  },
+
 }
 
 export default Radium(RecieptBook)
