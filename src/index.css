@@ -95,17 +95,30 @@ a {
 
 #contentGridContainer{
   display: grid;
-  grid-template-columns: 20% 1fr 20%;
-  grid-template-rows: 10% 1fr 10%;
+  /* grid-template-columns: 20% 1fr 20%; */
+  grid-template-columns:repeat(auto-fit,minmax(20%,1fr));
+  grid-template-rows: 10% 1fr 10%;   
   grid-gap: 1em;
   width: 70vw;
   margin: 0 auto;
 }
 
+
 #contentGridContainer > * {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (max-width: 768px) { 
+  #contentGridContainer{
+  display: grid;
+  grid-template-columns: 20% 1fr 20%;
+  grid-template-rows: 10% 1fr 10%;
+  grid-gap: 1em;
+  width: 70vw;
+  margin: 0 auto;
+  } 
 }
 
 header.App-Header{
@@ -122,6 +135,7 @@ footer.App-Footer{
 }
 
 
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -131,5 +145,6 @@ footer.App-Footer{
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+
 
 
