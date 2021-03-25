@@ -7,7 +7,6 @@ const Popup = (props) => {
 
   
 
-
   return (props.trigger) ? (
 
     
@@ -169,6 +168,8 @@ const styles = {
     border: '2px solid #C0C0C0',
     padding: '5px',
     cursor: 'pointer',
+    boxShadow: '0 0 6px 2px rgb(22, 22, 22)',
+    margin: '5px'
     
   }
 
