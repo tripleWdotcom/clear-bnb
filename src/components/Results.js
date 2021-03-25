@@ -1,9 +1,11 @@
 import { HouseContext } from '../contexts/HouseContext'
+import DetailedPage from '../pages/DetailedPage'
 import { useEffect, useContext, useState } from "react";
 
 export default function Results() {
   const { housesByCityAndDate, fetchHousesByCityAndDate } = useContext(HouseContext)
   const [showDetailedPage, setShowDetailedPage] = useState(false)
+  const [houseId, setHouseId] = useState('')
 
   useEffect(async () => {
     //let city = JSON.parse(localStorage.getItem('selectedCity')).value
@@ -31,15 +33,17 @@ export default function Results() {
   localStorage.getItem('features')])
   //])
 
-  const openDetailPage = () => {
+  const openDetailPage = (houseId) => {
+    console.log('house id', houseId)
     setShowDetailedPage(true)
+    setHouseId(houseId)
   }
 
 
 
   const test = c => (
 
-    <div style={{ cursor: 'pointer', width: "100%" }} key={c._id} onClick={openDetailPage}>
+    <div style={{ cursor: 'pointer', width: "100%" }} key={c._id} onClick={() => openDetailPage(c._id)}>
       <hr />
       <img style={{
         height: '200px',
@@ -78,7 +82,7 @@ export default function Results() {
       <div >
         {housesByCityAndDate.map(c => test(c))}
       </div>
-      {showDetailedPage ? 'show detailed page' : 'dont show'}
+      {showDetailedPage ? <DetailedPage houseId={houseId} /> : 'dont show'}
     </div>
   )
 }
