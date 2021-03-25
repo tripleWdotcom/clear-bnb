@@ -51,7 +51,7 @@ function App() {
 
                 <Router>
                   <header className={true ? 'App-Header' : ''}>
-                    {dimensions.width >= 768 ? <Navbar /> : ''}
+                    {dimensions.width > 768 ? <Navbar /> : console.log('dimensions.width 0', dimensions.width)}
                   </header>
                   <main className="content">
                     <Switch>
@@ -63,7 +63,7 @@ function App() {
                   </main>
 
                   <footer className={true ? 'App-Footer' : ''}>
-                    {dimensions.width < 768 ? <Footer /> : ''}
+                    {dimensions.width <= 768 ? <Footer /> : console.log('dimensions.width 1',dimensions.width)}
                   </footer>
 
                 </Router>
