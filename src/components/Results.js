@@ -1,8 +1,9 @@
 import { HouseContext } from '../contexts/HouseContext'
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 
 export default function Results() {
   const { housesByCityAndDate, fetchHousesByCityAndDate } = useContext(HouseContext)
+  const [showDetailedPage, setShowDetailedPage] = useState(false)
 
   useEffect(async () => {
     //let city = JSON.parse(localStorage.getItem('selectedCity')).value
@@ -30,11 +31,15 @@ export default function Results() {
   localStorage.getItem('features')])
   //])
 
+  const openDetailPage = () => {
+    setShowDetailedPage(true)
+  }
+
 
 
   const test = c => (
 
-    <div style={{ width: "100%" }} key={c._id}>
+    <div style={{ cursor: 'pointer', width: "100%" }} key={c._id} onClick={openDetailPage}>
       <hr />
       <img style={{
         height: '200px',
@@ -45,7 +50,7 @@ export default function Results() {
         alt={'picture ' + c.id}
       />
 
-      <h4 style={{ cursor: 'pointer' }}>{c.slogan}</h4><h5> USD{c.price} (per night)</h5>
+      <h4>{c.slogan}</h4><h5> USD{c.price} (per night)</h5>
       <p>{c.featureIds.map(f => <span style={{ fontSize: "10px" }} key={f._id}> {(() => {
         switch (f.name) {
           case "tv": return "\📺 TV";
@@ -73,6 +78,7 @@ export default function Results() {
       <div >
         {housesByCityAndDate.map(c => test(c))}
       </div>
+      {showDetailedPage ? 'show detailed page' : 'dont show'}
     </div>
   )
 }
