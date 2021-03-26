@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import MyPage from '../pages/MyPage.js'
+
 
 const StyledBurger = styled.div`
     width: 2rem;
     height: 2rem;
     position: fixed;
     top: 25px;
-    right: 20px;
+    right: 25px;
     display: flex;
     justify-content: space-around;
     flex-flow: column nowrap;
@@ -39,12 +41,15 @@ const Burger = () => {
 
   const [open, setOpen] = useState(false)
 
-  return ( 
+  return (
+    <>
     <StyledBurger open={open} onClick={() => setOpen(!open)}>
       <div />
       <div />
       <div />
-    </StyledBurger>
+      </StyledBurger>
+    
+      </>
    );
 }
  
