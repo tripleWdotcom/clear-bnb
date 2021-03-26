@@ -9,10 +9,12 @@ module.exports = (app, models) => {
     let docs = await model.find()
     res.json(docs)
   })
-  app.get('/rest/houses/ccity/:city', async (req, res) => {
-    let city = req.params.city
+
+
+// Option 2 for getting houses for carousel with espacial offers
+  app.get('/rest/houses/offers', async (req, res) => {
     let model = models['houses']
-    let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } }).populate('featureIds')
+    let docs = await model.find({isOffer:true}).populate('featureIds')
     res.json(docs)
   })
   // Get houses by city (searching for one letter at a time or all citys distinct)
