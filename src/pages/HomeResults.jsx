@@ -3,10 +3,11 @@ import Radium from 'radium'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import Filters from '../components/Filters'
+import Filters from '../components/Filters.jsx'
 import SearchComponent from '../components/Search'
 import Results from '../components/Results';
 import Calen from '../components/Calen';
+import Hidden from '@material-ui/core/Hidden'
 
 
 const HomeResults = () => {
@@ -25,11 +26,12 @@ const HomeResults = () => {
             </Paper>
           </Grid>
 
-
+          <Hidden xsDown>
           <Grid item xs={12} sm={6}>
             <Paper className={classes.paper}>
               <Filters /></Paper>
           </Grid>
+          </Hidden>
 
 
           <Grid item sm={6}>
