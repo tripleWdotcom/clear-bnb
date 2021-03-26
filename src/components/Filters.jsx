@@ -52,6 +52,7 @@ export default function Filters() {
 
   }
 
+
   useEffect(() => {
     localStorage.setItem('features', JSON.stringify(state))
     console.log("value of features is :", localStorage.getItem('features'))
@@ -68,14 +69,14 @@ export default function Filters() {
 
   return (
     <div>
-      <div>
+      <div className={'sliderContainer'} style={styles.sliderContainer}>
         <PriceSlider clear={reset} />
         <br/><br/>
         <BedSlider clear={reset} />
       </div>
      <br/><br/>
 
-      <FormControl component="fieldset">
+      <FormControl component="fieldset" style={styles.sliderContainer}>
         {/*     <FormLabel component="legend" color="primary" >Assign responsibility</FormLabel> */}
         <FormGroup>
           <FormControlLabel
@@ -124,4 +125,16 @@ export default function Filters() {
     </div>
   )
 
+  
 }
+
+const styles = {
+  sliderContainer: {
+    backgroundColor: 'whitesmoke',
+   
+    
+  }
+
+
+}
+

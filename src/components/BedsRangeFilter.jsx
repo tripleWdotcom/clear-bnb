@@ -10,7 +10,8 @@ export default function BedSlider(props) {
   let history = useHistory();
   const useStyles = makeStyles({
     bedRange: {
-      width: 200,
+      width: '70%',
+      margin: 'auto'
     }
   });
 

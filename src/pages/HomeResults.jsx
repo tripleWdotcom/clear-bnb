@@ -8,10 +8,21 @@ import SearchComponent from '../components/Search'
 import Results from '../components/Results';
 import Calen from '../components/Calen';
 import Hidden from '@material-ui/core/Hidden'
+import { withMobileDialog } from '@material-ui/core';
+import zIndex from '@material-ui/core/styles/zIndex';
+import { useState } from 'react';
 
 
 const HomeResults = () => {
-  
+  const[show,setShow]=useState([])
+
+
+
+  const toggleFilter=()=>{
+    show ? document.getElementById("filterMenu").style.height = "100%" : document.getElementById("filterMenu").style.height = "0px";
+    setShow(!show)
+  }
+
   const classes = useStyles();
 
   return (
@@ -27,24 +38,44 @@ const HomeResults = () => {
           </Grid>
 
           <Hidden xsDown>
-          <Grid item xs={12} sm={6}>
-            <Paper className={classes.paper}>
-              <Filters /></Paper>
-          </Grid>
+            <Grid item xs={4} sm={4} md={4}>
+              <Paper className={classes.paper2}>
+                <Filters /></Paper>
+            </Grid>
           </Hidden>
 
 
-          <Grid item sm={6}>
-            <Paper className={classes.paper}>
+          <Grid item xs={12} sm={8} md={8}>
+            <Paper className={classes.paper3}>
               <Results />
             </Paper>
           </Grid>
+        
 
+{/* 
+          <Hidden smUp>
+            <Grid item xs={12}>
+              <Paper className={classes.paperMobile}>
+                <Filters /></Paper>
+            </Grid>
+          </Hidden>
 
+ */}
         </Grid>
-
+  
 
       </div>
+      <Hidden smUp>
+      
+        <Grid item xs={12} id='filterMenu' className={classes.filterContainer}>
+          <Paper className={classes.paperMobile}>
+            <Filters /></Paper>
+        </Grid>
+        <Grid item xs={12} className={classes.toggleFilters}>
+          <Paper  onClick={toggleFilter} >{show?<span>Show filters</span>:<span>Hide Filters</span>}
+            </Paper>
+        </Grid>
+      </Hidden>
 
     </div>
 
@@ -59,11 +90,51 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'cyan'
   },
   paper: {
-    padding: theme.spacing(15),
+    padding: theme.spacing(2),
+    color: theme.palette.text.secondary,
+    backgroundColor: 'lightblue',
+    textAlign: '-webkit-center'
+
+  },
+  paper2: {
+    padding: theme.spacing(3),
     textAlign: 'center',
     color: theme.palette.text.secondary,
     backgroundColor: 'lightblue',
+    // width:'30%'
 
+  },
+  paper3: {
+    padding: theme.spacing(3),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    backgroundColor: 'lightblue',
+  },
+  paperMobile: {
+    padding: theme.spacing(3),
+   
+    textAlign: 'center',
+ 
+    backgroundColor: 'whitesmoke',
+  },
+   toggleFilters: {
+     padding: theme.spacing(2),
+    textAlign: 'center',
+    backgroundColor: 'grey',
+    position:'fixed',
+    zIndex:3,
+    bottom: '0px',
+    width:'100%'
+  
+  },
+
+  filterContainer:{
+    position:'fixed',
+    bottom:'0px',
+    width:'100vw',
+    zIndex:3,
+    transition: '0.5s',
+    height:'0px'
   }
 
 }));

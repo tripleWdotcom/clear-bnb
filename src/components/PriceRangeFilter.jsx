@@ -11,7 +11,8 @@ export default function PriceSlider(props) {
   let history = useHistory();
   const useStyles = makeStyles({
     priceRange: {
-      width: 200,
+      width: '70%',
+      margin: 'auto'
     }
   });
   const classes = useStyles();
