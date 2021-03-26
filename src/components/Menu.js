@@ -48,10 +48,12 @@ export default Radium(MenuContainer)
 const style = {
   color: 'white',
   containerMobile: {
-    backgroundColor: 'purple',
-    zIndex: '10',
-    position: 'fixed',
-    right: '0',
+     backgroundColor: 'white',
+     zIndex: '10',
+     position: 'fixed',
+     width: 'fit-content',
+
+
   },
   titleMobile: {
     padding: '10px 5px 10px 5px',

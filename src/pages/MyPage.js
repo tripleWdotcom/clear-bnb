@@ -50,9 +50,14 @@ function MyPage() {
     <>
       <Hidden smUp>
         <Grid container style={style.container} wrap="nowrap" direction="column" key="1" justify="center">
-          <button onClick={toggleMenu}>☰ </button>
+          <button className="openBtn" style={style.openBtn} onClick={toggleMenu}>☰ </button>
+
           <Grid item xs>
-            {isMenuOpen ? <Menu getNewAction={changeAction} /> : ''}
+             
+            {isMenuOpen ?
+             <div id="mySidebar" className="sidebar" style={style.sidebar}>
+            <Menu getNewAction={changeAction} />  </div> : ''}
+             
             {action === 'showBookings' ? <Bookings /> : ''}
             {action === 'showRentals' ? <MyRentals /> : ''}
             {action === 'showNewRental' ? <AddNewRental setNewAction={changeAction} /> : ''}
@@ -85,7 +90,7 @@ function MyPage() {
   )
 }
 
-export default Radium(MyPage)
+export default MyPage
 
 const style = {
   container: {
@@ -107,5 +112,26 @@ const style = {
     height: '300px',
     width: '5px',
     background: 'linear-gradient(to top, transparent 1%, gray 50%, transparent 100%)'
+  },
+
+  sidebar: {
+  height: '100%',
+  width: '0',
+  
+  paddingTop: '60px',
+    
+     
+       transition: '0.5s'
+  
+  },
+
+  openBtn: {
+  fontSize: '20px',
+  cursor: 'pointer',
+  backgroundColor: 'white',
+  color: 'black',
+  padding: '10px 15px',
+  border: 'none',
+  width: 'fit-content'
   }
 }
