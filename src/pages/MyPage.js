@@ -6,7 +6,8 @@ import Radium from 'radium'
 import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 import Menu from '../components/Menu'
-import Burger from '../components/Hamburger.jsx'
+
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
 function MyPage() {
@@ -35,6 +36,12 @@ function MyPage() {
     setIsMenuOpen(!isMenuOpen)
   }
 
+  const [checked, setChecked] = React.useState(false);
+   const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
+
+
   // useEffect(() => {
   //   showContent()
   // }, [isMenuOpen])
@@ -50,19 +57,28 @@ function MyPage() {
     <>
       <Hidden smUp>
         <Grid container style={style.container} wrap="nowrap" direction="column" key="1" justify="center">
+          <div className="main" style={style.main}>
+      
           <button className="openBtn" style={style.openBtn} onClick={toggleMenu}>☰ </button>
+        
 
+            </div>
           <Grid item xs>
-             
+             <ReactCSSTransitionGroup
+          transitionName="fade"
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={500}>
             {isMenuOpen ?
              <div id="mySidebar" className="sidebar" style={style.sidebar}>
-            <Menu getNewAction={changeAction} />  </div> : ''}
              
+            <Menu getNewAction={changeAction} />  </div> : ''}
+              
             {action === 'showBookings' ? <Bookings /> : ''}
             {action === 'showRentals' ? <MyRentals /> : ''}
             {action === 'showNewRental' ? <AddNewRental setNewAction={changeAction} /> : ''}
-            </Grid>
             
+               </ReactCSSTransitionGroup>
+            </Grid>
         </Grid>
       </Hidden>
 
@@ -117,11 +133,11 @@ const style = {
   sidebar: {
   height: '100%',
   width: '0',
-  
+  transition: '0.5s',
   paddingTop: '60px',
     
      
-       transition: '0.5s'
+      
   
   },
 
@@ -133,5 +149,10 @@ const style = {
   padding: '10px 15px',
   border: 'none',
   width: 'fit-content'
+  },
+
+  main: {
+    padding: '16px',
+    transition: '0.5s'
   }
 }

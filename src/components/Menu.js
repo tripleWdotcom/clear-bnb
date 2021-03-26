@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 import Burger from '../components/Hamburger.jsx'
+import Fade from '@material-ui/core/Fade';
+import React from 'react';
 
 
 function MenuContainer(props) {
@@ -11,17 +13,26 @@ function MenuContainer(props) {
     props.getNewAction(newAction)
   }
 
+   const [checked, setChecked] = React.useState(false);
+
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
+
   return (
     <>
       <Hidden smUp>
         <Grid container direction="column" style={style.containerMobile} key="1" justify="space-around">
-          
+          <div className="mainM" style={style.mainM}>
+        
+           
           <Grid item xs>
             <h4 style={style.titleMobile} key="2" onClick={() => { sendNewAction('showBookings') }}>My bookings</h4>
           </Grid>
           <Grid item xs><h4 style={style.titleMobile} key="3" onClick={() => { sendNewAction('showRentals') }}>My Rentals</h4></Grid>
             <Grid item xs><h4 style={style.titleMobile} key="4" onClick={() => { sendNewAction('showNewRental') }}>Add new rental</h4></Grid>
-           
+       
+           </div>
         </Grid>
       </Hidden>
 
@@ -79,4 +90,9 @@ const style = {
       color: 'red'
     }
   },
+
+  mainM: {
+    transition: '0.3s',
+   
+  }
 }

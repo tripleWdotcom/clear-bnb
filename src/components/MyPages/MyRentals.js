@@ -5,6 +5,7 @@ import Radium from 'radium'
 import Grid from '@material-ui/core/Grid'
 
 
+
 function MyRentals() {
 
   const { myRentals, fetchMyRentals } = useContext(HouseContext)
