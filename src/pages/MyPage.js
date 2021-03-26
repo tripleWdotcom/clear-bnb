@@ -21,8 +21,8 @@ function MyPage() {
   }
 
   useEffect(() => {
-    console.log('The new action is: ', action)
-    setIsMenuOpen(false)
+    // console.log('The new action is: ', action)
+     setIsMenuOpen(false)
     // if (open === true) {
     //   console.log('Btn exist and open is', open)
     //   setOpen(!open)
@@ -50,9 +50,9 @@ function MyPage() {
     <>
       <Hidden smUp>
         <Grid container style={style.container} wrap="nowrap" direction="column" key="1" justify="center">
-          <Burger> </Burger>
+          <button onClick={toggleMenu}>☰ </button>
           <Grid item xs>
-            {isMenuOpen ? <Burger getNewAction={changeAction} /> : ''}
+            {isMenuOpen ? <Menu getNewAction={changeAction} /> : ''}
             {action === 'showBookings' ? <Bookings /> : ''}
             {action === 'showRentals' ? <MyRentals /> : ''}
             {action === 'showNewRental' ? <AddNewRental setNewAction={changeAction} /> : ''}
