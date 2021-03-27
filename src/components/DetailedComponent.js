@@ -70,16 +70,6 @@ function DetailedComponent(props) {
             padding="0"
           >
             {currentHouse[0].pics.map(p => (<div><img src={p} /></div>))}
-            {/* // <div>
-            //   <img src="https://24mveri4z43mt0212q67obp6-wpengine.netdna-ssl.com/wp-content/uploads/2019/10/melbourne.jpg" />
-            // </div>
-            // <div>
-            //   <img src="https://cdn.getyourguide.com/img/location/5ffeb496e3e09.jpeg/88.jpg" />
-            // </div>
-            // <div>
-            //   <img src="https://cdn.getyourguide.com/img/location/5ffeb496e3e09.jpeg/88.jpg" />
-            // </div>
-          */}
           </Carousel>
         </div>
         <h1 style={styles.title} key="1" >{currentHouse[0].slogan}</h1>
