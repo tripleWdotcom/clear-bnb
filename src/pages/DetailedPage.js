@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import DetailedComponent from '../components/DetailedComponent'
 
 
+
 function DetailedPage(props) {
   
 
@@ -12,9 +13,9 @@ function DetailedPage(props) {
     <div className="popup" style={styles.popup}>
 
       <div style={styles.popupInnerComputer}>
-        <button>Close</button>
+        <button onClick={() => props.closeModal()}>Close</button>
         <DetailedComponent houseId={props.houseId}/>
-        
+        <div style={styles.dates}></div>
       </div>
 
 
@@ -52,7 +53,7 @@ const styles = {
     // padding: '300px 0px 300px 0px',
     width: '70vw',
     height: '100vh',
-    backgroundColor: '#FFF',
+    backgroundColor: 'whitesmoke',
     overflow: 'scroll',
 
   },
@@ -75,6 +76,9 @@ const styles = {
     height: '250px',
     padding: '25px'
   },
+  dates: {
+    backgroundColor: 'crimson'
+  }
 
   // thumbnails: {
   //   width: 'auto',

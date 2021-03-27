@@ -18,6 +18,8 @@ import beds from '../images/beds.png';
 import city from '../images/city.png';
 import country from '../images/country.png';
 import price from '../images/price.png';
+import contact from '../images/contact.png';
+import email from '../images/email.png';
 
 
 function DetailedComponent(props) {
@@ -37,7 +39,7 @@ function DetailedComponent(props) {
         <img src={c.name == 'tv' ? tv
           : c.name == 'wifi' ? wifi
             : c.name == 'parking' ? parking
-              : c.name == 'smoking' ? smoking
+              : c.name == 'smoking' ? smoking 
                 : c.name == 'gym' ? gym
                   : c.name == 'animalFriendly' ? animalFriendly
                     : c.name == 'breakfast' ? breakfast
@@ -131,13 +133,24 @@ function DetailedComponent(props) {
               <br />
               {currentHouse[0].featureIds.map((c, i) => features(c, i))}
             </Grid>
-      
+
           </Grid>
         </div>
 
         <hr style={{
           width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: '#F2F2F2', margin: '50px auto'
         }} key="7" />
+        <h3 style={styles.title2} key="102" >Host</h3>
+        <br />
+            <div style={styles.iconForm2} key="117">
+              <img src={contact} alt={contact} style={styles.icons} key="106" />
+              <p style={styles.iconText} key="105">{currentHouse[0].userId.firstName} {currentHouse[0].userId.lastName}</p>
+              <img src={email} alt={email} style={styles.icons} key="107" />
+              <p style={styles.iconText} key="109">{currentHouse[0].userId.email}</p>
+        </div>
+        <hr style={{
+          width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: '#F2F2F2', margin: '50px auto'
+        }} key="177" />
 
       </>
         : ''}
@@ -164,8 +177,11 @@ const styles = {
     display: 'flex',
     margin: '10px 0',
   },
+  iconForm2: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
   iconText: {
-    textAlign: 'left',
     margin: '10px 20px 0',
   },
   icons: {

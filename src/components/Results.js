@@ -17,7 +17,7 @@ export default function Results() {
       priceMin: (localStorage.getItem("priceMin") === null ? 1 : localStorage.getItem("priceMin")),
       priceMax: (localStorage.getItem("priceMax") === null ? 500 : localStorage.getItem("priceMax")),
       bedroomsMin: (localStorage.getItem("bedsNumberMin") === null ? 1 : localStorage.getItem("bedsNumberMin")),
-      bedroomsMax: (localStorage.getItem("bedsNumberMax") === null ? 10 : localStorage.getItem("bedsNumberMax"))
+      bedroomsMax: (localStorage.getItem("bedsNumberMax") === null ? 10 : localStorage.getItem("bedsNumberMax")),
     }
 
     let toto = { ...objects, ...x }
@@ -30,14 +30,21 @@ export default function Results() {
   localStorage.getItem("bedsNumberMax"),
   localStorage.getItem("priceMin"),
   localStorage.getItem("priceMax"),
-  localStorage.getItem('features')])
+    localStorage.getItem('features')])
   //])
+
 
   const openDetailPage = (houseId) => {
     console.log('house id', houseId)
     setShowDetailedPage(true)
     setHouseId(houseId)
   }
+
+  const closeDetailPage = () => {
+    setShowDetailedPage(false)
+  }
+
+
 
 
 
@@ -72,17 +79,17 @@ export default function Results() {
     </div>
   )
   let x = +localStorage.getItem("startDateChosen")
-  let y=new Date(x)
+  let y = new Date(x)
   let xx = +localStorage.getItem("endDateChosen")
   let yy = new Date(xx)
- 
+
   return (
     <div> Houses available from:
       {y.toDateString()} to {yy.toDateString()}
       <div >
         {housesByCityAndDate.map(c => test(c))}
       </div>
-      {showDetailedPage ? <DetailedPage houseId={houseId} /> : 'dont show'}
+      {showDetailedPage ? <DetailedPage houseId={houseId} closeModal={closeDetailPage} /> : ''}
     </div>
   )
 }

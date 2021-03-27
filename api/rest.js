@@ -96,7 +96,7 @@ module.exports = (app, models) => {
             }
           },
           { city: b.city },
-          // { isOffer: false }
+          { isOffer: { $eq: false } }
         ]
       }).populate(['userId', 'featureIds']).lean().exec()
     } else {
@@ -117,7 +117,7 @@ module.exports = (app, models) => {
           { $and: [{ price: { $lte: b.priceMax } }, { price: { $gte: b.priceMin } }] },
           { city: b.city },
           { $and: featureIds },
-          // { isOffer: false }
+          { isOffer: { $eq: false } }
         ]
       }).populate(['userId', 'featureIds']).lean().exec()
     }
