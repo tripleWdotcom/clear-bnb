@@ -6,6 +6,8 @@ export default function Results() {
   const { housesByCityAndDate, fetchHousesByCityAndDate } = useContext(HouseContext)
   const [showDetailedPage, setShowDetailedPage] = useState(false)
   const [houseId, setHouseId] = useState('')
+  const [startDate, setStartDate] = useState(0)
+  const [endDate, setEndDate] = useState(0)
 
   useEffect(async () => {
     //let city = JSON.parse(localStorage.getItem('selectedCity')).value
@@ -38,6 +40,8 @@ export default function Results() {
     console.log('house id', houseId)
     setShowDetailedPage(true)
     setHouseId(houseId)
+    setStartDate(localStorage.getItem("startDateChosen"))
+    setEndDate(localStorage.getItem("endDateChosen"))
   }
 
   const closeDetailPage = () => {
@@ -89,7 +93,7 @@ export default function Results() {
       <div >
         {housesByCityAndDate.map(c => test(c))}
       </div>
-      {showDetailedPage ? <DetailedPage houseId={houseId} closeModal={closeDetailPage} /> : ''}
+      {showDetailedPage ? <DetailedPage houseId={houseId} startDate={startDate} endDate={endDate} closeModal={closeDetailPage} /> : ''}
     </div>
   )
 }

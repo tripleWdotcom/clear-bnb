@@ -1,11 +1,17 @@
 
 import { useEffect, useState } from 'react';
 import DetailedComponent from '../components/DetailedComponent'
+import Radium from 'radium'
 
 
 
 function DetailedPage(props) {
-  
+
+  useEffect(() => {
+    console.log('props start date', new Date(parseInt(props.startDate)).toString())
+    console.log('props end date', new Date(parseInt(props.endDate)).toString())
+  }, [])
+
 
 
   return (
@@ -13,9 +19,14 @@ function DetailedPage(props) {
     <div className="popup" style={styles.popup}>
 
       <div style={styles.popupInnerComputer}>
-        <button onClick={() => props.closeModal()}>Close</button>
-        <DetailedComponent houseId={props.houseId}/>
-        <div style={styles.dates}></div>
+        <button style={styles.closeBtn} onClick={() => props.closeModal()}>Close</button>
+        <DetailedComponent houseId={props.houseId} />
+        <div style={styles.dates}>
+          <h3>Chosen dates</h3>
+          <br />
+        <p>{new Date(parseInt(props.startDate)).toLocaleString().substr(0, 11)} - {new Date(parseInt(props.endDate)).toLocaleString().substr(0, 11)}</p>
+        <button style={styles.bookBtn}>Book</button>
+        </div>
       </div>
 
 
@@ -77,7 +88,30 @@ const styles = {
     padding: '25px'
   },
   dates: {
-    backgroundColor: 'crimson'
+    margin: '10px'
+  },
+  bookBtn: {
+    backgroundColor: 'crimson',
+    margin: '15px',
+    padding: '10px 15px',
+    border: 'none',
+    borderRadius: '10px',
+    cursor: 'pointer',
+    outline: 'none',
+    transition: 'all 500ms ease-in-out',
+    ':hover': {
+      backgroundColor: '#F0524F',
+      transform: 'scale(1.05)'
+    }
+  },
+  closeBtn: {
+    margin: '15px',
+    padding: '10px 15px',
+    border: 'none',
+    borderRadius: '10px',
+    cursor: 'pointer',
+    backgroundColor: 'whitesmoke',
+    outline: 'none',
   }
 
   // thumbnails: {
@@ -93,4 +127,4 @@ const styles = {
 
 }
 
-export default DetailedPage;
+export default Radium(DetailedPage);

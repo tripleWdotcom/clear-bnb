@@ -25,7 +25,7 @@ function Bookings() {
       <div style={style.info} key={"c" + i}>
         <div style={style.infoText} key={"d" + i}>
           <h3>{b.houseId.city}</h3>
-          <a>{new Date(b.startDate * 1000).toLocaleString().substr(0, 11)} - {new Date(b.endDate * 1000).toLocaleString().substr(0, 11)}
+          <a>{new Date(b.startDate).toString().substr(0, 11)} - {new Date(b.endDate).toString().substr(0, 11)}
           </a>
           <br />
           <br />
@@ -74,7 +74,7 @@ const style = {
     ':hover': {
       height: '110px',
       cursor: 'pointer',
-      transition: 'all 500ms ease-in-out'
+      transition: 'all 500ms ease-in-out',
     }
   },
   infoText: {

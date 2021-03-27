@@ -20,6 +20,8 @@ import country from '../images/country.png';
 import price from '../images/price.png';
 import contact from '../images/contact.png';
 import email from '../images/email.png';
+import checkIn from '../images/checkIn.png';
+import checkOut from '../images/checkOut.png';
 
 
 function DetailedComponent(props) {
@@ -39,7 +41,7 @@ function DetailedComponent(props) {
         <img src={c.name == 'tv' ? tv
           : c.name == 'wifi' ? wifi
             : c.name == 'parking' ? parking
-              : c.name == 'smoking' ? smoking 
+              : c.name == 'smoking' ? smoking
                 : c.name == 'gym' ? gym
                   : c.name == 'animalFriendly' ? animalFriendly
                     : c.name == 'breakfast' ? breakfast
@@ -75,17 +77,17 @@ function DetailedComponent(props) {
         <h1 style={styles.title} key="1" >{currentHouse[0].slogan}</h1>
         <h3 style={styles.title} key="2" >{currentHouse[0].city}, {currentHouse[0].country}</h3>
         <hr style={{
-          width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: '#F2F2F2', margin: '50px auto'
+          width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: 'grey', margin: '50px auto'
         }} key="3" />
         <div style={styles.desc} key="4">{currentHouse[0].description}</div>
         <hr style={{
-          width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: '#F2F2F2', margin: '50px auto'
+          width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: 'grey', margin: '50px auto'
         }} key="5" />
         <div style={styles.gridContainer}>
           <Grid container
             direction="row"
             justify="space-between"
-            alignItems="left"
+
           >
             <Grid item xs={2}>
             </Grid>
@@ -114,9 +116,19 @@ function DetailedComponent(props) {
                 <p style={styles.iconText} key="79">{currentHouse[0].city}</p>
               </div>
 
-              <div style={styles.iconForm} key="96">
+              <div style={styles.iconForm} key="188">
                 <img src={country} alt={currentHouse[0].country} style={styles.icons} key="91" />
                 <p style={styles.iconText} key="80">{currentHouse[0].country}</p>
+              </div >
+
+              <div style={styles.iconForm} key="165">
+                <img src={checkIn} alt="check-in" style={styles.icons} key="190" />
+                <p style={styles.iconText} key="80">Check in: 15:00</p>
+              </div >
+
+              <div style={styles.iconForm} key="133">
+                <img src={checkOut} alt="check-out" style={styles.icons} key="192" />
+                <p style={styles.iconText} key="80">Check out: 12:00</p>
               </div >
             </Grid>
 
@@ -130,18 +142,18 @@ function DetailedComponent(props) {
         </div>
 
         <hr style={{
-          width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: '#F2F2F2', margin: '50px auto'
+          width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: 'grey', margin: '50px auto'
         }} key="7" />
         <h3 style={styles.title2} key="102" >Host</h3>
         <br />
-            <div style={styles.iconForm2} key="117">
-              <img src={contact} alt={contact} style={styles.icons} key="106" />
-              <p style={styles.iconText} key="105">{currentHouse[0].userId.firstName} {currentHouse[0].userId.lastName}</p>
-              <img src={email} alt={email} style={styles.icons} key="107" />
-              <p style={styles.iconText} key="109">{currentHouse[0].userId.email}</p>
+        <div style={styles.iconForm2} key="117">
+          <img src={contact} alt={contact} style={styles.icons} key="106" />
+          <p style={styles.iconText} key="105">{currentHouse[0].userId.firstName} {currentHouse[0].userId.lastName}</p>
+          <img src={email} alt={email} style={styles.icons} key="107" />
+          <p style={styles.iconText} key="109">{currentHouse[0].userId.email}</p>
         </div>
         <hr style={{
-          width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: '#F2F2F2', margin: '50px auto'
+          width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: 'grey', margin: '50px auto'
         }} key="177" />
 
       </>
