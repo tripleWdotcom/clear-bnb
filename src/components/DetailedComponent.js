@@ -58,18 +58,16 @@ function DetailedComponent(props) {
       {currentHouse.length > 0 ? <>
         <div style={styles.frame}>
           <Carousel
-            style={{ padding: '0' }}
             showArrows={true}
             showStatus={true}
             infiniteLoop={true}
-            showThumps={true}
+            showThumbs={true}
             swipeable={true}
             emulateTouch={true}
             showIndicators={false}
             autoPlay={false}
-            thumbWidth="200px"
-            dynamicHeight={false}
-            padding="0"
+            thumbWidth={100}
+            dynamicHeight={true}
           >
             {currentHouse[0].pics.map(p => (<div><img src={p} /></div>))}
           </Carousel>

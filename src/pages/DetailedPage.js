@@ -1,16 +1,46 @@
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import DetailedComponent from '../components/DetailedComponent'
 import Radium from 'radium'
-
+import { UserContext } from '../contexts/UserContext'
+import { BookingContext } from '../contexts/BookingContext'
+import { HouseContext } from '../contexts/HouseContext'
+import { useHistory } from 'react-router-dom'
 
 
 function DetailedPage(props) {
+  let history = useHistory();
+  const { isLoggedIn } = useContext(UserContext)
+  const { addNewBooking } = useContext(BookingContext)
+  const { housesByCityAndDate } = useContext(HouseContext)
+  const [totalPrice, setTotalPrice] = useState(0)
+  const [notLoggedIn, setNotLoggedIn] = useState(false)
 
   useEffect(() => {
-    console.log('props start date', new Date(parseInt(props.startDate)).toString())
-    console.log('props end date', new Date(parseInt(props.endDate)).toString())
+    let houseObj = housesByCityAndDate.filter(h => h._id === props.houseId)
+    let numOfDays = ((props.endDate - props.startDate) / 3600 / 1000) / 24
+    setTotalPrice(houseObj[0].price * numOfDays)
   }, [])
+
+  const createBooking = async () => {
+
+    if (!isLoggedIn.length || isLoggedIn == undefined) {
+      console.log('You are not logged in ')
+      setNotLoggedIn(true)
+    } else {
+      console.log('Who is logged in', isLoggedIn)
+      let newBooking = {
+        houseId: props.houseId,
+        userId: isLoggedIn[0]._id,
+        startDate: props.startDate,
+        endDate: props.endDate,
+        totalPrice: totalPrice
+      }
+      await addNewBooking(newBooking)
+      props.closeModal()
+      console.log('The new booking obj is', newBooking)
+    }
+  }
 
 
 
@@ -22,10 +52,18 @@ function DetailedPage(props) {
         <button style={styles.closeBtn} onClick={() => props.closeModal()}>Close</button>
         <DetailedComponent houseId={props.houseId} />
         <div style={styles.dates}>
+          <h2>Booking information</h2>
+          <br />
           <h3>Chosen dates</h3>
           <br />
-        <p>{new Date(parseInt(props.startDate)).toLocaleString().substr(0, 11)} - {new Date(parseInt(props.endDate)).toLocaleString().substr(0, 11)}</p>
-        <button style={styles.bookBtn}>Book</button>
+          <p>{new Date(parseInt(props.startDate)).toLocaleString().substr(0, 11)} - {new Date(parseInt(props.endDate)).toLocaleString().substr(0, 11)}</p>
+          <br />
+          <h3>Total price</h3>
+          <br />
+          <p>{totalPrice} €</p>
+          <button style={styles.bookBtn} onClick={createBooking}>Book</button>
+          <br />
+          { notLoggedIn ? 'Log in to book this house' : ''}<p></p>
         </div>
       </div>
 
