@@ -12,6 +12,7 @@ function DetailedPage(props) {
     <div className="popup" style={styles.popup}>
 
       <div style={styles.popupInnerComputer}>
+        <button>Close</button>
         <DetailedComponent houseId={props.houseId}/>
         
       </div>

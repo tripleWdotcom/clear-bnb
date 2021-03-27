@@ -34,7 +34,6 @@ function DetailedComponent(props) {
   const features = (c, i) => (
     <>
       <div style={styles.iconForm} key={'a' + i}>
-
         <img src={c.name == 'tv' ? tv
           : c.name == 'wifi' ? wifi
             : c.name == 'parking' ? parking
@@ -42,12 +41,9 @@ function DetailedComponent(props) {
                 : c.name == 'gym' ? gym
                   : c.name == 'animalFriendly' ? animalFriendly
                     : c.name == 'breakfast' ? breakfast
-                      : c.name == 'kitchen' ? kitchen : c.name == 'pool' ? pool : ''} alt={c.name} style={styles.icons} key={'b' + i} /><p style={styles.iconText} key={'e' + i}>{c.name}</p>
+                      : c.name == 'kitchen' ? kitchen : c.name == 'pool' ? pool : ''} alt={c.name} style={styles.icons} key={'b' + i} />
+        <p style={styles.iconText} key={'e' + i}>{c.name.charAt(0).toUpperCase() + c.name.slice(1)}</p>
       </div>
-
-
-
-
     </>
   )
 
@@ -100,59 +96,50 @@ function DetailedComponent(props) {
             <Grid item xs={2}>
             </Grid>
 
-            <Grid item xs>
-
+            <Grid item xs={6}>
               <h3 style={styles.title2} key="8">House details</h3>
               <br />
 
               <div style={styles.iconForm} key="100">
                 <img src={beds} alt={currentHouse[0].beds} style={styles.icons} key="95" />
-
+                <p style={styles.iconText} key="77">{currentHouse[0].bedrooms} beds</p>
               </div>
-
 
               <div style={styles.iconForm} key="99">
                 <img src={price} alt={currentHouse[0].price} style={styles.icons} key="94" />
+                <p style={styles.iconText} key="78">{currentHouse[0].price} € / night</p>
               </div>
-
 
               <div style={styles.iconForm} key="98">
                 <img src={adress} alt={currentHouse[0].adress} style={styles.icons} key="93" />
+                <p style={styles.iconText} key="81">{currentHouse[0].address}</p>
               </div>
-
-
 
               <div style={styles.iconForm} key="97">
-                <img src={city} alt={currentHouse[0].city} style={styles.icons} key="92" /> 
+                <img src={city} alt={currentHouse[0].city} style={styles.icons} key="92" />
+                <p style={styles.iconText} key="79">{currentHouse[0].city}</p>
               </div>
-
-
 
               <div style={styles.iconForm} key="96">
                 <img src={country} alt={currentHouse[0].country} style={styles.icons} key="91" />
+                <p style={styles.iconText} key="80">{currentHouse[0].country}</p>
               </div >
-
             </Grid>
+
             <Grid item xs>
               <h3 style={styles.title2} key="6" >Amenities</h3>
               <br />
-
               {currentHouse[0].featureIds.map((c, i) => features(c, i))}
-
             </Grid>
-            <Grid item xs={1}>
-            </Grid>
-
-
+      
           </Grid>
         </div>
 
-
-
-
+        <hr style={{
+          width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: '#F2F2F2', margin: '50px auto'
+        }} key="7" />
 
       </>
-
         : ''}
     </div>
   )
@@ -172,22 +159,14 @@ const styles = {
   },
   gridContainer: {
     textAlign: 'left',
-
   },
-  // title2: {
-  //   width: '50vw',
-  //   margin: '50px auto',
-  //   textAlign: 'left',
-  // },
   iconForm: {
-
+    display: 'flex',
     margin: '10px 0',
   },
   iconText: {
-    position: 'relative',
     textAlign: 'left',
-    margin: '0 auto'
-
+    margin: '10px 20px 0',
   },
   icons: {
     width: '30px',
