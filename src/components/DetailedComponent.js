@@ -57,20 +57,37 @@ function DetailedComponent(props) {
     <div style={styles.outerDiv}>
       {currentHouse.length > 0 ? <>
         <div style={styles.frame}>
-          <Carousel
-            showArrows={true}
-            showStatus={true}
-            infiniteLoop={true}
-            showThumbs={true}
-            swipeable={true}
-            emulateTouch={true}
-            showIndicators={false}
-            autoPlay={false}
-            thumbWidth={100}
-            dynamicHeight={true}
-          >
-            {currentHouse[0].pics.map(p => (<div><img src={p} /></div>))}
-          </Carousel>
+          <Hidden xsDown>
+            <Carousel
+              showArrows={true}
+              showStatus={true}
+              infiniteLoop={true}
+              showThumbs={true}
+              swipeable={true}
+              emulateTouch={false}
+              showIndicators={false}
+              autoPlay={false}
+              thumbWidth={100}
+              dynamicHeight={true}
+            >
+              {currentHouse[0].pics.map(p => (<div><img src={p} /></div>))}
+            </Carousel>
+          </Hidden>
+          <Hidden smUp>
+            <Carousel
+              showArrows={false}
+              showStatus={true}
+              infiniteLoop={true}
+              showThumbs={false}
+              swipeable={true}
+              emulateTouch={true}
+              showIndicators={false}
+              autoPlay={false}
+              dynamicHeight={false}
+            >
+              {currentHouse[0].pics.map(p => (<div><img src={p} /></div>))}
+            </Carousel>
+          </Hidden>
         </div>
         <h1 style={styles.title} key="1" >{currentHouse[0].slogan}</h1>
         <h3 style={styles.title} key="2" >{currentHouse[0].city}, {currentHouse[0].country}</h3>
@@ -87,10 +104,10 @@ function DetailedComponent(props) {
             justify="space-between"
 
           >
-            <Grid item xs={2}>
+            <Grid item sm={2}>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={8} sm={6}>
               <h3 style={styles.title2} key="8">House details</h3>
               <br />
 
@@ -130,7 +147,7 @@ function DetailedComponent(props) {
               </div >
             </Grid>
 
-            <Grid item xs>
+            <Grid item xs sm>
               <h3 style={styles.title2} key="6" >Amenities</h3>
               <br />
               {currentHouse[0].featureIds.map((c, i) => features(c, i))}
@@ -184,7 +201,7 @@ const styles = {
     justifyContent: 'center'
   },
   iconText: {
-    margin: '10px 20px 0',
+    margin: '15px 20px 0',
   },
   icons: {
     width: '30px',

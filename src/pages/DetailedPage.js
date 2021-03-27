@@ -6,6 +6,7 @@ import { UserContext } from '../contexts/UserContext'
 import { BookingContext } from '../contexts/BookingContext'
 import { HouseContext } from '../contexts/HouseContext'
 import { useHistory } from 'react-router-dom'
+import Hidden from '@material-ui/core/Hidden'
 
 
 function DetailedPage(props) {
@@ -46,12 +47,13 @@ function DetailedPage(props) {
 
   return (
 
-    <div className="popup" style={styles.popup}>
+    <div className="popup" style={styles.popup} key="1">
 
+      <Hidden xsDown>
       <div style={styles.popupInnerComputer}>
-        <button style={styles.closeBtn} onClick={() => props.closeModal()}>Close</button>
+          <button style={styles.closeBtn} key="2" onClick={() => props.closeModal()}>Close</button>
         <DetailedComponent houseId={props.houseId} />
-        <div style={styles.dates}>
+          <div style={styles.dates} key="3">
           <h2>Booking information</h2>
           <br />
           <h3>Chosen dates</h3>
@@ -61,11 +63,33 @@ function DetailedPage(props) {
           <h3>Total price</h3>
           <br />
           <p>{totalPrice} €</p>
-          <button style={styles.bookBtn} onClick={createBooking}>Book</button>
+            <button style={styles.bookBtn} key="4" onClick={createBooking}>Book</button>
           <br />
           { notLoggedIn ? 'Log in to book this house' : ''}<p></p>
         </div>
-      </div>
+        </div>
+      </Hidden>
+
+      <Hidden smUp>
+        <div style={styles.popupInnerMobile} key="5">
+          <button style={styles.closeBtn} key="6" onClick={() => props.closeModal()}>Close</button>
+          <DetailedComponent houseId={props.houseId} />
+          <div style={styles.dates} key="7">
+            <h2>Booking information</h2>
+            <br />
+            <h3>Chosen dates</h3>
+            <br />
+            <p>{new Date(parseInt(props.startDate)).toLocaleString().substr(0, 11)} - {new Date(parseInt(props.endDate)).toLocaleString().substr(0, 11)}</p>
+            <br />
+            <h3>Total price</h3>
+            <br />
+            <p>{totalPrice} €</p>
+            <button style={styles.bookBtn} key="8" onClick={createBooking}>Book</button>
+            <br />
+            {notLoggedIn ? 'Log in to book this house' : ''}<p></p>
+          </div>
+        </div>
+      </Hidden>
 
 
     </div>
@@ -91,11 +115,10 @@ const styles = {
   },
   popupInnerMobile: {
     position: 'relative',
-    padding: '300px 0px 300px 0px',
     width: '100%',
-    height: '100%',
+    height: '100vh',
     backgroundColor: '#FFF',
-
+    overflow: 'scroll',
   },
   popupInnerComputer: {
     position: 'relative',
