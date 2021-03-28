@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Bookings from '../components/MyPages/Bookings.js'
-import MyRentals from '../components/MyPages/MyRentals.js'
-import AddNewRental from '../components/MyPages/AddNewRental.js'
+import Bookings from '../components/MyPages/Bookings'
+import MyRentals from '../components/MyPages/MyRentals'
+import AddNewRental from '../components/MyPages/AddNewRental'
 import { UserContext } from '../contexts/UserContext'
 import { BookingContext } from '../contexts/BookingContext'
 import Radium from 'radium'
