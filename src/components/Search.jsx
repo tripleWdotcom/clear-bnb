@@ -10,7 +10,7 @@ const SearchComponent = () => {
   }
 
   return (
-    <div>
+    <div style={{width:'70%'}}>
       <SearchBar getData={handleData} />
       <br />  <br />
 

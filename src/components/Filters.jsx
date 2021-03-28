@@ -1,26 +1,24 @@
 
 import React, { useEffect, useState } from "react";
-import BedSlider from './BedsRangeFilter';
-import PriceSlider from './PriceRangeFilter';
-import FormLabel from '@material-ui/core/FormLabel';
+import BedSlider from './BedsRangeFilter.jsx';
+import PriceSlider from './PriceRangeFilter.jsx';
+//import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
+//import FormHelperText from '@material-ui/core/FormHelperText';
 import Switch from '@material-ui/core/Switch';
 import { useHistory } from "react-router-dom";
 
-
-
-export default function Filters(){
+export default function Filters() {
   let history = useHistory();
-
 
   const renFilters = async () => {
     history.push("/home-results");
   }
 
-  const [state, setState] =useState({
+
+  const [state, setState] = useState({
     tv: false,
     wifi: false,
     breakfast: false,
@@ -32,40 +30,61 @@ export default function Filters(){
     parking: false
   });
 
+  const [reset, setReset] = useState(false)
 
-  useEffect(()=>{
+  const clearFilters = () => {
+    setState({
+      tv: false,
+      wifi: false,
+      breakfast: false,
+      gym: false,
+      kitchen: false,
+      smoking: false,
+      animalFriendly: false,
+      pool: false,
+      parking: false
+    });
+    setReset(!reset)
+    localStorage.removeItem('bedsNumberMin')
+    localStorage.removeItem('bedsNumberMax')
+    localStorage.removeItem('priceMax')
+    localStorage.removeItem('priceMin')
+
+  }
+
+
+  useEffect(() => {
     localStorage.setItem('features', JSON.stringify(state))
     console.log("value of features is :", localStorage.getItem('features'))
     renFilters()
-  },[state])
+  }, [state])
 
   const handleChange = async (event) => {
-    
+
     setState({ ...state, [event.target.name]: event.target.checked });
-   
-    console.log("value of switch is :", event.target.name,event.target.checked)
-    
+
+    console.log("value of switch is :", event.target.name, event.target.checked)
 
   };
 
   return (
     <div>
-         <hr/>
-        <div>
-          <PriceSlider />
-          <BedSlider />    
-        </div>  
-      <hr />
-   
-      <FormControl component="fieldset">
-    {/*     <FormLabel component="legend" color="primary" >Assign responsibility</FormLabel> */}
+      <div className={'sliderContainer'} style={styles.sliderContainer}>
+        <PriceSlider clear={reset} />
+        <br/><br/>
+        <BedSlider clear={reset} />
+      </div>
+     <br/><br/>
+
+      <FormControl component="fieldset" style={styles.sliderContainer}>
+        {/*     <FormLabel component="legend" color="primary" >Assign responsibility</FormLabel> */}
         <FormGroup>
-          <FormControlLabel 
-            control={<Switch color='primary'  checked={state.gym} onChange={handleChange} name="gym" />}
+          <FormControlLabel
+            control={<Switch color='primary' checked={state.gym} onChange={handleChange} name="gym" />}
             label="GYM"
           />
           <FormControlLabel
-            control={<Switch color='primary' checked={state.tv} onChange={handleChange} name="tv"  />}
+            control={<Switch color='primary' checked={state.tv} onChange={handleChange} name="tv" />}
             label="TV"
           />
           <FormControlLabel
@@ -97,13 +116,25 @@ export default function Filters(){
             label="Parking"
           />
         </FormGroup>
-       {/*  <FormHelperText>Be careful</FormHelperText> */}
+        {/*  <FormHelperText>Be careful</FormHelperText> */}
       </FormControl>
+      <br /><br /><br />
+      <button onClick={clearFilters}> Clear</button>
+
+
     </div>
-
-
-
-
   )
 
+  
 }
+
+const styles = {
+  sliderContainer: {
+    backgroundColor: 'whitesmoke',
+   
+    
+  }
+
+
+}
+
