@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react'
+import { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -7,12 +7,11 @@ import { useHistory } from "react-router-dom";
 
 
 
-export default function PriceSlider(props) {
+export default function PriceSlider() {
   let history = useHistory();
   const useStyles = makeStyles({
     priceRange: {
-      width: '70%',
-      margin: 'auto'
+      width: 300,
     }
   });
   const classes = useStyles();
@@ -40,9 +39,6 @@ export default function PriceSlider(props) {
     setValue(newValue);
     renderResultcompPrice()
   };
-  useEffect(() => {
-    setValue([10, 500])
-  }, [props.clear])
 
   return (
     <div className={classes.priceRange}>
@@ -55,14 +51,12 @@ export default function PriceSlider(props) {
         getAriaValueText={valuetext}
         max={500}
         min={10}
-        step={10}
 
       />
       <Typography id="range-slider" >
         Price per Night
       </Typography>
-
-
+      <br /> <br />
     </div>
   );
 }

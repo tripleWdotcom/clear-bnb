@@ -122,10 +122,14 @@ module.exports = (app, models) => {
       }).populate(['userId', 'featureIds']).lean().exec()
     }
     if (doIt) {
-      let filtered = docs.filter(house =>
-        !checkBookingCollection.filter(booking =>
-          booking.houseId.equals(house._id)).length);
-
+      let filtered = [];
+      docs.filter(function (house) {
+        checkBookingCollection.filter(function (booking) {
+          if (!house._id.equals(booking.houseId)) {
+            filtered.push(house)
+          }
+        })
+      });
       console.log(filtered)
       res.json(filtered)
       return;
