@@ -35,6 +35,7 @@ const HomeResults = () => {
 
             <Grid item sm={12} md={12}>
               <Paper className={classes.searchAndCalenDesktop}>Search component desktop
+                 <SearchComponent />
                 <Calen />
               </Paper>
             </Grid>

@@ -46,9 +46,6 @@ function App() {
                     </Switch>
                   </main>
 
-                  <footer className={true ? 'App-Footer' : ''}>npm 
-                    <Footer />
-                  </footer>
 
                 </Router>
 

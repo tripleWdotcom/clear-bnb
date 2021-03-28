@@ -54,7 +54,7 @@ const Navbar = () => {
 
   return (
     <>
-      <Hidden xsDown >
+   
         <nav className="navbar" style={styles.navbar}>
 
           <h1 style={{
@@ -72,7 +72,7 @@ const Navbar = () => {
           {showModal ? <Modal closeModal={() => setShowModal(false)} /> : ''}
           {showMyPage ? <MemberPage /> : ''}
         </nav>
-      </Hidden>
+ 
 
     </>
   )

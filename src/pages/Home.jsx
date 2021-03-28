@@ -19,13 +19,25 @@ const Home = () => {
     <div className="home">
       <div className={classes.root}>
         <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>Search component
-            <SearchComponent />
-              <Calen />
-            <br/><br/>
-            </Paper>
-          </Grid>
+          <Hidden xsDown>
+
+            <Grid item sm={12} md={12}>
+              <Paper className={classes.searchAndCalenDesktop}>Search component desktop
+                 <SearchComponent />
+                <Calen />
+              </Paper>
+            </Grid>
+          </Hidden>
+
+          <Hidden smUp>
+            <Grid item xs={12}>
+              <Paper className={classes.searchAndCalenMobile}>Search component in mobile
+                <SearchComponent />
+                <Calen />
+              </Paper>
+            </Grid>
+
+          </Hidden>
           <Hidden xsDown >
             <Grid item xs={12}>
               <Paper className={classes.paper}>Carousel component</Paper>
@@ -48,13 +60,18 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: '#383D59'
   },
-  paper: {
-    padding: theme.spacing(15),
-    textAlign: 'center',
+  searchAndCalenDesktop: {
+    padding: theme.spacing(6),
     color: theme.palette.text.secondary,
-    backgroundColor: '#99AABF',
-
-  }
+    backgroundColor: 'lightblue',
+    textAlign: '-webkit-center'
+  },
+  searchAndCalenMobile: {
+    padding: theme.spacing(1),
+    color: theme.palette.text.secondary,
+    backgroundColor: 'lightblue',
+    textAlign: '-webkit-center'
+  },
 }));
 
 
