@@ -7,7 +7,7 @@ import { BookingContext } from '../contexts/BookingContext'
 import Radium from 'radium'
 import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
-import Menu from '../components/Menu'
+import Menu from '../components/Menu.jsx'
 
 function MyPage() {
   const { isLoggedIn } = useContext(UserContext)
