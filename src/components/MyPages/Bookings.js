@@ -1,23 +1,45 @@
 import { useEffect, useContext, useState } from 'react';
 import { BookingContext } from '../../contexts/BookingContext'
+
+import BookingRecieptPage from '../../pages/BookingRecieptPage'
 import Radium from 'radium'
 import Grid from '@material-ui/core/Grid'
 
 
 function Bookings() {
-  const { myBookings, fetchMyBookingsByUserId, deleteBookingById } = useContext(BookingContext)
+  const { myBookings } = useContext(BookingContext)
+
+  const [bookId, setBookId] = useState('')
+
+  const [showDetailedPage, setShowDetailedPage] = useState(false)
+  
 
 
   useEffect(() => {
     console.log('My bookings is now use effect', myBookings.length)
   }, [myBookings])
 
+
+  const openDetailPage = (bookId) => {
+
+    setShowDetailedPage(true)
+    setBookId(bookId)
+    // setHouseId(houseId)
+    // setStartDate(localStorage.getItem("startDateChosen"))
+    // setEndDate(localStorage.getItem("endDateChosen"))
+  }
+
+  const closeDetailPage = () => {
+    setShowDetailedPage(false)
+  }
+  
+
   const structureBookings = (b, i) =>
 
   (
-    <Grid item xs style={style.item} key={"a" + i}>
+    <Grid item xs style={style.item} key={"a" + i} onClick = {() => openDetailPage(b._id)}>
       <img style={style.img} key={"b" + i} src={b.houseId.pics[0]} />
-      <div style={style.info} key={"c" + i} onClick={() => { setShowReciept(true); setBookId(b._id); }}>
+      <div style={style.info} key={"c" + i}>
         <div style={style.infoText} key={"d" + i}>
           <h3>{b.houseId.city}</h3>
           <a>{new Date(b.startDate).toString().substr(0, 11)} - {new Date(b.endDate).toString().substr(0, 11)}
@@ -38,7 +60,7 @@ function Bookings() {
         <h2>My Bookings Page</h2>
         {myBookings.length > 0 ? myBookings.map((b, i) => structureBookings(b, i)) : <h3 style={style.noBook}>Here will your future bookings be...</h3>}
       </Grid>
-      {showReciept ? <RecieptBook bookId={bookId}/> : ''}
+      {showDetailedPage ? <BookingRecieptPage bookId={bookId} closeModal={closeDetailPage} /> : ''}
     </div>
   )
 }

@@ -52,7 +52,7 @@ function DetailedPage(props) {
       <Hidden xsDown>
       <div style={styles.popupInnerComputer}>
           <button style={styles.closeBtn} key="2" onClick={() => props.closeModal()}>Close</button>
-        <DetailedComponent houseId={props.houseId} />
+        <DetailedComponent houseId={props.houseId} path="results"/>
           <div style={styles.dates} key="3">
           <h2>Booking information</h2>
           <br />
@@ -73,7 +73,7 @@ function DetailedPage(props) {
       <Hidden smUp>
         <div style={styles.popupInnerMobile} key="5">
           <button style={styles.closeBtn} key="6" onClick={() => props.closeModal()}>Close</button>
-          <DetailedComponent houseId={props.houseId} />
+          <DetailedComponent houseId={props.houseId} path="results" />
           <div style={styles.dates} key="7">
             <h2>Booking information</h2>
             <br />

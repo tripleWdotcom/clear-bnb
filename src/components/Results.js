@@ -32,7 +32,7 @@ export default function Results() {
   localStorage.getItem("bedsNumberMax"),
   localStorage.getItem("priceMin"),
   localStorage.getItem("priceMax"),
-    localStorage.getItem('features')])
+  localStorage.getItem('features')])
   //])
 
 
@@ -54,7 +54,7 @@ export default function Results() {
 
   const test = c => (
 
-    <div style={{ cursor: 'pointer', width: "100%" }} key={c._id} onClick={() => openDetailPage(c._id)}>
+    <div className="resultItem" style={{ cursor: 'pointer', width: "100%" }} key={c._id} onClick={() => openDetailPage(c._id)}>
       <hr />
       <img style={{
         height: '200px',
@@ -90,9 +90,9 @@ export default function Results() {
   return (
     <div> Houses available from:
       {y.toDateString()} to {yy.toDateString()}
-      <div >
-        {housesByCityAndDate.map(c => test(c))}
-      </div>
+
+      {housesByCityAndDate.map(c => test(c))}
+
       {showDetailedPage ? <DetailedPage houseId={houseId} startDate={startDate} endDate={endDate} closeModal={closeDetailPage} /> : ''}
     </div>
   )

@@ -30,9 +30,23 @@ function DetailedComponent(props) {
   const [currentHouse, setCurrentHouse] = useState([])
 
   useEffect(() => {
-    let houseObj = housesByCityAndDate.filter(h => h._id === props.houseId)
-    setCurrentHouse(houseObj)
-    console.log('house obj', houseObj)
+    console.log('props house id', props.houseId)
+    console.log('props house obj', props.houseObj)
+    console.log('props paths', props.path)
+    if (props.path === 'results') {
+      let houseObj = housesByCityAndDate.filter(h => h._id === props.houseId)
+      setCurrentHouse(houseObj)
+      console.log('from results current house', houseObj)
+      console.log('Current house: result', currentHouse)
+    } else {
+      setCurrentHouse(props.houseObj)
+      console.log('from bookings current house', props.houseObj)
+      console.log('Current house: bookings', currentHouse)
+    }
+    
+    
+    
+    
   }, [])
 
   const features = (c, i) => (
