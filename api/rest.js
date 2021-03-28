@@ -96,7 +96,7 @@ module.exports = (app, models) => {
             }
           },
           { city: b.city },
-          { isOffer: { $eq: false } }
+          // { isOffer: false }
         ]
       }).populate(['userId', 'featureIds']).lean().exec()
     } else {
@@ -117,19 +117,15 @@ module.exports = (app, models) => {
           { $and: [{ price: { $lte: b.priceMax } }, { price: { $gte: b.priceMin } }] },
           { city: b.city },
           { $and: featureIds },
-          { isOffer: { $eq: false } }
+          // { isOffer: false }
         ]
       }).populate(['userId', 'featureIds']).lean().exec()
     }
     if (doIt) {
-      let filtered = [];
-      docs.filter(function (house) {
-        checkBookingCollection.filter(function (booking) {
-          if (!house._id.equals(booking.houseId)) {
-            filtered.push(house)
-          }
-        })
-      });
+      let filtered = docs.filter(house =>
+        !checkBookingCollection.filter(booking =>
+          booking.houseId.equals(house._id)).length);
+
       console.log(filtered)
       res.json(filtered)
       return;
