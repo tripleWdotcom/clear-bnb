@@ -14,12 +14,12 @@ import { useState } from 'react';
 
 
 const HomeResults = () => {
-  const[show,setShow]=useState([])
+  const [show, setShow] = useState([])
 
 
 
-  const toggleFilter=()=>{
-    show ? document.getElementById("filterMenu").style.height = "100%" : document.getElementById("filterMenu").style.height = "0px";
+  const toggleFilter = () => {
+    show ? document.getElementById("filterMenu").style.height = "100vh" : document.getElementById("filterMenu").style.height = "0";
     setShow(!show)
   }
 
@@ -30,15 +30,28 @@ const HomeResults = () => {
       <div className={classes.root}>
 
         <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>Search component
-            <SearchComponent />
-              <Calen />
-            </Paper>
-          </Grid>
 
           <Hidden xsDown>
-            <Grid item xs={4} sm={4} md={4}>
+
+            <Grid item sm={12} md={12}>
+              <Paper className={classes.searchAndCalenDesktop}>Search component desktop
+                <Calen />
+              </Paper>
+            </Grid>
+          </Hidden>
+
+          <Hidden smUp>
+            <Grid item xs={12}>
+              <Paper className={classes.searchAndCalenMobile}>Search component in mobile
+                <SearchComponent />
+                <Calen />
+              </Paper>
+            </Grid>
+
+          </Hidden>
+
+          <Hidden xsDown>
+            <Grid item sm={4} md={4}>
               <Paper className={classes.paper2}>
                 <Filters /></Paper>
             </Grid>
@@ -50,30 +63,20 @@ const HomeResults = () => {
               <Results />
             </Paper>
           </Grid>
-        
 
-{/* 
-          <Hidden smUp>
-            <Grid item xs={12}>
-              <Paper className={classes.paperMobile}>
-                <Filters /></Paper>
-            </Grid>
-          </Hidden>
-
- */}
         </Grid>
-  
+
 
       </div>
       <Hidden smUp>
-      
+
         <Grid item xs={12} id='filterMenu' className={classes.filterContainer}>
           <Paper className={classes.paperMobile}>
             <Filters /></Paper>
         </Grid>
         <Grid item xs={12} className={classes.toggleFilters}>
-          <Paper  onClick={toggleFilter} >{show?<span>Show filters</span>:<span>Hide Filters</span>}
-            </Paper>
+          <Paper onClick={toggleFilter} >{show ? <span>Show filters</span> : <span>Hide Filters</span>}
+          </Paper>
         </Grid>
       </Hidden>
 
@@ -89,12 +92,17 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: 'cyan'
   },
-  paper: {
-    padding: theme.spacing(2),
+  searchAndCalenDesktop: {
+    padding: theme.spacing(6),
     color: theme.palette.text.secondary,
     backgroundColor: 'lightblue',
     textAlign: '-webkit-center'
-
+  },
+  searchAndCalenMobile: {
+    padding: theme.spacing(1),
+    color: theme.palette.text.secondary,
+    backgroundColor: 'lightblue',
+    textAlign: '-webkit-center'
   },
   paper2: {
     padding: theme.spacing(3),
@@ -112,29 +120,29 @@ const useStyles = makeStyles((theme) => ({
   },
   paperMobile: {
     padding: theme.spacing(3),
-   
+
     textAlign: 'center',
- 
+
     backgroundColor: 'whitesmoke',
   },
-   toggleFilters: {
-     padding: theme.spacing(2),
+  toggleFilters: {
+    padding: theme.spacing(2),
     textAlign: 'center',
     backgroundColor: 'grey',
-    position:'fixed',
-    zIndex:3,
+    position: 'fixed',
+    zIndex: 3,
     bottom: '0px',
-    width:'100%'
-  
+    width: '100%'
+
   },
 
-  filterContainer:{
-    position:'fixed',
-    bottom:'0px',
-    width:'100vw',
-    zIndex:3,
+  filterContainer: {
+    position: 'fixed',
+    bottom: '0px',
+    width: '100vw',
+    zIndex: 3,
     transition: '0.5s',
-    height:'0px'
+    height: '0px'
   }
 
 }));

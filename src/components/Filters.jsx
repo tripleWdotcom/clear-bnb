@@ -70,11 +70,12 @@ export default function Filters() {
   return (
     <div>
       <div className={'sliderContainer'} style={styles.sliderContainer}>
+        <br /><br />
         <PriceSlider clear={reset} />
-        <br/><br/>
+        <br /><br />     
         <BedSlider clear={reset} />
       </div>
-     <br/><br/>
+  
 
       <FormControl component="fieldset" style={styles.sliderContainer}>
         {/*     <FormLabel component="legend" color="primary" >Assign responsibility</FormLabel> */}
@@ -118,8 +119,11 @@ export default function Filters() {
         </FormGroup>
         {/*  <FormHelperText>Be careful</FormHelperText> */}
       </FormControl>
-      <br /><br /><br />
-      <button onClick={clearFilters}> Clear</button>
+      <br />
+      <div style={{ textAlign:'right'}}>
+      <button onClick={clearFilters} > Clear</button>
+
+      </div>
 
 
     </div>
