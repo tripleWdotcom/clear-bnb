@@ -1,26 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import Bookings from '../components/MyPages/Bookings.jsx'
-import MyRentals from '../components/MyPages/MyRentals.jsx'
-import AddNewRental from '../components/MyPages/AddNewRental.jsx'
+import React, { useState, useEffect, useContext } from 'react';
+import Bookings from '../components/MyPages/Bookings'
+import MyRentals from '../components/MyPages/MyRentals'
+import AddNewRental from '../components/MyPages/AddNewRental'
+import { UserContext } from '../contexts/UserContext'
+import { BookingContext } from '../contexts/BookingContext'
 import Radium from 'radium'
 import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
-import Menu from '../components/Menu.jsx'
+import Menu from '../components/Menu'
 
 function MyPage() {
-
+  const { isLoggedIn } = useContext(UserContext)
+  const { fetchMyBookingsByUserId } = useContext(BookingContext)
   const [action, setAction] = useState('showBookings')
   const [width, setWidth] = useState(window.innerWidth)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [menuShowing, setMenuShowing] = useState()
 
+
   const changeAction = (newAction) => {
     setAction(newAction)
   }
 
-  useEffect(() => {
+  useEffect(async () => {
     console.log('The new action is: ', action)
     setIsMenuOpen(false)
+    await fetchMyBookingsByUserId(isLoggedIn[0]._id)
+
     // if (open === true) {
     //   console.log('Btn exist and open is', open)
     //   setOpen(!open)

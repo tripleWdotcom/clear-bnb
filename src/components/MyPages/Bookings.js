@@ -1,27 +1,19 @@
 import { useEffect, useContext, useState } from 'react';
 import { BookingContext } from '../../contexts/BookingContext'
-import { UserContext } from '../../contexts/UserContext'
-import RecieptBook from './RecieptBook'
 import Radium from 'radium'
 import Grid from '@material-ui/core/Grid'
 
 
 function Bookings() {
   const { myBookings, fetchMyBookingsByUserId, deleteBookingById } = useContext(BookingContext)
-  const { isLoggedIn } = useContext(UserContext)
-  const [showReciept, setShowReciept] = useState(false)
-  const [bookId, setBookId] = useState('')
 
-  useEffect(async () => {
-    console.log('Something has changed in my bookings')
-    await fetchMyBookingsByUserId(isLoggedIn[0]._id)
-  }, [])
 
   useEffect(() => {
-    console.log('My bookings is now', myBookings)
+    console.log('My bookings is now use effect', myBookings.length)
   }, [myBookings])
 
   const structureBookings = (b, i) =>
+
   (
     <Grid item xs style={style.item} key={"a" + i}>
       <img style={style.img} key={"b" + i} src={b.houseId.pics[0]} />
@@ -51,6 +43,7 @@ function Bookings() {
   )
 }
 
+
 export default Radium(Bookings);
 
 const style = {
@@ -78,7 +71,7 @@ const style = {
     ':hover': {
       height: '110px',
       cursor: 'pointer',
-      transition: 'all 500ms ease-in-out'
+      transition: 'all 500ms ease-in-out',
     }
   },
   infoText: {

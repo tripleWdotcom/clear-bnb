@@ -13,13 +13,7 @@ const Calen = () => {
   const searchButton = async () => {
     localStorage.setItem('startDateChosen', sd.getTime())
     localStorage.setItem('endDateChosen', ed.getTime())
-    setToggle(!toggle)
     history.push("/home-results");
-  }
-
-  const toggleCalen = () => {
-    //toggle ? document.getElementById("filterMenu").style.height = "100%" : document.getElementById("filterMenu").style.height = "0px";
-    setToggle(!toggle)
   }
 
   const [state, setState] = useState([
@@ -38,15 +32,15 @@ const Calen = () => {
   //console.log("end date:", state[0].endDate, " In timestamp:", (ed ? ed.getTime() : "Not defined yet"))
   return (<div>
 
-    <div>
-      <div className="checkIn" style={styles.checkIn} onClick={ toggleCalen }>
+    <span>
+      <div className="checkIn" style={styles.checkIn} onClick={() => { setToggle(!toggle) }}>
         <div style={{ color: 'black', WebkitUserSelect: 'none' }}>Check-In </div>{sd.toDateString()}
       </div>
-      <div className="checkOut" style={styles.checkOut} onClick={toggleCalen}>
+      <div className="checkOut" style={styles.checkOut} onClick={() => { setToggle(!toggle) }}>
         <div style={{ color: 'black', WebkitUserSelect: 'none' }}> Check-Out</div>{ed.toDateString()}
       </div>
-    </div>
-    <div id="calendarContainer">
+    </span>
+    <div className="calendarContainer">
       {
         toggle ? <DateRange
           onChange={item => setState([item.selection])}
@@ -85,8 +79,7 @@ const styles = {
     marginBottom: '10px',
     outline: 'none',
     webKitUserSelect: 'none',
-    color: 'green',
-    width:'70%'
+    color: 'green'
 
   },
   checkOut: {
@@ -99,8 +92,7 @@ const styles = {
     fontSize: '18px',
     border: '0px',
     outline: 'none',
-    color: 'red',
-    width: '70%'
+    color: 'red'
 
 
   }
