@@ -8,7 +8,7 @@ import Footer from './components/Footer.jsx';
 import Home from './pages/Home.jsx';
 import HomeResults from './pages/HomeResults.jsx'
 //import MemberPage from './components/MemberPage.js'
-import MyPage from './pages/MyPage.js'
+import MyPage from './pages/MyPage.jsx'
 import FAQ from './pages/FAQ.js'
 import { useContext } from 'react'
 import error404 from './images/error404.png'
