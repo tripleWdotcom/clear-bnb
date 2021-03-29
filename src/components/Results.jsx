@@ -83,8 +83,8 @@ export default function Results() {
             </Grid>
             
             <Hidden xsDown>
-              <Grid   >
-                <div >{c.featureIds.map(f => <span style={{ fontSize: "15px" }} key={f._id}> {(() => {
+              <Grid container direction="row" >
+                {c.featureIds.map(f => <span style={{ fontSize: "15px" }} key={f._id}> {(() => {
                   switch (f.name) {
                     case "tv": return (<div><img src={tv} style={{ width: '20px' }} /> TV</div>);
                     case "gym": return (<div><img src={gym} style={{ width: '20px' }} /> Gym</div>);
@@ -97,7 +97,7 @@ export default function Results() {
                     case "breakfast": return (<div><img src={breakfast} style={{ width: '20px' }} /> Breakfast</div>);
                     default: return "#FFFFFF";
                   }
-                })()}     </span>)}</div>
+                })()}     </span>)}
 
                 {/*    <div style={{ height: '100px',display:'flex' }}>{c.featureIds.map(f => <div key={f._id}> {(() => {
                 switch (f.name) {

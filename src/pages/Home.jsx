@@ -6,6 +6,7 @@ import Hidden from '@material-ui/core/Hidden';
 import SearchComponent from '../components/Search'
 import CityIconList from '../components/CityIconList'
 import Calen from '../components/Calen';
+import Ok from '../components/Carousel.jsx'
 
 
 
@@ -18,7 +19,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className={classes.root}>
-        <Grid container spacing={3}>
+        <Grid container direction='column' spacing={3}>
           <Hidden xsDown>
 
             <Grid item sm={12} md={12}>
@@ -38,13 +39,17 @@ const Home = () => {
             </Grid>
 
           </Hidden>
-          <Hidden xsDown >
+      
             <Grid item xs={12}>
-              <Paper className={classes.paper}>Carousel component</Paper>
+              <Paper className={classes.paper}>
+              <Ok /></Paper>
+
             </Grid>
-          </Hidden>
+    
           <Grid item xs={12}>
+            <Paper className={classes.paper}>
             <CityIconList />
+              </Paper>
           </Grid>
         </Grid>
       </div>
@@ -58,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 
   root: {
     flexGrow: 1,
-    backgroundColor: '#383D59'
+    backgroundColor: 'black'
   },
   searchAndCalenDesktop: {
     padding: theme.spacing(6),
@@ -72,6 +77,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'lightblue',
     textAlign: '-webkit-center'
   },
+  paper:{
+    backgroundColor:'green',
+ 
+  }
 }));
 
 

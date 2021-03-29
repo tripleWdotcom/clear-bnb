@@ -68,7 +68,7 @@ const Calen = () => {
     </div>
     <br /><br />
     <img src={searchBtn} style={{ height: '50px', cursor: 'pointer' }} alt="buttonnn" onClick={searchButton} />
-  </div>
+  </div> 
   )
 }
 

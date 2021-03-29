@@ -1,7 +1,13 @@
-const { Checkbox } = require("@material-ui/core")
-const { bookings } = require("./models")
+
+const { bookings, houses } = require("./models")
 
 module.exports = (app, models) => {
+
+  app.get('/rest/offerhouses', async (req, res) => {
+    let docs = await houses.find({isOffer:true})
+    console.log("these are the offers: ",docs)
+    res.json(docs)
+  })
 
   // Get all users/houses/rentals
   app.get('/rest/:model', async (req, res) => {
