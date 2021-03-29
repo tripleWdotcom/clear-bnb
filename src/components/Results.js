@@ -78,11 +78,16 @@ export default function Results() {
 
   const test = c => (
 
-    <div key={c._id}>
-     
-      <Grid container style={{paddingTop:'20px'}} onClick={() => openDetailPage(c._id)}>
+    <div key={c._id} style={{ backgroundColor: 'light-grey', margin: '5px' }}>
 
-        <Grid item md={4} >
+      <Grid container
+        direction="column"
+        justifyContent="flex-start"
+        alignItems="flex-start"
+        style={{ paddingTop: '20px', cursor: 'pointer' }}
+        onClick={() => openDetailPage(c._id)}>
+
+        <Grid item>
           <img style={{
             height: '100%',
             width: '100%',
@@ -92,34 +97,75 @@ export default function Results() {
             alt={'picture ' + c.id}
           ></img>
         </Grid>
-        <Grid item md={8}>
 
-          <Grid container direction="column">
-            <Grid item style={{textAlign:"left"}}>
 
-              <h2 style={{ cursor: 'pointer' }}>{c.slogan}</h2>
-              <h4> <LocationOnIcon />{c.city}</h4>
+        <Grid item xs style={{ textAlign: "left" }}>
+          <h2>{c.slogan}</h2>
+        </Grid>
+        <Grid container direction="row"
+          justify="space-between"
+          alignItems="center"
+          style={{ margin: '15px 0' }}>
+          <Grid item>
+            <h4>{c.city}</h4>
+          </Grid>
 
+          <Hidden xsDown>
+          <Grid item>
+          <hr style={{ borderTop: '1px solid grey', width: '50px'}} />
+          </Grid>
+          </Hidden>
+
+          <Hidden smUp>
+            <Grid item>
+              <hr style={{ borderTop: '1px solid grey', width: '20px' }} />
             </Grid>
-            
-            <Hidden xsDown>
-              <Grid   >
-                <div >{c.featureIds.map(f => <span style={{ fontSize: "15px" }} key={f._id}> {(() => {
-                  switch (f.name) {
-                    case "tv": return (<div><img src={tv} style={{ width: '20px' }} /> TV</div>);
-                    case "gym": return (<div><img src={gym} style={{ width: '20px' }} /> Gym</div>);
-                    case "animalFriendly": return (<div><img src={animalFriendly} style={{ width: '20px' }} /> Animal Friendly</div>);
-                    case "wifi": return (<div><img src={wifi} style={{ width: '20px' }} /> Wi-Fi</div>);
-                    case "pool": return (<div><img src={pool} style={{ width: '20px' }} /> Pool</div>);
-                    case "smoking": return (<div><img src={smoking} style={{ width: '20px' }} /> Smoking</div>);
-                    case "parking": return (<div><img src={parking} style={{ width: '20px' }} /> Parking</div>);
-                    case "kitchen": return (<div><img src={kitchen} style={{ width: '20px' }} /> Kitchen</div>);
-                    case "breakfast": return (<div><img src={breakfast} style={{ width: '20px' }} /> Breakfast</div>);
-                    default: return "#FFFFFF";
-                  }
-                })()}     </span>)}</div>
+          </Hidden>
 
-                {/*    <div style={{ height: '100px',display:'flex' }}>{c.featureIds.map(f => <div key={f._id}> {(() => {
+          <Grid item>
+            <h4>{c.price} € / night</h4>
+          </Grid>
+
+          <Hidden xsDown>
+          <Grid item>
+            <hr style={{ borderTop: '1px solid grey', width: '50px' }} />
+            </Grid>
+          </Hidden>
+
+          <Hidden smUp>
+            <Grid item>
+              <hr style={{ borderTop: '1px solid grey', width: '20px' }} />
+            </Grid>
+          </Hidden>
+
+          <Grid item>
+            <h4>{c.bedrooms} beds</h4>
+          </Grid>
+        </Grid>
+
+
+
+
+
+        {/* <Hidden xsDown>
+              <Grid container>
+                {c.featureIds.map(f => <Grid item xs><span style={{ fontSize: "15px" }} key={f._id}> {(() => {
+          switch (f.name) {
+            case "tv": return (<img src={tv} style={{ width: '20px' }} />);
+            case "gym": return (<img src={gym} style={{ width: '20px' }} />);
+            case "animalFriendly": return (<img src={animalFriendly} style={{ width: '20px' }} />);
+            case "wifi": return (<img src={wifi} style={{ width: '20px' }} />);
+            case "pool": return (<img src={pool} style={{ width: '20px' }} />);
+            case "smoking": return (<img src={smoking} style={{ width: '20px' }} />);
+            case "parking": return (<img src={parking} style={{ width: '20px' }} />);
+            case "kitchen": return (<img src={kitchen} style={{ width: '20px' }} />);
+            case "breakfast": return (<img src={breakfast} style={{ width: '20px' }} />);
+            default: return "#FFFFFF";
+          }
+        })()}     </span></Grid>)
+}
+
+{/*    <div style={{ height: '100px',display:'flex' }}>{c.featureIds.map(f => <div key={f._id}> {(() => {
                 switch (f.name) {
                   case "tv": return (<div><TvIcon />TV</div>);
                   case "gym": return (<div><TvIcon />Gym</div>);
@@ -134,42 +180,38 @@ export default function Results() {
                 }
               })()}     </div>)}</div> */}
 
-              </Grid>
-
-              
-            </Hidden>
-            <Hidden smUp>
-              <Grid >
-                <div style={{display:'inline-flex'}}>{c.featureIds.map(f => <span style={{padding:'10px'}} key={f._id}> {(() => {
-                  switch (f.name) {
-                    case "tv": return (<div><img src={tv} style={{ width: '20px' }} /></div>);
-                    case "gym": return (<div><img src={gym} style={{ width: '20px' }} /> </div>);
-                    case "animalFriendly": return (<div><img src={animalFriendly} style={{ width: '20px' }} /></div>);
-                    case "wifi": return (<div><img src={wifi} style={{ width: '20px' }} /> </div>);
-                    case "pool": return (<div><img src={pool} style={{ width: '20px' }} /> </div>);
-                    case "smoking": return (<div><img src={smoking} style={{ width: '20px' }} /></div>);
-                    case "parking": return (<div><img src={parking} style={{ width: '20px' }} /></div>);
-                    case "kitchen": return (<div><img src={kitchen} style={{ width: '20px' }} /></div>);
-                    case "breakfast": return (<div><img src={breakfast} style={{ width: '20px' }} /></div>);
-                    default: return "#FFFFFF";
-                  }
-                })()}     </span>)}</div>
-              </Grid>
+        {/* </Grid>  */}
 
 
-            </Hidden>
-           
-
-            <Grid item xs={12} container justify="space-around">
-              <h4> ${c.price} </h4>   <h4> Beds: {c.bedrooms} </h4>
-
-            </Grid>
-    
-          </Grid>
-
+        <Grid item xs>
+          <div style={{ display: 'inline-flex' }}>{c.featureIds.map(f => <span style={{ padding: '10px 20px 10px 0' }} key={f._id}> {(() => {
+            switch (f.name) {
+              case "tv": return (<div><img src={tv} style={{ width: '20px' }} /></div>);
+              case "gym": return (<div><img src={gym} style={{ width: '20px' }} /> </div>);
+              case "animalFriendly": return (<div><img src={animalFriendly} style={{ width: '20px' }} /></div>);
+              case "wifi": return (<div><img src={wifi} style={{ width: '20px' }} /> </div>);
+              case "pool": return (<div><img src={pool} style={{ width: '20px' }} /> </div>);
+              case "smoking": return (<div><img src={smoking} style={{ width: '20px' }} /></div>);
+              case "parking": return (<div><img src={parking} style={{ width: '20px' }} /></div>);
+              case "kitchen": return (<div><img src={kitchen} style={{ width: '20px' }} /></div>);
+              case "breakfast": return (<div><img src={breakfast} style={{ width: '20px' }} /></div>);
+              default: return "#FFFFFF";
+            }
+          })()}     </span>)}</div>
         </Grid>
-      </Grid>
-    </div>
+
+
+
+        {/* <Grid item style={{textAlign: 'left'}}>
+            
+
+            </Grid> */}
+
+      </Grid >
+
+
+
+    </div >
 
   )
   let x = +localStorage.getItem("startDateChosen")
@@ -178,9 +220,9 @@ export default function Results() {
   let yy = new Date(xx)
 
   return (
-    <div> 
+    <div>
 
-      
+
 
       <div style={{ fontSize: "20px", padding: '20px', backgroundColor: 'whitesmoke', color: 'black' }}>
         Available houses with Check-In on:<b>{y.toDateString()}</b> and Check out on:  <b>{yy.toDateString()}</b>
