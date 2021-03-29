@@ -1,3 +1,5 @@
+const { Checkbox } = require("@material-ui/core")
+const { bookings } = require("./models")
 
 module.exports = (app, models) => {
 
@@ -7,17 +9,12 @@ module.exports = (app, models) => {
     let docs = await model.find()
     res.json(docs)
   })
-
-
-
   app.get('/rest/houses/ccity/:city', async (req, res) => {
     let city = req.params.city
     let model = models['houses']
     let docs = await model.find({ city: { $regex: '^' + city, $options: 'i' } }).populate('featureIds')
     res.json(docs)
   })
-
-
   // Get houses by city (searching for one letter at a time or all citys distinct)
   app.get('/rest/houses/city/:city', async (req, res) => {
     let city = req.params.city
@@ -37,55 +34,104 @@ module.exports = (app, models) => {
     },
     {
       $sort: { _id: 1 }
-      }])
+    }])
     res.json(docs)
   })
 
   // Get houses by filters 
   app.get('/rest/houses/filters/:filters', async (req, res) => {
     let b = JSON.parse(req.params.filters)
-
+    let docs = ""
     // Feature filters
     let featureIds = []
-    b.wifi == null ? null : featureIds.push({ featureIds: b.wifi })
-    b.tv == null ? null : featureIds.push({ featureIds: b.tv })
-    b.breakfast == null ? null : featureIds.push({ featureIds: b.breakfast })
-    b.gym == null ? null : featureIds.push({ featureIds: b.gym })
-    b.kitchen == null ? null : featureIds.push({ featureIds: b.kitchen })
-    b.smoking == null ? null : featureIds.push({ featureIds: b.smoking })
-    b.animalFriendly == null ? null : featureIds.push({ featureIds: b.animalFriendly })
-    b.pool == null ? null : featureIds.push({ featureIds: b.pool })
-    b.parking == null ? null : featureIds.push({ featureIds: b.parking })
-
+    !b.wifi ? null : featureIds.push({ featureIds: "6046bf371807457c80418887" })
+    !b.tv ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f1a" })
+    !b.breakfast ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f1b" })
+    !b.gym ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f1c" })
+    !b.kitchen ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f1d" })
+    !b.smoking ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f1e" })
+    !b.animalFriendly ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f1f" })
+    !b.pool ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f20" })
+    !b.parking ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f21" })
+    // console.log("so what is feaurures here?:", featureIds)
     let model = models['houses']
 
     let unixTimestamp = Math.floor(new Date().getTime())
 
+    let doIt = false
+
+    let checkBookingCollection = await bookings.find({
+      $or: [
+        { $and: [{ endDate: { $gt: b.availableStart } }, { endDate: { $lt: b.availableEnd } }] }, // overlapping a booking
+        { $and: [{ startDate: { $gt: b.availableStart } }, { startDate: { $lt: b.availableEnd } }] }, // overlappign a booking
+        { $and: [{ startDate: { $lt: b.availableStart } }, { endDate: { $gt: b.availableEnd } }] }, //inside a booking range
+        { $and: [{ startDate: { $gt: b.availableStart } }, { endDate: { $gt: b.availableEnd } }] },// booking range inside chosen dates
+      ]
+    })
+    console.log("this is the stuff", checkBookingCollection)
+    if (checkBookingCollection.length !== 0) {
+      console.log("can u see me??")
+      doIt = true
+
+    }
+
     if (!featureIds.length) {
+      console.log("do it is :", doIt)
+      console.log("what is check in :", b.availableStart)
+      console.log("what is check OUT :", b.availableEnd)
+
       // Without any checkbox filters
-      let docs = await model.find({
+      docs = await model.find({
         $and: [
           { $and: [{ bedrooms: { $lte: b.bedroomsMax } }, { bedrooms: { $gte: b.bedroomsMin } }] },
           { $and: [{ price: { $lte: b.priceMax } }, { price: { $gte: b.priceMin } }] },
-          { $and: [{ availableEnd: { $gt: unixTimestamp } }, { availableEnd: { $gt: b.availableEnd } }] },
-          { $and: [{ availableStart: { $lt: unixTimestamp } }, { availableStart: { $lt: b.availableStart } }] },
-          { city: b.city }
+          {
+            dateRanges:
+            {
+              $elemMatch: {
+                availableEnd: { $gt: unixTimestamp },
+                availableEnd: { $gte: b.availableEnd },
+                availableStart: { $lte: b.availableStart }
+              },
+            }
+          },
+          { city: b.city },
+          // { isOffer: false }
         ]
-      }).populate(['userId', 'featureIds']).exec()
-      res.json(docs)
-      return;
+      }).populate(['userId', 'featureIds']).lean().exec()
     } else {
       // With checkbox filters
-      let docs = await model.find({
+      docs = await model.find({
         $and: [
+          {
+            dateRanges:
+            {
+              $elemMatch: {
+                availableEnd: { $gt: unixTimestamp },
+                availableEnd: { $gte: b.availableEnd },
+                availableStart: { $lte: b.availableStart }
+              },
+            }
+          },
           { $and: [{ bedrooms: { $lte: b.bedroomsMax } }, { bedrooms: { $gte: b.bedroomsMin } }] },
           { $and: [{ price: { $lte: b.priceMax } }, { price: { $gte: b.priceMin } }] },
-          { $and: [{ availableEnd: { $gt: unixTimestamp } }, { availableEnd: { $gt: b.availableEnd } }] },
-          { $and: [{ availableStart: { $lt: unixTimestamp } }, { availableStart: { $lt: b.availableStart } }] },
           { city: b.city },
-          { $and: featureIds }
+          { $and: featureIds },
+          // { isOffer: false }
         ]
-      }).populate(['userId', 'featureIds']).exec()
+      }).populate(['userId', 'featureIds']).lean().exec()
+    }
+    if (doIt) {
+      let filtered = docs.filter(house =>
+        !checkBookingCollection.filter(booking =>
+          booking.houseId.equals(house._id)).length);
+
+      console.log(filtered)
+      res.json(filtered)
+      return;
+    }
+    else {
+      console.log(docs)
       res.json(docs)
       return;
     }
@@ -97,14 +143,12 @@ module.exports = (app, models) => {
     let docs = await model.find({ userId: req.params.id }).populate(['userId', 'featureIds']).exec()
     res.json(docs)
   })
-
   // Get users bookings by userId
   app.get('/rest/bookings/user/:id', async (req, res) => {
     let model = models['bookings']
     let docs = await model.find({ userId: req.params.id }).populate(['userId', 'houseId']).exec()
     res.json(docs)
   })
-
   // Add a new house
   app.post('/rest/houses', async (req, res) => {
     let model = models['houses']

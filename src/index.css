@@ -6,7 +6,9 @@
   --font4: 'Roboto', sans-serif;
   --font5: 'Roboto', sans-serif;
   
-  --c1: rgb(252, 249, 249);
+/*   --c1: rgb(252, 249, 249);
+ */  
+  --c1: #69688C;
   --c2: rgb(124, 124, 122);
   --c3: rgb(116, 106, 91);
   --c4: rgb(78, 73, 64);
@@ -38,7 +40,8 @@
 }
 
 body {
-  background-color: var(--c1);
+ background: url(../src/images/test5.jpg) no-repeat center fixed;
+    background-size: cover;
 }
 
 #app {
@@ -93,10 +96,15 @@ a {
 #contentGridContainer{
   display: grid;
   grid-template-columns: 20% 1fr 20%;
-  grid-template-rows: 10% 1fr 10%;
+  grid-template-rows: 50px 1fr 50px;
   grid-gap: 1em;
   width: 70vw;
-  margin: 0 auto;
+  margin: 20px auto;
+}
+@media (max-width: 768px){
+    #contentGridContainer{
+    width: 100%;
+  }
 }
 
 #contentGridContainer > * {
@@ -112,10 +120,6 @@ header.App-Header{
 main.content{
   grid-column: 1/4;
   grid-row: 2;
-}
-footer.App-Footer{
-  grid-column: 1/4;
-  grid-row: 3;
 }
 
 .noselect {

@@ -1,30 +1,28 @@
 import { useState, useEffect, useContext } from 'react'
-import { HouseContext } from '../contexts/HouseContext'
+import { HouseContext} from '../contexts/HouseContext'
 import { useHistory } from "react-router-dom";
 import Hidden from '@material-ui/core/Hidden';
 import Radium from 'radium'
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-
 
 const CityIconList = () => {
-  const { fetchAllCities } = useContext(HouseContext)
+  const { citiesAndCountriesNames} = useContext(HouseContext)
   const [cities, setCities] = useState([])
   let history = useHistory();
 
   useEffect(() => {
     shuffleCities()
-  }, [])
+  }, [citiesAndCountriesNames])
 
-  async function shuffleCities() {
-    const cities = await fetchAllCities(null)
-    for (let i = cities.length - 1; i > 0; i--) {
+  function shuffleCities() {
+    let cityAndCountry = citiesAndCountriesNames;
+    for (let i = cityAndCountry.length - 1; i > 0; i--) {
       const city = Math.floor(Math.random() * i)
-      const temp = cities[i]
-      cities[i] = cities[city]
-      cities[city] = temp
+      const temp = cityAndCountry[i]
+      cityAndCountry[i] = cityAndCountry[city]
+      cityAndCountry[city] = temp
     }
-    setCities([...cities.slice(0, 4)])
+    setCities([...cityAndCountry.slice(0, 4)])
   }
 
   const goToResultList = (c, e) => {
@@ -34,19 +32,11 @@ const CityIconList = () => {
     history.push("/home-results");
   }
 
-  const randomBackground = (key) => {
-    const colorArray = ['#FF874F',
-      '#FFD966',
-      '#A9D164',
-      '#7DA9AD'];
-    return colorArray[key];
-  }
-
   return (
     <div>
       <Grid container spacing={3}>
         <Hidden xsDown>
-          {cities.map((c, key) => (
+          {cities?.map((c, key) => (
             <Grid item xs key={key}>
               <div style={styles.cityItem} key={key} onClick={(e) => goToResultList(c, e)}><h3 style={styles.title}>{c._id}</h3></div>
             </Grid>
@@ -55,7 +45,7 @@ const CityIconList = () => {
       </Grid>
       <Grid container spacing={2}>
         <Hidden smUp>
-          {cities.slice(0, 3).map((c, key) => (
+          {cities?.slice(0, 3).map((c, key) => (
             <Grid item xs key={key}>
               <div style={styles.cityItem} key={key} onClick={(e) => goToResultList(c, e)}><h5 style={styles.title}>{c._id}</h5></div>
             </Grid>

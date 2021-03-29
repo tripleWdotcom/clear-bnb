@@ -6,51 +6,48 @@ export const BookingContext = createContext()
 
 export default function BookingContextProvider(props) {
 
-  const [bookings, setBookings] = useState([])
+  const [myBookings, setMyBookings] = useState([])
 
   // Get bookings by userId
-  const fetchBookingsByUserId = async userId => {
+  const fetchMyBookingsByUserId = async userId => {
     let res = await fetch('/rest/bookings/user/' + userId, {
       method: 'GET',
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
-    // setBookings(res)
-    return res;
+    setMyBookings(res)
   }
 
   // Add a new booking
-  const addBooking = async booking => {
+  const addNewBooking = async newBooking => {
     let res = await fetch('/rest/bookings', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(booking)
+      body: JSON.stringify(newBooking)
     })
     res = await res.json()
-    // booking.id = res.id
-    // setBookings([...bookings, booking])
-    return res;
+    newBooking._id = res._id
+    setMyBookings([...myBookings, newBooking])
   }
 
   // Remove a booking by id
-  const deleteBookingById = async id => {
-    let res = await fetch('/rest/bookings/' + id, {
+  const deleteBookingById = async bookingId => {
+    let res = await fetch('/rest/bookings/' + bookingId, {
       method: 'DELETE',
       headers: { 'content-type': 'application/json' },
     })
     res = await res.json()
-    // let index = users.indexOf(res)
-    // bookings.splice(index, 1)
-    return res;
+    let index = myBookings.indexOf(res)
+    myBookings.splice(index, 1)
   }
 
-  
+
 
   // The values we want the children components to reach and be able to use
   const values = {
-    bookings,
-    fetchBookingsByUserId,
-    addBooking,
+    myBookings,
+    fetchMyBookingsByUserId,
+    addNewBooking,
     deleteBookingById
   }
 

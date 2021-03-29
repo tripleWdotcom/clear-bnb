@@ -4,7 +4,7 @@ const models = require('./models.js')
 //-----------------------------
 global.session = require('express-session');
 global.crypto = require('crypto');
-global.ConnectMongo =  require('connect-mongo').default;
+global.ConnectMongo = require('connect-mongo').default;
 //-------------------------------------------
 
 const app = express()
