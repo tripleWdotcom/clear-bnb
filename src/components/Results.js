@@ -1,5 +1,5 @@
 import { HouseContext } from '../contexts/HouseContext'
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import Grid from '@material-ui/core/Grid';
 import TvIcon from '@material-ui/icons/Tv';
 import parking from '../images/parking.png';
@@ -23,6 +23,7 @@ import checkOut from '../images/checkOut.png';
 import { Wifi } from '@material-ui/icons';
 import Hidden from '@material-ui/core/Hidden'
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import DetailedPage from '../pages/DetailedPage'
 
 
 export default function Results() {
