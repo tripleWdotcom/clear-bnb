@@ -152,17 +152,17 @@ function DetailedComponent(props) {
 
               <div style={styles.iconForm} key="165">
                 <img src={checkIn} alt="check-in" style={styles.icons} key="190" />
-                <p style={styles.iconText} key="80">Check in: 15:00</p>
+                <p style={styles.iconText} key="83">Check in: 15:00</p>
               </div >
 
               <div style={styles.iconForm} key="133">
                 <img src={checkOut} alt="check-out" style={styles.icons} key="192" />
-                <p style={styles.iconText} key="80">Check out: 12:00</p>
+                <p style={styles.iconText} key="85">Check out: 12:00</p>
               </div >
             </Grid>
 
             <Grid item xs sm>
-              <h3 style={styles.title2} key="6" >Amenities</h3>
+              <h3 style={styles.title2} key="166" >Amenities</h3>
               <br />
               {currentHouse[0].featureIds.map((c, i) => features(c, i))}
             </Grid>

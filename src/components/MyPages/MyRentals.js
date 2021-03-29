@@ -1,14 +1,20 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { HouseContext } from '../../contexts/HouseContext'
 import { UserContext } from '../../contexts/UserContext'
 import Radium from 'radium'
 import Grid from '@material-ui/core/Grid'
+import RentalRecieptPage from '../../pages/RentalRecieptPage'
 
 
 function MyRentals() {
 
   const { myRentals, fetchMyRentals } = useContext(HouseContext)
   const { isLoggedIn } = useContext(UserContext)
+
+  const [rentalId, setRentalId] = useState('')
+
+  const [showDetailedPage, setShowDetailedPage] = useState(false)
+
 
   useEffect(async () => {
     console.log('Something has changed in my bookings')
@@ -19,9 +25,18 @@ function MyRentals() {
     console.log('My rentals is now', myRentals)
   }, [myRentals])
 
+  const openDetailPage = (rentalId) => {
+    setShowDetailedPage(true)
+    setRentalId(rentalId)
+  }
+
+  const closeDetailPage = () => {
+    setShowDetailedPage(false)
+  }
+
   const structureRentals = (r, i) =>
   (
-    <Grid item xs style={style.item} key={"a" + i}>
+    <Grid item xs style={style.item} key={"a" + i} onClick={() => openDetailPage(r._id)}>
       <img style={style.img} key={"b" + i} src={r.pics[0]} />
       {r.isOffer ? <div style={style.offer} key={"f" + i}><div style={style.offerText} key={"g" + i}>Special offer</div></div> : ''}
       <div style={style.info} key={"c" + i}>
@@ -45,6 +60,7 @@ function MyRentals() {
         <h2>My Rentals page</h2>
         {myRentals.length > 0 ? myRentals.map((r, i) => structureRentals(r, i)) : 'You have no rentals yet'}
       </Grid>
+      {showDetailedPage ? <RentalRecieptPage rentalId={rentalId} closeModal={closeDetailPage} /> : ''}
     </div>
   )
 }

@@ -87,10 +87,10 @@ function BookingRecieptPage(props) {
         <div style={styles.popupInnerMobile} key="5">
           <button style={styles.closeBtn} key="6" onClick={() => props.closeModal()}>Close</button>
           <DetailedComponent houseObj={[houseObj]} path="booking" />
-          <div style={styles.dates} key="7">
+          <div style={styles.dates} key="10">
             <h2>Booking details</h2>
             <br />
-            <div style={styles.infoBox} key="7">
+            <div style={styles.infoBox} key="12">
               <br />
               <p>#{props.bookId}</p>
               <br />

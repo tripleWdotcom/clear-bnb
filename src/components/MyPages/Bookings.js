@@ -23,12 +23,8 @@ function Bookings() {
 
 
   const openDetailPage = (bookId) => {
-
     setShowDetailedPage(true)
     setBookId(bookId)
-    // setHouseId(houseId)
-    // setStartDate(localStorage.getItem("startDateChosen"))
-    // setEndDate(localStorage.getItem("endDateChosen"))
   }
 
   const closeDetailPage = () => {
