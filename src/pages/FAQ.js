@@ -55,7 +55,6 @@ const styles = {
   },
   p: {
     margin: '20px',
-    marginTop: '2vh',
   },
   content: {
     margin: '0 auto',

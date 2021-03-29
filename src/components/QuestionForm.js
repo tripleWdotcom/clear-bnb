@@ -26,7 +26,8 @@ const handleSubmit = async e => {
     email: email,
     message:message
   }
-  setSubmitOk(true)
+  setSubmitOk(true)  
+
 }
 
 const reset = () => {
@@ -36,7 +37,7 @@ const reset = () => {
 
 const charCount = () => {
   setRemainingChar(message.length)
-  console.log('message length',message.length)
+  console.log('message length', message.length)
 }
 
 return (
@@ -85,11 +86,10 @@ return (
           value={message}
           placeholder="Write your message here"
         onChange={(e) => {
-          console.log("input message", e.target.value)
           setMessage(e.target.value)
         }}
         style={questionsFormStyle.message} key="4"
-        onKeyUp={reset}
+        onKeyUp={reset, charCount}
         >
         </textarea>
       <span className="counter" style={questionsFormStyle.counter}>{remainingChar} / {totalChar}</span>
@@ -112,7 +112,6 @@ const questionsFormStyle = {
     gridTemplateColumns: '50% 50%',
     gridTemplateRows: '30px 30px 170px 30px 30px',
     gap: '15px',
-    margin: 'auto',
     width: '70vw',
     marginBottom: '50px',
   },
