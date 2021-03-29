@@ -140,7 +140,7 @@ const useStyles = makeStyles((theme) => ({
   filterContainer: {
     position: 'fixed',
     bottom: '0px',
-    width: '100vw',
+    width: '100%',
     zIndex: 3,
     transition: '0.5s',
     height: '0px'
