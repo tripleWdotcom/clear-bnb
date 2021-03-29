@@ -73,7 +73,7 @@ function BookingRecieptPage(props) {
               <br />
               <h3>Chosen dates</h3>
               <br />
-              <p>{ numOfDays} {numOfDays < 2 ? 'night' : 'nights'}, {new Date(parseInt(startDate)).toLocaleString().substr(0, 11)} - {new Date(parseInt(endDate)).toLocaleString().substr(0, 11)}</p>
+              <p>{numOfDays} {numOfDays < 2 ? 'night' : 'nights'}, {new Date(parseInt(startDate)).toLocaleString().substr(0, 11)} - {new Date(parseInt(endDate)).toLocaleString().substr(0, 11)}</p>
               <br />
               <h3>Total price</h3>
               <br />
@@ -90,7 +90,8 @@ function BookingRecieptPage(props) {
           <div style={styles.dates} key="10">
             <h2>Booking details</h2>
             <br />
-            <div style={styles.infoBox} key="12">
+            <div style={styles.infoBoxMobile} key="12">
+              <h3>Booking number</h3>
               <br />
               <p>#{props.bookId}</p>
               <br />
@@ -134,6 +135,7 @@ const styles = {
     height: '100vh',
     backgroundColor: '#FFF',
     overflow: 'scroll',
+    textAlign: 'center',
   },
   popupInnerComputer: {
     position: 'relative',
@@ -173,9 +175,15 @@ const styles = {
     width: '30vw',
     padding: '10px',
     alignItems: 'center',
-    margin: '0 auto'
+    margin: '0 auto',
+  },
+  infoBoxMobile: {
+    textAlign: 'left',
+    borderRadius: '5px',
+    border: '1px solid grey',
+    padding: '10px',
+    alignItems: 'center',
 
-    // borderRadius: '5px', color: 'grey', margin: '50px auto'
   },
   bookBtn: {
     backgroundColor: 'crimson',

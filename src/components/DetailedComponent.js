@@ -103,8 +103,16 @@ function DetailedComponent(props) {
             </Carousel>
           </Hidden>
         </div>
+
+        <Hidden xsDown>
         <h1 style={styles.title} key="1" >{currentHouse[0].slogan}</h1>
         <h3 style={styles.title} key="2" >{currentHouse[0].city}, {currentHouse[0].country}</h3>
+        </Hidden>
+        <Hidden smUp>
+          <h1 style={styles.titleMobile} key="135" >{currentHouse[0].slogan}</h1>
+          <h3 style={styles.titleMobile} key="136" >{currentHouse[0].city}, {currentHouse[0].country}</h3>
+        </Hidden>
+
         <hr style={{
           width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: 'grey', margin: '50px auto'
         }} key="3" />
@@ -114,14 +122,12 @@ function DetailedComponent(props) {
         }} key="5" />
         <div style={styles.gridContainer}>
           <Grid container
-            direction="row"
             justify="space-between"
-
           >
             <Grid item sm={2}>
             </Grid>
 
-            <Grid item xs={8} sm={6}>
+            <Grid item xs={12} sm={6}>
               <h3 style={styles.title2} key="8">House details</h3>
               <br />
 
@@ -159,9 +165,10 @@ function DetailedComponent(props) {
                 <img src={checkOut} alt="check-out" style={styles.icons} key="192" />
                 <p style={styles.iconText} key="85">Check out: 12:00</p>
               </div >
+              <div style={{marginBottom: '10px'}} key="164">
+              </div >
             </Grid>
-
-            <Grid item xs sm>
+            <Grid item xs={11} sm>
               <h3 style={styles.title2} key="166" >Amenities</h3>
               <br />
               {currentHouse[0].featureIds.map((c, i) => features(c, i))}
@@ -173,6 +180,7 @@ function DetailedComponent(props) {
         <hr style={{
           width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: 'grey', margin: '50px auto'
         }} key="7" />
+        <Hidden xsDown>
         <h3 style={styles.title2} key="102" >Host</h3>
         <br />
         <div style={styles.iconForm2} key="117">
@@ -183,7 +191,22 @@ function DetailedComponent(props) {
         </div>
         <hr style={{
           width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: 'grey', margin: '50px auto'
-        }} key="177" />
+          }} key="177" />
+        </Hidden>
+
+        <Hidden smUp>
+          <h3 style={styles.title2} key="141" >Host</h3>
+          <br />
+          <div style={styles.iconForm3} key="163">
+            <img src={contact} alt={contact} style={styles.icons} key="152" />
+            <p style={styles.iconText2} key="142">{currentHouse[0].userId.firstName} {currentHouse[0].userId.lastName}</p>
+            <img src={email} alt={email} style={styles.icons} key="168" />
+            <p style={styles.iconText2} key="143">{currentHouse[0].userId.email}</p>
+          </div>
+          <hr style={{
+            width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: 'grey', margin: '50px auto'
+          }} key="145" />
+        </Hidden>
 
       </>
         : ''}
@@ -193,7 +216,7 @@ function DetailedComponent(props) {
 
 const styles = {
   outerDiv: {
-    margin: '10px 0',
+    margin: '10px 5px',
     alignItems: 'center'
   },
   frame: {
@@ -201,6 +224,10 @@ const styles = {
   },
   title: {
     margin: '10px 0 10px 30px',
+    textAlign: 'center',
+  },
+  titleMobile: {
+    margin: '0 0 10px 0',
     textAlign: 'center',
   },
   gridContainer: {
@@ -216,6 +243,13 @@ const styles = {
   },
   iconText: {
     margin: '15px 20px 0',
+  },
+  iconForm3: {
+    display: 'inline-block',
+    justifyContent: 'center'
+  },
+  iconText2: {
+    margin: '0 0 15px',
   },
   icons: {
     width: '30px',

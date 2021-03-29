@@ -45,7 +45,7 @@ function RentalRecieptPage(props) {
           <div style={styles.dates} key="10">
             <h2>Booking details</h2>
             <br />
-            <div style={styles.infoBox} key="12">
+            <div style={styles.infoBoxMobile} key="12">
               <br />
               <h3>Chosen date ranges</h3>
               <br />
@@ -84,6 +84,7 @@ const styles = {
     height: '100vh',
     backgroundColor: '#FFF',
     overflow: 'scroll',
+    textAlign: 'center',
   },
   popupInnerComputer: {
     position: 'relative',
@@ -126,6 +127,14 @@ const styles = {
     margin: '0 auto'
 
     // borderRadius: '5px', color: 'grey', margin: '50px auto'
+  },
+  infoBoxMobile: {
+    textAlign: 'left',
+    borderRadius: '5px',
+    border: '1px solid grey',
+    padding: '10px',
+    alignItems: 'center',
+
   },
   bookBtn: {
     backgroundColor: 'crimson',
