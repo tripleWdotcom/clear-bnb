@@ -4,6 +4,7 @@ import { DateRange } from 'react-date-range';
 import { useState } from 'react'
 import '../pages/cal.css'
 import searchBtn from '../images/searchButton.png';
+import SearchIcon from '@material-ui/icons/Search';
 import { useHistory } from "react-router-dom";
 
 const Calen = () => {
@@ -61,7 +62,8 @@ const Calen = () => {
       }
     </div>
     <br /><br />
-    <img src={searchBtn} style={{ height: '50px', cursor: 'pointer' }} alt="buttonnn" onClick={searchButton} />
+    <SearchIcon style={{ cursor: 'pointer', fontSize: '250%' }} onClick={searchButton} />
+    {/* <img src={searchBtn} style={{ height: '50px', cursor: 'pointer' }} alt="buttonnn" onClick={searchButton} /> */}
   </div>
   )
 }
@@ -69,30 +71,31 @@ const Calen = () => {
 const styles = {
   checkIn: {
     backgroundColor: 'white',
-    height: '50px',
-    borderRadius: '50px',
+
+    borderRadius: '5px',
     fontFamily: 'initial',
-    fontWeight: 'bold',
+    padding: '5px',
     textAlign: 'center',
     fontSize: '18px',
-    border: '0px',
-    marginBottom: '10px',
+    border: '1px solid #d3d3d3',
+    margin: '10px',
     outline: 'none',
     webKitUserSelect: 'none',
-    color: 'green'
+    color: '#047361'
 
   },
   checkOut: {
     backgroundColor: 'white',
-    height: '50px',
-    borderRadius: '50px',
+
+    borderRadius: '5px',
     fontFamily: 'initial',
-    fontWeight: 'bold',
+    padding: '5px',
     textAlign: 'center',
     fontSize: '18px',
-    border: '0px',
+    border: '1px solid #d3d3d3',
     outline: 'none',
-    color: 'red'
+    color: '#F24738',
+    margin: '10px',
 
 
   }

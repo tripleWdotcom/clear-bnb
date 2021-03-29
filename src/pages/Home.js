@@ -22,7 +22,7 @@ const Home = () => {
           <Hidden xsDown>
 
             <Grid item sm={12} md={12}>
-              <Paper className={classes.searchAndCalenDesktop}>Search component desktop
+              <Paper className={classes.searchAndCalenDesktop}>
                  <SearchComponent />
                 <Calen />
               </Paper>
@@ -31,7 +31,7 @@ const Home = () => {
 
           <Hidden smUp>
             <Grid item xs={12}>
-              <Paper className={classes.searchAndCalenMobile}>Search component in mobile
+              <Paper className={classes.searchAndCalenMobile}>
                 <SearchComponent />
                 <Calen />
               </Paper>
@@ -58,18 +58,22 @@ const useStyles = makeStyles((theme) => ({
 
   root: {
     flexGrow: 1,
-    backgroundColor: '#383D59'
+    backgroundColor: 'transparent'
   },
   searchAndCalenDesktop: {
     padding: theme.spacing(6),
     color: theme.palette.text.secondary,
-    backgroundColor: 'lightblue',
+    backgroundColor: 'white',
+    borderRadius: '20px',
+    boxShadow: "0px 8px 36px #222",
     textAlign: '-webkit-center'
   },
   searchAndCalenMobile: {
     padding: theme.spacing(1),
     color: theme.palette.text.secondary,
-    backgroundColor: 'lightblue',
+    backgroundColor: 'white',
+    borderRadius: '20px',
+    boxShadow: "0px 8px 36px #222",
     textAlign: '-webkit-center'
   },
 }));

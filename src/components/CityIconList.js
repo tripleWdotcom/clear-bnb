@@ -60,14 +60,15 @@ const styles = {
   cityItem: {
     padding: '20px',
     textAlign: 'center',
-    backgroundColor: "#4158D0",
-    backgroundImage: "linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)",
+    backgroundColor: "#005751",
+    backgroundImage: "linear-gradient(43deg, #005751 0%, #047361 46%, #66A395 100%)",
     borderRadius: "10px",
     margin: '0 10px',
     cursor: "pointer",
+    boxShadow: "0px 8px 20px #222",
   },
   title: {
-    color: '#C820C0',
+    color: '#66A395',
     textShadow: '0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7)',
   },
 }

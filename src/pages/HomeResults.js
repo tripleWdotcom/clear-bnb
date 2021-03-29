@@ -34,7 +34,7 @@ const HomeResults = () => {
           <Hidden xsDown>
 
             <Grid item sm={12} md={12}>
-              <Paper className={classes.searchAndCalenDesktop}>Search component desktop
+              <Paper className={classes.searchAndCalenDesktop}>
                  <SearchComponent />
                 <Calen />
               </Paper>
@@ -43,7 +43,7 @@ const HomeResults = () => {
 
           <Hidden smUp>
             <Grid item xs={12}>
-              <Paper className={classes.searchAndCalenMobile}>Search component in mobile
+              <Paper className={classes.searchAndCalenMobile}>
                 <SearchComponent />
                 <Calen />
               </Paper>
@@ -91,25 +91,25 @@ const useStyles = makeStyles((theme) => ({
 
   root: {
     flexGrow: 1,
-    backgroundColor: 'cyan'
+    
   },
   searchAndCalenDesktop: {
     padding: theme.spacing(6),
     color: theme.palette.text.secondary,
-    backgroundColor: 'lightblue',
+    borderRadius: '10px',
     textAlign: '-webkit-center'
   },
   searchAndCalenMobile: {
     padding: theme.spacing(1),
     color: theme.palette.text.secondary,
-    backgroundColor: 'lightblue',
+    borderRadius: '10px',
     textAlign: '-webkit-center'
   },
   paper2: {
     padding: theme.spacing(3),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    backgroundColor: 'lightblue',
+    borderRadius: '10px',
     // width:'30%'
 
   },
@@ -117,19 +117,19 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     textAlign: 'center',
     color: theme.palette.text.secondary,
-    backgroundColor: 'lightblue',
+    borderRadius: '10px',
   },
   paperMobile: {
     padding: theme.spacing(3),
-
+    borderRadius: '10px',
     textAlign: 'center',
 
-    backgroundColor: 'whitesmoke',
+  
   },
   toggleFilters: {
     padding: theme.spacing(2),
     textAlign: 'center',
-    backgroundColor: 'grey',
+    borderRadius: '10px',
     position: 'fixed',
     zIndex: 3,
     bottom: '0px',
@@ -143,7 +143,8 @@ const useStyles = makeStyles((theme) => ({
     width: '100vw',
     zIndex: 3,
     transition: '0.5s',
-    height: '0px'
+    height: '0px',
+    borderRadius: '10px',
   }
 
 }));

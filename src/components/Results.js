@@ -224,8 +224,8 @@ export default function Results() {
 
 
 
-      <div style={{ fontSize: "20px", padding: '20px', backgroundColor: 'whitesmoke', color: 'black' }}>
-        Available houses with Check-In on:<b>{y.toDateString()}</b> and Check out on:  <b>{yy.toDateString()}</b>
+      <div style={{ fontSize: "20px", padding: '20px', backgroundColor: '#66A395', color: 'black' }}>
+        Available houses with Check-In on: <b>{y.toDateString()}</b> and Check out on: <b>{yy.toDateString()}</b>
       </div>
 
       {housesByCityAndDate.map(c => test(c))}

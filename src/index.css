@@ -8,11 +8,11 @@
   
 /*   --c1: rgb(252, 249, 249);
  */  
-  --c1: #69688C;
-  --c2: rgb(124, 124, 122);
-  --c3: rgb(116, 106, 91);
-  --c4: rgb(78, 73, 64);
-  --c5: rgb(53, 50, 46);
+  --c1: white;
+  --c2: #0D4C80;
+  --c3:#F24738;
+  --c4: #0597F2;
+  --c5:  #0D4C80;
   --c6: rgb(53, 51, 48);
   /*--redBorder:#6e1020 1px solid;*/
 }
@@ -35,13 +35,16 @@
 
 *::-webkit-scrollbar-thumb {
   background-color: var(--c1);
-  border-radius: 20px;
-  border: 2px solid rgb(46, 46, 46);
+  border-radius: 5px;
+  border: 1px solid light-grey;
 }
 
 body {
- background: url(../src/images/test5.jpg) no-repeat center fixed;
-    background-size: cover;
+  /* background-color: 'white-smoke' */
+ background: url(../src/images/sandBg.jpg) no-repeat center fixed;
+  background-size: cover;
+
+
 }
 
 #app {
