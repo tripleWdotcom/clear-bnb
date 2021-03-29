@@ -14,8 +14,8 @@ import { DateRange } from 'react-date-range';
 import { useHistory } from 'react-router-dom'
 
 function AddNewRental(props) {
-  let history = useHistory();
-  const { addNewRental, myRentals, offers, addNewRentalOffer } = useContext(HouseContext)
+
+  const { addNewRental, myRentals} = useContext(HouseContext)
   const { isLoggedIn } = useContext(UserContext)
   const { features } = useContext(FeatureContext)
 
@@ -42,6 +42,7 @@ function AddNewRental(props) {
   const [showCalOne, setShowCalOne] = useState(false)
   const [showCalTwo, setShowCalTwo] = useState(false)
   const [showCalThree, setShowCalThree] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   const [ranges, setRanges] = useState([
     {
@@ -52,33 +53,11 @@ function AddNewRental(props) {
   ]);
 
   useEffect(() => {
-    console.log('Somethings up with my offers???', offers)
-  }, [offers])
+    console.log('Somethings up with the success???', success)
+ 
+  }, [success])
 
-  useEffect(() => {
-    console.log('Somethings up with my rentals???', myRentals)
-  }, [myRentals])
-
-  const handleSubmit = async e => {
-    console.log('Add new rental button clicked!')
-
-    console.log(`
-      FirstName: ${isLoggedIn[0].firstName} 
-      LastName: ${isLoggedIn[0].lastName}
-      Email: ${isLoggedIn[0].email}
-      UserId: ${isLoggedIn[0]._id}
-      City: ${city}
-      Country: ${country}
-      Slogan: ${slogan}
-      Description: ${description}
-      Adress: ${adress}
-      Beds: ${beds}
-      Price: ${price}
-      Offer: ${isOffer}
-    `);
-    console.log('Pics: ', pics)
-    console.log('FeatureIds: ', featureIds)
-    console.log('Date Ranges: ', ranges)
+  const handleSubmit = async (e) => {
 
     e.preventDefault()
 
@@ -93,42 +72,71 @@ function AddNewRental(props) {
 
     let unixTimeDates = []
     ranges.map(r => {
-      unixTimeDates.push({ startDate: r.startDate.getTime(), endDate: r.endDate.getTime() })
+      unixTimeDates.push({ availableStart: r.startDate.getTime(), availableEnd: r.endDate.getTime() })
     })
 
-    console.log('is offer true?', !!isOffer)
+    const newRental = {
+      firstName: isLoggedIn[0].firstName,
+      lastName: isLoggedIn[0].lastName,
+      email: isLoggedIn[0].email,
+      userId: isLoggedIn[0]._id,
+      city: city,
+      country: country,
+      slogan: slogan,
+      description: description,
+      address: adress,
+      bedrooms: beds,
+      price: price,
+      pics: pics,
+      featureIds: idsOfFeatures,
+      dateRanges: unixTimeDates,
+      isOffer: isOffer
+    }
+    await addNewRental(newRental)
 
-      const newRental = {
-        firstName: isLoggedIn[0].firstName,
-        lastName: isLoggedIn[0].lastName,
-        email: isLoggedIn[0].email,
-        userId: isLoggedIn[0]._id,
-        city: city,
-        country: country,
-        slogan: slogan,
-        description: description,
-        adress: adress,
-        beds: beds,
-        price: price,
-        pics: pics,
-        featureIds: idsOfFeatures,
-        dateRanges: unixTimeDates,
-        isOffer: isOffer
-      }
+    // Reset form and give feedback
 
-      console.log('New Rental: ', newRental)
-
-      await addNewRental(newRental)
+    setCity("");
+    setCountry("");
+    setDescription("");
+    setSlogan("");
+    setAdress("");
+    setPics([]);
+    setPics(['url']);
+    setBeds();
+    setPrice();
+    setFeatureIds([])
+    setFeatureIds([
+      { name: 'wifi', value: false },
+      { name: 'tv', value: false },
+      { name: 'breakfast', value: false },
+      { name: 'gym', value: false },
+      { name: 'kitchen', value: false },
+      { name: 'smoking', value: false },
+      { name: 'animalFriendly', value: false },
+      { name: 'pool', value: false },
+      { name: 'parking', value: false }
+    ]);
+    setIsOffer()
     
+    setShowCalOne(false)
+    setShowCalTwo(false)
+    setShowCalThree(false)
+    setRanges([
+      {
+        startDate: new Date(),
+        endDate: new Date(),
+        key: 'selection',
+      }
+    ]);
 
+    setSuccess(true)
 
-    // find a way to set to my rentals, props not working???
-
-    // const U = await addUser(newUser)
-    // console.log('new user', U)
+    setTimeout(() => {
+      setSuccess(false)
+    }, 5000)
 
   }
-
 
   function valuetextBeds(value) {
     return `${value}`;
@@ -279,6 +287,7 @@ function AddNewRental(props) {
           <label style={modalStyle.label} key="12">
             <Slider
               defaultValue={1}
+
               getAriaValueText={valuetextBeds}
               step={1}
               valueLabelDisplay="on"
@@ -296,11 +305,11 @@ function AddNewRental(props) {
               getAriaValueText={valuetextPrice}
               step={10}
               valueLabelDisplay="on"
-              max={1000}
+              max={999}
               min={10}
               onChangeCommitted={(e, val) => setPrice(val)}
             />
-            Price per night $
+            Price per night €
           </label>
           <br />
           <br />
@@ -369,7 +378,7 @@ function AddNewRental(props) {
                 style={modalStyle.input} key={'g' + i}>
               </input>
               {i > 0 ? <h6 style={{ cursor: 'pointer', textAlign: 'right', marginTop: '-10px', ':hover': { color: 'red' } }} key={'h' + i}
-                onClick={() => setRanges([...ranges.slice(0, i), ...ranges.slice(i + 1)])}>remove</h6> : ''}
+                onClick={() => { setShowCalOne(false); setShowCalTwo(false); setShowCalThree(false); setRanges([...ranges.slice(0, i), ...ranges.slice(i + 1)]); }}>remove</h6> : ''}
             </label>
           )
           )}
@@ -379,7 +388,7 @@ function AddNewRental(props) {
             key: 'selection',
           }])}>+ Add more date ranges</div> : !isOffer ? 'Get more date ranges with premium' : ''}
 
-          {showCalOne ? <DateRange
+          {showCalOne ? <><DateRange
             className="calOne"
             minDate={new Date()}
             showPreview={true}
@@ -389,7 +398,8 @@ function AddNewRental(props) {
             showMonthAndYearPickers={false}
             weekStartsOn={1}
             ranges={[ranges[0]]}
-          /> : showCalTwo ? <DateRange
+          /><p style={{ cursor: 'pointer' }} onClick={() => setShowCalOne(!showCalOne)}>Add dates</p></>
+            : showCalTwo ? <><DateRange
             className="calTwo"
             minDate={ranges[0].endDate}
             showPreview={true}
@@ -399,7 +409,8 @@ function AddNewRental(props) {
             showMonthAndYearPickers={false}
             weekStartsOn={1}
             ranges={[ranges[1]]}
-          /> : showCalThree ? <DateRange
+            /><p style={{ cursor: 'pointer' }} onClick={() => setShowCalTwo(!showCalTwo)}>Add dates</p></>
+              : showCalThree ? <><DateRange
             className="calThree"
             minDate={ranges[1].endDate}
             showPreview={true}
@@ -409,11 +420,13 @@ function AddNewRental(props) {
             showMonthAndYearPickers={false}
             weekStartsOn={1}
             ranges={[ranges[2]]}
-          /> : ''}
+              /><p style={{ cursor: 'pointer' }} onClick={() => setShowCalThree(!showCalThree)}>Add dates</p></> : ''}
           <br />
           <br />
           <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="17">Create rental</button>
+          {success ? <h5 style={{ textAlign: 'center', color: 'green', marginTop: '10px', transition: 'opacity 0 5s ease-in-out', animationDelay: '2s' }}>You have successfully created a new rental!</h5> : ''}
         </form>
+        
       </div>
 
 

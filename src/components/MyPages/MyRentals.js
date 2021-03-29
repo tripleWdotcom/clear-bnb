@@ -42,8 +42,8 @@ function MyRentals() {
       <div style={style.info} key={"c" + i}>
         <div style={style.infoText} key={"d" + i}>
           <h3>{r.city}</h3>
-          {r.dateRanges.length < 2 ? <a>{new Date(r.dateRanges[0].startDate).toString().substr(3, 13)}
-          - {new Date(r.dateRanges[0].endDate).toString().substr(3, 13)}</a> : <a>Multiple date ranges</a>}
+          {r.dateRanges.length < 2 ? <a>{new Date(r.dateRanges[0].availableStart).toString().substr(3, 13)}
+          - {new Date(r.dateRanges[0].availableEnd).toString().substr(3, 13)}</a> : <a>Multiple date ranges</a>}
           <br />
           <br />
           <a style={style.infoMore} key={"e" + i}>
@@ -58,7 +58,7 @@ function MyRentals() {
     <div className="MyRentals">
       <Grid container direction="column" alignItems="center">
         <h2>My Rentals page</h2>
-        {myRentals.length > 0 ? myRentals.map((r, i) => structureRentals(r, i)) : 'You have no rentals yet'}
+        {myRentals.length > 0 ? myRentals.map((r, i) => structureRentals(r, i)) : <h3 style={style.noBook}>Here will your future rentals be...</h3>}
       </Grid>
       {showDetailedPage ? <RentalRecieptPage rentalId={rentalId} closeModal={closeDetailPage} /> : ''}
     </div>
