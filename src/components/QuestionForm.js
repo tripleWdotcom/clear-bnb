@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Radium from 'radium';
 
 function QuestionForm() {
-  const {firstName,setFirstName } = useState("")
-  const {lastName, setLastName } = useState("")
-  const [email, setEmail] = useState("");
-  const { message, setMessage } = useState("")
-  const { submitOk, setSubmitOk } = useState("false")
-  const { remainingChar, setRemainingChar } = useState(0)
-  const {totalChar,setTotalChar} = useState(250)
+  const [firstName,setFirstName ] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [email, setEmail] = useState("")
+  const [message, setMessage] = useState("")
+  const [submitOk, setSubmitOk] = useState(false)
+  const [remainingChar, setRemainingChar] = useState(0)
+  const [totalChar, setTotalChar] = useState(250)
 
 const handleSubmit = async e => {
   console.log('Submit button clicked')
@@ -26,7 +26,6 @@ const handleSubmit = async e => {
     email: email,
     message:message
   }
-
   setSubmitOk(true)
 }
 
@@ -50,7 +49,8 @@ return (
           value={firstName}
           placeholder="First name"
           onChange={(e) => setFirstName(e.target.value) }
-          style={questionsFormStyle.firstName} key="1"
+        style={questionsFormStyle.firstName} key="1"
+        onKeyUp={reset}
         >
         </input>
         <input
@@ -59,11 +59,12 @@ return (
           type="text"
           value={lastName}
           placeholder="Last Name"
-        onChange={(e) => {
+          onChange={(e) => {
           console.log("input last Name", e.target.value)
           setLastName(e.target.value)
         }}
-          style={questionsFormStyle.lastName} key="2"
+        style={questionsFormStyle.lastName} key="2"
+        onKeyUp={reset}
         >
         </input>
         <input
@@ -73,7 +74,8 @@ return (
           value={email}
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
-          style={questionsFormStyle.email} key="3"
+        style={questionsFormStyle.email} key="3"
+        onKeyUp={reset}
         >
         </input>
         <textarea
@@ -87,10 +89,11 @@ return (
           setMessage(e.target.value)
         }}
         style={questionsFormStyle.message} key="4"
+        onKeyUp={reset}
         >
         </textarea>
       <span className="counter" style={questionsFormStyle.counter}>{remainingChar} / {totalChar}</span>
-      {submitOk ? <a>Thank you for your message!We'll try to respond within 48 hrs.</a> : ''}
+      {submitOk ? <h4>Thank you for your message!We'll try to respond within 48 hrs.</h4> : ''}
       <button style={questionsFormStyle.button} >Submit</button>
       </form>
     </div>
