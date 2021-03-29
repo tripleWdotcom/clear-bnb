@@ -65,9 +65,10 @@ const Navbar = () => {
             style={{
               marginLeft: 'auto'
             }}>
-            <a style={styles.home} onClick={goHome}>Home</a>
-            {isUserLoggedIn && !showModal ? <a style={styles.userName} onClick={() => { history.push('/mypage') }}>Hej {isLoggedIn[0].firstName}</a> : ''}
-            {!isUserLoggedIn ? <a style={styles.signIn} onClick={() => { signInModal() }}>Sign In</a> : <a style={styles.signIn} onClick={logOut}>Log out</a>}
+            <a key="1"style={styles.home} onClick={goHome}>Home</a>
+            {isUserLoggedIn && !showModal ? <a key="2" style={styles.userName} onClick={() => { history.push('/mypage') }}>Hej {isLoggedIn[0].firstName}</a> : ''}
+            <a key="3" style={styles.home} onClick={() => { history.push('/FAQ') }}>FAQ</a>
+            {!isUserLoggedIn ? <a key="4" style={styles.signIn} onClick={() => { signInModal() }}>Sign In</a> : <a style={styles.signIn} onClick={logOut}>Log out</a>}
           </div>
           {showModal ? <Modal closeModal={() => setShowModal(false)} /> : ''}
           {showMyPage ? <MemberPage /> : ''}

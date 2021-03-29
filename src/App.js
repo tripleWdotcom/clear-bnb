@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import HomeResults from './pages/HomeResults'
 //import MemberPage from './components/MemberPage.js'
 import MyPage from './pages/MyPage.js'
+import FAQ from './pages/FAQ.js'
 import { useContext } from 'react'
 
 
@@ -41,6 +42,7 @@ function App() {
                     <Switch>
                       <Route exact path="/" component={Home} />
                       <Route exact path="/home-results" component={HomeResults} />
+                      <Route exact path="/FAQ" component={FAQ} />
                       <Route exact path="/mypage" component={MyPage} />
                       <Route path="*" component={page404} />
                     </Switch>
