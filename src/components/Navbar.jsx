@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import Modal from './Modal'
 import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext';
-import MemberPage from './MemberPage.js'
+import MemberPage from './MemberPage.jsx'
 
 const Navbar = () => {
 
@@ -54,7 +54,7 @@ const Navbar = () => {
 
   return (
     <>
-      <Hidden xsDown >
+   
         <nav className="navbar" style={styles.navbar}>
 
           <h1 style={{
@@ -73,7 +73,7 @@ const Navbar = () => {
           {showModal ? <Modal closeModal={() => setShowModal(false)} /> : ''}
           {showMyPage ? <MemberPage /> : ''}
         </nav>
-      </Hidden>
+ 
 
     </>
   )

@@ -44,13 +44,10 @@ const House = mongoose.model('House', {
     availableStart: Number,
     availableEnd: Number
   }],
-/*   availableStart: Number,
-  availableEnd: Number, */
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  isOffer:Boolean
 })
 
 const Booking = mongoose.model('Booking', {

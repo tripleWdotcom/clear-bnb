@@ -3,14 +3,15 @@ import UserContextProvider from './contexts/UserContext'
 import FeatureContextProvider from './contexts/FeatureContext'
 import HouseContextProvider from './contexts/HouseContext'
 import BookingContextProvider from './contexts/BookingContext'
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import HomeResults from './pages/HomeResults'
+import Navbar from './components/Navbar.jsx';
+import Footer from './components/Footer.jsx';
+import Home from './pages/Home.jsx';
+import HomeResults from './pages/HomeResults.jsx'
 //import MemberPage from './components/MemberPage.js'
 import MyPage from './pages/MyPage.js'
 import FAQ from './pages/FAQ.js'
 import { useContext } from 'react'
+import error404 from './images/error404.png'
 
 
 
@@ -20,9 +21,10 @@ function App() {
     rel="stylesheet" />
 
 
-  const page404 = () => (
-    <h1>Page not found: {window.location.pathname}</h1>
-  )
+  const page404 = () => (<div>
+     <h1 style={{color:"red",textAlign:"center"}}>Page not found: {window.location.pathname}</h1> 
+        <img src={error404} />
+  </div>)
   // localStorage.clear() // we might need to add/remove later
 
   return (
@@ -48,9 +50,6 @@ function App() {
                     </Switch>
                   </main>
 
-                  <footer className={true ? 'App-Footer' : ''}>npm 
-                    <Footer />
-                  </footer>
 
                 </Router>
 

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import Bookings from '../components/MyPages/Bookings.js'
-import MyRentals from '../components/MyPages/MyRentals.js'
-import AddNewRental from '../components/MyPages/AddNewRental.js'
+import Bookings from '../components/MyPages/Bookings.jsx'
+import MyRentals from '../components/MyPages/MyRentals.jsx'
+import AddNewRental from '../components/MyPages/AddNewRental.jsx'
 import Radium from 'radium'
 import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
-import Menu from '../components/Menu'
+import Menu from '../components/Menu.jsx'
 
 function MyPage() {
 

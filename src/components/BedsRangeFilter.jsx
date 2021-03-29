@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -6,11 +6,12 @@ import { useHistory } from "react-router-dom";
 
 
 
-export default function BedSlider() {
+export default function BedSlider(props) {
   let history = useHistory();
   const useStyles = makeStyles({
     bedRange: {
-      width: 200,
+      width: '70%',
+      margin: 'auto'
     }
   });
 
@@ -39,6 +40,11 @@ export default function BedSlider() {
     renderResultcomp()
   };
 
+  useEffect(() => {
+    setValue([1, 10])
+  }, [props.clear])
+ 
+
   return (
     <div className={classes.bedRange}>
 
@@ -50,12 +56,13 @@ export default function BedSlider() {
         getAriaValueText={valuetext}
         max={10}
         min={1}
-        marks
+      
+   
       />
       <Typography id="range-slider" gutterBottom>
         Number of beds
       </Typography>
-      <br /> <br />
+ 
     </div>
   );
 }
