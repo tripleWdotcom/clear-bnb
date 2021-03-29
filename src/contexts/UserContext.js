@@ -11,15 +11,15 @@ export default function UserContextProvider(props) {
   const [isLoggedIn, setIsLoggedIn] = useState([])
 
   // A reactive state to store users
-  //const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([])
 
 
   // Get all users
-  /*   const fetchUsers = async () => {
+  const fetchUsers = async () => {
       let res = await fetch('/rest/users')
       res = await res.json()
       setUsers(res)
-    } */
+    }
 
   // Get the user that is logged in if someone is logged in
   const whoIsLoggedIn = async () => {
@@ -93,6 +93,7 @@ export default function UserContextProvider(props) {
   // The values we want the children components to reach and be able to use
   const values = {
     isLoggedIn,
+    users,
     addUser,
     logInUser,
     logOutUser,
@@ -100,7 +101,8 @@ export default function UserContextProvider(props) {
 
   //Calls one time, as mounted in Vue
   useEffect(() => {
-    whoIsLoggedIn()
+    whoIsLoggedIn();
+    fetchUsers();
   }, [])
 
 

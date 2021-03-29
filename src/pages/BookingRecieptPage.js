@@ -14,60 +14,45 @@ function BookingRecieptPage(props) {
   // let history = useHistory();
   // const { isLoggedIn } = useContext(UserContext)
   const { myBookings } = useContext(BookingContext)
+
+  const { users } = useContext(UserContext)
   const { features } = useContext(FeatureContext)
   const [houseFeatures, setHouseFeatures] = useState([])
-  // const { housesByCityAndDate } = useContext(HouseContext)
+  const [startDate, setStartDate] = useState(0)
+  const [endDate, setEndDate] = useState(0)
   const [totalPrice, setTotalPrice] = useState(0)
   const [houseObj, setHouseObj] = useState('')
-  // const [notLoggedIn, setNotLoggedIn] = useState(false)
+  const [numOfDays, setNumOfDays] = useState(0)
 
   useEffect(() => {
+    getNewHouse();
+  }, [])
+
+  const getNewHouse = () => {
     let thisBooking = myBookings.filter(b => b._id === props.bookId)
-    let strArray = thisBooking[0].houseId.featureIds;
-    for (let i = 0; i < strArray.length; i++){
+    // Deep copy the array 
+    let copyOfBooking = JSON.parse(JSON.stringify(thisBooking))
+    let strArray = copyOfBooking[0].houseId.featureIds;
+
+    for (let i = 0; i < strArray.length; i++) {
       let featObj = features.filter(f => f._id === strArray[i])
       strArray[i] = featObj[0]
     }
-    thisBooking[0].houseId.featureIds = strArray
+    // Who is the host?
+    let hostId = copyOfBooking[0].houseId.userId
+    let hostObj = users.filter(u => u._id === hostId)
+    // Fill the feature objects
+    copyOfBooking[0].houseId.featureIds = strArray
+    // Fill the host object
+    copyOfBooking[0].houseId.userId = hostObj[0]
+    setHouseObj(copyOfBooking[0].houseId)
+    setStartDate(copyOfBooking[0].startDate)
+    setEndDate(copyOfBooking[0].endDate)
+    setTotalPrice(copyOfBooking[0].totalPrice)
 
-    // Do the same with the user id (host)
-
-
-    
-
-    // setHouseObj(thisBooking[0].houseId)
-    // thisBooking[0].houseId.featureIds(f => {
-    //   console.log('what is f', f)
-    // })
-    // console.log('this features after map:', thisBooking[0])
-
-    // setHouseObj(thisBooking[0].houseId)
-    // setHouseId(thisBooking.houseId._id)
-    // let houseObj = housesByCityAndDate.filter(h => h._id === props.houseId)
-    // let numOfDays = ((props.endDate - props.startDate) / 3600 / 1000) / 24
-    // setTotalPrice(houseObj[0].price * numOfDays)
-  }, [])
-
-  // const createBooking = async () => {
-
-  //   if (!isLoggedIn.length || isLoggedIn == undefined) {
-  //     console.log('You are not logged in ')
-  //     setNotLoggedIn(true)
-  //   } else {
-  //     console.log('Who is logged in', isLoggedIn)
-  //     let newBooking = {
-  //       houseId: props.houseId,
-  //       userId: isLoggedIn[0]._id,
-  //       startDate: props.startDate,
-  //       endDate: props.endDate,
-  //       totalPrice: totalPrice
-  //     }
-  //     await addNewBooking(newBooking)
-  //     props.closeModal()
-  //     console.log('The new booking obj is', newBooking)
-  //   }
-  // }
-
+    let numOfDays = ((copyOfBooking[0].endDate - copyOfBooking[0].startDate) / 3600 / 1000) / 24
+    setNumOfDays(numOfDays)
+  }
 
 
   return (
@@ -79,18 +64,21 @@ function BookingRecieptPage(props) {
           <button style={styles.closeBtn} key="2" onClick={() => props.closeModal()}>Close</button>
           <DetailedComponent houseObj={[houseObj]} path="bookings" />
           <div style={styles.dates} key="3">
-            <h2>Booking information</h2>
+            <h2>Booking details</h2>
             <br />
-            <h3>Chosen dates</h3>
-            <br />
-            {/* <p>{new Date(parseInt(props.startDate)).toLocaleString().substr(0, 11)} - {new Date(parseInt(props.endDate)).toLocaleString().substr(0, 11)}</p> */}
-            <br />
-            <h3>Total price</h3>
-            <br />
-            {/* <p>{totalPrice} €</p> */}
-            {/* <button style={styles.bookBtn} key="4" onClick={createBooking}>Book</button> */}
-            {/* <br />
-            {notLoggedIn ? 'Log in to book this house' : ''}<p></p> */}
+            <div style={styles.infoBox} key="7">
+              <h3>Booking number</h3>
+              <br />
+              <p>#{props.bookId}</p>
+              <br />
+              <h3>Chosen dates</h3>
+              <br />
+              <p>{ numOfDays} {numOfDays < 2 ? 'night' : 'nights'}, {new Date(parseInt(startDate)).toLocaleString().substr(0, 11)} - {new Date(parseInt(endDate)).toLocaleString().substr(0, 11)}</p>
+              <br />
+              <h3>Total price</h3>
+              <br />
+              <p>{totalPrice} €</p>
+            </div>
           </div>
         </div>
       </Hidden>
@@ -100,18 +88,20 @@ function BookingRecieptPage(props) {
           <button style={styles.closeBtn} key="6" onClick={() => props.closeModal()}>Close</button>
           <DetailedComponent houseObj={[houseObj]} path="booking" />
           <div style={styles.dates} key="7">
-            <h2>Booking information</h2>
+            <h2>Booking details</h2>
             <br />
-            <h3>Chosen dates</h3>
-            <br />
-            {/* <p>{new Date(parseInt(props.startDate)).toLocaleString().substr(0, 11)} - {new Date(parseInt(props.endDate)).toLocaleString().substr(0, 11)}</p> */}
-            <br />
-            <h3>Total price</h3>
-            <br />
-            {/* <p>{totalPrice} €</p> */}
-            {/* <button style={styles.bookBtn} key="8" onClick={createBooking}>Book</button>
-            <br />
-            {notLoggedIn ? 'Log in to book this house' : ''}<p></p> */}
+            <div style={styles.infoBox} key="7">
+              <br />
+              <p>#{props.bookId}</p>
+              <br />
+              <h3>Chosen dates</h3>
+              <br />
+              <p>{new Date(parseInt(startDate)).toLocaleString().substr(0, 11)} - {new Date(parseInt(endDate)).toLocaleString().substr(0, 11)}</p>
+              <br />
+              <h3>Total price</h3>
+              <br />
+              <p>{totalPrice} €</p>
+            </div>
           </div>
         </div>
       </Hidden>
@@ -152,7 +142,7 @@ const styles = {
     height: '100vh',
     backgroundColor: 'whitesmoke',
     overflow: 'scroll',
-
+    textAlign: 'center',
   },
 
   closeBtn: {
@@ -174,7 +164,18 @@ const styles = {
     padding: '25px'
   },
   dates: {
-    margin: '10px'
+    margin: '10px',
+  },
+  infoBox: {
+    textAlign: 'left',
+    borderRadius: '5px',
+    border: '1px solid grey',
+    width: '30vw',
+    padding: '10px',
+    alignItems: 'center',
+    margin: '0 auto'
+
+    // borderRadius: '5px', color: 'grey', margin: '50px auto'
   },
   bookBtn: {
     backgroundColor: 'crimson',

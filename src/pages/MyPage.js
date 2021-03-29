@@ -10,8 +10,8 @@ import Grid from '@material-ui/core/Grid'
 import Menu from '../components/Menu'
 
 function MyPage() {
-  const { isLoggedIn } = useContext(UserContext)
-  const { fetchMyBookingsByUserId } = useContext(BookingContext)
+  
+
   const [action, setAction] = useState('showBookings')
   const [width, setWidth] = useState(window.innerWidth)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -25,7 +25,7 @@ function MyPage() {
   useEffect(async () => {
     console.log('The new action is: ', action)
     setIsMenuOpen(false)
-    await fetchMyBookingsByUserId(isLoggedIn[0]._id)
+   
 
     // if (open === true) {
     //   console.log('Btn exist and open is', open)

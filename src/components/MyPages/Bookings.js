@@ -1,13 +1,14 @@
 import { useEffect, useContext, useState } from 'react';
 import { BookingContext } from '../../contexts/BookingContext'
-
+import { UserContext } from '../../contexts/UserContext'
 import BookingRecieptPage from '../../pages/BookingRecieptPage'
 import Radium from 'radium'
 import Grid from '@material-ui/core/Grid'
 
 
 function Bookings() {
-  const { myBookings } = useContext(BookingContext)
+  const { myBookings, fetchMyBookingsByUserId } = useContext(BookingContext)
+  const { isLoggedIn } = useContext(UserContext)
 
   const [bookId, setBookId] = useState('')
 
@@ -15,9 +16,10 @@ function Bookings() {
   
 
 
-  useEffect(() => {
-    console.log('My bookings is now use effect', myBookings.length)
-  }, [myBookings])
+  useEffect(async () => {
+    await fetchMyBookingsByUserId(isLoggedIn[0]._id)
+    console.log('My bookings is now use effect', myBookings)
+  }, [])
 
 
   const openDetailPage = (bookId) => {
