@@ -10,6 +10,7 @@ import HomeResults from './pages/HomeResults'
 //import MemberPage from './components/MemberPage.js'
 import MyPage from './pages/MyPage.js'
 import { useContext } from 'react'
+import error404 from './images/error404.png'
 
 
 
@@ -19,9 +20,10 @@ function App() {
     rel="stylesheet" />
 
 
-  const page404 = () => (
-    <h1>Page not found: {window.location.pathname}</h1>
-  )
+  const page404 = () => (<div>
+     <h1 style={{color:"red",textAlign:"center"}}>Page not found: {window.location.pathname}</h1> 
+        <img src={error404} />
+  </div>)
   // localStorage.clear() // we might need to add/remove later
 
   return (
@@ -46,9 +48,6 @@ function App() {
                     </Switch>
                   </main>
 
-                  <footer className={true ? 'App-Footer' : ''}>npm 
-                    <Footer />
-                  </footer>
 
                 </Router>
 

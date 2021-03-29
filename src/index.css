@@ -121,11 +121,6 @@ main.content{
   grid-column: 1/4;
   grid-row: 2;
 }
-footer.App-Footer{
-  grid-column: 1/4;
-  grid-row: 3;
-}
-
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */

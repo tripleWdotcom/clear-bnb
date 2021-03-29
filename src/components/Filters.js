@@ -50,15 +50,16 @@ export default function Filters(){
 
   return (
     <div>
-         <hr/>
-        <div>
-          <PriceSlider />
-          <BedSlider />    
-        </div>  
-      <hr />
-   
-      <FormControl component="fieldset">
-    {/*     <FormLabel component="legend" color="primary" >Assign responsibility</FormLabel> */}
+      <div className={'sliderContainer'} style={styles.sliderContainer}>
+        <br /><br />
+        <PriceSlider clear={reset} />
+        <br /><br />     
+        <BedSlider clear={reset} />
+      </div>
+  
+
+      <FormControl component="fieldset" style={styles.sliderContainer}>
+        {/*     <FormLabel component="legend" color="primary" >Assign responsibility</FormLabel> */}
         <FormGroup>
           <FormControlLabel 
             control={<Switch color='primary'  checked={state.gym} onChange={handleChange} name="gym" />}
@@ -99,6 +100,13 @@ export default function Filters(){
         </FormGroup>
        {/*  <FormHelperText>Be careful</FormHelperText> */}
       </FormControl>
+      <br />
+      <div style={{ textAlign:'right'}}>
+      <button onClick={clearFilters} > Clear</button>
+
+      </div>
+
+
     </div>
 
 
