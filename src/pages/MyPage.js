@@ -57,7 +57,7 @@ function MyPage() {
             {isMenuOpen ? <Menu getNewAction={changeAction} /> : ''}
             {action === 'showBookings' ? <Bookings /> : ''}
             {action === 'showRentals' ? <MyRentals /> : ''}
-            {action === 'showNewRental' ? <AddNewRental getNewAction={changeAction} /> : ''}
+            {action === 'showNewRental' ? <AddNewRental setNewAction={changeAction} /> : ''}
           </Grid>
         </Grid>
       </Hidden>
@@ -78,7 +78,7 @@ function MyPage() {
           <Grid item xs={7}>
             {action === 'showBookings' ? <Bookings /> : ''}
             {action === 'showRentals' ? <MyRentals /> : ''}
-            {action === 'showNewRental' ? <AddNewRental /> : ''}
+            {action === 'showNewRental' ? <AddNewRental setNewAction={changeAction} /> : ''}
           </Grid>
         </Grid>
       </Hidden>

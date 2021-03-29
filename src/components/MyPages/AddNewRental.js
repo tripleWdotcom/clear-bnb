@@ -15,7 +15,7 @@ import { useHistory } from 'react-router-dom'
 
 function AddNewRental(props) {
 
-  const { addNewRental, myRentals} = useContext(HouseContext)
+  const { addNewRental, myRentals } = useContext(HouseContext)
   const { isLoggedIn } = useContext(UserContext)
   const { features } = useContext(FeatureContext)
 
@@ -25,8 +25,8 @@ function AddNewRental(props) {
   const [slogan, setSlogan] = useState("");
   const [adress, setAdress] = useState("");
   const [pics, setPics] = useState(['url']);
-  const [beds, setBeds] = useState(0);
-  const [price, setPrice] = useState(0);
+  const [beds, setBeds] = useState(1);
+  const [price, setPrice] = useState(10);
   const [featureIds, setFeatureIds] = useState([
     { name: 'wifi', value: false },
     { name: 'tv', value: false },
@@ -42,7 +42,7 @@ function AddNewRental(props) {
   const [showCalOne, setShowCalOne] = useState(false)
   const [showCalTwo, setShowCalTwo] = useState(false)
   const [showCalThree, setShowCalThree] = useState(false)
-  const [success, setSuccess] = useState(false)
+
 
   const [ranges, setRanges] = useState([
     {
@@ -52,10 +52,12 @@ function AddNewRental(props) {
     }
   ]);
 
-  useEffect(() => {
-    console.log('Somethings up with the success???', success)
- 
-  }, [success])
+  // useEffect(() => {
+  //   console.log('Somethings up with the success???', success)
+  //   console.log('what is props', props)
+    
+    
+  // }, [myRentals])
 
   const handleSubmit = async (e) => {
 
@@ -94,47 +96,9 @@ function AddNewRental(props) {
     }
     await addNewRental(newRental)
 
-    // Reset form and give feedback
-
-    setCity("");
-    setCountry("");
-    setDescription("");
-    setSlogan("");
-    setAdress("");
-    setPics([]);
-    setPics(['url']);
-    setBeds();
-    setPrice();
-    setFeatureIds([])
-    setFeatureIds([
-      { name: 'wifi', value: false },
-      { name: 'tv', value: false },
-      { name: 'breakfast', value: false },
-      { name: 'gym', value: false },
-      { name: 'kitchen', value: false },
-      { name: 'smoking', value: false },
-      { name: 'animalFriendly', value: false },
-      { name: 'pool', value: false },
-      { name: 'parking', value: false }
-    ]);
-    setIsOffer()
     
-    setShowCalOne(false)
-    setShowCalTwo(false)
-    setShowCalThree(false)
-    setRanges([
-      {
-        startDate: new Date(),
-        endDate: new Date(),
-        key: 'selection',
-      }
-    ]);
+    props.setNewAction('showRentals')
 
-    setSuccess(true)
-
-    setTimeout(() => {
-      setSuccess(false)
-    }, 5000)
 
   }
 
@@ -287,7 +251,6 @@ function AddNewRental(props) {
           <label style={modalStyle.label} key="12">
             <Slider
               defaultValue={1}
-
               getAriaValueText={valuetextBeds}
               step={1}
               valueLabelDisplay="on"
@@ -301,7 +264,7 @@ function AddNewRental(props) {
           <br />
           <label style={modalStyle.label} key="13">
             <Slider
-              defaultValue={1}
+              defaultValue={10}
               getAriaValueText={valuetextPrice}
               step={10}
               valueLabelDisplay="on"
@@ -400,33 +363,33 @@ function AddNewRental(props) {
             ranges={[ranges[0]]}
           /><p style={{ cursor: 'pointer' }} onClick={() => setShowCalOne(!showCalOne)}>Add dates</p></>
             : showCalTwo ? <><DateRange
-            className="calTwo"
-            minDate={ranges[0].endDate}
-            showPreview={true}
-            onChange={e => handleSelect(e.selection, 'calTwo')}
-            moveRangeOnFirstSelection={false}
-            showDateDisplay={false}
-            showMonthAndYearPickers={false}
-            weekStartsOn={1}
-            ranges={[ranges[1]]}
+              className="calTwo"
+              minDate={ranges[0].endDate}
+              showPreview={true}
+              onChange={e => handleSelect(e.selection, 'calTwo')}
+              moveRangeOnFirstSelection={false}
+              showDateDisplay={false}
+              showMonthAndYearPickers={false}
+              weekStartsOn={1}
+              ranges={[ranges[1]]}
             /><p style={{ cursor: 'pointer' }} onClick={() => setShowCalTwo(!showCalTwo)}>Add dates</p></>
               : showCalThree ? <><DateRange
-            className="calThree"
-            minDate={ranges[1].endDate}
-            showPreview={true}
-            onChange={e => handleSelect(e.selection, 'calThree')}
-            moveRangeOnFirstSelection={false}
-            showDateDisplay={false}
-            showMonthAndYearPickers={false}
-            weekStartsOn={1}
-            ranges={[ranges[2]]}
+                className="calThree"
+                minDate={ranges[1].endDate}
+                showPreview={true}
+                onChange={e => handleSelect(e.selection, 'calThree')}
+                moveRangeOnFirstSelection={false}
+                showDateDisplay={false}
+                showMonthAndYearPickers={false}
+                weekStartsOn={1}
+                ranges={[ranges[2]]}
               /><p style={{ cursor: 'pointer' }} onClick={() => setShowCalThree(!showCalThree)}>Add dates</p></> : ''}
           <br />
           <br />
           <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="17">Create rental</button>
-          {success ? <h5 style={{ textAlign: 'center', color: 'green', marginTop: '10px', transition: 'opacity 0 5s ease-in-out', animationDelay: '2s' }}>You have successfully created a new rental!</h5> : ''}
+  
         </form>
-        
+
       </div>
 
 
