@@ -9,9 +9,10 @@ function QuestionForm() {
   const [submitOk, setSubmitOk] = useState(false)
   const [remainingChar, setRemainingChar] = useState(0)
   const [totalChar, setTotalChar] = useState(250)
+  const [isEmailOk,setIsEmailOk] = useState(true)
+  
 
-const handleSubmit = async e => {
-  console.log('Submit button clicked')
+  const handleSubmit = async e => {
   e.preventDefault()
   console.log(`
       FirstName: ${firstName}
@@ -26,18 +27,30 @@ const handleSubmit = async e => {
     email: email,
     message:message
   }
-  setSubmitOk(true)  
-
+  
+  const validEmail = (email) => {
+    let validEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return email.match(validEmailPattern);
+    };
+    
+    if (validEmail(email)) {
+      setIsEmailOk(true)
+      setSubmitOk(true)
+    }
+    else {
+      setIsEmailOk(false)
+      setSubmitOk(false)
+    }
+    setEmail(email.trim())
 }
 
 const reset = () => {
   setSubmitOk(false)
-  }
+}
   
 
 const charCount = () => {
   setRemainingChar(message.length)
-  console.log('message length', message.length)
 }
 
 return (
@@ -93,6 +106,7 @@ return (
         >
         </textarea>
       <span className="counter" style={questionsFormStyle.counter}>{remainingChar} / {totalChar}</span>
+      <h4 style={isEmailOk ? { display: 'none' } : { color: 'red', textAlign: 'center' }}> Invalid Email</h4>
       {submitOk ? <h4>Thank you for your message!We'll try to respond within 48 hrs.</h4> : ''}
       <button style={questionsFormStyle.button} >Submit</button>
       </form>
