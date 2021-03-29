@@ -44,7 +44,7 @@ export default Radium(MenuContainer)
 const style = {
   color: 'white',
   containerMobile: {
-    backgroundColor: 'purple',
+    backgroundColor: 'whitesmoke',
     zIndex: '10',
     position: 'fixed',
     right: '0',
