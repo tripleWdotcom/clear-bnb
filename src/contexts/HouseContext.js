@@ -27,6 +27,15 @@ export default function HouseContextProvider(props) {
     setCitiesAndCountriesNames(res)
   }
 
+  const fetchOffers = async () => {
+    let res = await fetch('/rest/offerhouses' ,{
+      method: 'GET', 
+      headers: { 'content-type': 'application/json' },
+    })
+    res = await res.json()
+    setOffers(res)
+  }
+
 
   // Get users rentals/houses they own
   const fetchMyRentals = async userId => {
@@ -131,6 +140,7 @@ export default function HouseContextProvider(props) {
   
   // The values we want the children components to reach and be able to use
   const values = {
+    offers,
     myRentals,
     citiesAndCountriesNames,
     housesByCityAndDate,
@@ -145,6 +155,7 @@ export default function HouseContextProvider(props) {
 
   useEffect(() => {
     fetchCitiesAndCountriesNames()
+    fetchOffers()
   }, [])
 
 

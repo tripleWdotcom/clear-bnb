@@ -4,7 +4,9 @@ import { useHistory } from "react-router-dom";
 import Modal from './Modal'
 import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext';
-import MemberPage from './MemberPage.js'
+import MemberPage from './MemberPage.jsx'
+import Grid from '@material-ui/core/Grid';
+import PersonIcon from '@material-ui/icons/Person';
 
 const Navbar = () => {
 
@@ -54,25 +56,32 @@ const Navbar = () => {
 
   return (
     <>
-   
-        <nav className="navbar" style={styles.navbar}>
 
-          <h1 style={{
-            color: "crimson"
-          }}>ClearBnB</h1>
+      <Grid container
+        direction="row"
+        justify="space-evenly"
+        alignItems="center" >
 
-          <div className="links"
-            style={{
-              marginLeft: 'auto'
-            }}>
-            <a style={styles.home} onClick={goHome}>Home</a>
-            {isUserLoggedIn && !showModal ? <a style={styles.userName} onClick={() => { history.push('/mypage') }}>Hej {isLoggedIn[0].firstName}</a> : ''}
-            {!isUserLoggedIn ? <a style={styles.signIn} onClick={() => { signInModal() }}>Sign In</a> : <a style={styles.signIn} onClick={logOut}>Log out</a>}
-          </div>
-          {showModal ? <Modal closeModal={() => setShowModal(false)} /> : ''}
-          {showMyPage ? <MemberPage /> : ''}
-        </nav>
- 
+        <Grid item style={{ color: "crimson", fontSize: "30px" }}>LOGO</Grid>
+
+        <Grid item>
+          <div key="1" style={styles.home} onClick={goHome}>Home</div>
+        </Grid>
+       {/*  {isUserLoggedIn && !showModal ? <Grid  item><div key="2" style={styles.userName} onClick={() => { history.push('/mypage') }}>👤 {isLoggedIn[0].firstName}</div> </Grid> : ''} */}
+        {isUserLoggedIn && !showModal ? <Grid item><div key="2" style={styles.userName} onClick={() => { history.push('/mypage') }}><PersonIcon fontSize="large" /></div> </Grid> : ''}
+
+        <Grid item>
+          <div key="3" style={styles.home} onClick={() => { history.push('/FAQ') }}>FAQ</div>
+        </Grid>
+
+        {!isUserLoggedIn ? <Grid item><div key="4" style={styles.signIn} onClick={() => { signInModal() }}>Sign In</div> </Grid> : <Grid item> <div style={styles.signIn} onClick={logOut}>Log out</div></Grid>}
+
+        {showModal ? <Modal closeModal={() => setShowModal(false)} /> : ''}
+        {showMyPage ? <MemberPage /> : ''}
+
+
+      </Grid>
+
 
     </>
   )
@@ -82,41 +91,39 @@ const styles = {
 
   navbar: {
 
-    padding: '20px',
-    display: 'flex',
-    alignItems: 'center',
-    maxWidth: '600px',
-    margin: '0 auto',
-    borderBottom: '1px solid whitesmoke',
   },
 
   home: {
-
-    marginLeft: '16px',
+    fontSize: "20px",
+    cursor: 'pointer',
+    ':hover': {
+      color: 'crimson',
+      WebkitTransform: "scale(1.3)",
+      transition: '0.3s'
+    },
+  },
+  signIn: {
+    color: 'whitesmoke',
+    backgroundColor: 'crimson',
+    borderRadius: '8px',
     textDecoration: 'none',
     padding: '6px',
     cursor: 'pointer',
     ':hover': {
-      color: 'crimson',
+      WebkitTransform: "scale(1.2)",
+      transition: '0.3s'
     },
-  },
-  signIn: {
-
-    color: 'whitesmoke',
-    backgroundColor: 'crimson',
-    borderRadius: '8px',
-    marginLeft: '16px',
-    textDecoration: 'none',
-    padding: '6px',
-    cursor: 'pointer'
 
   },
 
   userName: {
-    marginLeft: '16px',
-    textDecoration: 'none',
-    padding: '6px',
-    cursor: 'pointer'
+    fontSize: "20px",
+    cursor: 'pointer',
+    ':hover': {
+      color: 'crimson',
+      WebkitTransform: "scale(1.3)",
+      transition: '0.3s'
+    },
   }
 
 

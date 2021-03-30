@@ -34,7 +34,7 @@ const CityIconList = () => {
 
   return (
     <div>
-      <Grid container spacing={3}>
+      <Grid container spacing={1}>
         <Hidden xsDown>
           {cities?.map((c, key) => (
             <Grid item xs key={key}>
@@ -43,7 +43,7 @@ const CityIconList = () => {
           ))}
         </Hidden>
       </Grid>
-      <Grid container spacing={2}>
+      <Grid container spacing={1}>
         <Hidden smUp>
           {cities?.slice(0, 3).map((c, key) => (
             <Grid item xs key={key}>

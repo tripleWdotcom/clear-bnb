@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@brainhubeu/react-carousel": "^1.19.26",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.11.9",
@@ -24,8 +25,10 @@
     "react-responsive-carousel": "^3.2.15",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-scroll": "^1.7.9",
     "react-search-field": "^1.2.0",
     "react-select": "^4.2.1",
+    "react-slick": "^0.23.1",
     "web-vitals": "^1.1.0"
   },
   "scripts": {
