@@ -2,69 +2,62 @@ import { useState } from 'react';
 import Radium from 'radium';
 
 function QuestionForm() {
-  const [firstName,setFirstName ] = useState("")
+  const [firstName, setFirstName] = useState("")
   const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
   const [submitOk, setSubmitOk] = useState(false)
   const [remainingChar, setRemainingChar] = useState(0)
   const [totalChar, setTotalChar] = useState(250)
-  const [isEmailOk,setIsEmailOk] = useState(true)
-  
+
+
 
   const handleSubmit = async e => {
-  e.preventDefault()
-  console.log(`
+
+    e.preventDefault()
+    console.log(`
       FirstName: ${firstName}
       LastName: ${lastName}
       Email: ${email}
       message: ${message}
     `);
 
-  const newQuestion = {
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
-    message:message
+    const newQuestion = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      message: message
+    }
+    setSubmitOk(true)
+    //clear()
   }
-  
-  const validEmail = (email) => {
-    let validEmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return email.match(validEmailPattern);
-    };
-    
-    if (validEmail(email)) {
-      setIsEmailOk(true)
-      setSubmitOk(true)
-    }
-    else {
-      setIsEmailOk(false)
-      setSubmitOk(false)
-    }
-    setEmail(email.trim())
-}
 
-const reset = () => {
-  setSubmitOk(false)
-}
-  
+ /*  const clear = () => {
 
-const charCount = () => {
-  setRemainingChar(message.length)
-}
+    document.getElementById("formm").reset()
+  } */
 
-return (
+  const reset = () => {
+    setSubmitOk(false)
+  }
+
+
+  const charCount = () => {
+    setRemainingChar(message.length)
+  }
+
+  return (
     <div>
-      <form onSubmit={handleSubmit} style={questionsFormStyle.form}>
+      <form id='formm' onSubmit={handleSubmit} style={questionsFormStyle.form}>
         <input
           required
           name="firstName"
           type="text"
           value={firstName}
           placeholder="First name"
-          onChange={(e) => setFirstName(e.target.value) }
-        style={questionsFormStyle.firstName} key="1"
-        onKeyUp={reset}
+          onChange={(e) => setFirstName(e.target.value)}
+          style={questionsFormStyle.firstName} key="1"
+          onKeyUp={reset}
         >
         </input>
         <input
@@ -74,22 +67,22 @@ return (
           value={lastName}
           placeholder="Last Name"
           onChange={(e) => {
-          console.log("input last Name", e.target.value)
-          setLastName(e.target.value)
-        }}
-        style={questionsFormStyle.lastName} key="2"
-        onKeyUp={reset}
+            console.log("input last Name", e.target.value)
+            setLastName(e.target.value)
+          }}
+          style={questionsFormStyle.lastName} key="2"
+          onKeyUp={reset}
         >
         </input>
         <input
           required
           name="email"
-          type="text"
+          type="email"
           value={email}
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
-        style={questionsFormStyle.email} key="3"
-        onKeyUp={reset}
+          style={questionsFormStyle.email} key="3"
+          onKeyUp={reset}
         >
         </input>
         <textarea
@@ -98,17 +91,16 @@ return (
           type="text"
           value={message}
           placeholder="Write your message here"
-        onChange={(e) => {
-          setMessage(e.target.value)
-        }}
-        style={questionsFormStyle.message} key="4"
-        onKeyUp={reset, charCount}
+          onChange={(e) => {
+            setMessage(e.target.value)
+          }}
+          style={questionsFormStyle.message} key="4"
+          onKeyUp={reset, charCount}
         >
         </textarea>
-      <span className="counter" style={questionsFormStyle.counter}>{remainingChar} / {totalChar}</span>
-      <h4 style={isEmailOk ? { display: 'none' } : { color: 'red', textAlign: 'center' }}> Invalid Email</h4>
-      {submitOk ? <h4>Thank you for your message!We'll try to respond within 48 hrs.</h4> : ''}
-      <button style={questionsFormStyle.button} >Submit</button>
+        <span className="counter" style={questionsFormStyle.counter}>{remainingChar} / {totalChar}</span>
+        {submitOk ? <h4>Thank you for your message!We'll try to respond within 48 hrs.</h4> : ''}
+        <button style={questionsFormStyle.button} >Submit</button>
       </form>
     </div>
   )
