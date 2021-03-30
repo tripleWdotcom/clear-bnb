@@ -64,7 +64,7 @@ const Navbar = () => {
         direction="row"
         justify="space-evenly"
         alignItems="center" >
-  <Hidden xsUp>
+  <Hidden xsDown>
         <Grid item style={{ color: "crimson", fontSize: "30px" }}>
           <img src={logo} style={styles.logoDesktop}/>
         </Grid>
@@ -149,7 +149,7 @@ const styles = {
 
   logoMobile: {
   
-    width: '50%',
+    width: '40%',
     display: 'block',
     margin: '0 auto',
    
