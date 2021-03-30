@@ -50,7 +50,7 @@ export default function BedSlider() {
         getAriaValueText={valuetext}
         max={10}
         min={1}
-        marks
+     
       />
       <Typography id="range-slider" gutterBottom>
         Number of beds

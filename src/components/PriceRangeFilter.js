@@ -51,6 +51,7 @@ export default function PriceSlider() {
         getAriaValueText={valuetext}
         max={500}
         min={10}
+        step={10}
 
       />
       <Typography id="range-slider" >
