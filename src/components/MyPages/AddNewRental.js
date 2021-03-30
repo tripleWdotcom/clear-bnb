@@ -12,6 +12,15 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRange } from 'react-date-range';
 import { useHistory } from 'react-router-dom'
+import parking from '../../images/parking.png';
+import nosmoking from '../../images/nosmoking.png';
+import gym from '../../images/gym.png';
+import tv from '../../images/tv.png';
+import animalFriendly from '../../images/animalFriendly.png';
+import wifi from '../../images/wifi.png';
+import breakfast from '../../images/breakfast.png';
+import kitchen from '../../images/kitchen.png';
+import pool from '../../images/pool.png';
 
 function AddNewRental(props) {
 
@@ -55,8 +64,8 @@ function AddNewRental(props) {
   // useEffect(() => {
   //   console.log('Somethings up with the success???', success)
   //   console.log('what is props', props)
-    
-    
+
+
   // }, [myRentals])
 
   const handleSubmit = async (e) => {
@@ -96,7 +105,7 @@ function AddNewRental(props) {
     }
     await addNewRental(newRental)
 
-    
+
     props.setNewAction('showRentals')
 
 
@@ -281,17 +290,32 @@ function AddNewRental(props) {
               <label style={modalStyle.label} key="14">
                 Amenities
              <br />
+                <br />
 
                 {featureIds.map((f, i) => (
-                  <>
+                  <><div style={{ display: 'inline-flex' }} key={'p' + i}><img style={{
+                    width: '20px', height: '20px', marginTop: '8px', marginRight: '15px'
+                  }}
+                    src={
+                      f.name == 'tv' ? tv
+                        : f.name == 'wifi' ? wifi
+                          : f.name == 'parking' ? parking
+                            : f.name == 'smoking' ? nosmoking
+                              : f.name == 'gym' ? gym
+                                : f.name == 'animalFriendly' ? animalFriendly
+                                  : f.name == 'breakfast' ? breakfast
+                                    : f.name == 'kitchen' ? kitchen : f.name == 'pool' ? pool : ''}
+                    alt={f.name}
+                     />
+               
                     <FormControlLabel
                       value={f.value}
                       control={<Switch color="primary" />}
-                      label={f.name}
+                      label={f.name.charAt(0).toUpperCase() + f.name.slice(1)}
                       labelPlacement="end"
                       onChange={(e, val) => updateAmenities(val, f.name)}
                       key={'d' + i}
-                    />
+                    /></div>
                     <br />
                   </>
                 )
@@ -387,7 +411,7 @@ function AddNewRental(props) {
           <br />
           <br />
           <button style={{ ...modalStyle.button, ...modalStyle.btnIn }} key="17">Create rental</button>
-  
+
         </form>
 
       </div>
@@ -405,7 +429,7 @@ const modalStyle = {
     display: "flex",
     flexDirection: "column",
     width: "100%",
- 
+
     padding: "20px 40px 40px 40px",
     borderRadius: "6px",
     boxShadow: '0 8px 6px -6px black',
