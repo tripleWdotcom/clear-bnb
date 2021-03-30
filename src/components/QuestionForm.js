@@ -100,10 +100,10 @@ function QuestionForm() {
           onKeyUp={reset}
         >
         </textarea>
-        
+
         <button style={questionsFormStyle.button} >Submit</button>
         <br />
-        {submitOk ? <h3 style={{ textAlign: 'left', color: '#0D4C80'}}>Thank you for your message! We'll try to respond within 48 hrs.</h3> : ''}
+        {submitOk ? <h5 style={{ textAlign: 'left', color: 'white' }}>Thank you for your message! We'll try to respond within 48 hrs.</h5> : ''}
       </form>
     </div>
   )
@@ -112,15 +112,15 @@ const questionsFormStyle = {
   form: {
     display: "grid",
     flexDirection: 'column',
- 
-    padding: '20px 40px',
+
+    padding: '20px 40px 40px 40px',
     borderRadius: '6px',
     backgroundColor: '#047361',
     gridTemplateColumns: '50% 50%',
     gridTemplateRows: '30px 30px 170px 30px 30px',
     gap: '15px',
- 
-   
+
+
   },
   firstName: {
     gridArea: '1 / 1 / 2 / auto',
@@ -170,7 +170,7 @@ const questionsFormStyle = {
     color: 'black',
     cursor: 'pointer',
     ':hover': {
-      backgroundColor: "#A8BACE",
+      backgroundColor: "#72A19D",
       border: "none",
       color: "#fefefe"
     },
