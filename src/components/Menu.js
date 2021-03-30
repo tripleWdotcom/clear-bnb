@@ -46,23 +46,25 @@ const style = {
   containerMobile: {
     backgroundColor: 'whitesmoke',
     zIndex: '10',
-    position: 'fixed',
+    position: 'absolute',
     right: '0',
+    top: '150px',
   },
   titleMobile: {
     padding: '10px 5px 10px 5px',
-    color: 'black',
     cursor: 'pointer',
     margin: '0 1px',
     ':hover': {
-      color: 'white',
+      color: '#0D4C80',
+      transform: 'scale(1.05)'
     },
   },
   containerDesktop: {
     marginTop: '45px',
     padding: '20px',
     borderRadius: '20px',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    opacity: '0.9'
   },
   titleDesktop: {
     transition: 'all 500ms ease-in-out',
@@ -72,7 +74,5 @@ const style = {
       transform: 'scale(1.05)'
     },
   },
-  '.active': {
-    color: 'purple'
-  }
+
 }

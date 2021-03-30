@@ -8,6 +8,7 @@ import Radium from 'radium'
 import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 import Menu from '../components/Menu'
+import MenuIcon from '@material-ui/icons/Menu';
 
 function MyPage() {
   
@@ -51,8 +52,8 @@ function MyPage() {
   return (
     <>
       <Hidden smUp>
-        <Grid container style={style.container} wrap="nowrap" direction="column" key="1" justify="center">
-          <button onClick={toggleMenu}>Menu</button>
+        <Grid container style={style.container} wrap="nowrap" direction="column" key="1" justifyContent="center">
+          <button style={{fontSize: 'large', marginBottom: '30px', backgroundColor: 'white', border: '1px solid grey', borderRadius: '5px'}} onClick={toggleMenu}><MenuIcon /></button>
           <Grid item xs>
             {isMenuOpen ? <Menu getNewAction={changeAction} /> : ''}
             {action === 'showBookings' ? <Bookings /> : ''}
