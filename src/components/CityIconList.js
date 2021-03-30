@@ -29,6 +29,11 @@ const CityIconList = () => {
     const eventObject = { value: c._id, label: c._id + ', ' + c.country }
     localStorage.setItem('selectedCity', JSON.stringify(eventObject))
     localStorage.setItem('selectedOption', JSON.stringify(eventObject))
+    let tomorrow = new Date(new Date().setDate(new Date().getDate() + 1)).getTime()
+    let tomorrowPlus1 = new Date(new Date().setDate(new Date().getDate() + 2)).getTime()
+    console.log("tomorrow and pasadomanana ",tomorrow, tomorrowPlus1)
+    localStorage.setItem('startDateChosen', tomorrow) // ugly but is one line :)
+    localStorage.setItem('endDateChosen', tomorrowPlus1)
     history.push("/home-results");
   }
 

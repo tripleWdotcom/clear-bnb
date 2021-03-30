@@ -53,7 +53,6 @@ const Calen = () => {
           onChange={item => setState([item.selection])}
           moveRangeOnFirstSelection={false}
           ranges={state}
-          disabledDates={[1616488666543]}
           minDate={new Date()}
           showDateDisplay={false}
           rangeColors={['#82975b']}

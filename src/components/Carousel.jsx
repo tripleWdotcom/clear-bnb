@@ -10,7 +10,7 @@ import { Backdrop } from '@material-ui/core';
 
 export default function Ok() {
 
-  const { offers, fetchOffers } = useContext(HouseContext)
+  const { offers} = useContext(HouseContext)
   console.table("offers", offers)
 
   const test = c => (
@@ -18,8 +18,8 @@ export default function Ok() {
 
       <div key={c._id}>
         <img style={{
-          width: '95%',
-          maxHeight: '35vw'
+          width: '100%',
+          maxHeight: '30vw'
 
           /*             borderRadius: '10px' */
         }}
@@ -58,7 +58,7 @@ export default function Ok() {
           container
           direction="row"
           justify="space-around"
-          alignItems="center"  style={{ backgroundColor: 'whitesmoke', height: '6vw', position: 'absolute', bottom: '0px' }}>
+          alignItems="center"  style={{  height: '6vw' }}>
           <Grid item  md={4} xs={4} style={styles.pcb}>
             <div>€{c.price}/Night</div>
           </Grid>
@@ -81,11 +81,13 @@ export default function Ok() {
   )
 
   const mobileTest = x => (
-    <div style={{ background: 'whitesmoke' }}>
+    <div >
 
       <div key={x._id}>
         <img style={{
-          width: '95%',
+          width: '99%',
+          maxHeight: '60vw'
+
          
 
           /*             borderRadius: '10px' */
@@ -125,7 +127,7 @@ export default function Ok() {
           container
           direction="row"
           justify="space-around"
-          alignItems="center" style={{ backgroundColor: 'whitesmoke', height: '25vw', position: 'absolute', bottom: '0px' }}>
+          alignItems="center" style={{  backgroundColor: 'whitesmoke', height: '25vw' }}>
           <Grid item  xs={4} style={styles.pcbMobile}>
             <div>€{x.price}/Night</div>
           </Grid>
