@@ -8,7 +8,6 @@ function QuestionForm() {
   const [message, setMessage] = useState("")
   const [submitOk, setSubmitOk] = useState(false)
   const [remainingChar, setRemainingChar] = useState(0)
-  const [totalChar, setTotalChar] = useState(250)
 
 
 
@@ -28,23 +27,25 @@ function QuestionForm() {
       email: email,
       message: message
     }
+
     setSubmitOk(true)
-    //clear()
+    setTimeout(() => {
+      setSubmitOk(false)
+    }, 5000)
+
+    setFirstName("")
+    setLastName("")
+    setEmail("")
+    setMessage("")
+
   }
-
- /*  const clear = () => {
-
-    document.getElementById("formm").reset()
-  } */
 
   const reset = () => {
     setSubmitOk(false)
   }
 
 
-  const charCount = () => {
-    setRemainingChar(message.length)
-  }
+
 
   return (
     <div>
@@ -94,13 +95,15 @@ function QuestionForm() {
           onChange={(e) => {
             setMessage(e.target.value)
           }}
+          maxLength={250}
           style={questionsFormStyle.message} key="4"
-          onKeyUp={reset, charCount}
+          onKeyUp={reset}
         >
         </textarea>
-        <span className="counter" style={questionsFormStyle.counter}>{remainingChar} / {totalChar}</span>
-        {submitOk ? <h4>Thank you for your message!We'll try to respond within 48 hrs.</h4> : ''}
+        
         <button style={questionsFormStyle.button} >Submit</button>
+        <br />
+        {submitOk ? <h3 style={{ textAlign: 'left', color: '#0D4C80'}}>Thank you for your message! We'll try to respond within 48 hrs.</h3> : ''}
       </form>
     </div>
   )
@@ -109,22 +112,21 @@ const questionsFormStyle = {
   form: {
     display: "grid",
     flexDirection: 'column',
-    width: '400px',
-    minWidth: '100px',
-    minHeight: '400px',
+ 
     padding: '20px 40px 40px 40px',
     borderRadius: '6px',
-    boxShadow: '0px 8px 36px #222',
+    backgroundColor: 'teal',
     gridTemplateColumns: '50% 50%',
     gridTemplateRows: '30px 30px 170px 30px 30px',
     gap: '15px',
-    width: '70vw',
-    marginBottom: '50px',
+ 
+   
   },
   firstName: {
     gridArea: '1 / 1 / 2 / auto',
+    border: '2px teal solid',
     padding: '15px',
-    border: '0',
+
     borderRadius: '5px',
     fontFamily: 'Oswald", sans - serif',
     fontWeight: 'bold',
@@ -132,7 +134,7 @@ const questionsFormStyle = {
   lastName: {
     gridArea: '1 / 2/ 2 / auto',
     padding: '15px',
-    border: '0',
+    border: '2px teal solid',
     borderRadius: '5px',
     fontFamily: 'Oswald", sans - serif',
     fontWeight: 'bold',
@@ -140,7 +142,7 @@ const questionsFormStyle = {
   email: {
     gridArea: '2 / 1 / 3 / 3',
     padding: '15px',
-    border: '0',
+    border: '2px teal solid',
     borderRadius: '5px',
     fontFamily: 'Oswald", sans - serif',
     fontWeight: 'bold',
@@ -160,12 +162,12 @@ const questionsFormStyle = {
   button: {
     gridArea: '4 / 1 / 5 ,/ 3',
     width: '100px',
-    marginLeft: 'calc(50 % - 50px)',
+
     textalign: 'center',
-    border: '#6e1020 1px solid',
-    backgroundColor: '#6e1020',
+    border: 'none',
+    backgroundColor: 'white',
     borderRadius: '5px',
-    color: 'rgb(238, 220, 192)',
+    color: 'black',
     cursor: 'pointer',
     ':hover': {
       backgroundColor: "#A8BACE",
