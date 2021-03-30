@@ -1,5 +1,5 @@
 import Radium from 'radium'
-//import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 
@@ -62,15 +62,17 @@ const style = {
     marginTop: '45px',
     padding: '20px',
     borderRadius: '20px',
+    backgroundColor: 'white'
   },
   titleDesktop: {
-    color: 'black',
+    transition: 'all 500ms ease-in-out',
     cursor: 'pointer',
     ':hover': {
-      color: 'white'
+      color: '#0D4C80',
+      transform: 'scale(1.05)'
     },
-    ':target': {
-      color: 'red'
-    }
   },
+  '.active': {
+    color: 'purple'
+  }
 }

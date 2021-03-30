@@ -74,8 +74,8 @@ function MyPage() {
           <Grid item xs={4} key="1">
             <Menu getNewAction={changeAction} />
           </Grid>
-          <Grid item xs={1}><div style={style.line}></div></Grid>
-          <Grid item xs={7}>
+ 
+          <Grid item xs={8}>
             {action === 'showBookings' ? <Bookings /> : ''}
             {action === 'showRentals' ? <MyRentals /> : ''}
             {action === 'showNewRental' ? <AddNewRental setNewAction={changeAction} /> : ''}
