@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import PersonIcon from '@material-ui/icons/Person';
 import logo from '../images/logoNoBackgound.png';
 
+
 const Navbar = () => {
   
 
@@ -63,11 +64,19 @@ const Navbar = () => {
         direction="row"
         justify="space-evenly"
         alignItems="center" >
-
+  <Hidden xsUp>
         <Grid item style={{ color: "crimson", fontSize: "30px" }}>
-          <img src={logo} style={styles.logo}/>
+          <img src={logo} style={styles.logoDesktop}/>
+        </Grid>
+        </Hidden>
+         
+        <Hidden smUp>
+         
+          <Grid item style={{ color: "crimson", fontSize: "30px" }}>
+          <img src={logo} style={styles.logoMobile}/>
         </Grid>
 
+</Hidden>
         <Grid item>
           <div key="1" style={styles.home} onClick={goHome}>Home</div>
         </Grid>
@@ -132,15 +141,23 @@ const styles = {
     },
   },
 
-  logo: {
+  logoDesktop: {
     width: '50%',
   
+
+  },
+
+  logoMobile: {
+  
+    width: '50%',
+    display: 'block',
+    margin: '0 auto',
    
     
+    
+  },
   
-
-  }
-
+ 
 
 }
 
