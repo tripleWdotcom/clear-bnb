@@ -7,7 +7,7 @@ import { UserContext } from '../contexts/UserContext';
 import MemberPage from './MemberPage'
 import Grid from '@material-ui/core/Grid';
 import PersonIcon from '@material-ui/icons/Person';
-import logo from '../images/logo.png';
+import logo from '../images/logoNoBackgound.png';
 
 const Navbar = () => {
   
@@ -107,6 +107,7 @@ const styles = {
     },
   },
   signIn: {
+    
     color: 'whitesmoke',
     backgroundColor: 'crimson',
     borderRadius: '8px',
@@ -117,6 +118,7 @@ const styles = {
       WebkitTransform: "scale(1.2)",
       transition: '0.3s'
     },
+
 
   },
 
@@ -131,9 +133,10 @@ const styles = {
   },
 
   logo: {
-    width: '25%',
-    borderRadius: '5%',
-    border: '5px solid 	#DCDCDC',
+    width: '50%',
+  
+   
+    
   
 
   }
