@@ -9,7 +9,7 @@ import HomeResults from './pages/HomeResults.jsx'
 //import MemberPage from './components/MemberPage.js'
 import MyPage from './pages/MyPage.jsx'
 import FAQ from './pages/FAQ.js'
-import { useContext } from 'react'
+//import { useContext } from 'react'
 import error404 from './images/error404.png'
 
 
@@ -22,7 +22,7 @@ function App() {
 
   const page404 = () => (<div>
      <h1 style={{color:"red",textAlign:"center"}}>Page not found: {window.location.pathname}</h1> 
-        <img src={error404} />
+        <img src={error404} alt=""/>
   </div>)
   // localStorage.clear() // we might need to add/remove later
 

@@ -1,6 +1,6 @@
-import React, { useState,useContext} from 'react';
+import React, { useState} from 'react';
 import { useHistory } from "react-router-dom";
-import { UserContext } from '../contexts/UserContext';
+//import { UserContext } from '../contexts/UserContext';
 import Radium from 'radium';
 
 
@@ -9,11 +9,11 @@ function MemberPage() {
   const toggle = () => setOpen(!open)
   const history = useHistory()
 
-  const { logOutUser } = useContext(UserContext)
+  //const { logOutUser } = useContext(UserContext)
 
   const goToStartPage = async () => {
     history.push("/");
-    const u = await logOutUser()
+  //  const u = await logOutUser()
     window.location.reload()
   };
 
