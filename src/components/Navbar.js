@@ -7,8 +7,10 @@ import { UserContext } from '../contexts/UserContext';
 import MemberPage from './MemberPage'
 import Grid from '@material-ui/core/Grid';
 import PersonIcon from '@material-ui/icons/Person';
+import logo from '../images/logo.png';
 
 const Navbar = () => {
+  
 
   let history = useHistory();
 
@@ -62,7 +64,9 @@ const Navbar = () => {
         justify="space-evenly"
         alignItems="center" >
 
-        <Grid item style={{ color: "crimson", fontSize: "30px" }}>LOGO</Grid>
+        <Grid item style={{ color: "crimson", fontSize: "30px" }}>
+          <img src={logo} style={styles.logo}/>
+        </Grid>
 
         <Grid item>
           <div key="1" style={styles.home} onClick={goHome}>Home</div>
@@ -124,6 +128,14 @@ const styles = {
       WebkitTransform: "scale(1.3)",
       transition: '0.3s'
     },
+  },
+
+  logo: {
+    width: '25%',
+    borderRadius: '5%',
+    border: '5px solid 	#DCDCDC',
+  
+
   }
 
 
