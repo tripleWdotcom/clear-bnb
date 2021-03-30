@@ -4,7 +4,6 @@ import FeatureContextProvider from './contexts/FeatureContext'
 import HouseContextProvider from './contexts/HouseContext'
 import BookingContextProvider from './contexts/BookingContext'
 import Navbar from './components/Navbar.jsx';
-import Footer from './components/Footer.jsx';
 import Home from './pages/Home.jsx';
 import HomeResults from './pages/HomeResults.jsx'
 //import MemberPage from './components/MemberPage.js'
