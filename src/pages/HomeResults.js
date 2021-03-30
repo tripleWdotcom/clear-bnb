@@ -10,11 +10,24 @@ import Calen from '../components/Calen';
 import Hidden from '@material-ui/core/Hidden'
 import { withMobileDialog } from '@material-ui/core';
 import zIndex from '@material-ui/core/styles/zIndex';
-import { useState } from 'react';
+import { useEffect, useContext, useState } from 'react'
 
+import { UserContext } from '../contexts/UserContext'
 
 const HomeResults = () => {
   const [show, setShow] = useState([])
+
+  
+  const { whoIsLoggedIn, isLoggedIn } = useContext(UserContext)
+
+  useEffect(async () => {
+    await whoIsLoggedIn()
+    
+  }, [])
+
+  useEffect(() => {
+    console.log('Who is logged in from Home Results', isLoggedIn)
+  }, [isLoggedIn])
 
 
 

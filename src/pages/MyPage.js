@@ -10,44 +10,30 @@ import Grid from '@material-ui/core/Grid'
 import Menu from '../components/Menu'
 import MenuIcon from '@material-ui/icons/Menu';
 
+
 function MyPage() {
-  
 
-  const [action, setAction] = useState('showBookings')
-  const [width, setWidth] = useState(window.innerWidth)
+  const [action, setAction] = useState('')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [menuShowing, setMenuShowing] = useState()
+  const { isLoggedIn} = useContext(UserContext)
+  const { myBookings, fetchMyBookingsByUserId } = useContext(BookingContext)
 
+  useEffect(async () => {
+    await fetchMyBookingsByUserId(isLoggedIn[0]._id)
+    setAction('showBookings') 
+  }, [])
 
   const changeAction = (newAction) => {
     setAction(newAction)
   }
 
   useEffect(async () => {
-    console.log('The new action is: ', action)
     setIsMenuOpen(false)
-   
-
-    // if (open === true) {
-    //   console.log('Btn exist and open is', open)
-    //   setOpen(!open)
-    // }
-    // console.log('Does the menu button exist?', btn)
   }, [action])
 
   const toggleMenu = () => {
-    console.log('Pushing menu button, button is open:', isMenuOpen)
     setIsMenuOpen(!isMenuOpen)
   }
-
-  // useEffect(() => {
-  //   showContent()
-  // }, [isMenuOpen])
-
-  // function showContent() {
-  //   let content = isMenuOpen ?  : ''
-  //   setMenuShowing(content)
-  // }
 
   return (
     <>

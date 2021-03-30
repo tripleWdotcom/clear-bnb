@@ -30,7 +30,6 @@ const Navbar = () => {
         setIsUserLoggedIn(true)
       } else if (!isLoggedIn.error) {
         console.log('It is an object - im in')
-        console.log('first name of logged in', isLoggedIn)
         setShowModal(false)
         setIsUserLoggedIn(true)
         console.log('isUserLoggedIn', isUserLoggedIn)

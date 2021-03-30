@@ -11,6 +11,8 @@ import MyPage from './pages/MyPage'
 import FAQ from './pages/FAQ.js'
 //import { useContext } from 'react'
 import error404 from './images/error404.png'
+import { useEffect} from 'react'
+
 
 
 
@@ -19,9 +21,6 @@ import error404 from './images/error404.png'
 function App() {
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300&display=swap"
     rel="stylesheet" />
-
-
-
 
   const page404 = () => (<div>
     <h1 style={{ color: "red", textAlign: "center" }}>Page not found: {window.location.pathname}</h1>

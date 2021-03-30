@@ -70,8 +70,7 @@ function Results() {
   const test = c => (
 
     <div key={c._id} style={{
-      width: 'fit-content', margin: '5px', borderRadius: '10px', marginBottom: '20px', ':hover': {
-        color: 'crimson',
+      width: 'fit-content', margin: '5px 5px 20px 5px', borderRadius: '10px', ':hover': {
         boxShadow: '0px 8px 36px #222',
         WebkitTransform: "scale(1.01)",
         transition: 'all 0.3s ease-in-out'
@@ -80,7 +79,7 @@ function Results() {
       <Hidden xsDown>
         <Grid container
           direction="row"
-          justifyContent="flex-start"
+          justifycontent="flex-start"
           alignItems="flex-start"
           spacing={1}
           style={{ cursor: 'pointer' }}
@@ -100,7 +99,7 @@ function Results() {
           <Grid item xs>
             <Grid container
               direction="column"
-              justifyContent="space-around"
+              justifycontent="space-around"
 
             >
               <Grid item xs style={{ textAlign: "left" }}>
@@ -109,7 +108,7 @@ function Results() {
               <Grid item xs>
                 <Grid container direction="row"
                   spacing={2}
-                  justifyContent="space-between"
+                  justifycontent="space-between"
                   alignItems="center"
                   style={{ margin: '15px 0' }}>
                   <Grid item>
@@ -176,7 +175,7 @@ function Results() {
       <Hidden smUp>
         <Grid container
           direction="column"
-          justifyContent="flex-start"
+          justifycontent="flex-start"
           alignItems="flex-start"
           style={{ cursor: 'pointer' }}
           onClick={() => openDetailPage(c._id)}>
@@ -197,7 +196,7 @@ function Results() {
             <h3>{c.slogan.charAt(0).toUpperCase() + c.slogan.slice(1)}</h3>
           </Grid>
           <Grid container direction="row"
-            justify="space-between"
+            justifycontent="space-between"
             alignItems="center"
             style={{ margin: '15px 0' }}>
             <Grid item>
