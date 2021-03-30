@@ -82,10 +82,10 @@ module.exports = (app, models) => {
     }
 
     if (!featureIds.length) {
-      console.log("do it is :", doIt)
+   /*    console.log("do it is :", doIt)
       console.log("what is check in :", b.availableStart)
       console.log("what is check OUT :", b.availableEnd)
-
+ */
       // Without any checkbox filters
       docs = await model.find({
         $and: [
@@ -132,12 +132,12 @@ module.exports = (app, models) => {
         !checkBookingCollection.filter(booking =>
           booking.houseId.equals(house._id)).length);
 
-      console.log(filtered)
+    /*   console.log(filtered) */
       res.json(filtered)
       return;
     }
     else {
-      console.log(docs)
+   /*    console.log(docs) */
       res.json(docs)
       return;
     }
@@ -187,6 +187,7 @@ module.exports = (app, models) => {
     res.json(booking)
   })
 
-}
+} 
 
-
+ 
+ 

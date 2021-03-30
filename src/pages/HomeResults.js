@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Filters from '../components/Filters'
 import SearchComponent from '../components/Search'
-import Results from '../components/Results';
+import Results from '../components/Results.js';
 import Calen from '../components/Calen';
 import Hidden from '@material-ui/core/Hidden'
 import { withMobileDialog } from '@material-ui/core';

@@ -3,7 +3,7 @@ import { useEffect, useContext } from "react";
 import Grid from '@material-ui/core/Grid';
 import TvIcon from '@material-ui/icons/Tv';
 import parking from '../images/parking.png';
-import smoking from '../images/smoking.png';
+import nosmoking from '../images/nosmoking.png';
 import gym from '../images/gym.png';
 import tv from '../images/tv.png';
 import animalFriendly from '../images/animalFriendly.png';
@@ -89,7 +89,7 @@ const Results=()=> {
                     case "animalFriendly": return (<div><img src={animalFriendly} style={{ width: '20px' }} /> Animal Friendly</div>);
                     case "wifi": return (<div><img src={wifi} style={{ width: '20px' }} /> Wi-Fi</div>);
                     case "pool": return (<div><img src={pool} style={{ width: '20px' }} /> Pool</div>);
-                    case "smoking": return (<div><img src={smoking} style={{ width: '20px' }} /> Smoking</div>);
+                    case "smoking": return (<div><img src={nosmoking} style={{ width: '20px' }} />Smoking</div>);
                     case "parking": return (<div><img src={parking} style={{ width: '20px' }} /> Parking</div>);
                     case "kitchen": return (<div><img src={kitchen} style={{ width: '20px' }} /> Kitchen</div>);
                     case "breakfast": return (<div><img src={breakfast} style={{ width: '20px' }} /> Breakfast</div>);
@@ -125,7 +125,7 @@ const Results=()=> {
                     case "animalFriendly": return (<div><img src={animalFriendly} style={{ width: '20px' }} /></div>);
                     case "wifi": return (<div><img src={wifi} style={{ width: '20px' }} /> </div>);
                     case "pool": return (<div><img src={pool} style={{ width: '20px' }} /> </div>);
-                    case "smoking": return (<div><img src={smoking} style={{ width: '20px' }} /></div>);
+                    case "smoking": return (<div><img src={nosmoking} style={{ width: '20px' }} /></div>);
                     case "parking": return (<div><img src={parking} style={{ width: '20px' }} /></div>);
                     case "kitchen": return (<div><img src={kitchen} style={{ width: '20px' }} /></div>);
                     case "breakfast": return (<div><img src={breakfast} style={{ width: '20px' }} /></div>);
@@ -158,7 +158,7 @@ const Results=()=> {
   return (
     <div>
       <div style={{ fontSize: "20px", padding: '20px', backgroundColor: 'whitesmoke', color: 'black' }}>
-        Available houses with Check-In on:<b>{y.toDateString()}</b> and Check out on:  <b>{yy.toDateString()}</b>
+        aaaaaAvailable houses with Check-In on:<b>{y.toDateString()}</b> and Check out on:  <b>{yy.toDateString()}</b>
       </div>
 
       {housesByCityAndDate.map(c => test(c))}

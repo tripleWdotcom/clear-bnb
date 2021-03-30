@@ -1,9 +1,9 @@
 import { HouseContext } from '../contexts/HouseContext'
 import { useEffect, useContext, useState } from "react";
 import Grid from '@material-ui/core/Grid';
-import TvIcon from '@material-ui/icons/Tv';
+
 import parking from '../images/parking.png';
-import smoking from '../images/smoking.png';
+import smoking from '../images/nosmoking.png';
 import gym from '../images/gym.png';
 import tv from '../images/tv.png';
 import animalFriendly from '../images/animalFriendly.png';
@@ -11,18 +11,8 @@ import wifi from '../images/wifi.png';
 import breakfast from '../images/breakfast.png';
 import kitchen from '../images/kitchen.png';
 import pool from '../images/pool.png';
-import adress from '../images/adress.png';
-import beds from '../images/beds.png';
-import city from '../images/city.png';
-import country from '../images/country.png';
-import price from '../images/price.png';
-import contact from '../images/contact.png';
-import email from '../images/email.png';
-import checkIn from '../images/checkIn.png';
-import checkOut from '../images/checkOut.png';
-import { Wifi } from '@material-ui/icons';
+
 import Hidden from '@material-ui/core/Hidden'
-import LocationOnIcon from '@material-ui/icons/LocationOn';
 import DetailedPage from '../pages/DetailedPage'
 import Radium from 'radium'
 
@@ -103,7 +93,8 @@ function Results() {
               borderRadius: '10px'
             }}
               src={c.pics[0]}
-              alt={'picture ' + c.id}
+              alt={""}
+              key={c.id}
             ></img>
           </Grid>
           <Grid item xs>
