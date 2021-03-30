@@ -134,8 +134,8 @@ export default function Filters() {
 
 const styles = {
   sliderContainer: {
-    backgroundColor: 'whitesmoke',
-   
+    backgroundColor: 'white',
+    width: '100%'
     
   }
 

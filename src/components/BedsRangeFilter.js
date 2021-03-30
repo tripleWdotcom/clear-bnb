@@ -40,7 +40,7 @@ export default function BedSlider() {
   };
 
   return (
-    <div className={classes.bedRange}>
+    <div className={classes.bedRange} style={{ width: '100%' }}>
 
       <Slider
         value={value}

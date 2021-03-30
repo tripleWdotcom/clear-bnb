@@ -41,7 +41,7 @@ export default function PriceSlider() {
   };
 
   return (
-    <div className={classes.priceRange}>
+    <div className={classes.priceRange} style={{width: '100%'}}>
     
       <Slider
         value={value}
