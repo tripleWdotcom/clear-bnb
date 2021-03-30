@@ -111,7 +111,7 @@ const styles = {
     fontSize: "20px",
     cursor: 'pointer',
     ':hover': {
-      color: '#047361',
+      color: 'teal',
       WebkitTransform: "scale(1.3)",
       transition: '0.3s'
     },
@@ -136,7 +136,7 @@ const styles = {
     fontSize: "20px",
     cursor: 'pointer',
     ':hover': {
-      color: 'crimson',
+      color: 'teal',
       WebkitTransform: "scale(1.3)",
       transition: '0.3s'
     },
