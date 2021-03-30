@@ -41,11 +41,12 @@ export default function Ok() {
             <div /* style={{WebkitTextStrokeWidth: '1px', WebkitTextStrokeColor:'black' }} */>
               From :{new Date(d.availableStart).toDateString()}
 
-            </div>
+            </div>  
             <div /* style={{ WebkitTextStrokeWidth: '1px', WebkitTextStrokeColor: 'black' }} */>
               To: {new Date(d.availableEnd).toDateString()}
 
             </div>
+     {/*        <button onClick>Book Now!</button> */}
 
 
 
@@ -159,7 +160,7 @@ export default function Ok() {
 
       <Hidden xsDown>
         <Carousel autoPlay showArrows={true} showThumbs={false} showIndicators={false} infiniteLoop={true} showStatus={false}
-          transitionTime={2000} interval={5000} dynamicHeight={false} width={'100%'}
+          transitionTime={2000} interval={5000} dynamicHeight={false} width={'70vw'}
         >
           {offers.map(c => test(c))}
 
@@ -168,7 +169,7 @@ export default function Ok() {
 
         <Hidden smUp>
         <Carousel autoPlay showArrows={false} showThumbs={false} showIndicators={false} infiniteLoop={true} showStatus={false}
-          transitionTime={2000} interval={7000} /* width={'100vw'} */ dynamicHeight={false}
+          transitionTime={2000} interval={7000} width={'100vw'}  dynamicHeight={false}
         >
           {offers.map(x => mobileTest(x))}
 
