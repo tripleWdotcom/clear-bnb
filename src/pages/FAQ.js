@@ -38,7 +38,9 @@ function FAQ() {
       <p style={styles.p}>
         A: You can choose to create an offer for one period of time for your house. That means that your offer will be featured on the front page and you will get more exposure for a higher fee.
       </p>
-      <br />
+      <hr style={{
+        width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: '#0D4C80', margin: '50px auto'
+      }} />
       <h3 style={styles.h3}>Do you have any further questions? Send us a message!</h3>
       <br />
       <br />
@@ -61,7 +63,8 @@ const styles = {
   },
   h3: {
     textAlign: 'center',
-    margin: '0 40px'
+    margin: '0 40px',
+    color: '#005751'
   },
   p: {
     margin: '20px',

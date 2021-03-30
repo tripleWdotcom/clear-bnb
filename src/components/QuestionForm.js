@@ -113,9 +113,9 @@ const questionsFormStyle = {
     display: "grid",
     flexDirection: 'column',
  
-    padding: '20px 40px 40px 40px',
+    padding: '20px 40px',
     borderRadius: '6px',
-    backgroundColor: 'teal',
+    backgroundColor: '#047361',
     gridTemplateColumns: '50% 50%',
     gridTemplateRows: '30px 30px 170px 30px 30px',
     gap: '15px',
