@@ -71,7 +71,6 @@ const styles = {
     margin: '0 10px',
     cursor: "pointer",
     borderBottom: '1px solid grey',
-
     transition: 'all 300ms ease-in-out',
     ':hover': {
       boxShadow: "0px 8px 20px #222",
@@ -81,7 +80,6 @@ const styles = {
   },
   title: {
     color: '#8C8881',
-
     textShadow: '0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7)',
   },
 }

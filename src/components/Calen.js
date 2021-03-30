@@ -55,7 +55,6 @@ const Calen = () => {
           ranges={state}
           minDate={new Date()}
           showDateDisplay={false}
-          rangeColors={['#82975b']}
           showMonthAndYearPickers={false}
           showPreview={true}
           weekStartsOn={1}
