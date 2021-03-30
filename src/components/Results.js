@@ -113,7 +113,7 @@ function Results() {
         <Grid container direction="row"
           justify="space-between"
           alignItems="center"
-          style={{ margin: '15px 0' }}>
+          style={{ margin: '15px 0'}}>
           <Grid item>
             <h4>{c.city}</h4>
           </Grid>

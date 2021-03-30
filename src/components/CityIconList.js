@@ -1,12 +1,12 @@
 import { useState, useEffect, useContext } from 'react'
-import { HouseContext} from '../contexts/HouseContext'
+import { HouseContext } from '../contexts/HouseContext'
 import { useHistory } from "react-router-dom";
 import Hidden from '@material-ui/core/Hidden';
 import Radium from 'radium'
 import Grid from '@material-ui/core/Grid';
 
 const CityIconList = () => {
-  const { citiesAndCountriesNames} = useContext(HouseContext)
+  const { citiesAndCountriesNames } = useContext(HouseContext)
   const [cities, setCities] = useState([])
   let history = useHistory();
 
@@ -37,8 +37,8 @@ const CityIconList = () => {
       <Grid container spacing={1}>
         <Hidden xsDown>
           {cities?.map((c, key) => (
-            <Grid item xs key={key}>
-              <div style={styles.cityItem} key={key} onClick={(e) => goToResultList(c, e)}><h3 style={styles.title}>{c._id}</h3></div>
+            <Grid item xs key={key + 'a'}>
+              <div style={styles.cityItem} key={key + 'c'} onClick={(e) => goToResultList(c, e)}><h3 style={styles.title}>{c._id}</h3></div>
             </Grid>
           ))}
         </Hidden>
@@ -46,8 +46,8 @@ const CityIconList = () => {
       <Grid container spacing={1}>
         <Hidden smUp>
           {cities?.slice(0, 3).map((c, key) => (
-            <Grid item xs key={key}>
-              <div style={styles.cityItem} key={key} onClick={(e) => goToResultList(c, e)}><h5 style={styles.title}>{c._id}</h5></div>
+            <Grid item xs key={key + 'b'}>
+              <div style={styles.cityItem} key={key + 'd'} onClick={(e) => goToResultList(c, e)}><h5 style={styles.title}>{c._id}</h5></div>
             </Grid>
           ))}
         </Hidden>
@@ -60,15 +60,23 @@ const styles = {
   cityItem: {
     padding: '20px',
     textAlign: 'center',
-    backgroundColor: "#005751",
-    backgroundImage: "linear-gradient(43deg, #005751 0%, #047361 46%, #66A395 100%)",
+    backgroundColor: "whitesmoke",
+    backgroundImage: "linear-gradient(43deg, white 0%, whitesmoke 46%, whitesmoke 100%)",
     borderRadius: "10px",
     margin: '0 10px',
     cursor: "pointer",
-    boxShadow: "0px 8px 20px #222",
+    borderBottom: '1px solid grey',
+
+    transition: 'all 300ms ease-in-out',
+    ':hover': {
+      boxShadow: "0px 8px 20px #222",
+      transform: 'scale(1.05)'
+    }
+
   },
   title: {
-    color: '#66A395',
+    color: '#8C8881',
+
     textShadow: '0px 1px 0px rgba(255,255,255,.3), 0px -1px 0px rgba(0,0,0,.7)',
   },
 }
