@@ -44,7 +44,6 @@ function MyRentals() {
         {r.dateRanges.length < 2 ? <p style={style.infoText} key={"j" + i}>{new Date(r.dateRanges[0].availableStart).toString().substr(3, 13)}
           - {new Date(r.dateRanges[0].availableEnd).toString().substr(3, 13)}</p> : <p>Multiple date ranges</p>}
         <br />
-        <br />
         <p style={{ margin: '5px 0 5px 15px' }} key={"e" + i}>
           See more details...
           </p>

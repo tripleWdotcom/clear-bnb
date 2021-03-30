@@ -404,9 +404,8 @@ const modalStyle = {
   form: {
     display: "flex",
     flexDirection: "column",
-    width: "400px",
-    minWidth: "100px",
-    minHeight: "400px",
+    width: "100%",
+ 
     padding: "20px 40px 40px 40px",
     borderRadius: "6px",
     boxShadow: '0 8px 6px -6px black',
@@ -437,14 +436,16 @@ const modalStyle = {
     marginRight: "0.25em",
     marginTop: "0.5em",
     borderRadius: "4px",
+    transition: 'all 0.3s ease-in-out',
     ':hover': {
-      backgroundColor: "#A8BACE",
+      backgroundColor: "#047361",
       border: "none",
-      color: "#fefefe"
+      color: "#fefefe",
+      transform: 'scale(1.05)'
     }
   },
   btnIn: {
-    backgroundColor: "#22223B",
+    backgroundColor: "#005751",
     border: "none",
     color: "#fefefe",
     padding: "1.2em",
