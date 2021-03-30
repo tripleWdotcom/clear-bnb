@@ -60,7 +60,12 @@ function DetailedComponent(props) {
                   : c.name == 'animalFriendly' ? animalFriendly
                     : c.name == 'breakfast' ? breakfast
                       : c.name == 'kitchen' ? kitchen : c.name == 'pool' ? pool : ''} alt={c.name} style={styles.icons} key={'b' + i} />
-        <p style={styles.iconText} key={'e' + i}>{c.name.charAt(0).toUpperCase() + c.name.slice(1)}</p>
+        <p style={styles.iconText} key={'e' + i}>
+          {
+            c.name === 'smoking' ? 'No ' + c.name
+              : c.name === 'animalFriendly' ? c.name.charAt(0).toUpperCase() + c.name.slice(1, 6) + ' ' + c.name.slice(6).toLowerCase()
+                : c.name.charAt(0).toUpperCase() + c.name.slice(1)
+          }</p>
       </div>
     </>
   )
@@ -235,7 +240,7 @@ const styles = {
   },
   iconForm: {
     display: 'flex',
-    margin: '10px 0',
+    margin: '5px 0',
   },
   iconForm2: {
     display: 'flex',
