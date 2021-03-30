@@ -23,9 +23,10 @@ import checkOut from '../images/checkOut.png';
 import { Wifi } from '@material-ui/icons';
 import Hidden from '@material-ui/core/Hidden'
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import Radium from 'radium'
 
 
-export default function Results() {
+const Results=()=> {
   const { housesByCityAndDate, fetchHousesByCityAndDate } = useContext(HouseContext)
 
   useEffect(async () => {
@@ -63,13 +64,10 @@ export default function Results() {
       <Grid container style={{paddingTop:'20px'}}>
 
         <Grid item md={4} >
-          <img style={{
-            height: '100%',
-            width: '100%',
-            borderRadius: '10px'
-          }}
+          <img style={styles.pics}
             src={c.pics[0]}
-            alt={'picture ' + c.id}
+            alt={'picture ' + c._id}
+            key={c._id}
           ></img>
         </Grid>
         <Grid item md={8}>
@@ -169,3 +167,19 @@ export default function Results() {
     </div>
   )
 }
+
+const styles={
+
+  pics: {
+    height: '100%',
+    width: '100%',
+    borderRadius: '10px',
+  
+    cursor: 'pointer',
+    ':hover': {
+      WebkitTransform: "scale(1.1)",
+      transition: '0.2s'
+    }
+}}
+
+export default Radium(Results)
