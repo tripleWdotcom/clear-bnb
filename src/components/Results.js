@@ -70,10 +70,13 @@ function Results() {
   const test = c => (
 
     <div key={c._id} style={{
-      width: 'fit-content', margin: '5px 5px 20px 5px', borderRadius: '10px', ':hover': {
+      width: 'fit-content', margin: '5px 5px 20px 5px',
+      borderRadius: '10px',
+      transition: 'all 200ms ease-in-out',
+      ':hover': {
         boxShadow: '0px 8px 36px #222',
         WebkitTransform: "scale(1.01)",
-        transition: 'all 0.3s ease-in-out'
+       // transition: 'all 0.3s ease-in-out'
       },
     }}>
       <Hidden xsDown>
@@ -273,7 +276,7 @@ function Results() {
 
 
       <div style={{ fontSize: "20px", padding: '20px', backgroundColor: '#66A395', color: 'black' }}>
-       <b>{housesByCityAndDate.length}</b> Available houses with Check-In on: <b>{y.toDateString()}</b> and Check out on: <b>{yy.toDateString()}</b> 
+        <b>{housesByCityAndDate.length}</b> Available houses with Check-In on: <b>{y.toDateString()}</b> and Check out on: <b>{yy.toDateString()}</b>
       </div>
 
       {housesByCityAndDate.map(c => test(c))}
