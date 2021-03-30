@@ -6,6 +6,7 @@ import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext';
 import MemberPage from './MemberPage.jsx'
 import Grid from '@material-ui/core/Grid';
+import PersonIcon from '@material-ui/icons/Person';
 
 const Navbar = () => {
 
@@ -66,7 +67,8 @@ const Navbar = () => {
         <Grid item>
           <div key="1" style={styles.home} onClick={goHome}>Home</div>
         </Grid>
-        {isUserLoggedIn && !showModal ? <Grid  item><div key="2" style={styles.userName} onClick={() => { history.push('/mypage') }}>👤 {isLoggedIn[0].firstName}</div> </Grid> : ''}
+       {/*  {isUserLoggedIn && !showModal ? <Grid  item><div key="2" style={styles.userName} onClick={() => { history.push('/mypage') }}>👤 {isLoggedIn[0].firstName}</div> </Grid> : ''} */}
+        {isUserLoggedIn && !showModal ? <Grid item><div key="2" style={styles.userName} onClick={() => { history.push('/mypage') }}><PersonIcon fontSize="large" /></div> </Grid> : ''}
 
         <Grid item>
           <div key="3" style={styles.home} onClick={() => { history.push('/FAQ') }}>FAQ</div>
