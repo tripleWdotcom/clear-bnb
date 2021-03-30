@@ -126,23 +126,24 @@ const useStyles = makeStyles((theme) => ({
   
   },
   toggleFilters: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(0.5),
     textAlign: 'center',
     borderRadius: '10px',
     position: 'fixed',
     zIndex: 3,
-    bottom: '0px',
+    bottom: '0',
     width: '100%'
 
   },
 
   filterContainer: {
     position: 'fixed',
-    bottom: '0px',
+    bottom: '30px',
+    // bottom: '0px',
     width: '100%',
     zIndex: 3,
     transition: '0.5s',
-    height: '0px',
+    // height: '0px',
     borderRadius: '10px',
   }
 
