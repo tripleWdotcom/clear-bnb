@@ -19,8 +19,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 //import FormHelperText from '@material-ui/core/FormHelperText';
 import Switch from '@material-ui/core/Switch';
 import { useHistory } from "react-router-dom";
+import Radium from 'radium'
 
-export default function Filters() {
+function Filters() {
   let history = useHistory();
 
   const renFilters = async () => {
@@ -94,7 +95,7 @@ export default function Filters() {
         <FormGroup>
           <div style={{ display: 'inline-flex' }}><img src={gym} style={styles.icon} /><FormControlLabel
             control={<Switch color='primary' checked={state.gym} onChange={handleChange} name="gym" />}
-            label="GYM"
+            label="Gym"
           /></div>
           <div style={{ display: 'flex' }}><img src={tv} style={styles.icon} /> <FormControlLabel
             control={<Switch color='primary' checked={state.tv} onChange={handleChange} name="tv" />}
@@ -136,31 +137,36 @@ export default function Filters() {
 
       <br />
       <div style={{ textAlign: 'right' }}>
-        <button onClick={clearFilters} > Clear</button>
+        <button style={{
+          color: 'white',
+          cursor: 'pointer',
+          padding: '10px 15px', borderRadius: '10px',
+          border: 'none', backgroundColor: '#005751',
+          outline: 'none',
+          transition: 'all 500ms ease-in-out',
+          ':hover': {
+            backgroundColor: '#047361',
+            transform: 'scale(1.05)'
+        } }} onClick={clearFilters} > Clear</button>
 
       </div>
-
-
     </div>
   )
-
-
 }
 
 const styles = {
   sliderContainer: {
     backgroundColor: 'white',
     width: '100%'
-
   },
   icon: {
-    marginLeft:'40px',
+    marginLeft:'10px',
     marginRight: '40px',
-    marginTop:"5px",
+    marginTop:"8px",
 
-    width: '30px',
-    height: '30px'
+    width: '20px',
+    height: '20px'
   }
-
-
 }
+
+export default Radium(Filters)
