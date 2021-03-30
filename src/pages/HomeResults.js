@@ -17,20 +17,6 @@ import { UserContext } from '../contexts/UserContext'
 const HomeResults = () => {
   const [show, setShow] = useState([])
 
-  
-  const { whoIsLoggedIn, isLoggedIn } = useContext(UserContext)
-
-  useEffect(async () => {
-    await whoIsLoggedIn()
-    
-  }, [])
-
-  useEffect(() => {
-    console.log('Who is logged in from Home Results', isLoggedIn)
-  }, [isLoggedIn])
-
-
-
   const toggleFilter = () => {
     show ? document.getElementById("filterMenu").style.height = "100vh" : document.getElementById("filterMenu").style.height = "0";
     setShow(!show)
