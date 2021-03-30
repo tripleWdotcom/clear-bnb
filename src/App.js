@@ -3,11 +3,11 @@ import UserContextProvider from './contexts/UserContext'
 import FeatureContextProvider from './contexts/FeatureContext'
 import HouseContextProvider from './contexts/HouseContext'
 import BookingContextProvider from './contexts/BookingContext'
-import Navbar from './components/Navbar.jsx';
-import Home from './pages/Home.jsx';
-import HomeResults from './pages/HomeResults.jsx'
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import HomeResults from './pages/HomeResults'
 //import MemberPage from './components/MemberPage.js'
-import MyPage from './pages/MyPage.jsx'
+import MyPage from './pages/MyPage'
 import FAQ from './pages/FAQ.js'
 //import { useContext } from 'react'
 import error404 from './images/error404.png'

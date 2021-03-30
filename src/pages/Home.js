@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     backgroundColor: 'white',
     borderRadius: '20px',
-    boxShadow: "0px 8px 36px #222",
+    // boxShadow: "0px 8px 36px #222",
     textAlign: '-webkit-center'
   },
   searchAndCalenMobile: {
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     backgroundColor: 'white',
     borderRadius: '20px',
-    boxShadow: "0px 8px 36px #222",
+    // boxShadow: "0px 8px 36px #222",
     textAlign: '-webkit-center'
   },
   paper:{

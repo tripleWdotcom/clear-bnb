@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import Modal from './Modal'
 import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext';
-import MemberPage from './MemberPage.jsx'
+import MemberPage from './MemberPage'
 import Grid from '@material-ui/core/Grid';
 import PersonIcon from '@material-ui/icons/Person';
 
