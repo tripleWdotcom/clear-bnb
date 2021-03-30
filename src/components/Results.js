@@ -24,9 +24,10 @@ import { Wifi } from '@material-ui/icons';
 import Hidden from '@material-ui/core/Hidden'
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import DetailedPage from '../pages/DetailedPage'
+import Radium from 'radium'
 
 
-export default function Results() {
+function Results() {
   const { housesByCityAndDate, fetchHousesByCityAndDate } = useContext(HouseContext)
   const [showDetailedPage, setShowDetailedPage] = useState(false)
   const [houseId, setHouseId] = useState('')
@@ -78,16 +79,23 @@ export default function Results() {
 
   const test = c => (
 
-    <div key={c._id} style={{ backgroundColor: 'light-grey', margin: '5px' }}>
+    <div key={c._id} style={{
+      width: 'fit-content', margin: '5px', borderRadius: '10px', marginBottom: '20px', ':hover': {
+        color: 'crimson',
+        boxShadow: '0px 8px 36px #222',
+        WebkitTransform: "scale(1.01)",
+        transition: 'all 0.3s ease-in-out'
+      },
+    }}>
 
       <Grid container
         direction="column"
         justifyContent="flex-start"
         alignItems="flex-start"
-        style={{ paddingTop: '20px', cursor: 'pointer' }}
+        style={{ cursor: 'pointer' }}
         onClick={() => openDetailPage(c._id)}>
 
-        <Grid item>
+        <Grid item xs>
           <img style={{
             height: '100%',
             width: '100%',
@@ -100,7 +108,7 @@ export default function Results() {
 
 
         <Grid item xs style={{ textAlign: "left" }}>
-          <h2>{c.slogan}</h2>
+          <h2>{c.slogan.charAt(0).toUpperCase() + c.slogan.slice(1)}</h2>
         </Grid>
         <Grid container direction="row"
           justify="space-between"
@@ -111,9 +119,9 @@ export default function Results() {
           </Grid>
 
           <Hidden xsDown>
-          <Grid item>
-          <hr style={{ borderTop: '1px solid grey', width: '50px'}} />
-          </Grid>
+            <Grid item>
+              <hr style={{ borderTop: '1px solid grey', width: '50px' }} />
+            </Grid>
           </Hidden>
 
           <Hidden smUp>
@@ -127,8 +135,8 @@ export default function Results() {
           </Grid>
 
           <Hidden xsDown>
-          <Grid item>
-            <hr style={{ borderTop: '1px solid grey', width: '50px' }} />
+            <Grid item>
+              <hr style={{ borderTop: '1px solid grey', width: '50px' }} />
             </Grid>
           </Hidden>
 
@@ -234,3 +242,5 @@ export default function Results() {
     </div>
   )
 }
+
+export default Radium(Results)

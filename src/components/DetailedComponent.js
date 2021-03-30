@@ -105,7 +105,7 @@ function DetailedComponent(props) {
         </div>
 
         <Hidden xsDown>
-        <h1 style={styles.title} key="1" >{currentHouse[0].slogan}</h1>
+        <h1 style={styles.title} key="1" >{currentHouse[0].slogan.charAt(0).toUpperCase() + currentHouse[0].slogan.slice(1)}</h1>
         <h3 style={styles.title} key="2" >{currentHouse[0].city}, {currentHouse[0].country}</h3>
         </Hidden>
         <Hidden smUp>

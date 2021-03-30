@@ -152,7 +152,7 @@ const styles = {
     margin: '10px'
   },
   bookBtn: {
-    backgroundColor: 'crimson',
+    backgroundColor: '#005751',
     margin: '15px',
     padding: '10px 15px',
     border: 'none',
@@ -161,7 +161,7 @@ const styles = {
     outline: 'none',
     transition: 'all 500ms ease-in-out',
     ':hover': {
-      backgroundColor: '#F0524F',
+      backgroundColor: '#047361',
       transform: 'scale(1.05)'
     }
   },
