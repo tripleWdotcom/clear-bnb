@@ -7,20 +7,16 @@ import Grid from '@material-ui/core/Grid'
 
 
 function Bookings() {
-  const { myBookings, fetchMyBookingsByUserId } = useContext(BookingContext)
-  const { isLoggedIn } = useContext(UserContext)
-
+  const { myBookings } = useContext(BookingContext)
+  const [isMyBookings, setIsMyBookings] = useState(false)
   const [bookId, setBookId] = useState('')
-
   const [showDetailedPage, setShowDetailedPage] = useState(false)
 
-
-
   useEffect(async () => {
-    await fetchMyBookingsByUserId(isLoggedIn[0]._id)
-    console.log('My bookings is now use effect', myBookings)
-  }, [])
-
+    if (myBookings.length > 0) {
+      setIsMyBookings(true)
+    } 
+  }, [myBookings])
 
   const openDetailPage = (bookId) => {
     setShowDetailedPage(true)
@@ -31,9 +27,7 @@ function Bookings() {
     setShowDetailedPage(false)
   }
 
-
-  const structureBookings = (b, i) =>
-
+  const structureBookings = (b, i) => 
   (
     <Grid item xs style={style.item} key={"a" + i} onClick={() => openDetailPage(b._id)}>
       <img style={style.img} key={"b" + i} src={b.houseId.pics[0]} />
@@ -53,7 +47,7 @@ function Bookings() {
     <div className="Bookings">
       <Grid container direction="column" alignItems="center">
         <h2>My Bookings Page</h2>
-        {myBookings.length > 0 ? myBookings.map((b, i) => structureBookings(b, i)) : <h3 style={style.noBook}>Here will your future bookings be...</h3>}
+        {isMyBookings ? myBookings.map((b, i) => structureBookings(b, i)) : <h3 style={style.noBook}>Here will your future bookings be...</h3>}
       </Grid>
       {showDetailedPage ? <BookingRecieptPage bookId={bookId} closeModal={closeDetailPage} /> : ''}
     </div>

@@ -7,12 +7,25 @@ import SearchComponent from '../components/Search'
 import CityIconList from '../components/CityIconList'
 import Calen from '../components/Calen';
 import Ok from '../components/Carousel.jsx'
+import { UserContext } from '../contexts/UserContext'
+import { useEffect, useContext } from 'react'
 
 
 
 
 const Home = () => {
  
+  const { whoIsLoggedIn, isLoggedIn } = useContext(UserContext)
+
+  useEffect(async () => {
+    await whoIsLoggedIn()
+  }, [])
+
+  useEffect( () => {
+    console.log('Who is logged in from Home', isLoggedIn)
+  }, [isLoggedIn])
+
+
 
 
   const classes = useStyles();

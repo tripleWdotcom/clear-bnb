@@ -97,6 +97,7 @@ export default function UserContextProvider(props) {
     addUser,
     logInUser,
     logOutUser,
+    whoIsLoggedIn
   }
 
   //Calls one time, as mounted in Vue
