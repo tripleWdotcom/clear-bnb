@@ -1,19 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;@600&display=swap');
+
+
 
 #root {
   --font1: 'Roboto', sans-serif;
   --font2: 'Roboto', sans-serif;
   --font3: 'Roboto', sans-serif;
   --font4: 'Roboto', sans-serif;
-  --font5: 'Roboto', sans-serif;
+  --font5: 'Mulish', sans-serif;
   
 /*   --c1: rgb(252, 249, 249);
  */  
   --c1: white;
   --c2: #0D4C80;
-  --c3:#F24738;
+  --c3: #0597F2;
   --c4: #0597F2;
-  --c5:  #0D4C80;
+  --c5: #0D4C80;
   --c6: rgb(53, 51, 48);
+  /*#F24738;
   /*--redBorder:#6e1020 1px solid;*/
 }
 

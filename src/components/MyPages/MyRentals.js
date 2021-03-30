@@ -40,16 +40,13 @@ function MyRentals() {
       <img style={style.img} key={"b" + i} src={r.pics[0]} />
       {r.isOffer ? <div style={style.offer} key={"f" + i}><div style={style.offerText} key={"g" + i}>Special offer</div></div> : ''}
       <div style={style.info} key={"c" + i}>
-        <div style={style.infoText} key={"d" + i}>
-          <h3>{r.city}</h3>
-          {r.dateRanges.length < 2 ? <a>{new Date(r.dateRanges[0].availableStart).toString().substr(3, 13)}
-          - {new Date(r.dateRanges[0].availableEnd).toString().substr(3, 13)}</a> : <a>Multiple date ranges</a>}
-          <br />
-          <br />
-          <a style={style.infoMore} key={"e" + i}>
-            See more details...
-          </a>
-        </div>
+        <h2 style={style.infoText} key={"d" + i}>{r.city}</h2>
+        {r.dateRanges.length < 2 ? <p style={style.infoText} key={"j" + i}>{new Date(r.dateRanges[0].availableStart).toString().substr(3, 13)}
+          - {new Date(r.dateRanges[0].availableEnd).toString().substr(3, 13)}</p> : <p>Multiple date ranges</p>}
+        <br />
+        <p style={{ margin: '5px 0 5px 15px' }} key={"e" + i}>
+          See more details...
+          </p>
       </div>
     </Grid>
   )
@@ -74,31 +71,32 @@ const style = {
     padding: '10px',
   },
   img: {
-    width: '300px',
+    width: '100%',
+    maxWidth: '500px',
     height: 'auto',
     borderRadius: '20px',
     boxShadow: '0 8px 6px -6px black',
   },
   info: {
     position: 'absolute',
-    backgroundColor: 'rgba(255,255,255, 0.8)',
-    width: '300px',
-    height: '60px',
+    backgroundColor: 'rgba(255,255,255, 0.9)',
+    width: 'calc(100% - 20px)',
+
+    height: '90px',
     bottom: '14px',
     borderBottomLeftRadius: '20px',
     borderBottomRightRadius: '20px',
     transition: 'all 500ms ease-in-out',
     overflow: 'hidden',
     ':hover': {
-      height: '100px',
+      height: '140px',
       cursor: 'pointer',
-      transition: 'all 500ms ease-in-out'
     }
   },
   infoText: {
     margin: '5px 0 5px 10px',
     lineHeight: '150%',
-    letterSpacing: '5px',
+    letterSpacing: '1px',
   },
   offer: {
     position: 'absolute',

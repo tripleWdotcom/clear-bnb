@@ -1,9 +1,9 @@
 import { HouseContext } from '../contexts/HouseContext'
 import { useEffect, useContext, useState } from "react";
 import Grid from '@material-ui/core/Grid';
-import TvIcon from '@material-ui/icons/Tv';
+
 import parking from '../images/parking.png';
-import smoking from '../images/smoking.png';
+import smoking from '../images/nosmoking.png';
 import gym from '../images/gym.png';
 import tv from '../images/tv.png';
 import animalFriendly from '../images/animalFriendly.png';
@@ -11,22 +11,13 @@ import wifi from '../images/wifi.png';
 import breakfast from '../images/breakfast.png';
 import kitchen from '../images/kitchen.png';
 import pool from '../images/pool.png';
-import adress from '../images/adress.png';
-import beds from '../images/beds.png';
-import city from '../images/city.png';
-import country from '../images/country.png';
-import price from '../images/price.png';
-import contact from '../images/contact.png';
-import email from '../images/email.png';
-import checkIn from '../images/checkIn.png';
-import checkOut from '../images/checkOut.png';
-import { Wifi } from '@material-ui/icons';
+
 import Hidden from '@material-ui/core/Hidden'
-import LocationOnIcon from '@material-ui/icons/LocationOn';
 import DetailedPage from '../pages/DetailedPage'
+import Radium from 'radium'
 
 
-export default function Results() {
+function Results() {
   const { housesByCityAndDate, fetchHousesByCityAndDate } = useContext(HouseContext)
   const [showDetailedPage, setShowDetailedPage] = useState(false)
   const [houseId, setHouseId] = useState('')
@@ -78,136 +69,196 @@ export default function Results() {
 
   const test = c => (
 
-    <div key={c._id} style={{ backgroundColor: 'light-grey', margin: '5px' }}>
+    <div key={c._id} style={{
+      width: 'fit-content', margin: '5px 5px 20px 5px',
+      borderRadius: '10px',
+      transition: 'all 200ms ease-in-out',
+      ':hover': {
+        boxShadow: '0px 8px 36px #222',
+        WebkitTransform: "scale(1.01)",
+       // transition: 'all 0.3s ease-in-out'
+      },
+    }}>
+      <Hidden xsDown>
+        <Grid container
+          direction="row"
+          justifycontent="flex-start"
+          alignItems="flex-start"
+          spacing={1}
+          style={{ cursor: 'pointer' }}
+          onClick={() => openDetailPage(c._id)}>
 
-      <Grid container
-        direction="column"
-        justifyContent="flex-start"
-        alignItems="flex-start"
-        style={{ paddingTop: '20px', cursor: 'pointer' }}
-        onClick={() => openDetailPage(c._id)}>
+          <Grid item xs={4}>
+            <img style={{
+              height: '100%',
+              width: '100%',
+              borderRadius: '10px'
+            }}
+              src={c.pics[0]}
+              alt={""}
+              key={c.id}
+            ></img>
+          </Grid>
+          <Grid item xs>
+            <Grid container
+              direction="column"
+              justifycontent="space-around"
 
-        <Grid item>
-          <img style={{
-            height: '100%',
-            width: '100%',
-            borderRadius: '10px'
-          }}
-            src={c.pics[0]}
-            alt={'picture ' + c.id}
-          ></img>
-        </Grid>
+            >
+              <Grid item xs style={{ textAlign: "left" }}>
+                <h3>{c.slogan.charAt(0).toUpperCase() + c.slogan.slice(1)}</h3>
+              </Grid>
+              <Grid item xs>
+                <Grid container direction="row"
+                  spacing={2}
+                  justifycontent="space-between"
+                  alignItems="center"
+                  style={{ margin: '15px 0' }}>
+                  <Grid item>
+                    <h5>{c.city}</h5>
+                  </Grid>
 
+                  <Hidden xsDown>
+                    <Grid item>
+                      <hr style={{ borderTop: '1px solid grey', width: '50px' }} />
+                    </Grid>
+                  </Hidden>
 
-        <Grid item xs style={{ textAlign: "left" }}>
-          <h2>{c.slogan}</h2>
-        </Grid>
-        <Grid container direction="row"
-          justify="space-between"
-          alignItems="center"
-          style={{ margin: '15px 0' }}>
-          <Grid item>
-            <h4>{c.city}</h4>
+                  <Hidden smUp>
+                    <Grid item>
+                      <hr style={{ borderTop: '1px solid grey', width: '20px' }} />
+                    </Grid>
+                  </Hidden>
+
+                  <Grid item>
+                    <h5>{c.price} € / night</h5>
+                  </Grid>
+
+                  <Hidden xsDown>
+                    <Grid item>
+                      <hr style={{ borderTop: '1px solid grey', width: '50px' }} />
+                    </Grid>
+                  </Hidden>
+
+                  <Hidden smUp>
+                    <Grid item>
+                      <hr style={{ borderTop: '1px solid grey', width: '20px' }} />
+                    </Grid>
+                  </Hidden>
+
+                  <Grid item>
+                    <h5>{c.bedrooms} beds</h5>
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              <Grid item xs>
+                <Grid container direction="row">
+                  <div style={{ display: 'inline-flex' }}>{c.featureIds.map(f => <span style={{ padding: '10px 20px 10px 0' }} key={f._id}> {(() => {
+                    switch (f.name) {
+                      case "tv": return (<div><img src={tv} style={{ width: '20px' }} /></div>);
+                      case "gym": return (<div><img src={gym} style={{ width: '20px' }} /></div>);
+                      case "animalFriendly": return (<div><img src={animalFriendly} style={{ width: '20px' }} /></div>);
+                      case "wifi": return (<div><img src={wifi} style={{ width: '20px' }} /></div>);
+                      case "pool": return (<div><img src={pool} style={{ width: '20px' }} /></div>);
+                      case "smoking": return (<div><img src={smoking} style={{ width: '20px' }} /></div>);
+                      case "parking": return (<div><img src={parking} style={{ width: '20px' }} /></div>);
+                      case "kitchen": return (<div><img src={kitchen} style={{ width: '20px' }} /></div>);
+                      case "breakfast": return (<div><img src={breakfast} style={{ width: '20px' }} /></div>);
+                      default: return "#FFFFFF";
+                    }
+                  })()}     </span>)}</div>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid >
+      </Hidden>
+
+      <Hidden smUp>
+        <Grid container
+          direction="column"
+          justifycontent="flex-start"
+          alignItems="flex-start"
+          style={{ cursor: 'pointer' }}
+          onClick={() => openDetailPage(c._id)}>
+
+          <Grid item xs>
+            <img style={{
+              height: '100%',
+              width: '100%',
+              borderRadius: '10px'
+            }}
+              src={c.pics[0]}
+              alt={'picture ' + c.id}
+            ></img>
           </Grid>
 
-          <Hidden xsDown>
-          <Grid item>
-          <hr style={{ borderTop: '1px solid grey', width: '50px'}} />
-          </Grid>
-          </Hidden>
 
-          <Hidden smUp>
+          <Grid item xs style={{ textAlign: "left" }}>
+            <h3>{c.slogan.charAt(0).toUpperCase() + c.slogan.slice(1)}</h3>
+          </Grid>
+          <Grid container direction="row"
+            justifycontent="space-between"
+            alignItems="center"
+            style={{ margin: '15px 0' }}>
             <Grid item>
-              <hr style={{ borderTop: '1px solid grey', width: '20px' }} />
+              <h5>{c.city}</h5>
             </Grid>
-          </Hidden>
 
-          <Grid item>
-            <h4>{c.price} € / night</h4>
-          </Grid>
+            <Hidden xsDown>
+              <Grid item>
+                <hr style={{ borderTop: '1px solid grey', width: '50px' }} />
+              </Grid>
+            </Hidden>
 
-          <Hidden xsDown>
-          <Grid item>
-            <hr style={{ borderTop: '1px solid grey', width: '50px' }} />
-            </Grid>
-          </Hidden>
+            <Hidden smUp>
+              <Grid item>
+                <hr style={{ borderTop: '1px solid grey', width: '20px' }} />
+              </Grid>
+            </Hidden>
 
-          <Hidden smUp>
             <Grid item>
-              <hr style={{ borderTop: '1px solid grey', width: '20px' }} />
+              <h5>{c.price} € / night</h5>
             </Grid>
-          </Hidden>
 
-          <Grid item>
-            <h4>{c.bedrooms} beds</h4>
+            <Hidden xsDown>
+              <Grid item>
+                <hr style={{ borderTop: '1px solid grey', width: '50px' }} />
+              </Grid>
+            </Hidden>
+
+            <Hidden smUp>
+              <Grid item>
+                <hr style={{ borderTop: '1px solid grey', width: '20px' }} />
+              </Grid>
+            </Hidden>
+
+            <Grid item>
+              <h5>{c.bedrooms} beds</h5>
+            </Grid>
           </Grid>
-        </Grid>
 
 
+          <Grid item xs>
+            <div style={{ display: 'inline-flex' }}>{c.featureIds.map(f => <span style={{ padding: '10px 20px 10px 0' }} key={f._id}> {(() => {
+              switch (f.name) {
+                case "tv": return (<div><img src={tv} style={{ width: '20px' }} /></div>);
+                case "gym": return (<div><img src={gym} style={{ width: '20px' }} /> </div>);
+                case "animalFriendly": return (<div><img src={animalFriendly} style={{ width: '20px' }} /></div>);
+                case "wifi": return (<div><img src={wifi} style={{ width: '20px' }} /> </div>);
+                case "pool": return (<div><img src={pool} style={{ width: '20px' }} /> </div>);
+                case "smoking": return (<div><img src={smoking} style={{ width: '20px' }} /></div>);
+                case "parking": return (<div><img src={parking} style={{ width: '20px' }} /></div>);
+                case "kitchen": return (<div><img src={kitchen} style={{ width: '20px' }} /></div>);
+                case "breakfast": return (<div><img src={breakfast} style={{ width: '20px' }} /></div>);
+                default: return "#FFFFFF";
+              }
+            })()}     </span>)}</div>
+          </Grid>
+        </Grid >
 
-
-
-        {/* <Hidden xsDown>
-              <Grid container>
-                {c.featureIds.map(f => <Grid item xs><span style={{ fontSize: "15px" }} key={f._id}> {(() => {
-          switch (f.name) {
-            case "tv": return (<img src={tv} style={{ width: '20px' }} />);
-            case "gym": return (<img src={gym} style={{ width: '20px' }} />);
-            case "animalFriendly": return (<img src={animalFriendly} style={{ width: '20px' }} />);
-            case "wifi": return (<img src={wifi} style={{ width: '20px' }} />);
-            case "pool": return (<img src={pool} style={{ width: '20px' }} />);
-            case "smoking": return (<img src={smoking} style={{ width: '20px' }} />);
-            case "parking": return (<img src={parking} style={{ width: '20px' }} />);
-            case "kitchen": return (<img src={kitchen} style={{ width: '20px' }} />);
-            case "breakfast": return (<img src={breakfast} style={{ width: '20px' }} />);
-            default: return "#FFFFFF";
-          }
-        })()}     </span></Grid>)
-}
-
-{/*    <div style={{ height: '100px',display:'flex' }}>{c.featureIds.map(f => <div key={f._id}> {(() => {
-                switch (f.name) {
-                  case "tv": return (<div><TvIcon />TV</div>);
-                  case "gym": return (<div><TvIcon />Gym</div>);
-                  case "animalFriendly": return (<div><TvIcon />Animal Friendly</div>);
-                  case "wifi": return (<div><TvIcon />WiFi</div>);
-                  case "pool": return (<div><TvIcon />Pool</div>);
-                  case "smoking": return (<div><TvIcon />Smoking</div>);
-                  case "parking": return (<div><TvIcon />Parking</div>);
-                  case "kitchen": return (<div><TvIcon />Kitchen</div>);
-                  case "breakfast": return (<div><TvIcon />Breakfast</div>);
-                  default: return "#FFFFFF";
-                }
-              })()}     </div>)}</div> */}
-
-        {/* </Grid>  */}
-
-
-        <Grid item xs>
-          <div style={{ display: 'inline-flex' }}>{c.featureIds.map(f => <span style={{ padding: '10px 20px 10px 0' }} key={f._id}> {(() => {
-            switch (f.name) {
-              case "tv": return (<div><img src={tv} style={{ width: '20px' }} /></div>);
-              case "gym": return (<div><img src={gym} style={{ width: '20px' }} /> </div>);
-              case "animalFriendly": return (<div><img src={animalFriendly} style={{ width: '20px' }} /></div>);
-              case "wifi": return (<div><img src={wifi} style={{ width: '20px' }} /> </div>);
-              case "pool": return (<div><img src={pool} style={{ width: '20px' }} /> </div>);
-              case "smoking": return (<div><img src={smoking} style={{ width: '20px' }} /></div>);
-              case "parking": return (<div><img src={parking} style={{ width: '20px' }} /></div>);
-              case "kitchen": return (<div><img src={kitchen} style={{ width: '20px' }} /></div>);
-              case "breakfast": return (<div><img src={breakfast} style={{ width: '20px' }} /></div>);
-              default: return "#FFFFFF";
-            }
-          })()}     </span>)}</div>
-        </Grid>
-
-
-
-        {/* <Grid item style={{textAlign: 'left'}}>
-            
-
-            </Grid> */}
-
-      </Grid >
+      </Hidden>
 
 
 
@@ -225,7 +276,7 @@ export default function Results() {
 
 
       <div style={{ fontSize: "20px", padding: '20px', backgroundColor: '#66A395', color: 'black' }}>
-        Available houses with Check-In on: <b>{y.toDateString()}</b> and Check out on: <b>{yy.toDateString()}</b>
+        <b>{housesByCityAndDate.length}</b> Available houses with Check-In on: <b>{y.toDateString()}</b> and Check out on: <b>{yy.toDateString()}</b>
       </div>
 
       {housesByCityAndDate.map(c => test(c))}
@@ -234,3 +285,13 @@ export default function Results() {
     </div>
   )
 }
+
+export default Radium(Results)
+
+
+
+
+
+
+
+

@@ -2,15 +2,26 @@
 import React, { useEffect, useState } from "react";
 import BedSlider from './BedsRangeFilter';
 import PriceSlider from './PriceRangeFilter';
+import Grid from '@material-ui/core/Grid';
 //import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
+import parking from '../images/parking.png';
+import smoking from '../images/nosmoking.png';
+import gym from '../images/gym.png';
+import tv from '../images/tv.png';
+import animalFriendly from '../images/animalFriendly.png';
+import wifi from '../images/wifi.png';
+import breakfast from '../images/breakfast.png';
+import kitchen from '../images/kitchen.png';
+import pool from '../images/pool.png';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 //import FormHelperText from '@material-ui/core/FormHelperText';
 import Switch from '@material-ui/core/Switch';
 import { useHistory } from "react-router-dom";
+import Radium from 'radium'
 
-export default function Filters() {
+function Filters() {
   let history = useHistory();
 
   const renFilters = async () => {
@@ -72,72 +83,90 @@ export default function Filters() {
       <div className={'sliderContainer'} style={styles.sliderContainer}>
         <br /><br />
         <PriceSlider clear={reset} />
-        <br /><br />     
+        <br />
         <BedSlider clear={reset} />
       </div>
-  
+
+
+
 
       <FormControl component="fieldset" style={styles.sliderContainer}>
         {/*     <FormLabel component="legend" color="primary" >Assign responsibility</FormLabel> */}
         <FormGroup>
-          <FormControlLabel
+          <div style={{ display: 'inline-flex' }}><img src={gym} style={styles.icon} /><FormControlLabel
             control={<Switch color='primary' checked={state.gym} onChange={handleChange} name="gym" />}
-            label="GYM"
-          />
-          <FormControlLabel
+            label="Gym"
+          /></div>
+          <div style={{ display: 'flex' }}><img src={tv} style={styles.icon} /> <FormControlLabel
             control={<Switch color='primary' checked={state.tv} onChange={handleChange} name="tv" />}
             label="TV"
-          />
-          <FormControlLabel
+          /></div>
+          <div style={{ display: 'flex' }}><img src={wifi} style={styles.icon}/>   <FormControlLabel
             control={<Switch color='primary' checked={state.wifi} onChange={handleChange} name="wifi" />}
             label="Wi-Fi"
-          />
-          <FormControlLabel
+          /></div>
+          <div style={{ display: 'flex' }}><img src={breakfast} style={styles.icon} /> <FormControlLabel
             control={<Switch color='primary' checked={state.breakfast} onChange={handleChange} name="breakfast" />}
             label="Breakfast"
-          />
-          <FormControlLabel
+          /></div>
+          <div style={{ display: 'flex' }}><img src={kitchen} style={styles.icon}/> <FormControlLabel
             control={<Switch color='primary' checked={state.kitchen} onChange={handleChange} name="kitchen" />}
             label="Kitchen"
-          />
-          <FormControlLabel
+          /></div>
+          <div style={{ display: 'flex' }}><img src={smoking} style={styles.icon}/>  <FormControlLabel
             control={<Switch color='primary' checked={state.smoking} onChange={handleChange} name="smoking" />}
-            label="Smoking"
-          />
-          <FormControlLabel
+            label="No Smoking"
+          /></div>
+          <div style={{ display: 'flex' }}><img src={animalFriendly} style={styles.icon} /> <FormControlLabel
             control={<Switch color='primary' checked={state.animalFriendly} onChange={handleChange} name="animalFriendly" />}
             label="Animal Friendly"
-          />
-          <FormControlLabel
+          /></div>
+          <div style={{ display: 'flex' }}><img src={pool} style={styles.icon} />  <FormControlLabel
             control={<Switch color='primary' checked={state.pool} onChange={handleChange} name="pool" />}
             label="Pool"
-          />
-          <FormControlLabel
+          /></div>
+          <div style={{ display: 'flex' }}><img src={parking} style={styles.icon} /><FormControlLabel
             control={<Switch color='primary' checked={state.parking} onChange={handleChange} name="parking" />}
             label="Parking"
-          />
+          /></div>
         </FormGroup>
         {/*  <FormHelperText>Be careful</FormHelperText> */}
       </FormControl>
+
+
+
       <br />
-      <div style={{ textAlign:'right'}}>
-      <button onClick={clearFilters} > Clear</button>
+      <div style={{ textAlign: 'right' }}>
+        <button style={{
+          color: 'white',
+          cursor: 'pointer',
+          padding: '10px 15px', borderRadius: '10px',
+          border: 'none', backgroundColor: '#005751',
+          outline: 'none',
+          transition: 'all 500ms ease-in-out',
+          ':hover': {
+            backgroundColor: '#047361',
+            transform: 'scale(1.05)'
+        } }} onClick={clearFilters} > Clear</button>
 
       </div>
-
-
     </div>
   )
-
-  
 }
 
 const styles = {
   sliderContainer: {
     backgroundColor: 'white',
     width: '100%'
-    
+  },
+  icon: {
+    marginLeft:'10px',
+    marginRight: '40px',
+    marginTop:"8px",
+
+    width: '20px',
+    height: '20px'
   }
-
-
 }
+
+export default Radium(Filters)

@@ -12,10 +12,11 @@ import Hidden from '@material-ui/core/Hidden'
 function DetailedPage(props) {
   let history = useHistory();
   const { isLoggedIn } = useContext(UserContext)
-  const { addNewBooking } = useContext(BookingContext)
+  const { addNewBooking} = useContext(BookingContext)
   const { housesByCityAndDate } = useContext(HouseContext)
   const [totalPrice, setTotalPrice] = useState(0)
   const [notLoggedIn, setNotLoggedIn] = useState(false)
+  const [currentUser, setCurrentUser] = useState([])
 
   useEffect(() => {
     let houseObj = housesByCityAndDate.filter(h => h._id === props.houseId)
@@ -23,13 +24,15 @@ function DetailedPage(props) {
     setTotalPrice(houseObj[0].price * numOfDays)
   }, [])
 
+  useEffect(() => {
+    setCurrentUser([isLoggedIn[0]])
+  }, [isLoggedIn])
+
   const createBooking = async () => {
 
-    if (!isLoggedIn.length || isLoggedIn == undefined) {
-      console.log('You are not logged in ')
+    if (currentUser[0] === undefined) {
       setNotLoggedIn(true)
     } else {
-      console.log('Who is logged in', isLoggedIn)
       let newBooking = {
         houseId: props.houseId,
         userId: isLoggedIn[0]._id,
@@ -39,34 +42,32 @@ function DetailedPage(props) {
       }
       await addNewBooking(newBooking)
       props.closeModal()
-      console.log('The new booking obj is', newBooking)
+      history.push('/mypage')
     }
   }
-
-
 
   return (
 
     <div className="popup" style={styles.popup} key="1">
 
       <Hidden xsDown>
-      <div style={styles.popupInnerComputer}>
+        <div style={styles.popupInnerComputer}>
           <button style={styles.closeBtn} key="2" onClick={() => props.closeModal()}>Close</button>
-        <DetailedComponent houseId={props.houseId} path="results"/>
+          <DetailedComponent houseId={props.houseId} path="results" />
           <div style={styles.dates} key="3">
-          <h2>Booking information</h2>
-          <br />
-          <h3>Chosen dates</h3>
-          <br />
-          <p>{new Date(parseInt(props.startDate)).toLocaleString().substr(0, 11)} - {new Date(parseInt(props.endDate)).toLocaleString().substr(0, 11)}</p>
-          <br />
-          <h3>Total price</h3>
-          <br />
-          <p>{totalPrice} €</p>
+            <h2>Booking information</h2>
+            <br />
+            <h3>Chosen dates</h3>
+            <br />
+            <p>{new Date(parseInt(props.startDate)).toLocaleString().substr(0, 11)} - {new Date(parseInt(props.endDate)).toLocaleString().substr(0, 11)}</p>
+            <br />
+            <h3>Total price</h3>
+            <br />
+            <p>{totalPrice} €</p>
             <button style={styles.bookBtn} key="4" onClick={createBooking}>Book</button>
-          <br />
-          { notLoggedIn ? 'Log in to book this house' : ''}<p></p>
-        </div>
+            <br />
+            {notLoggedIn ? 'Log in to book this house' : ''}<p></p>
+          </div>
         </div>
       </Hidden>
 
@@ -152,7 +153,7 @@ const styles = {
     margin: '10px'
   },
   bookBtn: {
-    backgroundColor: 'crimson',
+    backgroundColor: '#005751',
     margin: '15px',
     padding: '10px 15px',
     border: 'none',
@@ -161,7 +162,7 @@ const styles = {
     outline: 'none',
     transition: 'all 500ms ease-in-out',
     ':hover': {
-      backgroundColor: '#F0524F',
+      backgroundColor: '#047361',
       transform: 'scale(1.05)'
     }
   },

@@ -6,7 +6,7 @@ import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 import tv from '../images/tv.png';
 import parking from '../images/parking.png';
-import smoking from '../images/smoking.png';
+import nosmoking from '../images/nosmoking.png';
 import gym from '../images/gym.png';
 import animalFriendly from '../images/animalFriendly.png';
 import wifi from '../images/wifi.png';
@@ -55,12 +55,17 @@ function DetailedComponent(props) {
         <img src={c.name == 'tv' ? tv
           : c.name == 'wifi' ? wifi
             : c.name == 'parking' ? parking
-              : c.name == 'smoking' ? smoking
+              : c.name == 'smoking' ? nosmoking
                 : c.name == 'gym' ? gym
                   : c.name == 'animalFriendly' ? animalFriendly
                     : c.name == 'breakfast' ? breakfast
                       : c.name == 'kitchen' ? kitchen : c.name == 'pool' ? pool : ''} alt={c.name} style={styles.icons} key={'b' + i} />
-        <p style={styles.iconText} key={'e' + i}>{c.name.charAt(0).toUpperCase() + c.name.slice(1)}</p>
+        <p style={styles.iconText} key={'e' + i}>
+          {
+            c.name === 'smoking' ? 'No ' + c.name
+              : c.name === 'animalFriendly' ? c.name.charAt(0).toUpperCase() + c.name.slice(1, 6) + ' ' + c.name.slice(6).toLowerCase()
+                : c.name.charAt(0).toUpperCase() + c.name.slice(1)
+          }</p>
       </div>
     </>
   )
@@ -84,7 +89,7 @@ function DetailedComponent(props) {
               thumbWidth={100}
               dynamicHeight={true}
             >
-              {currentHouse[0].pics.map(p => (<div><img src={p} /></div>))}
+              {currentHouse[0].pics.map((p, i)=> (<div><img src={p} key={i} /></div>))}
             </Carousel>
           </Hidden>
           <Hidden smUp>
@@ -105,7 +110,7 @@ function DetailedComponent(props) {
         </div>
 
         <Hidden xsDown>
-        <h1 style={styles.title} key="1" >{currentHouse[0].slogan}</h1>
+        <h1 style={styles.title} key="1" >{currentHouse[0].slogan.charAt(0).toUpperCase() + currentHouse[0].slogan.slice(1)}</h1>
         <h3 style={styles.title} key="2" >{currentHouse[0].city}, {currentHouse[0].country}</h3>
         </Hidden>
         <Hidden smUp>
@@ -235,7 +240,7 @@ const styles = {
   },
   iconForm: {
     display: 'flex',
-    margin: '10px 0',
+    margin: '5px 0',
   },
   iconForm2: {
     display: 'flex',

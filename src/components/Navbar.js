@@ -33,7 +33,6 @@ const Navbar = () => {
         setIsUserLoggedIn(true)
       } else if (!isLoggedIn.error) {
         console.log('It is an object - im in')
-        console.log('first name of logged in', isLoggedIn)
         setShowModal(false)
         setIsUserLoggedIn(true)
         console.log('isUserLoggedIn', isUserLoggedIn)
@@ -107,26 +106,28 @@ const styles = {
   },
 
   home: {
+    fontFamily: 'Mulish, sans-serif',
+    fontWeight: '600px',
     fontSize: "20px",
     cursor: 'pointer',
     ':hover': {
-      color: 'crimson',
+      color: '#047361',
       WebkitTransform: "scale(1.3)",
       transition: '0.3s'
     },
   },
   signIn: {
-    
-    color: 'whitesmoke',
-    backgroundColor: 'crimson',
-    borderRadius: '8px',
-    textDecoration: 'none',
-    padding: '6px',
+    fontFamily: 'Mulish, sans-serif',
+    color: 'white',
     cursor: 'pointer',
+    padding: '10px 15px', borderRadius: '10px',
+    border: 'none', backgroundColor: '#005751',
+    outline: 'none',
+    transition: 'all 500ms ease-in-out',
     ':hover': {
-      WebkitTransform: "scale(1.2)",
-      transition: '0.3s'
-    },
+      backgroundColor: '#047361',
+      transform: 'scale(1.05)'
+    }
 
 
   },

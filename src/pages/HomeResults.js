@@ -5,18 +5,17 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Filters from '../components/Filters'
 import SearchComponent from '../components/Search'
-import Results from '../components/Results';
+import Results from '../components/Results.js';
 import Calen from '../components/Calen';
 import Hidden from '@material-ui/core/Hidden'
 import { withMobileDialog } from '@material-ui/core';
 import zIndex from '@material-ui/core/styles/zIndex';
-import { useState } from 'react';
+import { useEffect, useContext, useState } from 'react'
 
+import { UserContext } from '../contexts/UserContext'
 
 const HomeResults = () => {
   const [show, setShow] = useState([])
-
-
 
   const toggleFilter = () => {
     show ? document.getElementById("filterMenu").style.height = "100vh" : document.getElementById("filterMenu").style.height = "0";
@@ -127,23 +126,24 @@ const useStyles = makeStyles((theme) => ({
   
   },
   toggleFilters: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(0.5),
     textAlign: 'center',
     borderRadius: '10px',
     position: 'fixed',
     zIndex: 3,
-    bottom: '0px',
+    bottom: '0',
     width: '100%'
 
   },
 
   filterContainer: {
     position: 'fixed',
-    bottom: '0px',
+    bottom: '30px',
+    // bottom: '0px',
     width: '100%',
     zIndex: 3,
     transition: '0.5s',
-    height: '0px',
+    // height: '0px',
     borderRadius: '10px',
   }
 

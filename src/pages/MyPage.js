@@ -8,51 +8,38 @@ import Radium from 'radium'
 import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 import Menu from '../components/Menu'
+import MenuIcon from '@material-ui/icons/Menu';
+
 
 function MyPage() {
-  
 
-  const [action, setAction] = useState('showBookings')
-  const [width, setWidth] = useState(window.innerWidth)
+  const [action, setAction] = useState('')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [menuShowing, setMenuShowing] = useState()
+  const { isLoggedIn} = useContext(UserContext)
+  const { myBookings, fetchMyBookingsByUserId } = useContext(BookingContext)
 
+  useEffect(async () => {
+    await fetchMyBookingsByUserId(isLoggedIn[0]._id)
+    setAction('showBookings') 
+  }, [])
 
   const changeAction = (newAction) => {
     setAction(newAction)
   }
 
   useEffect(async () => {
-    console.log('The new action is: ', action)
     setIsMenuOpen(false)
-   
-
-    // if (open === true) {
-    //   console.log('Btn exist and open is', open)
-    //   setOpen(!open)
-    // }
-    // console.log('Does the menu button exist?', btn)
   }, [action])
 
   const toggleMenu = () => {
-    console.log('Pushing menu button, button is open:', isMenuOpen)
     setIsMenuOpen(!isMenuOpen)
   }
-
-  // useEffect(() => {
-  //   showContent()
-  // }, [isMenuOpen])
-
-  // function showContent() {
-  //   let content = isMenuOpen ?  : ''
-  //   setMenuShowing(content)
-  // }
 
   return (
     <>
       <Hidden smUp>
-        <Grid container style={style.container} wrap="nowrap" direction="column" key="1" justify="center">
-          <button onClick={toggleMenu}>Menu</button>
+        <Grid container style={style.container} wrap="nowrap" direction="column" key="1" justifyContent="center">
+          <button style={{fontSize: 'large', marginBottom: '30px', backgroundColor: 'white', border: '1px solid grey', borderRadius: '5px'}} onClick={toggleMenu}><MenuIcon /></button>
           <Grid item xs>
             {isMenuOpen ? <Menu getNewAction={changeAction} /> : ''}
             {action === 'showBookings' ? <Bookings /> : ''}
@@ -74,8 +61,8 @@ function MyPage() {
           <Grid item xs={4} key="1">
             <Menu getNewAction={changeAction} />
           </Grid>
-          <Grid item xs={1}><div style={style.line}></div></Grid>
-          <Grid item xs={7}>
+ 
+          <Grid item xs={8}>
             {action === 'showBookings' ? <Bookings /> : ''}
             {action === 'showRentals' ? <MyRentals /> : ''}
             {action === 'showNewRental' ? <AddNewRental setNewAction={changeAction} /> : ''}

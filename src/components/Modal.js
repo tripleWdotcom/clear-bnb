@@ -62,7 +62,7 @@ const modalStyle = {
     padding: "1.2em",
     boxShadow: "0px 8px 36px #222",
     ':hover': {
-      backgroundColor: "#A8BACE",
+      backgroundColor: "#72A19D",
       border: "none",
       color: "#fefefe"
     },
@@ -79,7 +79,7 @@ const modalStyle = {
     boxShadow: "0px 2px 36px #222",
     textAlign: 'right',
     ':hover': {
-      backgroundColor: "#A8BACE",
+      backgroundColor: "#72A19D",
       border: "none",
       color: "#fefefe"
     },
