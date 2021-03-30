@@ -24,7 +24,8 @@ export default function Ok() {
           /*             borderRadius: '10px' */
         }}
           src={c.pics[0]}
-          alt={'picture '}
+          alt={'gkj'}
+          key={c._id}
         ></img>
 
         <div style={{ position: 'absolute', top: '10%', left: '10%', textAlign: 'left' }}>
@@ -90,7 +91,8 @@ export default function Ok() {
           /*             borderRadius: '10px' */
         }}
           src={x.pics[0]}
-          alt={'picture '}
+          alt={''}
+          key={x._id}
         ></img>
 
         <div style={{ position: 'absolute', top: '10%', left: '10%', textAlign: 'left' }}>
