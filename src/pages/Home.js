@@ -47,9 +47,9 @@ const Home = () => {
             </Grid>
     
           <Grid item xs={12}>
-            <Paper className={classes.paper}>
+     
             <CityIconList />
-              </Paper>
+        
           </Grid>
         </Grid>
       </div>
@@ -82,8 +82,8 @@ const useStyles = makeStyles((theme) => ({
     textAlign: '-webkit-center'
   },
   paper:{
-    backgroundColor:'green',
- 
+    
+    backgroundColor: 'transparent',
   }
 }));
 
