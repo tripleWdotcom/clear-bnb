@@ -6,7 +6,7 @@ import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 import tv from '../images/tv.png';
 import parking from '../images/parking.png';
-import smoking from '../images/smoking.png';
+import nosmoking from '../images/nosmoking.png';
 import gym from '../images/gym.png';
 import animalFriendly from '../images/animalFriendly.png';
 import wifi from '../images/wifi.png';
@@ -55,7 +55,7 @@ function DetailedComponent(props) {
         <img src={c.name == 'tv' ? tv
           : c.name == 'wifi' ? wifi
             : c.name == 'parking' ? parking
-              : c.name == 'smoking' ? smoking
+              : c.name == 'smoking' ? nosmoking
                 : c.name == 'gym' ? gym
                   : c.name == 'animalFriendly' ? animalFriendly
                     : c.name == 'breakfast' ? breakfast
