@@ -10,7 +10,6 @@ import { Backdrop } from '@material-ui/core';
 import '../index.css'
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
-import styled from 'styled-components'
 
 export default function Ok() {
 
@@ -163,12 +162,23 @@ export default function Ok() {
     <div className="carousel-grid-container">
       <div className="banner">
        
-        <div style={styles.banner}>
+        <Hidden xsDown>
+        <div style={styles.desktopBanner}>
           SPECIAL OFFERS
-          <ArrowDownwardIcon style={styles.arrow}></ArrowDownwardIcon>
-           
+          <ArrowDownwardIcon style={styles.desktopArrow}></ArrowDownwardIcon>
           </div>
+        </Hidden>
+
+        <Hidden smUp>
+          <div style={styles.mobileBanner}>
+            SPECIAL OFFERS
+          <ArrowDownwardIcon style={styles.mobileArrow}></ArrowDownwardIcon>
+          </div>
+        </Hidden>
         
+
+        
+
       </div>
 
       <Hidden xsDown>
@@ -197,14 +207,19 @@ export default function Ok() {
 
 const styles = {
 
-  banner: {
+  desktopBanner: {
     backgroundColor: 'teal',
     color: 'whitesmoke',
     textAlign: 'center',
-    fontSize: '2vw',
+    fontSize: '3vw',
     fontFamily: '"Caveat", cursive',
-  
-
+  },
+  mobileBanner: {
+    backgroundColor: 'teal',
+    color: 'whitesmoke',
+    textAlign: 'center',
+    fontSize: '5vw',
+    fontFamily: '"Caveat", cursive',
   },
 
   pcb: {
@@ -229,11 +244,18 @@ const styles = {
     color: 'antiquewhite',
     padding: '40px 0px',
     border: 'solid grey 5px',
-    fontSize: '5vw'
+    fontSize: '6vw'
   },
 
-  arrow: {
+  desktopArrow: {
     fontSize: '30px',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
+
+   mobileArrow: {
+    fontSize: '20px',
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto'
