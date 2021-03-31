@@ -33,11 +33,10 @@ module.exports = (app, models, dbCloudUrl) => {
       .update(req.body.password).digest('hex');
     // Create new user
     let user = new models['users']({ ...req.body, password: hash });
-    // NOTE: This system is unsafe since you can 
-    // choose your own role on registration!
+    
     await user.save();
     res.json(user)
-    // res.json({ success: true });
+  
   });
 
 
