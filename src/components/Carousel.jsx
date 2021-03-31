@@ -10,6 +10,7 @@ import { Backdrop } from '@material-ui/core';
 import '../index.css'
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
+import styled from 'styled-components'
 
 export default function Ok() {
 
