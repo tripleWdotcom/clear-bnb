@@ -7,12 +7,12 @@ import { UserContext } from '../contexts/UserContext';
 import MemberPage from './MemberPage'
 import Grid from '@material-ui/core/Grid';
 import PersonIcon from '@material-ui/icons/Person';
-import logo from '../images/logoNoBackgound.png';
+import logo from '../images/bnb.svg';
 
 
 
 const Navbar = () => {
-  
+
 
   let history = useHistory();
 
@@ -64,23 +64,23 @@ const Navbar = () => {
         direction="row"
         justify="space-evenly"
         alignItems="center" >
-  <Hidden xsDown>
-        <Grid item style={{ color: "crimson", fontSize: "30px" }}>
-          <img src={logo} style={styles.logoDesktop}/>
-        </Grid>
+        <Hidden xsDown>
+          <Grid item sm={6} md={6}style={{ color: "crimson", fontSize: "30px" }}>
+            <img src={logo} style={styles.logoDesktop} />
+          </Grid>
         </Hidden>
-         
-        <Hidden smUp>
-         
-          <Grid item style={{ color: "crimson", fontSize: "30px" }}>
-          <img src={logo} style={styles.logoMobile}/>
-        </Grid>
 
-</Hidden>
+        <Hidden smUp>
+
+          <Grid item style={{ color: "crimson", fontSize: "30px" }}>
+            <img src={logo} style={styles.logoMobile} />
+          </Grid>
+
+        </Hidden>
         <Grid item>
           <div key="1" style={styles.home} onClick={goHome}>Home</div>
         </Grid>
-       {/*  {isUserLoggedIn && !showModal ? <Grid  item><div key="2" style={styles.userName} onClick={() => { history.push('/mypage') }}>👤 {isLoggedIn[0].firstName}</div> </Grid> : ''} */}
+        {/*  {isUserLoggedIn && !showModal ? <Grid  item><div key="2" style={styles.userName} onClick={() => { history.push('/mypage') }}>👤 {isLoggedIn[0].firstName}</div> </Grid> : ''} */}
         {isUserLoggedIn && !showModal ? <Grid item><div key="2" style={styles.userName} onClick={() => { history.push('/mypage') }}><PersonIcon fontSize="large" /></div> </Grid> : ''}
 
         <Grid item>
@@ -112,7 +112,7 @@ const styles = {
     fontSize: "20px",
     cursor: 'pointer',
     ':hover': {
-      color: '#047361',
+      color: 'teal',
       WebkitTransform: "scale(1.3)",
       transition: '0.3s'
     },
@@ -137,29 +137,29 @@ const styles = {
     fontSize: "20px",
     cursor: 'pointer',
     ':hover': {
-      color: 'crimson',
+      color: 'teal',
       WebkitTransform: "scale(1.3)",
       transition: '0.3s'
     },
   },
 
   logoDesktop: {
-    width: '50%',
-  
+    width: '35%',
+
 
   },
 
   logoMobile: {
-  
-    width: '40%',
+
+    width: '30%',
     display: 'block',
     margin: '0 auto',
-   
-    
-    
+
+
+
   },
-  
- 
+
+
 
 }
 
