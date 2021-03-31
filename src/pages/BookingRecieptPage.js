@@ -64,7 +64,7 @@ function BookingRecieptPage(props) {
           <button style={styles.closeBtn} key="2" onClick={() => props.closeModal()}>Close</button>
           <DetailedComponent houseObj={[houseObj]} path="bookings" />
           <div style={styles.dates} key="3">
-            <h2>Booking details</h2>
+            <h2>ils</h2>
             <br />
             <div style={styles.infoBox} key="7">
               <h3>Booking number</h3>
@@ -73,7 +73,7 @@ function BookingRecieptPage(props) {
               <br />
               <h3>Chosen dates</h3>
               <br />
-              <p>{numOfDays} {numOfDays < 2 ? 'night' : 'nights'}, {new Date(parseInt(startDate)).toLocaleString().substr(0, 11)} - {new Date(parseInt(endDate)).toLocaleString().substr(0, 11)}</p>
+              <p>{numOfDays} {numOfDays < 2 ? 'night' : 'nights'}, {new Date(parseInt(startDate)).toLocaleDateString('en-GB')} - {new Date(parseInt(endDate)).toLocaleDateString('en-GB')}</p>
               <br />
               <h3>Total price</h3>
               <br />
@@ -97,7 +97,7 @@ function BookingRecieptPage(props) {
               <br />
               <h3>Chosen dates</h3>
               <br />
-              <p>{new Date(parseInt(startDate)).toLocaleString().substr(0, 11)} - {new Date(parseInt(endDate)).toLocaleString().substr(0, 11)}</p>
+              <p>{new Date(parseInt(startDate)).toLocaleDateString('en-GB')} - {new Date(parseInt(endDate)).toLocaleDateString('en-GB')}</p>
               <br />
               <h3>Total price</h3>
               <br />

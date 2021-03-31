@@ -31,7 +31,7 @@ function RentalRecieptPage(props) {
             <div style={styles.infoBox} key="7">
               <h3>Chosen date ranges</h3>
               <br />
-              {houseObj.length > 0 ? houseObj[0].dateRanges.map(d => (<><p>{new Date(parseInt(d.availableStart)).toLocaleString().substr(0, 11)} - {new Date(parseInt(d.availableEnd)).toLocaleString().substr(0, 11)}</p><br /></>)) : ''}
+              {houseObj.length > 0 ? houseObj[0].dateRanges.map(d => (<><p>{new Date(parseInt(d.availableStart)).toLocaleDateString('en-GB')} - {new Date(parseInt(d.availableEnd)).toLocaleDateString('en-GB')}</p><br /></>)) : ''}
               {isOffer ? <><br /><h4 style={{ backgroundColor: 'crimson', color: 'white', border: 'none', borderRadius: '5px', padding: '5px', textAlign: 'center' }}>You've made this rental as a special offer!</h4></> : ''}
             </div>
           </div>
@@ -49,7 +49,7 @@ function RentalRecieptPage(props) {
               <br />
               <h3>Chosen date ranges</h3>
               <br />
-              {houseObj.length > 0 ? houseObj[0].dateRanges.map(d => (<><p>{new Date(parseInt(d.availableStart)).toLocaleString().substr(0, 11)} - {new Date(parseInt(d.availableEnd)).toLocaleString().substr(0, 11)}</p><br /></>)) : ''}
+              {houseObj.length > 0 ? houseObj[0].dateRanges.map(d => (<><p>{new Date(parseInt(d.availableStart)).toLocaleDateString('en-GB')} - {new Date(parseInt(d.availableEnd)).toLocaleDateString('en-GB')}</p><br /></>)) : ''}
               {isOffer ? <><br /><h4 style={{ backgroundColor: 'crimson', color: 'white', border: 'none', borderRadius: '5px', padding: '5px', textAlign: 'center' }}>You've made this rental as a special offer!</h4></> : ''}
             </div>
           </div>
