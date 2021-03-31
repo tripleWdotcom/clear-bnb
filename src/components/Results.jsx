@@ -1,7 +1,7 @@
 import { HouseContext } from '../contexts/HouseContext'
 import { useEffect, useContext } from "react";
 import Grid from '@material-ui/core/Grid';
-import TvIcon from '@material-ui/icons/Tv';
+
 import parking from '../images/parking.png';
 import nosmoking from '../images/nosmoking.png';
 import gym from '../images/gym.png';

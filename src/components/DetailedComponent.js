@@ -53,13 +53,13 @@ function DetailedComponent(props) {
     <>
       <div style={styles.iconForm} key={'a' + i}>
         <img src={c.name == 'tv' ? tv
-          : c.name == 'wifi' ? wifi
-            : c.name == 'parking' ? parking
-              : c.name == 'smoking' ? nosmoking
-                : c.name == 'gym' ? gym
-                  : c.name == 'animalFriendly' ? animalFriendly
-                    : c.name == 'breakfast' ? breakfast
-                      : c.name == 'kitchen' ? kitchen : c.name == 'pool' ? pool : ''} alt={c.name} style={styles.icons} key={'b' + i} />
+          : c.name === 'wifi' ? wifi
+            : c.name === 'parking' ? parking
+              : c.name === 'smoking' ? nosmoking
+                : c.name === 'gym' ? gym
+                  : c.name === 'animalFriendly' ? animalFriendly
+                    : c.name === 'breakfast' ? breakfast
+                      : c.name === 'kitchen' ? kitchen : c.name === 'pool' ? pool : ''} alt={c.name} style={styles.icons} key={'b' + i} />
         <p style={styles.iconText} key={'e' + i}>
           {
             c.name === 'smoking' ? 'No ' + c.name

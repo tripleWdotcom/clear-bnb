@@ -3,7 +3,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRange } from 'react-date-range';
 import { useState } from 'react'
 import '../pages/cal.css'
-import searchBtn from '../images/searchButton.png';
+
 import SearchIcon from '@material-ui/icons/Search';
 import { useHistory } from "react-router-dom";
 

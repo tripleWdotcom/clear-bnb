@@ -11,7 +11,7 @@ import MyPage from './pages/MyPage'
 import FAQ from './pages/FAQ.js'
 //import { useContext } from 'react'
 import error404 from './images/error404.png'
-import { useEffect} from 'react'
+
 
 
 
