@@ -7,8 +7,14 @@ import { HouseContext } from '../contexts/HouseContext'
 import { useEffect, useContext, useState } from "react";
 import zIndex from '@material-ui/core/styles/zIndex';
 import { Backdrop } from '@material-ui/core';
+import '../index.css'
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
 
 export default function Ok() {
+
+
+  
 
   const { offers} = useContext(HouseContext)
   console.table("offers", offers)
@@ -155,7 +161,13 @@ export default function Ok() {
 
     <div className="carousel-grid-container">
       <div className="banner">
-        <div style={styles.banner}>SPECIAL OFFERS</div>
+       
+        <div style={styles.banner}>
+          SPECIAL OFFERS
+          <ArrowDownwardIcon style={styles.arrow}></ArrowDownwardIcon>
+           
+          </div>
+        
       </div>
 
       <Hidden xsDown>
@@ -186,9 +198,11 @@ const styles = {
 
   banner: {
     backgroundColor: 'teal',
-    color: 'black',
+    color: 'whitesmoke',
     textAlign: 'center',
-    fontSize: '2vw'
+    fontSize: '2vw',
+    fontFamily: '"Caveat", cursive',
+  
 
   },
 
@@ -215,6 +229,13 @@ const styles = {
     padding: '40px 0px',
     border: 'solid grey 5px',
     fontSize: '5vw'
+  },
+
+  arrow: {
+    fontSize: '30px',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto'
   }
 
 
