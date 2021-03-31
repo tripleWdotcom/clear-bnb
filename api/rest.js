@@ -70,7 +70,7 @@ module.exports = (app, models) => {
       $or: [
         { $and: [{ endDate: { $gt: b.availableStart } }, { endDate: { $lt: b.availableEnd } }] }, // overlapping a booking
         { $and: [{ startDate: { $gt: b.availableStart } }, { startDate: { $lt: b.availableEnd } }] }, // overlappign a booking
-        { $and: [{ startDate: { $lt: b.availableStart } }, { endDate: { $gt: b.availableEnd } }] }, //inside a booking range
+        { $and: [{ startDate: { $lte: b.availableStart } }, { endDate: { $gte: b.availableEnd } }] }, //inside a booking range
         { $and: [{ startDate: { $gt: b.availableStart } }, { endDate: { $gt: b.availableEnd } }] },// booking range inside chosen dates
       ]
     })
