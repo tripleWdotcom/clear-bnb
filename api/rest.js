@@ -102,7 +102,7 @@ module.exports = (app, models) => {
             }
           },
           { city: b.city },
-          // { isOffer: false }
+         // { isOffer: false }
         ]
       }).populate(['userId', 'featureIds']).lean().exec()
     } else {

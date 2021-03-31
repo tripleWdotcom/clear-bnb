@@ -277,7 +277,7 @@ function AddNewRental(props) {
               getAriaValueText={valuetextPrice}
               step={10}
               valueLabelDisplay="on"
-              max={999}
+              max={500}
               min={10}
               onChangeCommitted={(e, val) => setPrice(val)}
             />

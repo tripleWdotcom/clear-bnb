@@ -28,7 +28,7 @@ export default function PriceSlider(props) {
 
   const handleChange = (event, newValue) => {
     let minB = newValue[0] || 50
-    let maxB = newValue[1] || 1000
+    let maxB = newValue[1] || 500
 
     //onmouseup(console.log("mouse is up"))
 
