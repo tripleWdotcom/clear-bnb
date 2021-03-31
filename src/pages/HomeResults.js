@@ -18,7 +18,7 @@ const HomeResults = () => {
   const [show, setShow] = useState([])
 
   const toggleFilter = () => {
-    show ? document.getElementById("filterMenu").style.height = "100vh" : document.getElementById("filterMenu").style.height = "0";
+    show ? document.getElementById("filterMenu").style.height = "100%" : document.getElementById("filterMenu").style.height = "0";
     setShow(!show)
   }
 
@@ -139,11 +139,11 @@ const useStyles = makeStyles((theme) => ({
   filterContainer: {
     position: 'fixed',
     bottom: '30px',
-    // bottom: '0px',
+     bottom: '0px',
     width: '100%',
     zIndex: 3,
     transition: '0.5s',
-    // height: '0px',
+    height: '0px',
     borderRadius: '10px',
   }
 
