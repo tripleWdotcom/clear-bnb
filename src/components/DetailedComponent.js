@@ -76,7 +76,7 @@ function DetailedComponent(props) {
               thumbWidth={100}
               dynamicHeight={true}
             >
-              {currentHouse[0].pics.map((p, i) => (<div><img src={p} key={i+"bb"} /></div>))}
+              {currentHouse[0].pics.map((p, i) => (<div><img src={p} alt="" key={i+"bb"} /></div>))}
             </Carousel>
           </Hidden>
           <Hidden smUp>

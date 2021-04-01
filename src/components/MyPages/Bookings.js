@@ -1,6 +1,5 @@
 import { useEffect, useContext, useState } from 'react';
 import { BookingContext } from '../../contexts/BookingContext'
-import { UserContext } from '../../contexts/UserContext'
 import BookingRecieptPage from '../../pages/BookingRecieptPage'
 import Radium from 'radium'
 import Grid from '@material-ui/core/Grid'

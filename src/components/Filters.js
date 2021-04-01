@@ -85,39 +85,39 @@ function Filters() {
 
       <FormControl component="fieldset" style={styles.sliderContainer}>
          <FormGroup>
-          <div style={{ display: 'inline-flex' }}><img src={gym} style={styles.icon} /><FormControlLabel
+          <div style={{ display: 'inline-flex' }}><img alt="" src={gym} style={styles.icon} /><FormControlLabel
             control={<Switch color='primary' checked={state.gym} onChange={handleChange} name="gym" />}
             label="Gym"
           /></div>
-          <div style={{ display: 'flex' }}><img src={tv} style={styles.icon} /> <FormControlLabel
+          <div style={{ display: 'flex' }}><img alt="" src={tv} style={styles.icon} /> <FormControlLabel
             control={<Switch color='primary' checked={state.tv} onChange={handleChange} name="tv" />}
             label="TV"
           /></div>
-          <div style={{ display: 'flex' }}><img src={wifi} style={styles.icon}/>   <FormControlLabel
+          <div style={{ display: 'flex' }}><img alt="" src={wifi} style={styles.icon}/>   <FormControlLabel
             control={<Switch color='primary' checked={state.wifi} onChange={handleChange} name="wifi" />}
             label="Wi-Fi"
           /></div>
-          <div style={{ display: 'flex' }}><img src={breakfast} style={styles.icon} /> <FormControlLabel
+          <div style={{ display: 'flex' }}><img alt="" src={breakfast} style={styles.icon} /> <FormControlLabel
             control={<Switch color='primary' checked={state.breakfast} onChange={handleChange} name="breakfast" />}
             label="Breakfast"
           /></div>
-          <div style={{ display: 'flex' }}><img src={kitchen} style={styles.icon}/> <FormControlLabel
+          <div style={{ display: 'flex' }}><img alt="" src={kitchen} style={styles.icon}/> <FormControlLabel
             control={<Switch color='primary' checked={state.kitchen} onChange={handleChange} name="kitchen" />}
             label="Kitchen"
           /></div>
-          <div style={{ display: 'flex' }}><img src={smoking} style={styles.icon}/>  <FormControlLabel
+          <div style={{ display: 'flex' }}><img alt="" src={smoking} style={styles.icon}/>  <FormControlLabel
             control={<Switch color='primary' checked={state.smoking} onChange={handleChange} name="smoking" />}
             label="No Smoking"
           /></div>
-          <div style={{ display: 'flex' }}><img src={animalFriendly} style={styles.icon} /> <FormControlLabel
+          <div style={{ display: 'flex' }}><img alt="" src={animalFriendly} style={styles.icon} /> <FormControlLabel
             control={<Switch color='primary' checked={state.animalFriendly} onChange={handleChange} name="animalFriendly" />}
             label="Animal Friendly"
           /></div>
-          <div style={{ display: 'flex' }}><img src={pool} style={styles.icon} />  <FormControlLabel
+          <div style={{ display: 'flex' }}><img alt="" src={pool} style={styles.icon} />  <FormControlLabel
             control={<Switch color='primary' checked={state.pool} onChange={handleChange} name="pool" />}
             label="Pool"
           /></div>
-          <div style={{ display: 'flex' }}><img src={parking} style={styles.icon} /><FormControlLabel
+          <div style={{ display: 'flex' }}><img alt="" src={parking} style={styles.icon} /><FormControlLabel
             control={<Switch color='primary' checked={state.parking} onChange={handleChange} name="parking" />}
             label="Parking"
           /></div>
