@@ -11,7 +11,6 @@ import { useContext } from "react";
 export default function Ok() {
 
   const { offers } = useContext(HouseContext)
-  console.table("offers", offers)
 
   const test = c => (
     <div style={{ background: 'whitesmoke' }}>
