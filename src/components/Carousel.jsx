@@ -37,7 +37,7 @@ export default function Ok() {
           {c.dateRanges.map(d => <div style={{ color: 'whitesmoke', fontSize: '2vw', fontWeight: 600 }} key={d.availableStart}>
 
             <div >
-              From :{new Date(d.availableStart).toDateString()}
+              From: {new Date(d.availableStart).toDateString()}
 
             </div>
             <div>

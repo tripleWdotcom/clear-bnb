@@ -297,7 +297,9 @@ function AddNewRental(props) {
                     <FormControlLabel
                       value={f.value}
                       control={<Switch color="primary" />}
-                      label={f.name.charAt(0).toUpperCase() + f.name.slice(1)}
+                      label={f.name === 'smoking' ? 'No ' + f.name
+                        : f.name === 'animalFriendly' ? f.name.charAt(0).toUpperCase() + f.name.slice(1, 6) + ' ' + f.name.slice(6).toLowerCase()
+                          : f.name.charAt(0).toUpperCase() + f.name.slice(1)}
                       labelPlacement="end"
                       onChange={(e, val) => updateAmenities(val, f.name)}
                       key={'d' + i}

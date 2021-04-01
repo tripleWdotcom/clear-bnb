@@ -59,7 +59,7 @@ function DetailedPage(props) {
             <br />
             <h3>Chosen dates</h3>
             <br />
-            <p>{new Date(parseInt(props.startDate)).toLocaleString().substr(0, 11)} - {new Date(parseInt(props.endDate)).toLocaleString().substr(0, 11)}</p>
+            <p>{new Date(parseInt(props.startDate)).toLocaleDateString('en-GB').substr(0, 11)} - {new Date(parseInt(props.endDate)).toLocaleDateString('en-GB').substr(0, 11)}</p>
             <br />
             <h3>Total price</h3>
             <br />
