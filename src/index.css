@@ -9,16 +9,15 @@
   --font4: 'Roboto', sans-serif;
   --font5: 'Mulish', sans-serif;
   
-/*   --c1: rgb(252, 249, 249);
- */  
+
+ 
   --c1: white;
   --c2: #0D4C80;
   --c3: #0597F2;
   --c4: #0597F2;
   --c5: #0D4C80;
   --c6: rgb(53, 51, 48);
-  /*#F24738;
-  /*--redBorder:#6e1020 1px solid;*/
+
 }
 
 * {
@@ -44,7 +43,7 @@
 }
 
 body {
-  /* background-color: 'white-smoke' */
+
  background: url(../src/images/sandBg.jpg) no-repeat center fixed;
   background-size: cover;
 

@@ -4,7 +4,6 @@ import Radium from 'radium'
 import { HouseContext } from '../contexts/HouseContext'
 import Hidden from '@material-ui/core/Hidden'
 
-
 function RentalRecieptPage(props) {
   const { myRentals } = useContext(HouseContext)
   const [houseObj, setHouseObj] = useState([])
@@ -88,7 +87,6 @@ const styles = {
   },
   popupInnerComputer: {
     position: 'relative',
-    // padding: '300px 0px 300px 0px',
     width: '70vw',
     height: '100vh',
     backgroundColor: 'whitesmoke',
@@ -102,13 +100,10 @@ const styles = {
     right: '16px',
     cursor: 'pointer'
   },
-
   gallery: {
     width: 'auto',
     height: '500px',
-
   },
-
   mobileGallery: {
     width: 'auto',
     height: '250px',
@@ -125,8 +120,6 @@ const styles = {
     padding: '10px',
     alignItems: 'center',
     margin: '0 auto'
-
-    // borderRadius: '5px', color: 'grey', margin: '50px auto'
   },
   infoBoxMobile: {
     textAlign: 'left',
@@ -159,18 +152,6 @@ const styles = {
     backgroundColor: 'whitesmoke',
     outline: 'none',
   }
-
-  // thumbnails: {
-  //   width: 'auto',
-  //   height: '100px',
-  //   border: '2px solid #C0C0C0',
-  //   padding: '5px',
-  //   cursor: 'pointer',
-  //   boxShadow: '0 0 6px 2px rgb(22, 22, 22)',
-  //   margin: '5px'
-
-  // }
-
 }
 
 export default Radium(RentalRecieptPage);

@@ -26,15 +26,9 @@ export default function BedSlider(props) {
   const handleChange =(event, newValue) => {
     let minB = newValue[0] || 1
     let maxB = newValue[1] || 10
-
-    console.log("minB:", minB, "maxB:", maxB)
    
-
     localStorage.setItem('bedsNumberMin', minB)
     localStorage.setItem('bedsNumberMax', maxB)
-
-    console.log("??", +localStorage.getItem('bedsNumberMin'))
-    console.log("??", +localStorage.getItem('bedsNumberMax')) // why 2? no idea
    
     setValue(newValue);
     renderResultcomp()

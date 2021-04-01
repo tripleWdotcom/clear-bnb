@@ -123,7 +123,6 @@ const styles = {
   },
   popupInnerComputer: {
     position: 'relative',
-    // padding: '300px 0px 300px 0px',
     width: '70vw',
     height: '100vh',
     backgroundColor: 'whitesmoke',
@@ -175,17 +174,6 @@ const styles = {
     backgroundColor: 'whitesmoke',
     outline: 'none',
   }
-
-  // thumbnails: {
-  //   width: 'auto',
-  //   height: '100px',
-  //   border: '2px solid #C0C0C0',
-  //   padding: '5px',
-  //   cursor: 'pointer',
-  //   boxShadow: '0 0 6px 2px rgb(22, 22, 22)',
-  //   margin: '5px'
-
-  // }
 
 }
 

@@ -6,16 +6,9 @@ import BookingContextProvider from './contexts/BookingContext'
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import HomeResults from './pages/HomeResults'
-//import MemberPage from './components/MemberPage.js'
 import MyPage from './pages/MyPage'
 import FAQ from './pages/FAQ.js'
-//import { useContext } from 'react'
 import error404 from './images/error404.png'
-
-
-
-
-
 
 
 function App() {
@@ -26,7 +19,6 @@ function App() {
     <h1 style={{ color: "red", textAlign: "center" }}>Page not found: {window.location.pathname}</h1>
     <img src={error404} alt="" />
   </div>)
-  // localStorage.clear() // we might need to add/remove later
 
   return (
     <div className="App">
@@ -50,7 +42,6 @@ function App() {
                       <Route path="*" component={page404} />
                     </Switch>
                   </main>
-
 
                 </Router>
 

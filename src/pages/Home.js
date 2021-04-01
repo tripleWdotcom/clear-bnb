@@ -1,4 +1,3 @@
-import Radium from 'radium'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -10,22 +9,13 @@ import Ok from '../components/Carousel.jsx'
 import { UserContext } from '../contexts/UserContext'
 import { useEffect, useContext } from 'react'
 
-
-
-
 const Home = () => {
  
-  const { whoIsLoggedIn, isLoggedIn } = useContext(UserContext)
+  const { whoIsLoggedIn } = useContext(UserContext)
 
   useEffect(async () => {
     await whoIsLoggedIn()
   }, [])
-
-  useEffect( () => {
-    console.log('Who is logged in from Home', isLoggedIn)
-  }, [isLoggedIn])
-
-
 
 
   const classes = useStyles();
@@ -42,7 +32,6 @@ const Home = () => {
               </Paper>
             </Grid>
           </Hidden>
-
           <Hidden smUp>
             <Grid item xs={12}>
               <Paper className={classes.searchAndCalenMobile}>
@@ -51,18 +40,13 @@ const Home = () => {
               </Paper>
             </Grid>
 
-          </Hidden>
-      
+          </Hidden>      
             <Grid item xs={12}>
               <Paper className={classes.paper}>
               <Ok /></Paper>
-
-            </Grid>
-    
-          <Grid item xs={12}>
-     
-            <CityIconList />
-        
+            </Grid>    
+          <Grid item xs={12}>     
+            <CityIconList />        
           </Grid>
         </Grid>
       </div>
@@ -83,7 +67,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     backgroundColor: 'white',
     borderRadius: '20px',
-    // boxShadow: "0px 8px 36px #222",
     textAlign: '-webkit-center'
   },
   searchAndCalenMobile: {
@@ -91,7 +74,6 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
     backgroundColor: 'white',
     borderRadius: '20px',
-    // boxShadow: "0px 8px 36px #222",
     textAlign: '-webkit-center'
   },
   paper:{
@@ -101,4 +83,4 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default Radium(Home);
+export default Home;

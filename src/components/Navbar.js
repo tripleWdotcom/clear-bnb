@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import Modal from './Modal'
 import { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext';
-import MemberPage from './MemberPage'
 import Grid from '@material-ui/core/Grid';
 import PersonIcon from '@material-ui/icons/Person';
 import logo from '../images/bnb.svg';
@@ -18,28 +17,22 @@ const Navbar = () => {
   const { isLoggedIn, logOutUser } = useContext(UserContext)
   const [showModal, setShowModal] = useState(false)
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
-  const [showMyPage, setShowMyPage] = useState(false)
 
   useEffect(async () => {
-    console.log('who is logged in', isLoggedIn)
-    console.log('is logged in array', isLoggedIn.length)
-    console.log('who is logged error', isLoggedIn.error)
+  
     if (!showModal && !Array.isArray(isLoggedIn) || isLoggedIn.length > 0) {
       if (isLoggedIn.error == 'Not logged in') {
-        console.log('No one is logged in')
+     
         setIsUserLoggedIn(false)
       } else if (isLoggedIn.error == 'Someone already logged in') {
-        console.log('someone is already logged in')
+     
         setIsUserLoggedIn(true)
       } else if (!isLoggedIn.error) {
-        console.log('It is an object - im in')
+   
         setShowModal(false)
-        setIsUserLoggedIn(true)
-        console.log('isUserLoggedIn', isUserLoggedIn)
+        setIsUserLoggedIn(true)        
       }
     }
-
-
   }, [isLoggedIn])
 
   const signInModal = async () => {
@@ -79,7 +72,7 @@ const Navbar = () => {
         <Grid item>
           <div key="1" style={styles.home} onClick={goHome}>Home</div>
         </Grid>
-        {/*  {isUserLoggedIn && !showModal ? <Grid  item><div key="2" style={styles.userName} onClick={() => { history.push('/mypage') }}>👤 {isLoggedIn[0].firstName}</div> </Grid> : ''} */}
+     
         {isUserLoggedIn && !showModal ? <Grid item><div key="2" style={styles.userName} onClick={() => { history.push('/mypage') }}><PersonIcon fontSize="large" /></div> </Grid> : ''}
 
         <Grid item>
@@ -89,7 +82,7 @@ const Navbar = () => {
         {!isUserLoggedIn ? <Grid item><div key="4" style={styles.signIn} onClick={() => { signInModal() }}>Sign In</div> </Grid> : <Grid item> <div style={styles.signIn} onClick={logOut}>Log out</div></Grid>}
 
         {showModal ? <Modal closeModal={() => setShowModal(false)} /> : ''}
-        {showMyPage ? <MemberPage /> : ''}
+     
 
 
       </Grid>

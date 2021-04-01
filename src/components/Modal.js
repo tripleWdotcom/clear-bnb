@@ -16,19 +16,19 @@ function Modal(props) {
   }, [isLoggedIn])
 
   const signUpForm = () => {
-    console.log('signUpForm clicked')
+
     setIsShowSignUp(true)
-    console.log('isSignUp in Modal', isShowSignUp)
+ 
   }
 
   const closeSignUp = () => {
     setIsShowSignUp(false)
     props.closeModal()
-    console.log('isSignUp in Modal(const closeSignUp)', isShowSignUp)
+
   }
 
   const whenClicked = () => {
-    console.log('Create account button from sign up is clicked')
+
     setIsShowSignUp(false)
     props.closeModal()
   }
@@ -41,8 +41,6 @@ function Modal(props) {
     </div>
   )
 }
-
-
 
 const modalStyle = {
   position: 'absolute',

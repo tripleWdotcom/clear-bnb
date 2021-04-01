@@ -13,7 +13,6 @@ export default function UserContextProvider(props) {
   // A reactive state to store users
   const [users, setUsers] = useState([])
 
-
   // Get all users
   const fetchUsers = async () => {
       let res = await fetch('/rest/users')
@@ -33,7 +32,7 @@ export default function UserContextProvider(props) {
 
   // Log in user
   const logInUser = async userCredentials => {
-    console.log('Context', userCredentials)
+ 
     let res = await fetch('/api/login', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
@@ -66,30 +65,15 @@ export default function UserContextProvider(props) {
     // to trigger reactivity we replace the old list with a new 
     // by spreading the old list (a copy of it) and adding the new user
     // setIsLoggedIn(newUser)
-    console.log('Context for sign up', res)
+  
     if (res.error === 'Email already in use') {
       setIsLoggedIn(res)
     } else {
       logInUser({ email: newUser.email, password: newUser.password })
     }
-
-    // console.log('IsLoggedIn after setIsLoggedIn(newUser)', isLoggedIn)
+  
   }
 
-  // Remove a user by id
-  // Should we have this?
-  /*  const deleteUserById = async userId => {
-     let res = await fetch('/api/users/:id', {
-       method: 'DELETE',
-       headers: { 'content-type': 'application/json' },
-       body: JSON.stringify(userId)
-     })
-     res = await res.json()
-     return res;
-     let index = users.indexOf(res)
-     users.splice(index, 1)
-   }
-  */
   // The values we want the children components to reach and be able to use
   const values = {
     isLoggedIn,

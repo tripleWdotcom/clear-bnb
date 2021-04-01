@@ -17,12 +17,12 @@ function MyRentals() {
 
 
   useEffect(async () => {
-    console.log('Something has changed in my bookings')
+
     await fetchMyRentals(isLoggedIn[0]._id)
   }, [])
 
   useEffect(() => {
-    console.log('My rentals is now', myRentals)
+ 
   }, [myRentals])
 
   const openDetailPage = (rentalId) => {

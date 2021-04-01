@@ -11,7 +11,6 @@ import FormControl from '@material-ui/core/FormControl';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRange } from 'react-date-range';
-import { useHistory } from 'react-router-dom'
 import parking from '../../images/parking.png';
 import nosmoking from '../../images/nosmoking.png';
 import gym from '../../images/gym.png';
@@ -24,7 +23,7 @@ import pool from '../../images/pool.png';
 
 function AddNewRental(props) {
 
-  const { addNewRental, myRentals } = useContext(HouseContext)
+  const { addNewRental } = useContext(HouseContext)
   const { isLoggedIn } = useContext(UserContext)
   const { features } = useContext(FeatureContext)
 
@@ -52,7 +51,6 @@ function AddNewRental(props) {
   const [showCalTwo, setShowCalTwo] = useState(false)
   const [showCalThree, setShowCalThree] = useState(false)
 
-
   const [ranges, setRanges] = useState([
     {
       startDate: new Date(),
@@ -60,13 +58,6 @@ function AddNewRental(props) {
       key: 'selection',
     }
   ]);
-
-  // useEffect(() => {
-  //   console.log('Somethings up with the success???', success)
-  //   console.log('what is props', props)
-
-
-  // }, [myRentals])
 
   const handleSubmit = async (e) => {
 
@@ -76,7 +67,7 @@ function AddNewRental(props) {
     featureIds.map(f => {
       if (f.value == true) {
         let featureObj = features.filter(fea => fea.name == f.name)
-        console.log('featureObj', featureObj)
+
         idsOfFeatures.push(featureObj[0]._id)
       }
     })
@@ -105,9 +96,7 @@ function AddNewRental(props) {
     }
     await addNewRental(newRental)
 
-
     props.setNewAction('showRentals')
-
 
   }
 
@@ -119,8 +108,7 @@ function AddNewRental(props) {
   }
 
   const handleSelect = (newRange, name) => {
-    console.log('Ranges', newRange)
-    console.log('name ', name)
+
     let copyOfRanges = [...ranges]
 
     switch (name) {
@@ -252,7 +240,6 @@ function AddNewRental(props) {
           )}
 
           {pics.length < 5 ? <div style={{ cursor: 'pointer', ':hover': { color: 'green' } }} onClick={() => setPics([...pics, 'url'])}>+ Add more pictures</div> : 'Get more pictures with premium'}
-
           <br />
           <br />
           <br />
@@ -291,7 +278,6 @@ function AddNewRental(props) {
                 Amenities
              <br />
                 <br />
-
                 {featureIds.map((f, i) => (
                   <><div style={{ display: 'inline-flex' }} key={'p' + i}><img style={{
                     width: '20px', height: '20px', marginTop: '8px', marginRight: '15px'
@@ -306,8 +292,8 @@ function AddNewRental(props) {
                                   : f.name == 'breakfast' ? breakfast
                                     : f.name == 'kitchen' ? kitchen : f.name == 'pool' ? pool : ''}
                     alt={f.name}
-                     />
-               
+                  />
+
                     <FormControlLabel
                       value={f.value}
                       control={<Switch color="primary" />}
@@ -352,8 +338,7 @@ function AddNewRental(props) {
                 required
                 name="startDate"
                 value={'Start date: ' + r.startDate.toDateString()}
-                onChange={(e) => console.log('What is the new start date ', i, e.target.value)}
-                onClick={() => { (i == 0 ? setShowCalOne(!showCalOne) : i == 1 ? setShowCalTwo(!showCalTwo) : setShowCalThree(!showCalThree)); console.log('im clicking to show cal') }}
+                onClick={() => { (i == 0 ? setShowCalOne(!showCalOne) : i == 1 ? setShowCalTwo(!showCalTwo) : setShowCalThree(!showCalThree)) }}
                 style={modalStyle.input} key={'f' + i}>
               </input>
               <input
@@ -361,7 +346,7 @@ function AddNewRental(props) {
                 disabled
                 name="endDate"
                 value={'End date: ' + r.endDate.toDateString()}
-                onChange={(e) => console.log('What is the new end date', i, e.target.value)}
+
                 style={modalStyle.input} key={'g' + i}>
               </input>
               {i > 0 ? <h6 style={{ cursor: 'pointer', textAlign: 'right', marginTop: '-10px', ':hover': { color: 'red' } }} key={'h' + i}
@@ -422,7 +407,6 @@ function AddNewRental(props) {
 }
 
 export default Radium(AddNewRental);
-
 
 const modalStyle = {
   form: {

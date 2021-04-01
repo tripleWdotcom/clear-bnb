@@ -1,5 +1,3 @@
-
-import Radium from 'radium'
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,11 +6,8 @@ import SearchComponent from '../components/Search'
 import Results from '../components/Results.js';
 import Calen from '../components/Calen';
 import Hidden from '@material-ui/core/Hidden'
-import { withMobileDialog } from '@material-ui/core';
-import zIndex from '@material-ui/core/styles/zIndex';
-import { useEffect, useContext, useState } from 'react'
+import {useState} from 'react'
 
-import { UserContext } from '../contexts/UserContext'
 
 const HomeResults = () => {
   const [show, setShow] = useState([])
@@ -109,7 +104,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
     borderRadius: '10px',
-    // width:'30%'
 
   },
   paper3: {
@@ -150,4 +144,4 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default Radium(HomeResults);
+export default HomeResults;

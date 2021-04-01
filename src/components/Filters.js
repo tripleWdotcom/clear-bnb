@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from "react";
 import BedSlider from './BedsRangeFilter';
 import PriceSlider from './PriceRangeFilter';
-import Grid from '@material-ui/core/Grid';
-//import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import parking from '../images/parking.png';
@@ -16,7 +14,6 @@ import breakfast from '../images/breakfast.png';
 import kitchen from '../images/kitchen.png';
 import pool from '../images/pool.png';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-//import FormHelperText from '@material-ui/core/FormHelperText';
 import Switch from '@material-ui/core/Switch';
 import { useHistory } from "react-router-dom";
 import Radium from 'radium'
@@ -66,16 +63,12 @@ function Filters() {
 
   useEffect(() => {
     localStorage.setItem('features', JSON.stringify(state))
-    console.log("value of features is :", localStorage.getItem('features'))
-    renFilters()
+      renFilters()
   }, [state])
 
   const handleChange = async (event) => {
 
     setState({ ...state, [event.target.name]: event.target.checked });
-
-    console.log("value of switch is :", event.target.name, event.target.checked)
-
   };
 
   return (
@@ -91,8 +84,7 @@ function Filters() {
 
 
       <FormControl component="fieldset" style={styles.sliderContainer}>
-        {/*     <FormLabel component="legend" color="primary" >Assign responsibility</FormLabel> */}
-        <FormGroup>
+         <FormGroup>
           <div style={{ display: 'inline-flex' }}><img src={gym} style={styles.icon} /><FormControlLabel
             control={<Switch color='primary' checked={state.gym} onChange={handleChange} name="gym" />}
             label="Gym"
@@ -130,11 +122,8 @@ function Filters() {
             label="Parking"
           /></div>
         </FormGroup>
-        {/*  <FormHelperText>Be careful</FormHelperText> */}
+ 
       </FormControl>
-
-
-
       <br />
       <div style={{ textAlign: 'right' }}>
         <button style={{

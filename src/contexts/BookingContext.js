@@ -41,8 +41,6 @@ export default function BookingContextProvider(props) {
     myBookings.splice(index, 1)
   }
 
-
-
   // The values we want the children components to reach and be able to use
   const values = {
     myBookings,
@@ -50,11 +48,6 @@ export default function BookingContextProvider(props) {
     addNewBooking,
     deleteBookingById
   }
-
-  // Calls one time, as mounted in Vue
-  // useEffect(() => {
-  //   fetchBookings()
-  // }, [])
 
   return (
     <BookingContext.Provider value={values}>

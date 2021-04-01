@@ -13,21 +13,14 @@ function SignUp(props) {
 
   useEffect(() => {
     if (isLoggedIn.error === 'Email already in use') {
-      console.log('Im in bad credentials for sign up')
+    
       setBadCredentials(true)
     }
   }, [isLoggedIn])
 
   const handleSubmit = async e => {
-    console.log('Add user button clicked!')
+  
 
-    console.log(`
-      FirstName: ${firstName}
-      LastName: ${lastName}
-      Email: ${email}
-      Password: ${password}
-      Password2: ${password2}
-    `);
 
     e.preventDefault()
 
@@ -38,14 +31,14 @@ function SignUp(props) {
       firstName: firstName,
       lastName: lastName,
     }
-    console.log('before addUser', newUser)
+  
     await addUser(newUser)
 
 
     // CHECK IF EMAIL IS OK 
 
     if (badCredentials) {
-      console.log('My credentials in Sign UP', badCredentials)
+   
       props.isClicked()
     }
   }

@@ -5,19 +5,13 @@ import Radium from 'radium'
 import { UserContext } from '../contexts/UserContext'
 import { FeatureContext } from '../contexts/FeatureContext'
 import { BookingContext } from '../contexts/BookingContext'
-import { HouseContext } from '../contexts/HouseContext'
-import { useHistory } from 'react-router-dom'
 import Hidden from '@material-ui/core/Hidden'
 
 
 function BookingRecieptPage(props) {
-  // let history = useHistory();
-  // const { isLoggedIn } = useContext(UserContext)
   const { myBookings } = useContext(BookingContext)
-
   const { users } = useContext(UserContext)
   const { features } = useContext(FeatureContext)
-  const [houseFeatures, setHouseFeatures] = useState([])
   const [startDate, setStartDate] = useState(0)
   const [endDate, setEndDate] = useState(0)
   const [totalPrice, setTotalPrice] = useState(0)
@@ -64,7 +58,7 @@ function BookingRecieptPage(props) {
           <button style={styles.closeBtn} key="2" onClick={() => props.closeModal()}>Close</button>
           <DetailedComponent houseObj={[houseObj]} path="bookings" />
           <div style={styles.dates} key="3">
-            <h2>ils</h2>
+            <h2>Booking Details</h2>
             <br />
             <div style={styles.infoBox} key="7">
               <h3>Booking number</h3>
@@ -139,7 +133,6 @@ const styles = {
   },
   popupInnerComputer: {
     position: 'relative',
-    // padding: '300px 0px 300px 0px',
     width: '70vw',
     height: '100vh',
     backgroundColor: 'whitesmoke',
@@ -208,18 +201,6 @@ const styles = {
     backgroundColor: 'whitesmoke',
     outline: 'none',
   }
-
-  // thumbnails: {
-  //   width: 'auto',
-  //   height: '100px',
-  //   border: '2px solid #C0C0C0',
-  //   padding: '5px',
-  //   cursor: 'pointer',
-  //   boxShadow: '0 0 6px 2px rgb(22, 22, 22)',
-  //   margin: '5px'
-
-  // }
-
 }
 
 export default Radium(BookingRecieptPage);

@@ -1,5 +1,4 @@
 import Radium from 'radium'
-
 import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 
@@ -31,9 +30,6 @@ function MenuContainer(props) {
           <Grid item xs><h3 style={style.titleDesktop} key="8" onClick={() => { sendNewAction('showNewRental') }}>Add new rental</h3></Grid>
         </Grid>
       </Hidden>
-
-
-
 
     </>
   )

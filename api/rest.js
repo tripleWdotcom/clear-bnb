@@ -5,7 +5,6 @@ module.exports = (app, models) => {
 
   app.get('/rest/offerhouses', async (req, res) => {
     let docs = await houses.find({isOffer:true})
-    console.log("these are the offers: ",docs)
     res.json(docs)
   })
 
@@ -59,7 +58,7 @@ module.exports = (app, models) => {
     !b.animalFriendly ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f1f" })
     !b.pool ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f20" })
     !b.parking ? null : featureIds.push({ featureIds: "604773bf04ac3c37f09f7f21" })
-    // console.log("so what is feaurures here?:", featureIds)
+  
     let model = models['houses']
 
     let unixTimestamp = Math.floor(new Date().getTime())
@@ -74,18 +73,12 @@ module.exports = (app, models) => {
         { $and: [{ startDate: { $gt: b.availableStart } }, { endDate: { $gt: b.availableEnd } }] },// booking range inside chosen dates
       ]
     })
-    console.log("this is the stuff", checkBookingCollection)
     if (checkBookingCollection.length !== 0) {
-      console.log("can u see me??")
-      doIt = true
 
+      doIt = true
     }
 
     if (!featureIds.length) {
-   /*    console.log("do it is :", doIt)
-      console.log("what is check in :", b.availableStart)
-      console.log("what is check OUT :", b.availableEnd)
- */
       // Without any checkbox filters
       docs = await model.find({
         $and: [
@@ -102,7 +95,7 @@ module.exports = (app, models) => {
             }
           },
           { city: b.city },
-         // { isOffer: false }
+        
         ]
       }).populate(['userId', 'featureIds']).lean().exec()
     } else {
@@ -123,7 +116,7 @@ module.exports = (app, models) => {
           { $and: [{ price: { $lte: b.priceMax } }, { price: { $gte: b.priceMin } }] },
           { city: b.city },
           { $and: featureIds },
-          // { isOffer: false }
+       
         ]
       }).populate(['userId', 'featureIds']).lean().exec()
     }
@@ -131,13 +124,12 @@ module.exports = (app, models) => {
       let filtered = docs.filter(house =>
         !checkBookingCollection.filter(booking =>
           booking.houseId.equals(house._id)).length);
-
-    /*   console.log(filtered) */
+  
       res.json(filtered)
       return;
     }
     else {
-   /*    console.log(docs) */
+
       res.json(docs)
       return;
     }

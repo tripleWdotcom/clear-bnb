@@ -27,7 +27,6 @@ module.exports = (app, models, dbCloudUrl) => {
       return;
     }
 
-    console.log('Im adding a user anyways')
 
     const hash = crypto.createHmac('sha256', salt)
       .update(req.body.password).digest('hex');
@@ -38,14 +37,12 @@ module.exports = (app, models, dbCloudUrl) => {
     res.json(user)
   
   });
-
-
   // Login
 
   app.post('/api/login', async (req, res) => {
     // note: req.session is unique per user/browser
     if (req.session.user !== undefined && req.session.user.length > 0) {
-      console.log('Someone is already logged in')
+  
       res.json(req.session.user);
 
       return;
@@ -77,14 +74,13 @@ module.exports = (app, models, dbCloudUrl) => {
       res.json({ error: 'Was not logged in' });
     }
   });
-
   // Check if logged in
 
   app.get('/api/login', (req, res) => {
-    console.log('is there a user in session?', req.session.user)
+
     if (req.session.user !== undefined && req.session.user.length > 0 ) {
       let user = { ...req.session.user };
-      console.log('who is the user', user)
+
       delete user[0].password; // remove password in answer
       res.json(user);
     }

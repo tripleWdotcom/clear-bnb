@@ -7,27 +7,11 @@ function QuestionForm() {
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
   const [submitOk, setSubmitOk] = useState(false)
-  const [remainingChar, setRemainingChar] = useState(0)
-
-
 
   const handleSubmit = async e => {
 
     e.preventDefault()
-    console.log(`
-      FirstName: ${firstName}
-      LastName: ${lastName}
-      Email: ${email}
-      message: ${message}
-    `);
-
-    const newQuestion = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      message: message
-    }
-
+   
     setSubmitOk(true)
     setTimeout(() => {
       setSubmitOk(false)
@@ -43,10 +27,6 @@ function QuestionForm() {
   const reset = () => {
     setSubmitOk(false)
   }
-
-
-
-
   return (
     <div>
       <form id='formm' onSubmit={handleSubmit} style={questionsFormStyle.form}>
@@ -68,7 +48,7 @@ function QuestionForm() {
           value={lastName}
           placeholder="Last Name"
           onChange={(e) => {
-            console.log("input last Name", e.target.value)
+    
             setLastName(e.target.value)
           }}
           style={questionsFormStyle.lastName} key="2"

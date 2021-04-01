@@ -4,7 +4,6 @@ import MyRentals from '../components/MyPages/MyRentals'
 import AddNewRental from '../components/MyPages/AddNewRental'
 import { UserContext } from '../contexts/UserContext'
 import { BookingContext } from '../contexts/BookingContext'
-import Radium from 'radium'
 import Hidden from '@material-ui/core/Hidden'
 import Grid from '@material-ui/core/Grid'
 import Menu from '../components/Menu'
@@ -16,7 +15,7 @@ function MyPage() {
   const [action, setAction] = useState('')
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { isLoggedIn} = useContext(UserContext)
-  const { myBookings, fetchMyBookingsByUserId } = useContext(BookingContext)
+  const { fetchMyBookingsByUserId } = useContext(BookingContext)
 
   useEffect(async () => {
     await fetchMyBookingsByUserId(isLoggedIn[0]._id)
@@ -73,27 +72,12 @@ function MyPage() {
   )
 }
 
-export default Radium(MyPage)
+export default MyPage
 
 const style = {
   container: {
     width: '100%',
     marginTop: '30px'
-  },
-  mobileMenu: {
-    transform: 'translateX(0%)',
-    transition: 'all 500ms ease-in-out',
-    ':after': {
-      backgroundColor: 'pink',
-      transform: 'translateX(-100%)',
-    },
-  },
-  desktopMenu: {
-
-  },
-  line: {
-    height: '300px',
-    width: '5px',
-    background: 'linear-gradient(to top, transparent 1%, gray 50%, transparent 100%)'
-  }
+  }, 
+ 
 }

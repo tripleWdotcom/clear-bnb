@@ -1,16 +1,16 @@
-import Radium from 'radium'
+
 import Grid from '@material-ui/core/Grid';
 import { Carousel } from "react-responsive-carousel";
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import Hidden from '@material-ui/core/Hidden';
 import { HouseContext } from '../contexts/HouseContext'
-import { useEffect, useContext, useState } from "react";
-import zIndex from '@material-ui/core/styles/zIndex';
-import { Backdrop } from '@material-ui/core';
+import { useContext } from "react";
+
+
 
 export default function Ok() {
 
-  const { offers} = useContext(HouseContext)
+  const { offers } = useContext(HouseContext)
   console.table("offers", offers)
 
   const test = c => (
@@ -20,8 +20,6 @@ export default function Ok() {
         <img style={{
           width: '100%',
           maxHeight: '30vw'
-
-          /*             borderRadius: '10px' */
         }}
           src={c.pics[0]}
           alt={'gkj'}
@@ -36,19 +34,16 @@ export default function Ok() {
             color: 'whitesmoke',
             fontWeight: '600'
           }}>{c.country}</div>
-          {c.dateRanges.map(d => <div style={{ color: 'whitesmoke', fontSize: '2vw', fontWeight:600 }} key={d.availableStart}>
+          {c.dateRanges.map(d => <div style={{ color: 'whitesmoke', fontSize: '2vw', fontWeight: 600 }} key={d.availableStart}>
 
-            <div /* style={{WebkitTextStrokeWidth: '1px', WebkitTextStrokeColor:'black' }} */>
+            <div >
               From :{new Date(d.availableStart).toDateString()}
 
-            </div>  
-            <div /* style={{ WebkitTextStrokeWidth: '1px', WebkitTextStrokeColor: 'black' }} */>
+            </div>
+            <div>
               To: {new Date(d.availableEnd).toDateString()}
 
             </div>
-     {/*        <button onClick>Book Now!</button> */}
-
-
 
           </div>)}
         </div>
@@ -59,14 +54,14 @@ export default function Ok() {
           container
           direction="row"
           justify="space-around"
-          alignItems="center"  style={{  height: '6vw' }}>
-          <Grid item  md={4} xs={4} style={styles.pcb}>
+          alignItems="center" style={{ height: '6vw' }}>
+          <Grid item md={4} xs={4} style={styles.pcb}>
             <div>€{c.price}/Night</div>
           </Grid>
           <Grid item md={4} xs={4} style={styles.pcb}>
             {c.city}
           </Grid>
-          <Grid item  md={4} xs={4} style={styles.pcb}>
+          <Grid item md={4} xs={4} style={styles.pcb}>
             {c.bedrooms} beds
             </Grid>
         </Grid>
@@ -89,9 +84,6 @@ export default function Ok() {
           width: '99%',
           maxHeight: '60vw'
 
-         
-
-          /*             borderRadius: '10px' */
         }}
           src={x.pics[0]}
           alt={''}
@@ -99,8 +91,6 @@ export default function Ok() {
         ></img>
 
         <div style={{ position: 'absolute', top: '10%', left: '10%', textAlign: 'left' }}>
-
-
           <div style={{
             fontSize: '11vw',
             color: 'whitesmoke',
@@ -108,48 +98,35 @@ export default function Ok() {
           }}>{x.country}</div>
           {x.dateRanges.map(d => <div style={{ color: 'whitesmoke', fontSize: '3vw', fontWeight: 600 }} key={d.availableStart}>
 
-            <div /* style={{WebkitTextStrokeWidth: '1px', WebkitTextStrokeColor:'black' }} */>
+            <div >
               From :{new Date(d.availableStart).toDateString()}
 
             </div>
-            <div /* style={{ WebkitTextStrokeWidth: '1px', WebkitTextStrokeColor: 'black' }} */>
+            <div>
               To: {new Date(d.availableEnd).toDateString()}
 
             </div>
-
-
-
           </div>)}
         </div>
-
-
-
         <Grid container
           container
           direction="row"
           justify="space-around"
-          alignItems="center" style={{  backgroundColor: 'whitesmoke', height: '25vw' }}>
-          <Grid item  xs={4} style={styles.pcbMobile}>
+          alignItems="center" style={{ backgroundColor: 'whitesmoke', height: '25vw' }}>
+          <Grid item xs={4} style={styles.pcbMobile}>
             <div>€{x.price}/Night</div>
           </Grid>
-          <Grid item  xs={4} style={styles.pcbMobile}>
+          <Grid item xs={4} style={styles.pcbMobile}>
             {x.city}
-          </Grid>  
-          <Grid item   xs={4} style={styles.pcbMobile}>
+          </Grid>
+          <Grid item xs={4} style={styles.pcbMobile}>
             {x.bedrooms} beds
             </Grid>
         </Grid>
-
-
-
-
       </div>
-
-
     </div>
 
   )
-
 
   return (
 
@@ -167,9 +144,9 @@ export default function Ok() {
         </Carousel>
       </Hidden>
 
-        <Hidden smUp>
+      <Hidden smUp>
         <Carousel autoPlay showArrows={false} showThumbs={false} showIndicators={false} infiniteLoop={true} showStatus={false}
-          transitionTime={2000} interval={7000} width={'100vw'}  dynamicHeight={false}
+          transitionTime={2000} interval={7000} width={'100vw'} dynamicHeight={false}
         >
           {offers.map(x => mobileTest(x))}
 
@@ -177,7 +154,6 @@ export default function Ok() {
       </Hidden>
 
     </div>
-
 
   );
 }
@@ -216,10 +192,6 @@ const styles = {
     border: 'solid grey 5px',
     fontSize: '5vw'
   }
-
-
-
-
 }
 
 

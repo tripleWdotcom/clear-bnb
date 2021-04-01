@@ -1,5 +1,4 @@
 import React from 'react';
-import Radium from 'radium';
 import QuestionForm from '../components/QuestionForm'
 
 function FAQ() {
@@ -14,11 +13,11 @@ function FAQ() {
 
       <p style={styles.p} >
         A: Yes we do! Guests and house owners must wear masks when interacting.
-           Please keep the social distancing. House owners and guests are required
-           to maintain a social distance of six feet (two meters) or more — as recommended by global health organizations.
+        Please keep the social distancing. House owners and guests are required
+        to maintain a social distance of six feet (two meters) or more — as recommended by global health organizations.
       </p>
-      
-     
+
+
       <h2 style={styles.h2}>Q: Do I need to meet my host?</h2>
       <p style={styles.p}>
         A: Options like self check-in or booking an entire home allow you to interact with your host mainly through in-app messaging — you can message or email them anytime if something comes up.
@@ -49,15 +48,13 @@ function FAQ() {
   )
 }
 
-
-
 const styles = {
   context: {
     backgroundColor: 'white',
     borderRadius: '10px',
     width: '100%'
   },
-  h2:{
+  h2: {
     paddingTop: '4vh',
     margin: '20px',
   },
@@ -76,4 +73,4 @@ const styles = {
   }
 }
 
-export default Radium(FAQ);
+export default FAQ

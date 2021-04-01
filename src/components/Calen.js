@@ -19,7 +19,6 @@ const Calen = () => {
   }
 
   const toggleCalen = () => {
-    //toggle ? document.getElementById("filterMenu").style.height = "100%" : document.getElementById("filterMenu").style.height = "0px";
     setToggle(!toggle)
   }
 
@@ -34,16 +33,13 @@ const Calen = () => {
   let sd = state[0].startDate
   let ed = state[0].endDate
 
-
-  //console.log("start date: ", state[0].startDate, " In timestamp:", sd.getTime())
-  //console.log("end date:", state[0].endDate, " In timestamp:", (ed ? ed.getTime() : "Not defined yet"))
   return (<div>
 
     <div>
       <div className="checkIn" style={styles.checkIn} onClick={() => { toggleCalen() }}>
         <div style={{ color: 'black', WebkitUserSelect: 'none' }}>Check-In </div>{sd.toDateString()}
       </div>
-      <div className="checkOut" style={styles.checkOut} onClick={() => { toggleCalen()}}>
+      <div className="checkOut" style={styles.checkOut} onClick={() => { toggleCalen() }}>
         <div style={{ color: 'black', WebkitUserSelect: 'none' }}> Check-Out</div>{ed.toDateString()}
       </div>
     </div>
@@ -59,8 +55,6 @@ const Calen = () => {
           showMonthAndYearPickers={false}
           showPreview={true}
           weekStartsOn={1}
-          // months={2}
-          // direction={'horizontal'}
           className={'calen'}
         >
         </DateRange> : null
@@ -68,7 +62,6 @@ const Calen = () => {
     </div>
     <br /><br />
     <SearchIcon style={{ cursor: 'pointer', fontSize: '250%' }} onClick={searchButton} />
-    {/* <img src={searchBtn} style={{ height: '50px', cursor: 'pointer' }} alt="buttonnn" onClick={searchButton} /> */}
   </div>
   )
 }

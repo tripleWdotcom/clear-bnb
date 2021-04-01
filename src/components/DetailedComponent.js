@@ -23,30 +23,19 @@ import email from '../images/email.png';
 import checkIn from '../images/checkIn.png';
 import checkOut from '../images/checkOut.png';
 
-
 function DetailedComponent(props) {
   const { housesByCityAndDate } = useContext(HouseContext)
 
   const [currentHouse, setCurrentHouse] = useState([])
 
   useEffect(() => {
-    console.log('props house id', props.houseId)
-    console.log('props house obj', props.houseObj)
-    console.log('props paths', props.path)
     if (props.path === 'results') {
       let houseObj = housesByCityAndDate.filter(h => h._id === props.houseId)
       setCurrentHouse(houseObj)
-      console.log('from results current house', houseObj)
-      console.log('Current house: result', currentHouse)
     } else {
       setCurrentHouse(props.houseObj)
-      console.log('from bookings current house', props.houseObj)
-      console.log('Current house: bookings', currentHouse)
-    }
-    
-    
-    
-    
+       }
+
   }, [])
 
   const features = (c, i) => (
@@ -69,8 +58,6 @@ function DetailedComponent(props) {
       </div>
     </>
   )
-
-
   return (
 
     <div style={styles.outerDiv}>
@@ -89,7 +76,7 @@ function DetailedComponent(props) {
               thumbWidth={100}
               dynamicHeight={true}
             >
-              {currentHouse[0].pics.map((p, i)=> (<div><img src={p} key={i} /></div>))}
+              {currentHouse[0].pics.map((p, i) => (<div><img src={p} key={i} /></div>))}
             </Carousel>
           </Hidden>
           <Hidden smUp>
@@ -110,8 +97,8 @@ function DetailedComponent(props) {
         </div>
 
         <Hidden xsDown>
-        <h1 style={styles.title} key="1" >{currentHouse[0].slogan.charAt(0).toUpperCase() + currentHouse[0].slogan.slice(1)}</h1>
-        <h3 style={styles.title} key="2" >{currentHouse[0].city}, {currentHouse[0].country}</h3>
+          <h1 style={styles.title} key="1" >{currentHouse[0].slogan.charAt(0).toUpperCase() + currentHouse[0].slogan.slice(1)}</h1>
+          <h3 style={styles.title} key="2" >{currentHouse[0].city}, {currentHouse[0].country}</h3>
         </Hidden>
         <Hidden smUp>
           <h1 style={styles.titleMobile} key="135" >{currentHouse[0].slogan}</h1>
@@ -170,7 +157,7 @@ function DetailedComponent(props) {
                 <img src={checkOut} alt="check-out" style={styles.icons} key="192" />
                 <p style={styles.iconText} key="85">Check out: 12:00</p>
               </div >
-              <div style={{marginBottom: '10px'}} key="164">
+              <div style={{ marginBottom: '10px' }} key="164">
               </div >
             </Grid>
             <Grid item xs={11} sm>
@@ -186,16 +173,16 @@ function DetailedComponent(props) {
           width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: 'grey', margin: '50px auto'
         }} key="7" />
         <Hidden xsDown>
-        <h3 style={styles.title2} key="102" >Host</h3>
-        <br />
-        <div style={styles.iconForm2} key="117">
-          <img src={contact} alt={contact} style={styles.icons} key="106" />
-          <p style={styles.iconText} key="105">{currentHouse[0].userId.firstName} {currentHouse[0].userId.lastName}</p>
-          <img src={email} alt={email} style={styles.icons} key="107" />
-          <p style={styles.iconText} key="109">{currentHouse[0].userId.email}</p>
-        </div>
-        <hr style={{
-          width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: 'grey', margin: '50px auto'
+          <h3 style={styles.title2} key="102" >Host</h3>
+          <br />
+          <div style={styles.iconForm2} key="117">
+            <img src={contact} alt={contact} style={styles.icons} key="106" />
+            <p style={styles.iconText} key="105">{currentHouse[0].userId.firstName} {currentHouse[0].userId.lastName}</p>
+            <img src={email} alt={email} style={styles.icons} key="107" />
+            <p style={styles.iconText} key="109">{currentHouse[0].userId.email}</p>
+          </div>
+          <hr style={{
+            width: '50vw', borderTop: '1px solid', borderRadius: '5px', color: 'grey', margin: '50px auto'
           }} key="177" />
         </Hidden>
 

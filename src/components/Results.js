@@ -1,7 +1,6 @@
 import { HouseContext } from '../contexts/HouseContext'
 import { useEffect, useContext, useState } from "react";
 import Grid from '@material-ui/core/Grid';
-
 import parking from '../images/parking.png';
 import smoking from '../images/nosmoking.png';
 import gym from '../images/gym.png';
@@ -11,7 +10,6 @@ import wifi from '../images/wifi.png';
 import breakfast from '../images/breakfast.png';
 import kitchen from '../images/kitchen.png';
 import pool from '../images/pool.png';
-
 import Hidden from '@material-ui/core/Hidden'
 import DetailedPage from '../pages/DetailedPage'
 import Radium from 'radium'
@@ -25,7 +23,6 @@ function Results() {
   const [endDate, setEndDate] = useState(0)
 
   useEffect(async () => {
-    //let city = JSON.parse(localStorage.getItem('selectedCity')).value
     let x = JSON.parse(localStorage.getItem('features'))
     let objects = {
       city: JSON.parse(localStorage.getItem('selectedCity')).value,
@@ -39,20 +36,19 @@ function Results() {
 
     let toto = { ...objects, ...x }
     await fetchHousesByCityAndDate(toto)
-    //await fetchHousesByCityAndDate(objects)
 
-    console.log("what is my obejc???", toto)
+
   }, [localStorage.getItem('selectedCity'),
   localStorage.getItem("bedsNumberMin"),
   localStorage.getItem("bedsNumberMax"),
   localStorage.getItem("priceMin"),
   localStorage.getItem("priceMax"),
   localStorage.getItem('features')])
-  //])
+
 
 
   const openDetailPage = (houseId) => {
-    console.log('house id', houseId)
+
     setShowDetailedPage(true)
     setHouseId(houseId)
     setStartDate(localStorage.getItem("startDateChosen"))
@@ -63,10 +59,6 @@ function Results() {
     setShowDetailedPage(false)
   }
 
-
-
-
-
   const test = c => (
 
     <div key={c._id} style={{
@@ -76,8 +68,7 @@ function Results() {
       ':hover': {
         boxShadow: '0px 8px 36px #222',
         WebkitTransform: "scale(1.01)",
-       // transition: 'all 0.3s ease-in-out'
-      },
+        },
     }}>
       <Hidden xsDown>
         <Grid container

@@ -1,9 +1,7 @@
 import { useState, useContext } from 'react'
 import { UserContext } from '../contexts/UserContext'
 import Radium from 'radium'
-import id from 'date-fns/esm/locale/id/index.js';
 import { useEffect } from 'react';
-
 
 function SignIn(props) {
   const { isLoggedIn, logInUser } = useContext(UserContext)
@@ -13,20 +11,15 @@ function SignIn(props) {
 
   useEffect(() => {
     if (isLoggedIn.error === 'No match.') {
-      console.log('Im in bad credentials')
+  
       setBadCredentials(true)
     }
     
   }, [isLoggedIn])
 
   const handleSubmit = async e => {
-    console.log('Login button clicked!')
-    
-    console.log(`
-      Email: ${email}
-      Password: ${password}
-    `);
-
+ 
+  
     e.preventDefault()
 
 
