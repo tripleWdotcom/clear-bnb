@@ -1,5 +1,5 @@
 import Radium from 'radium'
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { HouseContext } from '../../contexts/HouseContext'
 import { UserContext } from '../../contexts/UserContext'
 import { FeatureContext } from '../../contexts/FeatureContext'
@@ -35,7 +35,7 @@ function AddNewRental(props) {
   const [pics, setPics] = useState(['url']);
   const [beds, setBeds] = useState(1);
   const [price, setPrice] = useState(10);
-  const [featureIds, setFeatureIds] = useState([
+  const [featureIds] = useState([
     { name: 'wifi', value: false },
     { name: 'tv', value: false },
     { name: 'breakfast', value: false },
@@ -65,8 +65,8 @@ function AddNewRental(props) {
 
     let idsOfFeatures = []
     featureIds.map(f => {
-      if (f.value == true) {
-        let featureObj = features.filter(fea => fea.name == f.name)
+      if (f.value === true) {
+        let featureObj = features.filter(fea => fea.name === f.name)
 
         idsOfFeatures.push(featureObj[0]._id)
       }
@@ -283,14 +283,14 @@ function AddNewRental(props) {
                     width: '20px', height: '20px', marginTop: '8px', marginRight: '15px'
                   }}
                     src={
-                      f.name == 'tv' ? tv
-                        : f.name == 'wifi' ? wifi
-                          : f.name == 'parking' ? parking
-                            : f.name == 'smoking' ? nosmoking
-                              : f.name == 'gym' ? gym
-                                : f.name == 'animalFriendly' ? animalFriendly
-                                  : f.name == 'breakfast' ? breakfast
-                                    : f.name == 'kitchen' ? kitchen : f.name == 'pool' ? pool : ''}
+                      f.name === 'tv' ? tv
+                        : f.name === 'wifi' ? wifi
+                          : f.name === 'parking' ? parking
+                            : f.name === 'smoking' ? nosmoking
+                              : f.name === 'gym' ? gym
+                                : f.name === 'animalFriendly' ? animalFriendly
+                                  : f.name === 'breakfast' ? breakfast
+                                    : f.name === 'kitchen' ? kitchen : f.name === 'pool' ? pool : ''}
                     alt={f.name}
                   />
 
@@ -335,12 +335,12 @@ function AddNewRental(props) {
 
           {ranges.map((r, i) => (
             <label style={modalStyle.label} key={'e' + i}>
-              {isOffer ? 'A' : i == 0 ? '1st a' : i == 1 ? '2nd a' : '3d a'}vailablitity range
+              {isOffer ? 'A' : i === 0 ? '1st a' : i === 1 ? '2nd a' : '3d a'}vailablitity range
               <input
                 required
                 name="startDate"
                 value={'Start date: ' + r.startDate.toDateString()}
-                onClick={() => { (i == 0 ? setShowCalOne(!showCalOne) : i == 1 ? setShowCalTwo(!showCalTwo) : setShowCalThree(!showCalThree)) }}
+                onClick={() => { (i === 0 ? setShowCalOne(!showCalOne) : i === 1 ? setShowCalTwo(!showCalTwo) : setShowCalThree(!showCalThree)) }}
                 style={modalStyle.input} key={'f' + i}>
               </input>
               <input
