@@ -1,0 +1,11 @@
+.calen{
+ 
+  background-color: rgb(207, 207, 207);
+  border-radius: 20px;
+   -webkit-transition: height 2s;
+   transition: height 2s;
+
+}
+.rdrDayDisabled {
+   background-color:transparent;
+}

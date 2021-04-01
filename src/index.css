@@ -1,13 +1,140 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;600&display=swap');
+
+
+#root {
+  --font1: 'Roboto', sans-serif;
+  --font2: 'Roboto', sans-serif;
+  --font3: 'Roboto', sans-serif;
+  --font4: 'Roboto', sans-serif;
+  --font5: 'Mulish', sans-serif;
+  
+
+ 
+  --c1: white;
+  --c2: #0D4C80;  
+  --c3: #0597F2;
+  --c4: #0597F2;
+  --c5: #0D4C80;
+  --c6: rgb(53, 51, 48);
+
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  margin: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(51, 51, 51) #2c3e50;
+  letter-spacing: .8px;
+  box-sizing: border-box;
 }
+
+*::-webkit-scrollbar {
+  width: 14px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: var(--c1);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--c1);
+  border-radius: 5px;
+  border: 1px solid light-grey;
+}
+
+body {
+
+ background: url(../src/images/sandBg.jpg) no-repeat center fixed;
+  background-size: cover;
+
+
+}
+
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: black;
+  background-color: var(--c1);
+  overflow: hidden;
+  height: auto;
+}
+
+h1{
+  font-family: var(--font1);
+  color: var(--c6);
+}
+h2 {
+  font-family: var(--font1);
+  color: var(--c2);
+}
+h3{
+  font-family: var(--font5);
+  color: var(--c3);
+}
+h4{
+  font-family: var(--font1);
+  color: var(--c4);
+}
+h5{
+  font-family: var(--font5);
+  color: var(--c5);
+}
+button{
+  font-family: var(--font1);
+}
+
+li {
+  font-family: var(--font1);
+}
+
+p, span {
+  font-family: var(--font5);
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--c5);
+  letter-spacing: 0.7px;
+}
+
+a {
+  color: rgb(109, 109, 109);
+}
+
+#contentGridContainer{
+  display: grid;
+  grid-template-columns: 20% 1fr 20%;
+  grid-template-rows: 50px 1fr 50px;
+  grid-gap: 1em;
+  width: 70vw;
+  margin: 20px auto;
+}
+@media (max-width: 768px){
+    #contentGridContainer{
+    width: 100%;
+  }
+}
+
+#contentGridContainer > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header.App-Header{
+  grid-column: 1/4;
+  grid-row: 1;
+}
+main.content{
+  grid-column: 1/4;
+  grid-row: 2;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+

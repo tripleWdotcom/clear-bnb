@@ -1,23 +1,57 @@
-import logo from './logo2.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import UserContextProvider from './contexts/UserContext'
+import FeatureContextProvider from './contexts/FeatureContext'
+import HouseContextProvider from './contexts/HouseContext'
+import BookingContextProvider from './contexts/BookingContext'
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import HomeResults from './pages/HomeResults'
+import MyPage from './pages/MyPage'
+import FAQ from './pages/FAQ.js'
+import error404 from './images/error404.png'
+
 
 function App() {
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+    rel="stylesheet" />
+
+  const page404 = () => (<div>
+    <h1 style={{ color: "red", textAlign: "center" }}>Page not found: {window.location.pathname}</h1>
+    <img src={error404} alt="" />
+  </div>)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>
-        </h1>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Hello World, i mean React!
-        </a>
-      </header>
+      <UserContextProvider>
+        <BookingContextProvider>
+          <HouseContextProvider>
+            <FeatureContextProvider>
+
+              <div id="contentGridContainer">
+
+                <Router>
+                  <header className={true ? 'App-Header' : ''}>
+                    <Navbar />
+                  </header>
+                  <main className="content">
+                    <Switch>
+                      <Route exact path="/" component={Home} />
+                      <Route exact path="/home-results" component={HomeResults} />
+                      <Route exact path="/FAQ" component={FAQ} />
+                      <Route exact path="/mypage" component={MyPage} />
+                      <Route path="*" component={page404} />
+                    </Switch>
+                  </main>
+
+                </Router>
+
+              </div>
+            </FeatureContextProvider>
+          </HouseContextProvider>
+        </BookingContextProvider>
+      </UserContextProvider>
     </div>
+
   );
 }
 
