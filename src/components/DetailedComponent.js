@@ -41,7 +41,7 @@ function DetailedComponent(props) {
   const features = (c, i) => (
     <>
       <div style={styles.iconForm} key={'a' + i}>
-        <img src={c.name == 'tv' ? tv
+        <img src={c.name === 'tv' ? tv
           : c.name === 'wifi' ? wifi
             : c.name === 'parking' ? parking
               : c.name === 'smoking' ? nosmoking
@@ -76,7 +76,7 @@ function DetailedComponent(props) {
               thumbWidth={100}
               dynamicHeight={true}
             >
-              {currentHouse[0].pics.map((p, i) => (<div><img src={p} key={i} /></div>))}
+              {currentHouse[0].pics.map((p, i) => (<div><img src={p} key={i+"bb"} /></div>))}
             </Carousel>
           </Hidden>
           <Hidden smUp>
@@ -91,7 +91,7 @@ function DetailedComponent(props) {
               autoPlay={false}
               dynamicHeight={false}
             >
-              {currentHouse[0].pics.map(p => (<div><img src={p} /></div>))}
+              {currentHouse[0].pics.map((p,i) => (<div key={i+"aa"}><img src={p} alt="" /></div>))}
             </Carousel>
           </Hidden>
         </div>
