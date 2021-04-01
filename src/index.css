@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;@600&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;600&display=swap');
 
 
 #root {
@@ -12,7 +11,7 @@
 
  
   --c1: white;
-  --c2: #0D4C80;
+  --c2: #0D4C80;  
   --c3: #0597F2;
   --c4: #0597F2;
   --c5: #0D4C80;
